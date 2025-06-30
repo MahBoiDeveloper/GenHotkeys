@@ -11,7 +11,7 @@ project(
     GZHHotkeysEditor
     VERSION 0.0.3
     DESCRIPTION "A tool for editing hotkeys for C&C: Generals and C&C: Generals - Zero Hour"
-    LANGUAGES CXX   
+    LANGUAGES CXX
 )
 
 set(PROJECT_DESTINATION_FOLDER           "${CMAKE_BINARY_DIR}/exe"                          CACHE STRING "Global project path")
