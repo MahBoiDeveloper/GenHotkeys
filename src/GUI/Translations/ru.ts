@@ -20,17 +20,17 @@
         <translation type="vanished">Нажмите латинскую клавишу...</translation>
     </message>
     <message>
-        <location filename="../ActionHotkeyWidget.cpp" line="85"/>
+        <location filename="../ActionHotkeyWidget.cpp" line="82"/>
         <source>It isn&apos;t character key!</source>
         <translation>Эта клавиша не буква!</translation>
     </message>
     <message>
-        <location filename="../ActionHotkeyWidget.cpp" line="87"/>
+        <location filename="../ActionHotkeyWidget.cpp" line="84"/>
         <source>This key isn&apos;t allowed!</source>
         <translation>Эта клавиша не разрешена!</translation>
     </message>
     <message>
-        <location filename="../ActionHotkeyWidget.cpp" line="125"/>
+        <location filename="../ActionHotkeyWidget.cpp" line="122"/>
         <source>Press the key...</source>
         <translation>Нажмите клавишу...</translation>
     </message>

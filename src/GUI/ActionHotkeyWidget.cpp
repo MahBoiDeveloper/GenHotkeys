@@ -17,7 +17,7 @@ ActionHotkeyWidget::ActionHotkeyWidget(const QString& actionName,
     , timerMseconds{1300}
 {
     // Object name for css
-    btnHotkey.setObjectName("btnHotkey");
+    btnHotkey.setObjectName(nameof(btnHotkey));
     btnHotkey.setProperty("unique", false);
     btnHotkey.setMinimumSize(ImageManager::DecodeMissingWebpIcon().size().width() + 15, // Checked for letter W
                              ImageManager::DecodeMissingWebpIcon().size().height());
@@ -42,15 +42,12 @@ ActionHotkeyWidget::ActionHotkeyWidget(const QString& actionName,
 }
 
 QString ActionHotkeyWidget::GetActionName() const { return actionNameLabel.text(); }
-
 QString ActionHotkeyWidget::GetHotkey()     const { return btnHotkey.text(); }
 
 void ActionHotkeyWidget::HighlightKey(bool isKeysMoreThanTwo)
 {
-    if (isKeysMoreThanTwo)
-        btnHotkey.setProperty("unique", false);
-    else
-        btnHotkey.setProperty("unique", true);
+    // If more than 2 == not unique
+    btnHotkey.setProperty("unique", !isKeysMoreThanTwo);
 
     btnHotkey.style()->unpolish(&btnHotkey);
     btnHotkey.style()->polish(&btnHotkey);
