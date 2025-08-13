@@ -4,22 +4,6 @@
 <context>
     <name>ActionHotkeyWidget</name>
     <message>
-        <source>It isn&apos;t latin key...</source>
-        <translation type="vanished">Это не латинская клавиша!</translation>
-    </message>
-    <message>
-        <source>This key doesn&apos;t allowed!</source>
-        <translation type="vanished">Эта клавиша не разрешена!</translation>
-    </message>
-    <message>
-        <source>It isn&apos;t latin key!</source>
-        <translation type="vanished">Эта не латинская клавиша!</translation>
-    </message>
-    <message>
-        <source>Press latin key...</source>
-        <translation type="vanished">Нажмите латинскую клавишу...</translation>
-    </message>
-    <message>
         <location filename="../ActionHotkeyWidget.cpp" line="82"/>
         <source>It isn&apos;t character key!</source>
         <translation>Эта клавиша не буква!</translation>
@@ -127,28 +111,16 @@
     <message>
         <location filename="../EditorWindow.cpp" line="550"/>
         <source>Binary files</source>
-        <translation type="unfinished">Двоичные файлы</translation>
+        <translation>Двоичные файлы</translation>
     </message>
     <message>
         <location filename="../EditorWindow.cpp" line="551"/>
         <source>Any files</source>
-        <translation type="unfinished">Все файлы</translation>
+        <translation>Все файлы</translation>
     </message>
 </context>
 <context>
     <name>GreetingWindow</name>
-    <message>
-        <source>NEW</source>
-        <translation type="vanished">НОВЫЙ</translation>
-    </message>
-    <message>
-        <source>PROJECT</source>
-        <translation type="vanished">ПРОЕКТ</translation>
-    </message>
-    <message>
-        <source>LOAD</source>
-        <translation type="vanished">ЗАГРУЗИТЬ</translation>
-    </message>
     <message>
         <location filename="../GreetingWindow.cpp" line="23"/>
         <location filename="../GreetingWindow.cpp" line="28"/>
@@ -165,10 +137,6 @@
         <source>THE FILE</source>
         <translation>ИЗ ФАЙЛА</translation>
     </message>
-    <message>
-        <source>LANGUAGE</source>
-        <translation type="vanished">ЯЗЫК</translation>
-    </message>
 </context>
 <context>
     <name>LoadFromTheFileWindow</name>
@@ -181,14 +149,6 @@
         <location filename="../LoadFromTheFileWindow.cpp" line="17"/>
         <source>BACK</source>
         <translation>НАЗАД</translation>
-    </message>
-    <message>
-        <source>Text files</source>
-        <translation type="obsolete">Текстовые файлы</translation>
-    </message>
-    <message>
-        <source>Select .csf file:</source>
-        <translation type="vanished">Выберите .csf файл:</translation>
     </message>
     <message>
         <location filename="../LoadFromTheFileWindow.cpp" line="20"/>
@@ -210,14 +170,6 @@
         <source>REVIEW</source>
         <translation>ОБЗОР</translation>
     </message>
-    <message>
-        <source>Load project</source>
-        <translation type="vanished">Загрузить проект</translation>
-    </message>
-    <message>
-        <source>Load installed game hotkey map</source>
-        <translation type="vanished">Загрузить горячие клавиши из игры</translation>
-    </message>
 </context>
 <context>
     <name>LoadFromTheGameWindow</name>
@@ -231,37 +183,9 @@
         <source>BACK</source>
         <translation>НАЗАД</translation>
     </message>
-    <message>
-        <source>Save hotkeys dirrectly to the game.</source>
-        <translation type="vanished">Сохранять горячие клавиши в игре.</translation>
-    </message>
 </context>
 <context>
     <name>QObject</name>
-    <message>
-        <source>Unable to find Settings.json in Resource folder.</source>
-        <translation type="vanished">Невозможно найти файл Settings.json в папке Resources.</translation>
-    </message>
-    <message>
-        <source>Unable to find TechTree.json in Resource folder.</source>
-        <translation type="vanished">Невозможно найти файл TechTree.json в папке Resources.</translation>
-    </message>
-    <message>
-        <source>Unable to find Resource/Theme folder.</source>
-        <translation type="vanished">Невозможно найти папку Resource/Theme.</translation>
-    </message>
-    <message>
-        <source>Unable to find Resource/Icons folder.</source>
-        <translation type="vanished">Невозможно найти папку Resource/Icons.</translation>
-    </message>
-    <message>
-        <source>Unable to find Resource/Translations folder.</source>
-        <translation type="vanished">Невозможно найти папку Resource/Translations.</translation>
-    </message>
-    <message>
-        <source>Unknown error has been occured.</source>
-        <translation type="vanished">Возникла неизвестная ошибка</translation>
-    </message>
     <message>
         <location filename="../../ProgramConstants.hpp" line="74"/>
         <source>Error with CSF file</source>
@@ -278,10 +202,8 @@
         <translation>Невозможно найти указанный CSF файл.</translation>
     </message>
     <message>
-        <source>Choosen CSF file doesn&apos;t have CONTROLBAR category.
-Make sure that you are load correct file.</source>
-        <translation type="vanished">У выбранного CSF файла отсутствует категория CONTROLBAR
-Проверьте, что вы загружаете правильный файл.</translation>
+        <source></source>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../ProgramConstants.hpp" line="77"/>
@@ -289,21 +211,9 @@ Make sure that you are load correct file.</source>
         <translation>У выбранного CSF файла отсутствует категория CONTROLBAR. Проверьте, что вы загружаете правильный файл.</translation>
     </message>
     <message>
-        <source>Unable find CSF file in &quot;Game\Data\English\&quot; folder.</source>
-        <translation type="vanished">Невозможно найти &quot;generals.csf&quot; в папке &quot;Game\Data\English\&quot;.</translation>
-    </message>
-    <message>
-        <source>Unable find &quot;generals.csf&quot; file in &quot;Game\Data\English\&quot; folder.</source>
-        <translation type="vanished">Невозможно найти &quot;generals.csf&quot; в папке &quot;Game/Data/English&quot;.</translation>
-    </message>
-    <message>
         <location filename="../../ProgramConstants.hpp" line="78"/>
         <source>Choosen CSF file doesn&apos;t have OBJECT category. Make sure that you are load correct file.</source>
         <translation>У выбранного CSF файла отсутствует категория OBJECT. Проверьте, что вы загружаете правильный файл.</translation>
-    </message>
-    <message>
-        <source>Unable find &quot;generals.csf&quot; file in &quot;Game/Data/English&quot; folder.</source>
-        <translation type="vanished">Невозможно найти &quot;generals.csf&quot; в папке &quot;Game/Data/English&quot;.</translation>
     </message>
     <message>
         <location filename="../../ProgramConstants.hpp" line="79"/>
@@ -345,17 +255,9 @@ Make sure that you are load correct file.</source>
         <source>Aircrafts</source>
         <translation>Авиация</translation>
     </message>
-    <message>
-        <source>Aircraft</source>
-        <translation type="vanished">Авиация</translation>
-    </message>
 </context>
 <context>
     <name>SettingsWindow</name>
-    <message>
-        <source>Back</source>
-        <translation type="obsolete">Назад</translation>
-    </message>
     <message>
         <location filename="../SettingsWindow.cpp" line="27"/>
         <source>Enable debug console</source>
@@ -410,14 +312,6 @@ Make sure that you are load correct file.</source>
         <location filename="../SettingsWindow.cpp" line="121"/>
         <source>CANCEL</source>
         <translation>ОТМЕНА</translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation type="vanished">Да</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="vanished">Отмена</translation>
     </message>
 </context>
 </TS>
