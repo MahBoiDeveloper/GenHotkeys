@@ -392,39 +392,27 @@ using namespace std;
 #pragma endregion
 
 #pragma region Setters
-    void CSFParser::SetHotkey(const string& input, const wchar_t& wchLetter)
+    void CSFParser::SetHotkey(const string& input, const wchar_t& wchLetter) { SetHotkey(QString::fromStdString(input), wchLetter); }
+    void CSFParser::SetHotkey(const char* strName, const wchar_t& wchLetter) { SetHotkey(string(strName), wchLetter); }
+    void CSFParser::SetHotkey(const QString& strName, const wchar_t& wchLetter)
     {
-        LOGSTM << "Changing for string \"" << input << "\" hotkey assingment to letter \"" << (const char)wchLetter << "\"" << endl;
+        if (wchLetter == L' ') return;
 
-        QString strName = QString::fromStdString(input);
-        
+        LOGSTM << "Changing for string \"" << strName.toStdString() << "\" hotkey assingment to letter \"" << (const char)wchLetter << "\"" << endl;
+
         for (auto& elem : Table)
         {
-            if (elem.Name == strName)
-            {
-                int index = 0;
+            if (elem.Name != strName)
+                continue;
 
-                index = elem.Value.indexOf(L'&');
+            if (!elem.Value.contains(L'&') || elem.Value.size() <= 4) // if not "[&F]"
+                elem.Value = QString("[&") + QChar(wchLetter) + "] " + elem.Value;
+            else
+                elem.Value[elem.Value.indexOf(L'&') + 1] = wchLetter;
 
-                if(index <= elem.Value.size())
-                {
-                    // If we could find something like [&F], then we just replace the letter
-                    if(elem.Value[index - 1] == L'[' && elem.Value[index + 2] == L']')
-                    {
-                        elem.Value[index + 1] = wchLetter;
-                    }
-                    // If no, then we add [&wch] to begin of the value and delete & in text
-                    else
-                    {
-                        elem.Value = elem.Value.remove(index, 1);
-                    }
-                }
-            }
+            break;
         }
     }
-
-    void CSFParser::SetHotkey(const char* strName, const wchar_t& wchLetter)    { SetHotkey(string(strName), wchLetter); }
-    void CSFParser::SetHotkey(const QString& strName, const wchar_t& wchLetter) { SetHotkey(strName.toStdString(), wchLetter); }
 
     void CSFParser::SetStringValue(const string& strName, const wstring& wstrValue)
     {
