@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.15 FATAL_ERROR)
 
 if (NOT WIN32)
-    message(FATAL_ERROR "This program has been specified to compile on Microsoft Windows OS only.")
+    message(FATAL_ERROR "This program has been specified to compile on Microsoft Windows only.")
 endif()
 
 set(CMAKE_CXX_STANDARD 20)
@@ -23,7 +23,7 @@ file(MAKE_DIRECTORY ${PROJECT_DESTINATION_RESOURCES_FOLDER})
 file(MAKE_DIRECTORY ${PROJECT_DESTINATION_BIN_FOLDER})
 file(MAKE_DIRECTORY ${PROJECT_DESTINATION_LOGS_FOLDER})
 
-# TODO: temporary
+# Do not remove this prefix path
 set(CMAKE_PREFIX_PATH "C:/Qt/5.15.2/mingw81_64" "C:/Qt/Tools/mingw_64")
 
 set(CMAKE_BUILD_PARALLEL_LEVEL 10)

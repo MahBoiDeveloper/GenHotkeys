@@ -17,10 +17,8 @@ using namespace std;
         // Disable console if it is really opened.
         ShowWindow(GetConsoleWindow(), SW_HIDE);
         
-        int i = 0;
-
         vector<filesystem::directory_entry> files;
-        for (const auto& entry : filesystem::directory_iterator("..\\..\\Logs"))
+        for (const auto& entry : filesystem::directory_iterator("Logs"))
             if (entry.is_regular_file())
                 files.push_back(entry);
 
@@ -48,8 +46,8 @@ using namespace std;
         // Due to Logger is a singleton, we must create check if folder Logs exists.
         if (!LogFile.is_open())
         {
-            filesystem::create_directory("..\\..\\Logs");
-            LogFile.open(string("..\\..\\") + GetLogFileName());
+            filesystem::create_directory("Logs");
+            LogFile.open(string("Logs") + GetLogFileName());
         }
 
         if (!LogFile.is_open()) 
