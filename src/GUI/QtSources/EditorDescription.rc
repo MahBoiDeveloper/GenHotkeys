@@ -1,16 +1,16 @@
 IDI_ICON1	ICON	DISCARDABLE	"EditorIcon.ico"
 
 1 VERSIONINFO
-FILEVERSION     0,3,0,0
-PRODUCTVERSION  0,3,0,0
+FILEVERSION     0,4,0,0
+PRODUCTVERSION  0,4,0,0
 BEGIN
     BLOCK "StringFileInfo"
     BEGIN
         BLOCK "040904E4"
         BEGIN
             VALUE "FileDescription",  "Hotkeys Editor For C&C: Generals"
-            VALUE "ProductVersion",   "0.3.0.0"
-            VALUE "FileVersion",      "0.3.0.0"
+            VALUE "ProductVersion",   "0.4.0.0"
+            VALUE "FileVersion",      "0.4.0.0"
             VALUE "ProductName",      "GenHotkeys"
             VALUE "InternalName",     "GenHotkeys"
             VALUE "OriginalFilename", "LoadEditor.exe"

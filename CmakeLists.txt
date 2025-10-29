@@ -9,7 +9,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 project(
     GZHHotkeysEditor
-    VERSION 0.0.3
+    VERSION 0.4.0
     DESCRIPTION "A tool for editing hotkeys for C&C: Generals and C&C: Generals - Zero Hour"
     LANGUAGES CXX
 )
