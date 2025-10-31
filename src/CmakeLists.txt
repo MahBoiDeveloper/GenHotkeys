@@ -71,6 +71,7 @@
 # Starter target configuration
 
     # Starter target name
+    set(PROXY_EXE_NAME "GenHotkeys")
     set(STARTER_TARGET_NAME "HotkeyEditorStarter")
 
     # Define starter executable with source files
@@ -85,7 +86,7 @@
         ${STARTER_TARGET_NAME}
         PROPERTIES
         RUNTIME_OUTPUT_DIRECTORY ${PROJECT_DESTINATION_FOLDER}
-        OUTPUT_NAME ${MAIN_TARGET_NAME}
+        OUTPUT_NAME ${PROXY_EXE_NAME}
     )
 
     # Create a preprocessor variable with the path to the main program relative to the starter
@@ -138,7 +139,6 @@
     find_program(QTENV_BAT qtenv2.bat)
 
     if(CMAKE_BUILD_TYPE STREQUAL "Release")
-
         # Deploy Qt and other dlls to the Editor/Resource folder
         add_custom_command(
             TARGET ${MAIN_TARGET_NAME}
@@ -152,5 +152,4 @@
                 --dir $<TARGET_PROPERTY:${MAIN_TARGET_NAME},RUNTIME_OUTPUT_DIRECTORY>
                 $<TARGET_FILE:${MAIN_TARGET_NAME}>
         )
-
     endif()

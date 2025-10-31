@@ -13,7 +13,7 @@ BEGIN
             VALUE "FileVersion",      "0.4.0.0"
             VALUE "ProductName",      "GenHotkeys"
             VALUE "InternalName",     "GenHotkeys"
-            VALUE "OriginalFilename", "LoadEditor.exe"
+            VALUE "OriginalFilename", "Editor.exe"
             VALUE "CompanyName",      "GenHotkeys Developers. All rights reserved."
             VALUE "LegalCopyright",   "Copyright (C) GenHotkeys Devs 2023-2025"
             VALUE "Licence",          "GNU GPL v3"
