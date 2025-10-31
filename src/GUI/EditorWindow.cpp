@@ -20,6 +20,9 @@
 #include "SettingsWindow.hpp"
 #include "EditorWindow.hpp"
 
+// TODO: Move definition to the something like reflection header
+int operator+(Qt::Modifier mod, Qt::Key key) { return (static_cast<int>(mod) + static_cast<int>(key)); }
+
 #pragma region CTORs and Setters
 
 EditorWindow::EditorWindow(QWidget* parent)
@@ -559,3 +562,4 @@ void EditorWindow::ActOpen_NewHotkeyFileSelected(const QString& filepath)
 }
 
 #pragma endregion
+
