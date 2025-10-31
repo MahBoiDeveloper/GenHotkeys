@@ -20,7 +20,7 @@
 
     # Editor target name
     set(MAIN_TARGET_NAME "HotkeyEditor")
-    set(ACTUAL_EXE_NAME "GenHotkeys")
+    set(ACTUAL_EXE_NAME "LoadEditor")
     
     # Define editor executable
     add_executable(${MAIN_TARGET_NAME})
@@ -39,6 +39,9 @@
 
     # Remove all GUI sources from main sources list
     list(REMOVE_ITEM SOURCES ${EXCLUDED_GRAPHIC_SOURCES})
+    
+    # Remove launch target source file from main sources list
+    list(REMOVE_ITEM SOURCES "MainStarter.cpp")
 
     # Assign source files to the main target
     target_sources(
@@ -52,7 +55,7 @@
     set_target_properties(
         ${MAIN_TARGET_NAME}
         PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY ${PROJECT_DESTINATION_FOLDER}
+        RUNTIME_OUTPUT_DIRECTORY ${PROJECT_DESTINATION_BIN_FOLDER}
         OUTPUT_NAME ${ACTUAL_EXE_NAME}
     )
     
@@ -64,6 +67,31 @@
 
     # Add graphic dependency to the main target
     target_link_libraries(${MAIN_TARGET_NAME} PRIVATE GUI)
+    
+# Starter target configuration
+
+    # Starter target name
+    set(STARTER_TARGET_NAME "HotkeyEditorStarter")
+
+    # Define starter executable with source files
+    add_executable(
+        ${STARTER_TARGET_NAME}
+        "MainStarter.cpp"
+        "GUI/QtSources/StarterDescription.rc"
+    )
+
+    # Define output directory and file name
+    set_target_properties(
+        ${STARTER_TARGET_NAME}
+        PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY ${PROJECT_DESTINATION_FOLDER}
+        OUTPUT_NAME ${MAIN_TARGET_NAME}
+    )
+
+    # Create a preprocessor variable with the path to the main program relative to the starter
+    target_compile_definitions(${STARTER_TARGET_NAME} PRIVATE
+        -DPROJECT_EXE_RELATIVE_PATH="$<PATH:RELATIVE_PATH,$<TARGET_FILE:${MAIN_TARGET_NAME}>,${PROJECT_DESTINATION_FOLDER}>"
+    )
 
 # Managing additional source files
 
@@ -110,6 +138,7 @@
     find_program(QTENV_BAT qtenv2.bat)
 
     if(CMAKE_BUILD_TYPE STREQUAL "Release")
+
         # Deploy Qt and other dlls to the Editor/Resource folder
         add_custom_command(
             TARGET ${MAIN_TARGET_NAME}
@@ -120,7 +149,8 @@
             COMMAND ${WINDEPLOYQT_PROGRAM}
                 --compiler-runtime
                 --force
-                --dir ${PROJECT_DESTINATION_BIN_FOLDER} # Actually redirects qt's libraries to the different folder
+                --dir $<TARGET_PROPERTY:${MAIN_TARGET_NAME},RUNTIME_OUTPUT_DIRECTORY>
                 $<TARGET_FILE:${MAIN_TARGET_NAME}>
         )
+
     endif()
