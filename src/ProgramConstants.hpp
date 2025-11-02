@@ -22,7 +22,7 @@ enum class GameObjectTypes
 class ProgramConstants
 {
 public:
-    inline static std::unique_ptr<ProgramConstants> Instance     = nullptr;
+    inline static std::unique_ptr<ProgramConstants> Instance      = nullptr;
     std::unique_ptr<Settings>                       pSettingsFile = nullptr;
 
     // Folders
@@ -50,6 +50,11 @@ public:
     const QString EDITOR_TITLE            = SHORT_COMMON_TITLE + " — Editor";
     const QString LOAD_TITLE              = SHORT_COMMON_TITLE + " — Load";
     const QString CREATE_TITLE            = SHORT_COMMON_TITLE + " — New Set Up";
+
+    // JSON mappings
+    const QString SHORT_NAME               = "ShortName";
+    const QString DISPLAY_NAME             = "DisplayName";
+    const QString DISPLAY_NAME_DESCRIPTION = "DisplayNameDescription";
 
     // Magic numbers that become known
     const double  START_WIDGET_SIZE_RATIO = 3./7.;

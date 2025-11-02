@@ -22,99 +22,99 @@
 <context>
     <name>EditorWindow</name>
     <message>
-        <location filename="../EditorWindow.cpp" line="172"/>
+        <location filename="../EditorWindow.cpp" line="176"/>
         <source>File</source>
         <translation>Файл</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="173"/>
+        <location filename="../EditorWindow.cpp" line="177"/>
         <source>Open</source>
         <translation>Открыть</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="174"/>
+        <location filename="../EditorWindow.cpp" line="178"/>
         <source>Save</source>
         <translation>Сохранить</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="175"/>
+        <location filename="../EditorWindow.cpp" line="179"/>
         <source>Save As...</source>
         <translation>Сохранить как...</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="176"/>
+        <location filename="../EditorWindow.cpp" line="180"/>
         <source>Special</source>
         <translation>Дополнительно</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="192"/>
+        <location filename="../EditorWindow.cpp" line="196"/>
         <source>View</source>
         <translation>Вид</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="193"/>
+        <location filename="../EditorWindow.cpp" line="197"/>
         <source>Status Bar</source>
         <translation>Строка состояния</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="194"/>
+        <location filename="../EditorWindow.cpp" line="198"/>
         <source>Enable</source>
         <translation>Включить</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="195"/>
+        <location filename="../EditorWindow.cpp" line="199"/>
         <source>Disable</source>
         <translation>Отключить</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="199"/>
-        <location filename="../EditorWindow.cpp" line="512"/>
+        <location filename="../EditorWindow.cpp" line="203"/>
+        <location filename="../EditorWindow.cpp" line="515"/>
         <source>Settings</source>
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="203"/>
-        <location filename="../EditorWindow.cpp" line="477"/>
+        <location filename="../EditorWindow.cpp" line="207"/>
+        <location filename="../EditorWindow.cpp" line="480"/>
         <source>About</source>
         <translation>О программе</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="337"/>
+        <location filename="../EditorWindow.cpp" line="341"/>
         <source>Layout %1</source>
         <translation>Раскладка %1</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="457"/>
+        <location filename="../EditorWindow.cpp" line="460"/>
         <source>Authors: </source>
         <translation>Авторы: </translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="458"/>
+        <location filename="../EditorWindow.cpp" line="461"/>
         <source>Version: </source>
         <translation>Версия: </translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="459"/>
+        <location filename="../EditorWindow.cpp" line="462"/>
         <source>Program licensed with </source>
         <translation>Программа лицензирована под </translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="460"/>
+        <location filename="../EditorWindow.cpp" line="463"/>
         <source>GitHub repository:</source>
         <translation>Репозиторий на GitHub:</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="462"/>
+        <location filename="../EditorWindow.cpp" line="465"/>
         <source>Support development:</source>
         <translation>Поддержать разработку:</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="552"/>
+        <location filename="../EditorWindow.cpp" line="555"/>
         <source>Binary files</source>
         <translation>Двоичные файлы</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="553"/>
+        <location filename="../EditorWindow.cpp" line="556"/>
         <source>Any files</source>
         <translation>Все файлы</translation>
     </message>
@@ -187,17 +187,17 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="74"/>
+        <location filename="../../ProgramConstants.hpp" line="79"/>
         <source>Error with CSF file</source>
         <translation>Ошибка с CSF файлом</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="75"/>
+        <location filename="../../ProgramConstants.hpp" line="80"/>
         <source>Cannot process the empty file.</source>
         <translation>Невозможно обработать пустой файл.</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="76"/>
+        <location filename="../../ProgramConstants.hpp" line="81"/>
         <source>Unable to find selected CSF file.</source>
         <translation>Невозможно найти указанный CSF файл.</translation>
     </message>
@@ -206,52 +206,52 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="77"/>
+        <location filename="../../ProgramConstants.hpp" line="82"/>
         <source>Choosen CSF file doesn&apos;t have CONTROLBAR category. Make sure that you are load correct file.</source>
         <translation>У выбранного CSF файла отсутствует категория CONTROLBAR. Проверьте, что вы загружаете правильный файл.</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="78"/>
+        <location filename="../../ProgramConstants.hpp" line="83"/>
         <source>Choosen CSF file doesn&apos;t have OBJECT category. Make sure that you are load correct file.</source>
         <translation>У выбранного CSF файла отсутствует категория OBJECT. Проверьте, что вы загружаете правильный файл.</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="79"/>
+        <location filename="../../ProgramConstants.hpp" line="84"/>
         <source>Unable to find &quot;generals.csf&quot; file in &quot;%1&quot; folder.</source>
         <translation>Невозможно найти &quot;generals.csf&quot; в папке &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="80"/>
+        <location filename="../../ProgramConstants.hpp" line="85"/>
         <source>Unable to find CSF file inside BIG archive &quot;%1&quot;</source>
         <translation>Невозможно найти CSF файл внутри BIG архива &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="81"/>
+        <location filename="../../ProgramConstants.hpp" line="86"/>
         <source>Game files search error</source>
         <translation>Ошибка поиска по игровым файлам</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="82"/>
+        <location filename="../../ProgramConstants.hpp" line="87"/>
         <source>Unable to find &quot;EnglishZH.big&quot; archive in &quot;%1&quot; folder.</source>
         <translation>Невозможно найти &quot;EnglishZH.big&quot; в папке &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="115"/>
+        <location filename="../../ProgramConstants.hpp" line="120"/>
         <source>Buildings</source>
         <translation>Здания</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="116"/>
+        <location filename="../../ProgramConstants.hpp" line="121"/>
         <source>Infantry</source>
         <translation>Пехота</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="117"/>
+        <location filename="../../ProgramConstants.hpp" line="122"/>
         <source>Vehicles</source>
         <translation>Техника</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="118"/>
+        <location filename="../../ProgramConstants.hpp" line="123"/>
         <source>Aircrafts</source>
         <translation>Авиация</translation>
     </message>

@@ -2,9 +2,14 @@
     "TechTree" :
     [
         {
-            "ShortName"               : "USA",
-            "DisplayName"             : "USA",
-            "DisplayNameDescription"  : "United Stated Of America",
+            "ShortName"              : "USA",
+            "DisplayName"            : "USA",
+            "DisplayNameDescription" : "United Stated Of America",
+            "ru" : 
+            {
+                "DisplayName"            : "США", 
+                "DisplayNameDescription" : "Соединённые Штаты Америки"
+            },
 
             "Buildings" : 
             [
@@ -469,6 +474,10 @@
             "ShortName"               : "SWG",
             "DisplayName"             : "SUPERWEAPON",
             "DisplayNameDescription"  : "Superweapons General",
+            "ru" : 
+            {
+                "DisplayName"            : "СВГ"
+            },
 
             "Buildings" : 
             [

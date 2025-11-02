@@ -3,24 +3,84 @@
 #include "Parsers/JSONFile.hpp"
 #include "Logger.hpp"
 #include "Faction.hpp"
+#include "Unsorted.hpp"
 
 Faction::Faction(const QString& _shortName, const QString& _displayName, const QString& _displayNameDescription)
     : shortName{_shortName}
     , displayName{_displayName}
     , displayNameDescription{_displayNameDescription}
-{}
+{
+}
 
 Faction::Faction(const QJsonObject& factionAsObject)
-    : shortName{factionAsObject["ShortName"].toString()}
-    , displayName{factionAsObject["DisplayName"].toString()}
-    , displayNameDescription{factionAsObject["DisplayNameDescription"].toString()}
+    : shortName{factionAsObject[PROGRAM_CONSTANTS->SHORT_NAME].toString()}
+    , displayName{factionAsObject[PROGRAM_CONSTANTS->DISPLAY_NAME].toString()}
+    , displayNameDescription{factionAsObject[PROGRAM_CONSTANTS->DISPLAY_NAME_DESCRIPTION].toString()}
     , techTree{ParseJsonObject(factionAsObject)}
-{}
+{
+    for (int currLng = 0; currLng < static_cast<int>(Languages::Count); currLng++)
+    {
+        QString _displayName = "";
+        QString _displayNameDescription = "";
+        Languages lng = static_cast<Languages>(currLng);
+        
+        if (lng != Languages::English)
+        {
+            auto translatedNames = factionAsObject[Unsorted::GetLanguageShortName(lng)].toObject();
+            
+            if (!translatedNames.isEmpty())
+            {
+                if (!translatedNames[PROGRAM_CONSTANTS->DISPLAY_NAME].isNull() 
+                    && !translatedNames[PROGRAM_CONSTANTS->DISPLAY_NAME].isUndefined())
+                {
+                    _displayName = translatedNames[PROGRAM_CONSTANTS->DISPLAY_NAME].toString();
+                }
 
-const QString& Faction::GetShortName() const { return shortName; }
-const QString& Faction::GetDisplayName() const { return displayName; }
-const QString& Faction::GetDisplayNameDescription() const { return displayNameDescription; }
+                if (!translatedNames[PROGRAM_CONSTANTS->DISPLAY_NAME_DESCRIPTION].isNull() 
+                    && !translatedNames[PROGRAM_CONSTANTS->DISPLAY_NAME_DESCRIPTION].isUndefined())
+                {
+                    _displayNameDescription = translatedNames[PROGRAM_CONSTANTS->DISPLAY_NAME_DESCRIPTION].toString();
+                }
+            }
+        }
+        else
+        {
+            continue;
+        }
+
+        localizedDisplay.insert(lng, {_displayName, _displayNameDescription});
+    }
+}
+
+const QString Faction::GetShortName() const { return shortName; }
+const QString Faction::GetDisplayName() const { return displayName; }
+const QString Faction::GetDisplayNameDescription() const { return displayNameDescription; }
 const QMap<Faction::GameObject, GameObjectTypes>& Faction::GetTechTree() const { return techTree; }
+
+const QString Faction::GetDisplayName(Languages lng) const
+{
+    QString ret;
+
+    if (lng != Languages::English)
+        ret = localizedDisplay.value(lng).first;
+    
+    if (ret == StringExt::EmptyString)
+        ret = displayName;
+
+    return ret;
+}
+const QString Faction::GetDisplayNameDescription(Languages lng) const 
+{
+    QString ret;
+
+    if (lng != Languages::English)
+        ret = localizedDisplay.value(lng).second;
+    
+    if (ret == StringExt::EmptyString)
+        ret = displayNameDescription;
+
+    return ret;
+}
 
 const QVector<QVector<Faction::Action>> Faction::GetKeyboardLayoutsByObjectName(const QString& objName) const
 {

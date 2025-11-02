@@ -49,6 +49,7 @@ EditorWindow::EditorWindow(QWidget* parent)
 
     QBoxLayout* ltFactions = nullptr;
     int factonsCount = FACTIONS_MANAGER->Count();
+    Languages language = PROGRAM_CONSTANTS->pSettingsFile->GetLanguage();
 
     if (factonsCount == Faction::BASIC_FACTION_COUNT)
     {
@@ -67,11 +68,13 @@ EditorWindow::EditorWindow(QWidget* parent)
             {
                 const Faction currFaction = FACTIONS_MANAGER->FindByIndex(sectionIndex + i);
 
-                QPushButton* factionButton = new QPushButton{currFaction.GetDisplayName()};
+                QPushButton* factionButton = new QPushButton{currFaction.GetDisplayName(language)};
+                factionButton->setToolTip(currFaction.GetDisplayNameDescription(language));
 
                 auto shortName = currFaction.GetShortName();
+
                 if (PROGRAM_CONSTANTS->USA_SHORT_NAMES.contains(shortName))
-                factionButton->setProperty("faction", "USA");
+                    factionButton->setProperty("faction", "USA");
 
                 if (PROGRAM_CONSTANTS->PRC_SHORT_NAMES.contains(shortName))
                     factionButton->setProperty("faction", "PRC");
@@ -388,7 +391,6 @@ QHBoxLayout* EditorWindow::CreateKeysOnKeyboard(const QString& str)
     }
     return pKeys;
 }
-
 
 void EditorWindow::SetActionHotkey(const QString& fctShortName, const QString& goName, const QString& actName, const QString& hk)
 {
