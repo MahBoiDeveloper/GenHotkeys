@@ -3,7 +3,7 @@
 #include <windows.h>
 #include <tchar.h>
 
-#include "StringExt.hpp"
+#include "../StringExt.hpp"
 #include "Registry.hpp"
 
 using namespace std;

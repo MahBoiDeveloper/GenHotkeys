@@ -3,8 +3,8 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 
+#include "Windows/Registry.hpp"
 #include "Convert.hpp"
-#include "Registry.hpp"
 #include "Logger.hpp"
 #include "Settings.hpp"
 

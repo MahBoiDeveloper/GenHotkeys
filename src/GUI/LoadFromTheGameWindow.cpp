@@ -6,8 +6,8 @@
 #include <QCheckBox>
 #include <QTranslator>
 
+#include "../Windows/Registry.hpp"
 #include "../Logger.hpp"
-#include "../Registry.hpp"
 #include "LoadFromTheGameWindow.hpp"
 
 LoadFromTheGameWindow::LoadFromTheGameWindow(QWidget* parent) : QWidget(parent)

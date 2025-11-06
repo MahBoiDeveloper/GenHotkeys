@@ -2,8 +2,8 @@
 #include <QFile>
 #include <QMessageBox>
 
+#include "../Windows/Registry.hpp"
 #include "../Logger.hpp"
-#include "../Registry.hpp"
 #include "WindowManager.hpp"
 #include "ImageManager.hpp"
 #include "LoadFromTheGameWindow.hpp"

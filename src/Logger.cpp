@@ -5,8 +5,8 @@
 #include <QMessageBox>
 #include <QDebug>
 
+#include "Windows/Registry.hpp"
 #include "Logger.hpp"
-#include "Registry.hpp"
 #include "Info.hpp"
 
 using namespace std;

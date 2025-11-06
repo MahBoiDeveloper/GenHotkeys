@@ -3,10 +3,10 @@
 #include <QApplication>
 
 #include "../Parsers/CSFParser.hpp"
+#include "../Windows/Registry.hpp"
 #include "../Logger.hpp"
 #include "../Unsorted.hpp"
 #include "../Convert.hpp"
-#include "../Registry.hpp"
 #include "../Exception.hpp"
 
 #include "ImageManager.hpp"
