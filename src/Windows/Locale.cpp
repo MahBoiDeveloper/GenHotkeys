@@ -8,7 +8,6 @@
 
 namespace Windows
 {
-    /// @brief Returns full locale name by the given partial name (e.g. "en" -> "en-US")
     QString Locale::GetFullLocaleName(const QString& partial)
     {
         std::wstring wpartial = partial.toStdWString();
@@ -35,7 +34,6 @@ namespace Windows
         return StringExt::EmptyString;
     }
 
-    /// @brief Returns English language name (e.g. "en-US" -> "English")
     QString Locale::LanguageName(const QString& partial)
     {
         QString locale = GetFullLocaleName(partial);
