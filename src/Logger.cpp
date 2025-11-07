@@ -78,27 +78,27 @@ using namespace std;
     void Logger::LogSystemInformation()
     {
         // Write to log all necessary information about MS Windows
-        Log() << "Operation System Information"               << endl;
+        Log() << "Operation System Information"                                << endl;
         Log() << "Version   : "
-                                << Registry::GetWindowsVersion()              << ' '
-                                << GetWindowsBit()                            << endl;
-        Log() << "Language  : " << Registry::GetCurrentUserLanguage() << endl << endl;
+                                << Windows::Registry::GetWindowsVersion()      << ' '
+                                << GetWindowsBit()                             << endl;
+        Log() << "Language  : " << Windows::Registry::GetCurrentUserLanguage() << endl << endl;
 
         // Write to log all information about processor type and memory size
         Log() << "Hardware Information"                         << endl;
-        Log() << "Processor : " << Registry::GetProcessorInfo() << endl;
-        Log() << "Memory    : " << Registry::GetMemoryInfo()      << endl << endl;
+        Log() << "Processor : " << Windows::Registry::GetProcessorInfo() << endl;
+        Log() << "Memory    : " << Windows::Registry::GetMemoryInfo()      << endl << endl;
 
         // Write to log all games paths
         Log() << "Software Information" << endl;
 
-        for (const auto& game : {Registry::Games::Generals, Registry::Games::GeneralsZeroHour})
+        for (const auto& game : {Windows::Registry::Games::Generals, Windows::Registry::Games::GeneralsZeroHour})
         {
-            if (Registry::GetPathToGame(game).empty())
-                Log() << "C&C: " << Registry::ToString(game)  << " not installed" << endl;
+            if (Windows::Registry::GetPathToGame(game).empty())
+                Log() << "C&C: " << Windows::Registry::ToString(game)  << " not installed" << endl;
             else
-                Log() << "C&C: " << Registry::ToString(game)  << " installed at ["
-                                 << ToQString(Registry::GetPathToGame(game)).toStdString() << ']' << endl;
+                Log() << "C&C: " << Windows::Registry::ToString(game)  << " installed at ["
+                                 << ToQString(Windows::Registry::GetPathToGame(game)).toStdString() << ']' << endl;
         }
 
         LogFile << endl;
@@ -167,7 +167,7 @@ using namespace std;
 #pragma region Support methods
     const string Logger::GetWindowsBit() const
     {
-        if (Registry::GetWindowsBit() == Registry::WindowsBit::Win32)
+        if (Windows::Registry::GetWindowsBit() == Windows::Registry::WindowsBit::Win32)
             return "32-bit";
         else
             return "64-bit";

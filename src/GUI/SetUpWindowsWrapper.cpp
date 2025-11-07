@@ -125,7 +125,7 @@ void SetUpWindowsWrapper::LoadFromTheGameWindow_AcceptConfiguration()
     // TODO: Make it load vanila Generals
     //       Also as work with non-ascii paths
     //       Also as search in big-archives (see more at GZH source code)
-    QString gamePath = QString::fromStdWString(Registry::GetPathToGame(Registry::Games::GeneralsZeroHour));
+    QString gamePath = QString::fromStdWString(Windows::Registry::GetPathToGame(Windows::Registry::Games::GeneralsZeroHour));
     QString pathDataEngGenCsf = gamePath + "Data\\English\\generals.csf";
     QString pathEngBig = gamePath + "\\EnglishZH.big";
 

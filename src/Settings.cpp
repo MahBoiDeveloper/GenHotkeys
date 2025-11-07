@@ -35,7 +35,7 @@ void Settings::Parse()
     ForceSystemLanguage = json.Query("$." + nameof(ForceSystemLanguage)).toBool();
 
     if (ForceSystemLanguage)
-        Language = Convert::ToLangEnum(Registry::GetCurrentUserLanguage());
+        Language = Convert::ToLangEnum(Windows::Registry::GetCurrentUserLanguage());
     else
         Language = Convert::ToLangEnum(json.Query("$." + nameof(Language)).toString());
 

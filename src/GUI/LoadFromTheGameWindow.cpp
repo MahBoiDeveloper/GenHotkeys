@@ -35,14 +35,14 @@ LoadFromTheGameWindow::LoadFromTheGameWindow(QWidget* parent) : QWidget(parent)
     connect(btnCancel, &QPushButton::clicked, this, [=, this] { emit btnBackClicked(); });
 
     // configure game buttons
-    QRadioButton* rdxGenerals = new QRadioButton(Registry::ToQString(Registry::Games::Generals));
+    QRadioButton* rdxGenerals = new QRadioButton(Windows::Registry::ToQString(Windows::Registry::Games::Generals));
     rdxGenerals->setDisabled(true);
     rdxGenerals->setObjectName(nameof(rdxGenerals));
     QFont rbxGeneralsFont = rdxGenerals->font();
     rbxGeneralsFont.setStrikeOut(true);
     rdxGenerals->setFont(rbxGeneralsFont);
 
-    QRadioButton* rdxZeroHour = new QRadioButton(Registry::ToQString(Registry::Games::GeneralsZeroHour));
+    QRadioButton* rdxZeroHour = new QRadioButton(Windows::Registry::ToQString(Windows::Registry::Games::GeneralsZeroHour));
     rdxZeroHour->setChecked(true);
     rdxGenerals->setObjectName(nameof(rdxGenerals));
 
