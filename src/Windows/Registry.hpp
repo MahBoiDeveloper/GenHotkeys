@@ -8,7 +8,7 @@ namespace Windows
     class Registry final
     {
     public: // Data
-        enum class WindowsBit
+        enum class Arch
         {
             Win32,
             Win64
@@ -27,12 +27,12 @@ namespace Windows
         };
 
         /// @brief Paths in Window's registry to the C&C: Generals and C&C: Generals — Zero Hour
-        inline static const std::map<Games, std::map<WindowsBit, std::wstring>> PATHS_TO_GAMES =
+        inline static const std::map<Games, std::map<Arch, std::wstring>> PATHS_TO_GAMES =
         {
-            {Games::Generals,      {{WindowsBit::Win32, L"SOFTWARE\\Electronic Arts\\EA Games\\Generals"},
-                                    {WindowsBit::Win64, L"SOFTWARE\\WOW6432Node\\Electronic Arts\\EA Games\\Generals"}}},
-            {Games::GeneralsZeroHour, {{WindowsBit::Win32, L"SOFTWARE\\Electronic Arts\\EA Games\\Command and Conquer Generals Zero Hour"},
-                                       {WindowsBit::Win64, L"SOFTWARE\\WOW6432Node\\Electronic Arts\\EA Games\\Command and Conquer Generals Zero Hour"}}},
+            {Games::Generals,      {{Arch::Win32, L"SOFTWARE\\Electronic Arts\\EA Games\\Generals"},
+                                    {Arch::Win64, L"SOFTWARE\\WOW6432Node\\Electronic Arts\\EA Games\\Generals"}}},
+            {Games::GeneralsZeroHour, {{Arch::Win32, L"SOFTWARE\\Electronic Arts\\EA Games\\Command and Conquer Generals Zero Hour"},
+                                       {Arch::Win64, L"SOFTWARE\\WOW6432Node\\Electronic Arts\\EA Games\\Command and Conquer Generals Zero Hour"}}},
         };
 
     public: // Methods
@@ -43,7 +43,7 @@ namespace Windows
         /// @brief Returns equal string for enum class value. 
         static QString ToQString(Games game);
         /// @brief Returns actual Windows bit like a enum value.
-        static WindowsBit GetWindowsBit();
+        static Arch GetWindowsBit();
         
         /// @brief Returns REG_SZ string value from MS Windows registry.
         static std::string GetTextFromKeyA(RootFolder Folder, const char* pPathToFolder, const char* pKeyName);

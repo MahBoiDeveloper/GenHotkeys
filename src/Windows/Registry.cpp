@@ -10,15 +10,15 @@ using namespace std;
 
 namespace Windows
 {
-    Registry::WindowsBit Registry::GetWindowsBit()
+    Registry::Arch Registry::GetWindowsBit()
     {
         HKEY rKey;
-        WindowsBit windowsBit;
+        Arch windowsBit;
 
         if (RegOpenKeyExA(HKEY_LOCAL_MACHINE, _T("SOFTWARE\\WOW6432Node"), 0, KEY_QUERY_VALUE, &rKey) == ERROR_SUCCESS)
-            windowsBit = WindowsBit::Win64;
+            windowsBit = Arch::Win64;
         else
-            windowsBit = WindowsBit::Win32;
+            windowsBit = Arch::Win32;
 
         RegCloseKey(rKey);
 
@@ -103,8 +103,8 @@ namespace Windows
 
     QString Registry::ToQString(Games game) { return QString::fromStdString(Registry::ToString(game)); }
 
-    bool Registry::IsWindow64bit() { return GetWindowsBit() == WindowsBit::Win64; }
-    bool Registry::IsWindow32bit() { return GetWindowsBit() == WindowsBit::Win32; }
+    bool Registry::IsWindow64bit() { return GetWindowsBit() == Arch::Win64; }
+    bool Registry::IsWindow32bit() { return GetWindowsBit() == Arch::Win32; }
 
 #pragma region Logger methods
         string Registry::GetCurrentUserLanguage()

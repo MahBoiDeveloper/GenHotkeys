@@ -167,7 +167,7 @@ using namespace std;
 #pragma region Support methods
     const string Logger::GetWindowsBit() const
     {
-        if (Windows::Registry::GetWindowsBit() == Windows::Registry::WindowsBit::Win32)
+        if (Windows::Registry::GetWindowsBit() == Windows::Registry::Arch::Win32)
             return "32-bit";
         else
             return "64-bit";
