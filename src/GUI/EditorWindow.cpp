@@ -23,7 +23,7 @@
 using namespace StringExt;
 
 // TODO: Move definition to the something like reflection header
-int operator+(Qt::Modifier mod, Qt::Key key) { return (static_cast<int>(mod) + static_cast<int>(key)); }
+inline int operator+(Qt::Modifier mod, Qt::Key key) { return (static_cast<int>(mod) + static_cast<int>(key)); }
 
 #pragma region CTORs and Setters
 
@@ -422,8 +422,8 @@ void EditorWindow::KeyboardWindow_Update(int id)
     auto currTab = pHotkeysPanelsWidget->findChild<QWidget*>(QString("Layout ") + QString::number(id + 1), Qt::FindChildrenRecursively);
         
     QString accum;
-    for (const auto& elem : currTab->findChildren<ActionHotkeyWidget*>(QString(), Qt::FindChildrenRecursively))
-        accum += QString(elem->GetHotkey()).toUpper();
+    for (const auto& elem : currTab->findChildren<ActionHotkeyWidget*>(EmptyString, Qt::FindChildrenRecursively))
+        accum += elem->GetHotkey().toUpper();
 
     for (const QChar& ch : accum)
     {

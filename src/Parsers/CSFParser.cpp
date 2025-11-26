@@ -62,7 +62,7 @@ using namespace StringExt;
         }
         else
         {
-            throw Exception(QString("") + "Bad file name error. Unable to open file \"" + Path + "\"");
+            throw Exception("Bad file name error. Unable to open file \""q + Path + "\"");
         }
     }
     void CSFParser::Parse(const wstring& filePath)        { Parse(filePath.c_str()); }
@@ -407,7 +407,7 @@ using namespace StringExt;
                 continue;
 
             if (!elem.Value.contains(L'&') || elem.Value.size() <= 4) // if not "[&F]"
-                elem.Value = QString("[&") + QChar(wchLetter) + "] " + elem.Value;
+                elem.Value = "[&"q + QChar(wchLetter) + "] " + elem.Value;
             else
                 elem.Value[elem.Value.indexOf(L'&') + 1] = wchLetter;
 
