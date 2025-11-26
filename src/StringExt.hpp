@@ -39,9 +39,15 @@ namespace StringExt
                        std::same_as<T, std::string> || std::same_as<T, std::wstring>   || 
                        std::same_as<T, QString>;
 
-
-    // Doesn't work due to Qt5 and QString class have no constexpr ctor/dtor. Also add -Wno-literal-suffix to disable warning.
-    // inline constexpr QString operator""q (const char* __str, size_t __len) noexcept { return QString::fromUtf8(__str, __len); }
+    // Ingores ""q instead of ""_q. Thank you C++ committie for another useless warning.
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored "-Wliteral-suffix"
+    /// @brief Works fine, but not a compile-time optimized.
+    /// @brief To be able optimize it in compile-time update to Qt 6.4 >= due to constexpr ctor in QString.
+    /// @brief Reference: https://doc.qt.io/qt-6/qstring.html#operator-22-22_s
+    inline QString operator""q (const char*    str, size_t len) noexcept { return QString::fromUtf8(str, len); }
+    inline QString operator""q (const wchar_t* str, size_t len) noexcept { return QString::fromWCharArray(str, len); }
+    #pragma GCC diagnostic pop
 
     // Doesn't work due to attempt of redefine pointers mathematics.
     // template<IsCString S, IsCString T> inline QString operator+ (const S& str1, const T& str2) { return EmptyString; }
