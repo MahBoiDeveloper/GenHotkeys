@@ -1,5 +1,4 @@
 #include <QCoreApplication>
-#include <QObject>
 #include "StringExt.hpp"
 
 QString StringExt::l10n(const char*         string) { return QCoreApplication::translate("QObject", QString(string).toUtf8().constData()); }

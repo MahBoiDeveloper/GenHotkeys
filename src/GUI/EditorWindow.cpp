@@ -20,6 +20,8 @@
 #include "SettingsWindow.hpp"
 #include "EditorWindow.hpp"
 
+using namespace StringExt;
+
 // TODO: Move definition to the something like reflection header
 int operator+(Qt::Modifier mod, Qt::Key key) { return (static_cast<int>(mod) + static_cast<int>(key)); }
 

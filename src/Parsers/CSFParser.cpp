@@ -8,6 +8,7 @@
 #include "CSFParser.hpp"
 
 using namespace std;
+using namespace StringExt;
 
 #pragma region CTORs and DTORs
     CSFParser::CSFParser()                        {}
