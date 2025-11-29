@@ -15,24 +15,20 @@ void ProgramConstants::InitializeFileSettings() { pSettingsFile = std::make_uniq
 void ProgramConstants::InitializeTranslations()
 {
     QDir transDir(PROGRAM_CONSTANTS->TRANSLATIONS_FOLDER);
-    
+    int i = 0;
+    _Languages.insert(0, {"en", "English"});
+
     if (transDir.isEmpty())
     {
-        LOGMSG(PROGRAM_CONSTANTS->TRANSLATIONS_FOLDER + " " + "is empty!");
+        LOGMSG(PROGRAM_CONSTANTS->TRANSLATIONS_FOLDER + " " + "is empty! Only English language available.");
         return;
     }
 
-    auto files = transDir.entryInfoList(QDir::Filter::Files);
-    _Languages.insert(0, {"en", "English"});
-    int i = 0;
-    for (const auto& file : files)
+    for (const auto& file : transDir.entryInfoList(QStringList( "*.qm" ), QDir::Filter::Files))
     {
         ++i;
         LOGMSG("Filtered file: " + file.fileName());
-        if (file.completeSuffix() == "qm")
-        {
-            LOGMSG("Inserting: {" + file.completeBaseName() + ", " + Windows::Locale::LanguageName(file.completeBaseName()) + "}");
-            _Languages.insert(i, {file.completeBaseName(), Windows::Locale::LanguageName(file.completeBaseName())});
-        }
+        LOGMSG("Inserting: {" + file.completeBaseName() + ", " + Windows::Locale::LanguageName(file.completeBaseName()) + "}");
+        _Languages.insert(i, {file.completeBaseName(), Windows::Locale::LanguageName(file.completeBaseName())});
     }
 }
