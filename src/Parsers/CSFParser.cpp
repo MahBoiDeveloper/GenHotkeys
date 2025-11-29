@@ -1,9 +1,9 @@
 #include <sstream>
 #include <QStringList>
 
+#include "../Windows/Locale.hpp"
 #include "../Logger.hpp"
 #include "../Convert.hpp"
-#include "../Unsorted.hpp"
 #include "../Exception.hpp"
 #include "CSFParser.hpp"
 

@@ -1,4 +1,4 @@
-#include "Unsorted.hpp"
+#include "Windows/Locale.hpp"
 #include "Convert.hpp"
 using namespace std;
 
@@ -29,7 +29,7 @@ namespace Convert
         QString lowerLocale = locale.toLower();
 
         for(auto elem = PROGRAM_CONSTANTS->LANGUAGES_STRINGS.cbegin(); elem != PROGRAM_CONSTANTS->LANGUAGES_STRINGS.cend(); ++elem)
-            if (Unsorted::GetLanguageShortName(elem.key()) == lowerLocale)
+            if (Windows::Locale::GetLanguageShortName(elem.key()) == lowerLocale)
                 return elem.key();
     
         return Languages::English;

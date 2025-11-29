@@ -3,9 +3,9 @@
 #include <QPushButton>
 #include <QVBoxLayout>
 
+#include "../Windows/Locale.hpp"
 #include "../Logger.hpp"
 #include "../ProgramConstants.hpp"
-#include "../Unsorted.hpp"
 #include "WindowManager.hpp"
 #include "ImageManager.hpp"
 #include "GreetingWindow.hpp"

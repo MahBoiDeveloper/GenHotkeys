@@ -1,9 +1,9 @@
 #include <QSet>
+#include "Windows/Locale.hpp"
 #include "Parsers/CSFParser.hpp"
 #include "Parsers/JSONFile.hpp"
 #include "Logger.hpp"
 #include "Faction.hpp"
-#include "Unsorted.hpp"
 
 Faction::Faction(const QString& _shortName, const QString& _displayName, const QString& _displayNameDescription)
     : shortName{_shortName}
@@ -26,7 +26,7 @@ Faction::Faction(const QJsonObject& factionAsObject)
         
         if (lng != Languages::English)
         {
-            auto translatedNames = factionAsObject[Unsorted::GetLanguageShortName(lng)].toObject();
+            auto translatedNames = factionAsObject[Windows::Locale::GetLanguageShortName(lng)].toObject();
             
             if (!translatedNames.isEmpty())
             {

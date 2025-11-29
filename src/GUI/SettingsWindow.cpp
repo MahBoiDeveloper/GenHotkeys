@@ -3,7 +3,7 @@
 
 #include "../Logger.hpp"
 #include "../ProgramConstants.hpp"
-#include "../Unsorted.hpp"
+#include "../Windows/Locale.hpp"
 #include "WindowManager.hpp"
 #include "SettingsWindow.hpp"
 
@@ -49,7 +49,7 @@ SettingsWindow::SettingsWindow(QWidget* parent) : QWidget(parent)
     lblLanguage->setObjectName(nameof(lblLanguage));
     
     for (int i = 0; i < static_cast<int>(Languages::Count); ++i)
-        cmbLanguage->addItem(Unsorted::GetLanguageFullName(static_cast<Languages>(i)));
+        cmbLanguage->addItem(Windows::Locale::GetLanguageFullName(static_cast<Languages>(i)));
     cmbLanguage->setCurrentIndex(static_cast<int>(PROGRAM_CONSTANTS->pSettingsFile->GetLanguage()));
     cmbLanguage->setCurrentText(PROGRAM_CONSTANTS->LANGUAGES_STRINGS.value(PROGRAM_CONSTANTS->pSettingsFile->GetLanguage()).second);
 

@@ -4,8 +4,8 @@
 
 #include "../Parsers/CSFParser.hpp"
 #include "../Windows/Registry.hpp"
+#include "../Windows/Locale.hpp"
 #include "../Logger.hpp"
-#include "../Unsorted.hpp"
 #include "../Convert.hpp"
 #include "../Exception.hpp"
 
@@ -113,7 +113,7 @@ void WindowManager::SetTranslator()
 
     lang = PROGRAM_CONSTANTS->pSettingsFile->GetLanguage();
 
-    QString lngShortName = Unsorted::GetLanguageShortName(lang);
+    QString lngShortName = Windows::Locale::GetLanguageShortName(lang);
     LOGMSG("Set editor language to " + lngShortName.toUpper());
 
     pAppTranslator = new QTranslator();

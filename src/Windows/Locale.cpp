@@ -1,10 +1,14 @@
 #include <QString>
 #include <QVector>
 #include <QByteArray>
+#include <QStringList>
+#include <list>
 #include <windows.h>
 
 #include "../StringExt.hpp"
 #include "Locale.hpp"
+
+using namespace std;
 
 namespace Windows
 {
@@ -52,4 +56,18 @@ namespace Windows
 
         return StringExt::EmptyString;
     }
+
+    Languages Locale::LangEnumFromLocale(const QString& locale)
+    {
+        QString lowerLocale = locale.toLower();
+
+        for(auto it = PROGRAM_CONSTANTS->LANGUAGES_STRINGS.cbegin(); it != PROGRAM_CONSTANTS->LANGUAGES_STRINGS.cend(); ++it)
+            if (GetLanguageShortName(it.key()) == lowerLocale)
+                return it.key();
+    
+        return Languages::English;
+    }
+
+    QString Locale::GetLanguageShortName(Languages language) { return PROGRAM_CONSTANTS->LANGUAGES_STRINGS.value(language).first; }
+    QString Locale::GetLanguageFullName(Languages language)  { return PROGRAM_CONSTANTS->LANGUAGES_STRINGS.value(language).second; }
 }

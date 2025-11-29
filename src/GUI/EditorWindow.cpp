@@ -8,10 +8,10 @@
 #include <QComboBox>
 #include <QFileDialog>
 
+#include "../Windows/Locale.hpp"
 #include "../Parsers/CSFParser.hpp"
 #include "../Info.hpp"
 #include "../Logger.hpp"
-#include "../Unsorted.hpp"
 #include "../Convert.hpp"
 #include "../FactionsManager.hpp"
 
