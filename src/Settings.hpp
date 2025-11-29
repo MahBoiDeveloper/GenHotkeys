@@ -2,13 +2,6 @@
 #include <QSet>
 #include "Parsers/JSONFile.hpp"
 
-enum class Languages
-{
-    English,
-    Russian,
-    Count
-};
-
 class Settings final
 {
 private: // Data
@@ -17,7 +10,7 @@ private: // Data
     bool          DebugConsole;
     bool          DiscordRPC;
     bool          ForceSystemLanguage;
-    Languages     Language;
+    size_t        Language;
 
 private: // Methods
     bool FromQtCheckState(const Qt::CheckState& state);
@@ -40,8 +33,8 @@ public:
     const bool IsForceSystemLanguageOnStartUpEnabled() const;
     /// @brief Returns `QSet` of available keys from `QWEWRTY` keyboard to choice by user.
     const QSet<Qt::Key> GetAllowedKeys() const;
-    /// @brief Returns enum `Languages` value of current language from settings file.
-    const Languages GetLanguage() const;
+    /// @brief Returns value of current language from settings file corresponded to the hashtable from the `ProgramConstants`.
+    const size_t GetLanguage() const;
 
     /// @brief Sets status for console window.
     void SetConsoleStatus(const Qt::CheckState& state);
@@ -58,5 +51,5 @@ public:
     /// @brief Sets status to force editor use system language.
     void SetForceSystemLanguageOnStartUp(const Qt::CheckState& state);
     /// @brief Sets editor's language.
-    void SetLanguage(const Languages& locale);
+    void SetLanguage(const size_t& locale);
 };

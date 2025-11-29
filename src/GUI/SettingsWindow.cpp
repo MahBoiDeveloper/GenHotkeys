@@ -3,7 +3,7 @@
 
 #include "../Logger.hpp"
 #include "../ProgramConstants.hpp"
-#include "../Unsorted.hpp"
+#include "../Windows/Locale.hpp"
 #include "WindowManager.hpp"
 #include "SettingsWindow.hpp"
 
@@ -48,10 +48,11 @@ SettingsWindow::SettingsWindow(QWidget* parent) : QWidget(parent)
     lblLanguage->setText(tr("Language:"));
     lblLanguage->setObjectName(nameof(lblLanguage));
     
-    for (int i = 0; i < static_cast<int>(Languages::Count); ++i)
-        cmbLanguage->addItem(Unsorted::GetLanguageFullName(static_cast<Languages>(i)));
+    for (size_t i : PROGRAM_CONSTANTS->Languages.keys())
+        cmbLanguage->addItem(PROGRAM_CONSTANTS->Languages.value(i).second);
+
     cmbLanguage->setCurrentIndex(static_cast<int>(PROGRAM_CONSTANTS->pSettingsFile->GetLanguage()));
-    cmbLanguage->setCurrentText(PROGRAM_CONSTANTS->LANGUAGES_STRINGS.value(PROGRAM_CONSTANTS->pSettingsFile->GetLanguage()).second);
+    cmbLanguage->setCurrentText(PROGRAM_CONSTANTS->Languages.value(PROGRAM_CONSTANTS->pSettingsFile->GetLanguage()).second);
 
     ltLanguage->setAlignment(Qt::AlignLeading);
     ltLanguage->addWidget(lblLanguage);
@@ -101,10 +102,10 @@ void SettingsWindow::BtnSave_Clicked()
 
     PROGRAM_CONSTANTS->pSettingsFile->SetForceSystemLanguageOnStartUp(chkForceSystemLanguageOnStartUp->checkState());
     
-    bool isNewLanguageAssigned = static_cast<Languages>(cmbLanguage->currentIndex()) != PROGRAM_CONSTANTS->pSettingsFile->GetLanguage();
+    bool isNewLanguageAssigned = cmbLanguage->currentIndex() != PROGRAM_CONSTANTS->pSettingsFile->GetLanguage();
     
     if (isNewLanguageAssigned)
-        PROGRAM_CONSTANTS->pSettingsFile->SetLanguage(static_cast<Languages>(cmbLanguage->currentIndex()));
+        PROGRAM_CONSTANTS->pSettingsFile->SetLanguage(cmbLanguage->currentIndex());
 
     PROGRAM_CONSTANTS->pSettingsFile->Save();
 

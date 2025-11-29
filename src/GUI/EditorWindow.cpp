@@ -8,10 +8,10 @@
 #include <QComboBox>
 #include <QFileDialog>
 
+#include "../Windows/Locale.hpp"
 #include "../Parsers/CSFParser.hpp"
 #include "../Info.hpp"
 #include "../Logger.hpp"
-#include "../Unsorted.hpp"
 #include "../Convert.hpp"
 #include "../FactionsManager.hpp"
 
@@ -20,8 +20,10 @@
 #include "SettingsWindow.hpp"
 #include "EditorWindow.hpp"
 
+using namespace StringExt;
+
 // TODO: Move definition to the something like reflection header
-int operator+(Qt::Modifier mod, Qt::Key key) { return (static_cast<int>(mod) + static_cast<int>(key)); }
+inline int operator+(Qt::Modifier mod, Qt::Key key) { return (static_cast<int>(mod) + static_cast<int>(key)); }
 
 #pragma region CTORs and Setters
 
@@ -49,7 +51,7 @@ EditorWindow::EditorWindow(QWidget* parent)
 
     QBoxLayout* ltFactions = nullptr;
     int factonsCount = FACTIONS_MANAGER->Count();
-    Languages language = PROGRAM_CONSTANTS->pSettingsFile->GetLanguage();
+    size_t language = PROGRAM_CONSTANTS->pSettingsFile->GetLanguage();
 
     if (factonsCount == Faction::BASIC_FACTION_COUNT)
     {
@@ -420,8 +422,8 @@ void EditorWindow::KeyboardWindow_Update(int id)
     auto currTab = pHotkeysPanelsWidget->findChild<QWidget*>(QString("Layout ") + QString::number(id + 1), Qt::FindChildrenRecursively);
         
     QString accum;
-    for (const auto& elem : currTab->findChildren<ActionHotkeyWidget*>(QString(), Qt::FindChildrenRecursively))
-        accum += QString(elem->GetHotkey()).toUpper();
+    for (const auto& elem : currTab->findChildren<ActionHotkeyWidget*>(EmptyString, Qt::FindChildrenRecursively))
+        accum += elem->GetHotkey().toUpper();
 
     for (const QChar& ch : accum)
     {

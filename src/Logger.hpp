@@ -7,7 +7,7 @@
 
 #define LOGGER      Logger::Instance
 #define LOGSTM      Logger::Instance->Log()
-#define LOGMSG(msg) Logger::Instance->Log(QString("")+msg);Logger::Instance->LogToConsole(QString("")+msg)
+#define LOGMSG(msg) Logger::Instance->Log(StringExt::EmptyString+msg);Logger::Instance->LogToConsole(StringExt::EmptyString+msg)
 
 #define MAX_LOGS_COUNT 10
 

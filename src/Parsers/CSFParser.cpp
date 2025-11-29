@@ -1,13 +1,14 @@
 #include <sstream>
 #include <QStringList>
 
+#include "../Windows/Locale.hpp"
 #include "../Logger.hpp"
 #include "../Convert.hpp"
-#include "../Unsorted.hpp"
 #include "../Exception.hpp"
 #include "CSFParser.hpp"
 
 using namespace std;
+using namespace StringExt;
 
 #pragma region CTORs and DTORs
     CSFParser::CSFParser()                        {}
@@ -61,7 +62,7 @@ using namespace std;
         }
         else
         {
-            throw Exception(QString("") + "Bad file name error. Unable to open file \"" + Path + "\"");
+            throw Exception("Bad file name error. Unable to open file \""q + Path + "\"");
         }
     }
     void CSFParser::Parse(const wstring& filePath)        { Parse(filePath.c_str()); }
@@ -406,7 +407,7 @@ using namespace std;
                 continue;
 
             if (!elem.Value.contains(L'&') || elem.Value.size() <= 4) // if not "[&F]"
-                elem.Value = QString("[&") + QChar(wchLetter) + "] " + elem.Value;
+                elem.Value = "[&"q + QChar(wchLetter) + "] " + elem.Value;
             else
                 elem.Value[elem.Value.indexOf(L'&') + 1] = wchLetter;
 

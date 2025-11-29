@@ -5,6 +5,7 @@
 #include "GINIParser.hpp"
 
 using namespace std;
+using namespace StringExt;
 
 #pragma region CTORs and DTORs
     GINIParser::GINIParser(const string& filePath)  : Path(filePath)               { Parse(); }

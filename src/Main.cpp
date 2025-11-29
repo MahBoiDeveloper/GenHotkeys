@@ -65,6 +65,7 @@ int main(int argc, const char** argv)
     if (!filesystem::exists(PROGRAM_CONSTANTS->TRANSLATIONS_FOLDER.toStdString().c_str()))
         return ShowErrorMessage(PROGRAM_CONSTANTS->TRANSLATIONS_NO_FOUND);
 
+    PROGRAM_CONSTANTS->InitializeTranslations();
     PROGRAM_CONSTANTS->InitializeFileSettings();
 
     // Show console, that by default is hiding by Logger class

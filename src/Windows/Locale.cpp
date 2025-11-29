@@ -1,10 +1,14 @@
 #include <QString>
 #include <QVector>
 #include <QByteArray>
+#include <QStringList>
+#include <list>
 #include <windows.h>
 
 #include "../StringExt.hpp"
 #include "Locale.hpp"
+
+using namespace std;
 
 namespace Windows
 {

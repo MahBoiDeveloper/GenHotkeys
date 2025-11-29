@@ -10,6 +10,7 @@
 #include "Info.hpp"
 
 using namespace std;
+using namespace StringExt;
 
 #pragma region ctor and dtor
     Logger::Logger()

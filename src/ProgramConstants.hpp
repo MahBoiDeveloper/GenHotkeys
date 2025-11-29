@@ -21,9 +21,8 @@ enum class GameObjectTypes
 
 class ProgramConstants
 {
-public:
-    inline static std::unique_ptr<ProgramConstants> Instance      = nullptr;
-    std::unique_ptr<Settings>                       pSettingsFile = nullptr;
+public: // Immutable data
+    const size_t DEFAULT_LANGUAGE_CODE = 0;
 
     // Folders
     const QString RESOURCE_FOLDER         = "Resources";
@@ -68,12 +67,12 @@ public:
     const int     EMPTY_KEY_WIDTH         = 25;
 
     // Error strings
-    const char*   SETTINGS_NO_FOUND       = "Unable to find \"Settings.json\" in \"Resource\" folder.";
-    const char*   TECH_TREE_NO_FOUND      = "Unable to find \"TechTree.json\" in \"Resource\" folder.";
-    const char*   THEME_FOLDER_NO_FOUND   = "Unable to find \"Resource/Theme\" folder.";
-    const char*   ICONS_FOLDER_NO_FOUND   = "Unable to find \"Resource/Icons\" folder.";
-    const char*   TRANSLATIONS_NO_FOUND   = "Unable to find \"Resource/Translations\" folder.";
-    const char*   UNKNOWN_ERROR           = "Unknown error has been occured.";
+    const QString SETTINGS_NO_FOUND       = "Unable to find \"Settings.json\" in \"Resource\" folder.";
+    const QString TECH_TREE_NO_FOUND      = "Unable to find \"TechTree.json\" in \"Resource\" folder.";
+    const QString THEME_FOLDER_NO_FOUND   = "Unable to find \"Resource/Theme\" folder.";
+    const QString ICONS_FOLDER_NO_FOUND   = "Unable to find \"Resource/Icons\" folder.";
+    const QString TRANSLATIONS_NO_FOUND   = "Unable to find \"Resource/Translations\" folder.";
+    const QString UNKNOWN_ERROR           = "Unknown error has been occured.";
 
     // Translated error strings
     const QString CSF_ERROR_HEADER        = QObject::tr("Error with CSF file");
@@ -109,12 +108,6 @@ public:
         {'Z', Qt::Key_Z}, {'X', Qt::Key_X}, {'C', Qt::Key_C}, {'V', Qt::Key_V}, {'B', Qt::Key_B}, {'N', Qt::Key_N}, {'M', Qt::Key_M}
     };
 
-    const QMap<Languages, QPair<QString, QString>> LANGUAGES_STRINGS =
-    {
-        {Languages::English, {"en", "English"}},
-        {Languages::Russian, {"ru", "Русский"}}
-    };
-
     const QMap<GameObjectTypes, QString> INGAME_ENTITIES_STRINGS =
     {
         {GameObjectTypes::Buildings, QObject::tr("Buildings")},
@@ -123,8 +116,15 @@ public:
         {GameObjectTypes::Aircrafts, QObject::tr("Aircrafts")}
     };
 
+public: // Mutable data
+    inline static std::unique_ptr<ProgramConstants> Instance      = nullptr;
+    std::unique_ptr<Settings>                       pSettingsFile = nullptr;
+    QMap<size_t, QPair<QString, QString>>           Languages     = {};
+
 public: // Methods
-    ProgramConstants();
-    /// @brief Parse `Resource\Settings.json` to the `Settings` class.
+    explicit ProgramConstants();
+    /// @brief Parse `Resources\Settings.json` to the `Settings` class.
     void InitializeFileSettings();
+    /// @brief Parse `*.qm` files in the `Resources\Translations` folder.
+    void InitializeTranslations();
 };
