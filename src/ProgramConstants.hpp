@@ -21,10 +21,7 @@ enum class GameObjectTypes
 
 class ProgramConstants
 {
-public:
-    inline static std::unique_ptr<ProgramConstants> Instance      = nullptr;
-    std::unique_ptr<Settings>                       pSettingsFile = nullptr;
-
+public: // Immutable data
     // Folders
     const QString RESOURCE_FOLDER         = "Resources";
     const QString BINARIES_FOLDER         = RESOURCE_FOLDER + "\\Binaries";
@@ -123,8 +120,15 @@ public:
         {GameObjectTypes::Aircrafts, QObject::tr("Aircrafts")}
     };
 
+public: // Mutable data
+    inline static std::unique_ptr<ProgramConstants> Instance      = nullptr;
+    std::unique_ptr<Settings>                       pSettingsFile = nullptr;
+    QMap<size_t, QPair<QString, QString>>           _Languages    = {};
+
 public: // Methods
-    ProgramConstants();
-    /// @brief Parse `Resource\Settings.json` to the `Settings` class.
+    explicit ProgramConstants();
+    /// @brief Parse `Resources\Settings.json` to the `Settings` class.
     void InitializeFileSettings();
+    /// @brief Parse `*.qm` files in the `Resources\Translations` folder.
+    void InitializeTranslations();
 };

@@ -66,6 +66,7 @@ int main(int argc, const char** argv)
         return ShowErrorMessage(PROGRAM_CONSTANTS->TRANSLATIONS_NO_FOUND);
 
     PROGRAM_CONSTANTS->InitializeFileSettings();
+    PROGRAM_CONSTANTS->InitializeTranslations();
 
     // Show console, that by default is hiding by Logger class
     if (PROGRAM_CONSTANTS->pSettingsFile->IsConsoleEnabled()) 
