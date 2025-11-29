@@ -20,15 +20,14 @@ void ProgramConstants::InitializeTranslations()
 
     if (transDir.isEmpty())
     {
-        LOGMSG(TRANSLATIONS_FOLDER + " " + "is empty! Only English language available.");
+        LOGMSG(TRANSLATIONS_FOLDER + " folder is empty. Only English translation available!");
         return;
     }
 
     for (const auto& file : transDir.entryInfoList(QStringList( "*.qm" ), QDir::Filter::Files))
     {
         ++i;
-        LOGMSG("Filtered file: " + file.fileName());
-        LOGMSG("Inserting: {" + file.completeBaseName().toLower() + ", " + Windows::Locale::LanguageName(file.completeBaseName().toLower()) + "}");
+        LOGMSG("Listed translation: {" + file.completeBaseName().toLower() + ", " + Windows::Locale::LanguageName(file.completeBaseName().toLower()) + "}");
         Languages.insert(i, {file.completeBaseName().toLower(), Windows::Locale::LanguageName(file.completeBaseName().toLower())});
     }
 }
