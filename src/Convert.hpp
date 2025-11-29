@@ -10,12 +10,6 @@ namespace Convert
     QStringList ToQStringList(const std::list<std::string>& srcList);
     /// @brief Returns list `std::list` of `std::string` as element by converting `QStringList<QString>` value.
     inline std::list<std::string> ToStdStringList(const QStringList& srcList);
-    /// @brief Return enum `Languages` value that equivalent to the text value.
-    Languages ToLangEnum(const std::string& locale);
-    /// @brief Return enum `Languages` value that equivalent to the text value.
-    Languages ToLangEnum(const QString& locale);
     /// @brief Converts `QChar` to `Qt::Key` enum equivalent.
     Qt::Key ToQtKey(const QChar& ch);
-    /// @brief Converts enum `Language` to `QString`.
-    QString ToQString(const Languages& locale);
 }

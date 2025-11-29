@@ -187,17 +187,17 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="79"/>
+        <location filename="../../ProgramConstants.hpp" line="78"/>
         <source>Error with CSF file</source>
         <translation>Ошибка с CSF файлом</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="80"/>
+        <location filename="../../ProgramConstants.hpp" line="79"/>
         <source>Cannot process the empty file.</source>
         <translation>Невозможно обработать пустой файл.</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="81"/>
+        <location filename="../../ProgramConstants.hpp" line="80"/>
         <source>Unable to find selected CSF file.</source>
         <translation>Невозможно найти указанный CSF файл.</translation>
     </message>
@@ -206,52 +206,52 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="82"/>
+        <location filename="../../ProgramConstants.hpp" line="81"/>
         <source>Choosen CSF file doesn&apos;t have CONTROLBAR category. Make sure that you are load correct file.</source>
         <translation>У выбранного CSF файла отсутствует категория CONTROLBAR. Проверьте, что вы загружаете правильный файл.</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="83"/>
+        <location filename="../../ProgramConstants.hpp" line="82"/>
         <source>Choosen CSF file doesn&apos;t have OBJECT category. Make sure that you are load correct file.</source>
         <translation>У выбранного CSF файла отсутствует категория OBJECT. Проверьте, что вы загружаете правильный файл.</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="84"/>
+        <location filename="../../ProgramConstants.hpp" line="83"/>
         <source>Unable to find &quot;generals.csf&quot; file in &quot;%1&quot; folder.</source>
         <translation>Невозможно найти &quot;generals.csf&quot; в папке &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="85"/>
+        <location filename="../../ProgramConstants.hpp" line="84"/>
         <source>Unable to find CSF file inside BIG archive &quot;%1&quot;</source>
         <translation>Невозможно найти CSF файл внутри BIG архива &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="86"/>
+        <location filename="../../ProgramConstants.hpp" line="85"/>
         <source>Game files search error</source>
         <translation>Ошибка поиска по игровым файлам</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="87"/>
+        <location filename="../../ProgramConstants.hpp" line="86"/>
         <source>Unable to find &quot;EnglishZH.big&quot; archive in &quot;%1&quot; folder.</source>
         <translation>Невозможно найти &quot;EnglishZH.big&quot; в папке &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="120"/>
+        <location filename="../../ProgramConstants.hpp" line="113"/>
         <source>Buildings</source>
         <translation>Здания</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="121"/>
+        <location filename="../../ProgramConstants.hpp" line="114"/>
         <source>Infantry</source>
         <translation>Пехота</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="122"/>
+        <location filename="../../ProgramConstants.hpp" line="115"/>
         <source>Vehicles</source>
         <translation>Техника</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="123"/>
+        <location filename="../../ProgramConstants.hpp" line="116"/>
         <source>Aircrafts</source>
         <translation>Авиация</translation>
     </message>
@@ -279,37 +279,37 @@
         <translation>Язык:</translation>
     </message>
     <message>
-        <location filename="../SettingsWindow.cpp" line="65"/>
+        <location filename="../SettingsWindow.cpp" line="66"/>
         <source>SAVE</source>
         <translation>СОХРАНИТЬ</translation>
     </message>
     <message>
-        <location filename="../SettingsWindow.cpp" line="69"/>
+        <location filename="../SettingsWindow.cpp" line="70"/>
         <source>RESET ALL</source>
         <translation>СБРОСИТЬ ВСЁ</translation>
     </message>
     <message>
-        <location filename="../SettingsWindow.cpp" line="73"/>
+        <location filename="../SettingsWindow.cpp" line="74"/>
         <source>BACK</source>
         <translation>НАЗАД</translation>
     </message>
     <message>
-        <location filename="../SettingsWindow.cpp" line="117"/>
+        <location filename="../SettingsWindow.cpp" line="118"/>
         <source>Setting Apply Confirmation</source>
         <translation>Подтверждение применения настроек</translation>
     </message>
     <message>
-        <location filename="../SettingsWindow.cpp" line="118"/>
+        <location filename="../SettingsWindow.cpp" line="119"/>
         <source>You have selected settings that require a complete restart of the editor. Do you want to apply new settings and restart editor?</source>
         <translation>Вы выбрали настройки, которые требуют полного перезапуска редактора. Вы желаете применить новые настройки и перезапустить редактор?</translation>
     </message>
     <message>
-        <location filename="../SettingsWindow.cpp" line="120"/>
+        <location filename="../SettingsWindow.cpp" line="121"/>
         <source>YES</source>
         <translation>ДА</translation>
     </message>
     <message>
-        <location filename="../SettingsWindow.cpp" line="121"/>
+        <location filename="../SettingsWindow.cpp" line="122"/>
         <source>CANCEL</source>
         <translation>ОТМЕНА</translation>
     </message>

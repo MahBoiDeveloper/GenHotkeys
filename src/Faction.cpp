@@ -18,15 +18,14 @@ Faction::Faction(const QJsonObject& factionAsObject)
     , displayNameDescription{factionAsObject[PROGRAM_CONSTANTS->DISPLAY_NAME_DESCRIPTION].toString()}
     , techTree{ParseJsonObject(factionAsObject)}
 {
-    for (int currLng = 0; currLng < static_cast<int>(Languages::Count); currLng++)
+    for (size_t lng : PROGRAM_CONSTANTS->Languages.keys())
     {
         QString _displayName = "";
         QString _displayNameDescription = "";
-        Languages lng = static_cast<Languages>(currLng);
         
-        if (lng != Languages::English)
+        if (lng != PROGRAM_CONSTANTS->DEFAULT_LANGUAGE_CODE)
         {
-            auto translatedNames = factionAsObject[Windows::Locale::GetLanguageShortName(lng)].toObject();
+            auto translatedNames = factionAsObject[PROGRAM_CONSTANTS->Languages.value(lng).first].toObject();
             
             if (!translatedNames.isEmpty())
             {
@@ -57,11 +56,11 @@ const QString Faction::GetDisplayName() const { return displayName; }
 const QString Faction::GetDisplayNameDescription() const { return displayNameDescription; }
 const QMap<Faction::GameObject, GameObjectTypes>& Faction::GetTechTree() const { return techTree; }
 
-const QString Faction::GetDisplayName(Languages lng) const
+const QString Faction::GetDisplayName(size_t lng) const
 {
     QString ret;
 
-    if (lng != Languages::English)
+    if (lng != PROGRAM_CONSTANTS->DEFAULT_LANGUAGE_CODE)
         ret = localizedDisplay.value(lng).first;
     
     if (ret == StringExt::EmptyString)
@@ -69,11 +68,11 @@ const QString Faction::GetDisplayName(Languages lng) const
 
     return ret;
 }
-const QString Faction::GetDisplayNameDescription(Languages lng) const 
+const QString Faction::GetDisplayNameDescription(size_t lng) const 
 {
     QString ret;
 
-    if (lng != Languages::English)
+    if (lng != PROGRAM_CONSTANTS->DEFAULT_LANGUAGE_CODE)
         ret = localizedDisplay.value(lng).second;
     
     if (ret == StringExt::EmptyString)

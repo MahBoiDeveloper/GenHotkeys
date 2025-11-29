@@ -22,6 +22,8 @@ enum class GameObjectTypes
 class ProgramConstants
 {
 public: // Immutable data
+    const size_t DEFAULT_LANGUAGE_CODE = 0;
+
     // Folders
     const QString RESOURCE_FOLDER         = "Resources";
     const QString BINARIES_FOLDER         = RESOURCE_FOLDER + "\\Binaries";
@@ -106,12 +108,6 @@ public: // Immutable data
         {'Z', Qt::Key_Z}, {'X', Qt::Key_X}, {'C', Qt::Key_C}, {'V', Qt::Key_V}, {'B', Qt::Key_B}, {'N', Qt::Key_N}, {'M', Qt::Key_M}
     };
 
-    const QMap<Languages, QPair<QString, QString>> LANGUAGES_STRINGS =
-    {
-        {Languages::English, {"en", "English"}},
-        {Languages::Russian, {"ru", "Русский"}}
-    };
-
     const QMap<GameObjectTypes, QString> INGAME_ENTITIES_STRINGS =
     {
         {GameObjectTypes::Buildings, QObject::tr("Buildings")},
@@ -123,7 +119,7 @@ public: // Immutable data
 public: // Mutable data
     inline static std::unique_ptr<ProgramConstants> Instance      = nullptr;
     std::unique_ptr<Settings>                       pSettingsFile = nullptr;
-    QMap<size_t, QPair<QString, QString>>           _Languages    = {};
+    QMap<size_t, QPair<QString, QString>>           Languages     = {};
 
 public: // Methods
     explicit ProgramConstants();

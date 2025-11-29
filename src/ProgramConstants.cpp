@@ -14,13 +14,13 @@ void ProgramConstants::InitializeFileSettings() { pSettingsFile = std::make_uniq
 
 void ProgramConstants::InitializeTranslations()
 {
-    QDir transDir(PROGRAM_CONSTANTS->TRANSLATIONS_FOLDER);
+    QDir transDir(TRANSLATIONS_FOLDER);
     int i = 0;
-    _Languages.insert(0, {"en", "English"});
+    Languages.insert(DEFAULT_LANGUAGE_CODE, {"en", "English"});
 
     if (transDir.isEmpty())
     {
-        LOGMSG(PROGRAM_CONSTANTS->TRANSLATIONS_FOLDER + " " + "is empty! Only English language available.");
+        LOGMSG(TRANSLATIONS_FOLDER + " " + "is empty! Only English language available.");
         return;
     }
 
@@ -28,7 +28,7 @@ void ProgramConstants::InitializeTranslations()
     {
         ++i;
         LOGMSG("Filtered file: " + file.fileName());
-        LOGMSG("Inserting: {" + file.completeBaseName() + ", " + Windows::Locale::LanguageName(file.completeBaseName()) + "}");
-        _Languages.insert(i, {file.completeBaseName(), Windows::Locale::LanguageName(file.completeBaseName())});
+        LOGMSG("Inserting: {" + file.completeBaseName().toLower() + ", " + Windows::Locale::LanguageName(file.completeBaseName().toLower()) + "}");
+        Languages.insert(i, {file.completeBaseName().toLower(), Windows::Locale::LanguageName(file.completeBaseName().toLower())});
     }
 }

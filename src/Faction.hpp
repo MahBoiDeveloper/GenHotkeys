@@ -27,7 +27,7 @@ private: // Data
     QString displayName;
     QString displayNameDescription;
     QMap<GameObject, GameObjectTypes> techTree;
-    QMap<Languages, QPair<QString, QString>> localizedDisplay;
+    QMap<size_t, QPair<QString, QString>> localizedDisplay;
 public:
     inline static const int BASIC_FACTION_COUNT = 12;
 
@@ -43,11 +43,11 @@ public:
     /// @brief Returns another one short faction name from field `DisplayName` of TechTree.json.
     const QString GetDisplayName() const;
     /// @brief Returns another one short faction name from field `DisplayName` of TechTree.json for the specific locale.
-    const QString GetDisplayName(Languages lng) const;
+    const QString GetDisplayName(size_t lng) const;
     /// @brief Returns long faction name from field `DisplayNameDescription` of TechTree.json.
     const QString GetDisplayNameDescription() const;
     /// @brief Returns long faction name from field `DisplayNameDescription` of TechTree.json for the specific locale.
-    const QString GetDisplayNameDescription(Languages lng) const;
+    const QString GetDisplayNameDescription(size_t lng) const;
     /// @brief Returns link to the techTree field.
     const QMap<GameObject, GameObjectTypes>& GetTechTree() const;
     /// @brief Returns link to the keyboard layout vector searching by object name.

@@ -51,7 +51,7 @@ EditorWindow::EditorWindow(QWidget* parent)
 
     QBoxLayout* ltFactions = nullptr;
     int factonsCount = FACTIONS_MANAGER->Count();
-    Languages language = PROGRAM_CONSTANTS->pSettingsFile->GetLanguage();
+    size_t language = PROGRAM_CONSTANTS->pSettingsFile->GetLanguage();
 
     if (factonsCount == Faction::BASIC_FACTION_COUNT)
     {

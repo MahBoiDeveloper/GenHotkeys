@@ -56,18 +56,4 @@ namespace Windows
 
         return StringExt::EmptyString;
     }
-
-    Languages Locale::LangEnumFromLocale(const QString& locale)
-    {
-        QString lowerLocale = locale.toLower();
-
-        for(auto it = PROGRAM_CONSTANTS->LANGUAGES_STRINGS.cbegin(); it != PROGRAM_CONSTANTS->LANGUAGES_STRINGS.cend(); ++it)
-            if (GetLanguageShortName(it.key()) == lowerLocale)
-                return it.key();
-    
-        return Languages::English;
-    }
-
-    QString Locale::GetLanguageShortName(Languages language) { return PROGRAM_CONSTANTS->LANGUAGES_STRINGS.value(language).first; }
-    QString Locale::GetLanguageFullName(Languages language)  { return PROGRAM_CONSTANTS->LANGUAGES_STRINGS.value(language).second; }
 }

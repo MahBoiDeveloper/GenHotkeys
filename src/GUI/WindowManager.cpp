@@ -106,14 +106,14 @@ void WindowManager::StartUpWindow_AcceptConfiguration()
 
 void WindowManager::SetTranslator()
 {
-    Languages lang;
+    size_t language;
 
     if (pAppTranslator != nullptr) 
         qApp->removeTranslator(pAppTranslator);
 
-    lang = PROGRAM_CONSTANTS->pSettingsFile->GetLanguage();
+    language = PROGRAM_CONSTANTS->pSettingsFile->GetLanguage();
 
-    QString lngShortName = Windows::Locale::GetLanguageShortName(lang);
+    QString lngShortName = PROGRAM_CONSTANTS->Languages.value(language).first;
     LOGMSG("Set editor language to " + lngShortName.toUpper());
 
     pAppTranslator = new QTranslator();
