@@ -7,6 +7,7 @@ namespace Windows
     class Locale final
     {
     public:
+        Locale() = delete;
         /// @brief Returns full locale name by the given partial name (e.g. "en" -> "en-US")
         static QString GetFullLocaleName(const QString& partial);
         /// @brief Returns English language name (e.g. "en-US" -> "English")

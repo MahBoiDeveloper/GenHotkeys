@@ -9,10 +9,10 @@ private: // Data
     QJsonObject JsonMainObject;
 
 public: // Methods
-    JSONFile();
-    JSONFile(const QString&     filePath);
-    JSONFile(const std::string& filePath);
-    JSONFile(const char*        filePath);
+    explicit JSONFile();
+    explicit JSONFile(const QString&     filePath);
+    explicit JSONFile(const std::string& filePath);
+    explicit JSONFile(const char*        filePath);
 
     /// @brief Returns main object of parsed JSON file
     const QJsonObject&  GetMainObject() const;

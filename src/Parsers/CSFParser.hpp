@@ -58,11 +58,11 @@ private: // Methods
     std::wstring WharArrayToWstring(const size_t& arrayLength, const wchar_t* pArray) const;
 
 public:
-    CSFParser();
-    CSFParser(const std::wstring& strFilePath);
-    CSFParser(const std::string&  strFilePath);
-    CSFParser(const char*         strFilePath);
-    CSFParser(const QString&      strFilePath);
+    explicit CSFParser();
+    explicit CSFParser(const std::wstring& strFilePath);
+    explicit CSFParser(const std::string&  strFilePath);
+    explicit CSFParser(const char*         strFilePath);
+    explicit CSFParser(const QString&      strFilePath);
 
     /// @brief Parse .csf file with direct path.
     void Parse(const std::wstring& strFilePath);

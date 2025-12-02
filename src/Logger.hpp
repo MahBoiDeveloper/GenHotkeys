@@ -20,7 +20,7 @@ private:
     std::ofstream LogFile;
 
 public: // Methods
-    Logger();
+    explicit Logger();
     ~Logger();
 
     /// @brief Write [DATE-TIME] and return stream to write other data. Needs to be ended with `endl`

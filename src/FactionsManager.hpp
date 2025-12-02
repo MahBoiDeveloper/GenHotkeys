@@ -18,7 +18,7 @@ private: // Methods
     void Parse();
 public:
     /// @brief Default constructor.
-    FactionManager();
+    explicit FactionManager();
     /// @brief Return count of parsed factions.
     int Count();
     /// @brief Return faction by its index in container.

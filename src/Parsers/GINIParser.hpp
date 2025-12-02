@@ -24,10 +24,10 @@ private:
     std::vector<GINISection> Sections;
 
 public: // Methods
-    GINIParser() = delete;
-    GINIParser(const char* strFileSample);
-    GINIParser(const std::string& strFileSample);
-    GINIParser(const QString& strFileSample);
+    explicit GINIParser() = delete;
+    explicit GINIParser(const char* strFileSample);
+    explicit GINIParser(const std::string& strFileSample);
+    explicit GINIParser(const QString& strFileSample);
 
     /// @brief Save .ini file.
     void Save();

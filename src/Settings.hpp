@@ -15,7 +15,7 @@ private: // Data
 private: // Methods
     bool FromQtCheckState(const Qt::CheckState& state);
 public:
-    Settings();
+    explicit Settings();
     ~Settings();
 
     /// @brief Set all `Settings` class variables to default values.

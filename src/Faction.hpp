@@ -34,9 +34,9 @@ public:
 private: // Methods
     QMap<GameObject, GameObjectTypes> ParseJsonObject(const QJsonObject& obj);
 public:
-    Faction();
-    Faction(const QString& _shortName, const QString& _displayName, const QString& _displayNameDescription);
-    Faction(const QJsonObject& factionAsObject);
+    explicit Faction();
+    explicit Faction(const QString& _shortName, const QString& _displayName, const QString& _displayNameDescription);
+    explicit Faction(const QJsonObject& factionAsObject);
 
     /// @brief Returns short faction name from field `ShortName` of TechTree.json.
     const QString GetShortName() const;
