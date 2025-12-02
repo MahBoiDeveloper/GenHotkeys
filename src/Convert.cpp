@@ -24,5 +24,5 @@ namespace Convert
         return retList;
     }
 
-    Qt::Key   ToQtKey(const QChar& ch) { return static_cast<Qt::Key>(QChar(ch).unicode()); }
+    Qt::Key ToQtKey(const QChar& ch) { return static_cast<Qt::Key>(QChar(ch).unicode()); }
 }
