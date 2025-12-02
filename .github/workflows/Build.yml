@@ -48,8 +48,12 @@ jobs:
       - name: Compile Project
         shell: cmd
         run: |
+          :: Search for lrelease.exe and linguist.exe
+          dir D:\*lrelease.exe /s /b
+          dir D:\*linguist.exe /s /b
+          echo.
+        
           :: Remove previous cmake build folder
-          
           rmdir /s /q build >nul 2>nul
           :: Link MinGW to system variables
           mkdir C:\Qt\Tools > nul
