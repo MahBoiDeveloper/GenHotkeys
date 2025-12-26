@@ -7,7 +7,7 @@ echo Authors: mah_boi, nikitvs
 echo.
 
 :: Check for remove build folder
-set "KEEP_ALIVE_BUILD=0"
+set "KEEP_BUILD=0"
 for %%A in (%*) do (
     if /I "%%~A"=="--keep-build" set "KEEP_BUILD=1"
     if /I "%%~A"=="-k"           set "KEEP_BUILD=1"
@@ -30,7 +30,6 @@ echo.
 echo Compilation and linking executables...
 cmake --build .\build --config Release --target all -j 4
 echo Compilation and linking executables done
-echo.
 
 :: Copy translation tools
 mkdir build\exe\Resources\Translations\Tools > nul 2> nul
@@ -44,3 +43,6 @@ echo ru.ts        -- Translation file example. >> build\exe\Resources\Translatio
 :: Add any file to "Logs" folder for the next shipping
 mkdir build\exe\Logs >nul 2> nul
 echo Do not delete this folder, please. Or program will can not be start. > build\exe\Logs\readme.txt
+
+:: Remove error level code that crashes pipeline
+set "ERRORLEVEL=0"
