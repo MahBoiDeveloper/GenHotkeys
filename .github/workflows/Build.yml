@@ -48,6 +48,9 @@ jobs:
       - name: Compile Project
         shell: cmd
         run: |
+          mkdir C:\Qt\Tools > nul
+          mklink C:\Qt\Tools\mingw_64 C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64 > nul
+          set PATH=%PATH%;C:\Qt\5.15.2\mingw81_64\bin;C:\Qt\Tools\mingw_64\bin
           call Build.bat
 
       # Upload artifact to the GitHub
