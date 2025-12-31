@@ -23,14 +23,16 @@ namespace Windows
 
         // Collect all locales
         std::vector<std::wstring> locales;
-        EnumSystemLocalesEx([](LPWSTR lpLocaleString, DWORD, LPARAM lParam) -> BOOL {
+        EnumSystemLocalesEx([](LPWSTR lpLocaleString, DWORD, LPARAM lParam) -> BOOL
+        {
             auto* locales = reinterpret_cast<std::vector<std::wstring>*>(lParam);
             locales->emplace_back(lpLocaleString);
             return TRUE;
         }, LOCALE_ALL, reinterpret_cast<LPARAM>(&locales), nullptr);
 
         // Find one that starts with the partial name
-        for (const auto& loc : locales) {
+        for (const auto& loc : locales)
+        {
             if (_wcsnicmp(loc.c_str(), wpartial.c_str(), wpartial.size()) == 0)
                 return QString::fromStdWString(loc);
         }
