@@ -6,6 +6,8 @@ echo Program: GenHotkeys
 echo Authors: mah_boi, nikitvs
 echo.
 
+tree C:\Qt
+
 :: Check for remove build folder
 set "KEEP_BUILD=0"
 for %%A in (%*) do (
