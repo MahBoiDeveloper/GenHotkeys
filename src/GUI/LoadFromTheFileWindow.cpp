@@ -38,6 +38,24 @@ LoadFromTheFileWindow::LoadFromTheFileWindow(QWidget* parent) : QWidget(parent)
     QLineEdit* lneFilePath = new QLineEdit();
     lneFilePath->setObjectName(nameof(lneFilePath));
     lneFilePath->setMaximumWidth(700);
+    connect(lneFilePath, &QLineEdit::textChanged, this, [=, this] 
+    { 
+        QString tmp = lneFilePath->text();
+        
+        if (tmp.startsWith("file:///"))
+            tmp.remove("file:///");
+
+        while (tmp.startsWith("\"") || tmp.endsWith("\""))
+        {
+            if (tmp.startsWith("\""))
+                tmp.remove(0, 1);
+
+            if (tmp.endsWith("\""))
+                tmp.remove(tmp.length() - 1, 1);
+        }
+
+        lneFilePath->setText(tmp);
+    });
 
     QFont font(lneFilePath->font());
     font.setPointSize(font.pointSize()-2); // reduce standart font size

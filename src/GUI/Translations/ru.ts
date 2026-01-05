@@ -156,17 +156,17 @@
         <translation>Выберите .csf или .big файл:</translation>
     </message>
     <message>
-        <location filename="../LoadFromTheFileWindow.cpp" line="49"/>
+        <location filename="../LoadFromTheFileWindow.cpp" line="67"/>
         <source>Binary files</source>
         <translation>Двоичные файлы</translation>
     </message>
     <message>
-        <location filename="../LoadFromTheFileWindow.cpp" line="50"/>
+        <location filename="../LoadFromTheFileWindow.cpp" line="68"/>
         <source>Any files</source>
         <translation>Все файлы</translation>
     </message>
     <message>
-        <location filename="../LoadFromTheFileWindow.cpp" line="53"/>
+        <location filename="../LoadFromTheFileWindow.cpp" line="71"/>
         <source>REVIEW</source>
         <translation>ОБЗОР</translation>
     </message>
@@ -226,32 +226,30 @@
         <translation>Невозможно найти CSF файл внутри BIG архива &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="85"/>
         <source>Game files search error</source>
-        <translation>Ошибка поиска по игровым файлам</translation>
+        <translation type="vanished">Ошибка поиска по игровым файлам</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="86"/>
         <source>Unable to find &quot;EnglishZH.big&quot; archive in &quot;%1&quot; folder.</source>
-        <translation>Невозможно найти &quot;EnglishZH.big&quot; в папке &quot;%1&quot;.</translation>
+        <translation type="vanished">Невозможно найти &quot;EnglishZH.big&quot; в папке &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="114"/>
+        <location filename="../../ProgramConstants.hpp" line="112"/>
         <source>Buildings</source>
         <translation>Здания</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="115"/>
+        <location filename="../../ProgramConstants.hpp" line="113"/>
         <source>Infantry</source>
         <translation>Пехота</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="116"/>
+        <location filename="../../ProgramConstants.hpp" line="114"/>
         <source>Vehicles</source>
         <translation>Техника</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="117"/>
+        <location filename="../../ProgramConstants.hpp" line="115"/>
         <source>Aircrafts</source>
         <translation>Авиация</translation>
     </message>
