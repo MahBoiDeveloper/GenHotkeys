@@ -1,4 +1,3 @@
-#include <future>
 #include "Logger.hpp"
 #include "FactionsManager.hpp"
 

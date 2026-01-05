@@ -121,13 +121,12 @@ void SetUpWindowsWrapper::BtnSettings_Clicked()     { setCurrentWidget(pSettings
 void SetUpWindowsWrapper::BtnBack_Clicked()         { WINDOW_MANAGER->SetCSFFilePath(""); setCurrentWidget(pGreetingWidget); }
 
 void SetUpWindowsWrapper::LoadFromTheGameWindow_AcceptConfiguration()
-{ 
+{
     // TODO: Make it load vanila Generals
-    //       Also as work with non-ascii paths
-    //       Also as search in big-archives (see more at GZH source code)
-    QString gamePath = QString::fromStdWString(Windows::Registry::GetPathToGame(Windows::Registry::Games::GeneralsZeroHour));
-    QString pathDataEngGenCsf = gamePath + "Data\\English\\generals.csf";
-    QString pathEngBig = gamePath + "\\EnglishZH.big";
+    //       Also as search in all big-archives (see more at GZH source code)
+    const QString gamePath = QString::fromStdWString(Windows::Registry::GetPathToGame(Windows::Registry::Games::GeneralsZeroHour));
+    const QString pathDataEngGenCsf = gamePath + "Data\\English\\generals.csf";
+    const QString pathEngBig = gamePath + "\\EnglishZH.big";
 
     if (!QFile::exists(pathDataEngGenCsf) && !QFile::exists(pathEngBig))
     {
@@ -137,9 +136,15 @@ void SetUpWindowsWrapper::LoadFromTheGameWindow_AcceptConfiguration()
     }
 
     if (QFile::exists(pathDataEngGenCsf))
+    {
         WINDOW_MANAGER->SetCSFFilePath(pathDataEngGenCsf);
+    }
     else
+    {
+        LOGMSG("Unable to find " + pathDataEngGenCsf);
+        LOGMSG("Loading " + pathEngBig + "...");
         WINDOW_MANAGER->SetCSFFilePath(pathEngBig);
+    }
     
     WINDOW_MANAGER->StartUpWindow_AcceptConfiguration();
 }

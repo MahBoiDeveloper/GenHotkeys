@@ -9,7 +9,7 @@
 class FactionManager final
 {
 private: // Data
-    JSONFile TECH_TREE_SOURCE{PROGRAM_CONSTANTS->TECH_TREE_FILE};
+    const JSONFile TECH_TREE_SOURCE{PROGRAM_CONSTANTS->TECH_TREE_FILE};
     QVector<Faction> vFactions;
 public:
     inline static std::unique_ptr<FactionManager> Instance = nullptr;
