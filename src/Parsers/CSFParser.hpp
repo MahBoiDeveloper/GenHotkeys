@@ -52,6 +52,8 @@ private: // Methods
     void WriteHeader(std::ofstream* csfFile);
     void WriteBody(std::ofstream* csfFile);
 
+    std::streampos SetOffsetAtTheStringStart(std::ifstream& file, const std::string& str);
+
     /// @brief Pure function-convertor from char array to std::string.
     std::string  CharArrayToString(const size_t& arrayLength, const char* pArray)     const;
     /// @brief Pure function-convertor from wchar_t array to std::wstring.

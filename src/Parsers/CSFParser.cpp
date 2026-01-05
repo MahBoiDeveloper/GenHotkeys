@@ -29,30 +29,9 @@ using namespace StringExt;
             if (Path.ends_with(L".BIG"))
             {
                 LOGMSG("BIG archive detected. Try to find CSF file inside...");
-
-                bool searchResult = false;
-                char fourC[4] = {' ', ' ', ' ', ' '};
-                std::streampos fourCharOffset = sizeof(char) * 4;
-
-                while (!searchResult && file.good())
-                {
-                    file.read(fourC, fourCharOffset);
-                    searchResult = (fourC[0] == FSC[0]) && (fourC[1] == FSC[1]) && (fourC[2] == FSC[2]) && (fourC[3] == FSC[3]);
-                }
-
-                if (!file.good())
-                {
-                    LOGMSG(PROGRAM_CONSTANTS->CSF_NO_CSF_IN_BIG.arg(Path));
-                    throw Exception(L10N(PROGRAM_CONSTANTS->CSF_NO_CSF_IN_BIG).arg(Path));
-                }
-
-                auto offset = file.tellg();
-                file.clear();
-                file.seekg(offset - fourCharOffset);
-
-                LOGMSG("CSF file data found at offset : " + reinterpret_cast<const uint64_t&>(offset));
-
-                Path = Path.substr(0, Path.find_last_of('\\') + 1) + L"Data\\English\\generals.csf";
+                streampos offset = SetOffsetAtTheStringStart(file, " FSC"s);
+                LOGMSG("CSF file data found at offset : " + static_cast<const uint64_t&>(offset));
+                Path = Path.substr(0, Path.find_last_of('\\') + 1) + PROGRAM_CONSTANTS->BIG_ARCHIVE_CSF_PATH.toStdWString();
             }
 
             LOGMSG("Attempt to read string table from \"" + Path.c_str() + "\" file...");
@@ -69,21 +48,65 @@ using namespace StringExt;
     void CSFParser::Parse(const std::string& strFilePath) { Parse(strFilePath.c_str()); }
     void CSFParser::Parse(const QString& strFilePath)     { Parse(strFilePath.toStdString().c_str()); }
 
+    streampos CSFParser::SetOffsetAtTheStringStart(ifstream& file, const string& searchStr)
+    {
+        const streampos startOffset = file.tellg();
+        const streampos delta = sizeof(char) * searchStr.length();
+        const streampos testDelta = 1;
+
+        bool searchResult = false;
+        string searchWindow = searchStr;
+        char c = ' ';
+
+        while (!searchResult && file.good())
+        {
+            file.read(&c, testDelta);
+            if (searchStr[0] == c)
+            {
+                // Return back to 1 character
+                file.seekg(file.tellg() - testDelta);
+                file.read(const_cast<char*>(searchWindow.c_str()), delta);
+                searchResult = searchStr == searchWindow;
+                // Return back search window position
+                file.seekg(file.tellg() - delta + testDelta);
+            }
+            else
+                continue;
+        }
+
+        // Restore position before search string
+        file.seekg(file.tellg() + delta - testDelta);
+
+        if (!file.good())
+        {
+            file.clear();
+            file.seekg(startOffset);
+            LOGMSG(PROGRAM_CONSTANTS->CSF_NO_CSF_IN_BIG.arg(Path));
+            throw Exception(L10N(PROGRAM_CONSTANTS->CSF_NO_CSF_IN_BIG).arg(Path));
+        }
+
+        streampos offset = file.tellg();
+        file.clear();
+        file.seekg(offset - delta);
+
+        return offset;
+    }
+
     void CSFParser::ReadHeader(ifstream* csfFile)
     {
         csfFile->read(reinterpret_cast<char*>(&Header), sizeof(Header));
 
         LOGSTM << "File header data:" << endl;
 
-        LOGSTM << '\t' << "First 4th bytes of file header are : [" << Header.csfChars[0] 
-                                                                   << Header.csfChars[1] 
-                                                                   << Header.csfChars[2] 
-                                                                   << Header.csfChars[3] << ']' << endl;
-        LOGSTM << '\t' << "CSF file format version             : " << Header.formatVersion      << endl;
-        LOGSTM << '\t' << "Number of labels in CSF file        : " << Header.numberOfLabels     << endl;
-        LOGSTM << '\t' << "Number of strings in CSF file       : " << Header.numberOfStrings    << endl;
-        LOGSTM << '\t' << "Useless bytes, i guess?             : " << Header.uselessBytes       << endl;
-        LOGSTM << '\t' << "Language code                       : " << Header.languageCode       << endl;
+        LOGSTM << '\t' << "First 4th bytes of file header are  : [" << Header.csfChars[0] 
+                                                                    << Header.csfChars[1] 
+                                                                    << Header.csfChars[2] 
+                                                                    << Header.csfChars[3] << ']' << endl;
+        LOGSTM << '\t' << "CSF file format version             : "  << Header.formatVersion      << endl;
+        LOGSTM << '\t' << "Number of labels in CSF file        : "  << Header.numberOfLabels     << endl;
+        LOGSTM << '\t' << "Number of strings in CSF file       : "  << Header.numberOfStrings    << endl;
+        LOGSTM << '\t' << "Useless bytes, i guess?             : "  << Header.uselessBytes       << endl;
+        LOGSTM << '\t' << "Language code                       : "  << Header.languageCode       << endl;
     }
 
     void CSFParser::ReadBody(ifstream* csfFile)
