@@ -10,7 +10,7 @@ GenHotkeys is an attempt to create a tool for editing C&C: Generals and C&C: Gen
 1. Download and install [MinGW_w64 12.2.0](https://github.com/brechtsanders/winlibs_mingw/releases/download/12.2.0-14.0.6-10.0.0-ucrt-r2/winlibs-x86_64-posix-seh-gcc-12.2.0-mingw-w64ucrt-10.0.0-r2.7z) to the `C:\Qt\Tools\mingw_64` folder
 2. Download and install [CMake 3.15](https://cmake.org/download/) or newer
 3. Clone this repository recursively via your git client
-4. Run `zBuildAndRun.bat` or run build in your favourite editor
+4. Run `Build.bat` to compile release build
 
 ## Requirements
 * OS: Windows 10 x64 or newer
