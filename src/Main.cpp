@@ -1,5 +1,4 @@
 // std headers
-#include <fcntl.h>   // Allows to use UTF-16 encoding as the default encoding
 #include <windows.h> // Allows disable console
 #include <iostream>
 #include <filesystem>
@@ -31,9 +30,6 @@ int ShowErrorMessage(const QString& txt)
 
 int main(int argc, const char** argv)
 {
-    // After this all out text to console MUST be showed via std::wcout and all chars should be converted as wchar_t
-    // _setmode(_fileno(stdout), _O_U16TEXT);
-
     // Call parsing the Settings.json
     PROGRAM_CONSTANTS = make_unique<ProgramConstants>();
 
