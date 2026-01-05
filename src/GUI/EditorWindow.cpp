@@ -8,6 +8,7 @@
 #include <QComboBox>
 #include <QFileDialog>
 
+#include "../Windows/Registry.hpp"
 #include "../Windows/Locale.hpp"
 #include "../Parsers/CSFParser.hpp"
 #include "../Info.hpp"
@@ -532,6 +533,15 @@ void EditorWindow::ActSettings_Triggered()
 void EditorWindow::ActSave_Triggered()
 {
     LOGMSG("Saving changes to .csf file...");
+    
+    if (CSF_PARSER->Path.ends_with(L".big") || CSF_PARSER->Path.ends_with(L".BIG"))
+    {
+        CSF_PARSER->Path = (QString::fromStdWString(
+                                Windows::Registry::GetPathToGame(
+                                    Windows::Registry::Games::GeneralsZeroHour)) 
+                            + "Data\\English\\generals.csf"q).toStdWString();
+    }
+
     CSF_PARSER->Save();
     LOGMSG("Changes has been saved");
 }

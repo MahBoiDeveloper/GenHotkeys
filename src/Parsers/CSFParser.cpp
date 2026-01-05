@@ -1,7 +1,6 @@
 #include <sstream>
 #include <QStringList>
 
-#include "../Windows/Locale.hpp"
 #include "../Logger.hpp"
 #include "../Convert.hpp"
 #include "../Exception.hpp"
@@ -31,7 +30,6 @@ using namespace StringExt;
                 LOGMSG("BIG archive detected. Try to find CSF file inside...");
                 streampos offset = SetOffsetAtTheStringStart(file, " FSC"s);
                 LOGMSG("CSF file data found at offset : " + static_cast<const uint64_t&>(offset));
-                Path = Path.substr(0, Path.find_last_of('\\') + 1) + PROGRAM_CONSTANTS->BIG_ARCHIVE_CSF_PATH.toStdWString();
             }
 
             LOGMSG("Attempt to read string table from \"" + Path.c_str() + "\" file...");
@@ -44,9 +42,9 @@ using namespace StringExt;
             throw Exception("Bad file name error. Unable to open file \""q + Path + "\"");
         }
     }
-    void CSFParser::Parse(const wstring& filePath)        { Parse(filePath.c_str()); }
-    void CSFParser::Parse(const std::string& strFilePath) { Parse(strFilePath.c_str()); }
-    void CSFParser::Parse(const QString& strFilePath)     { Parse(strFilePath.toStdString().c_str()); }
+    void CSFParser::Parse(const wstring& filePath) { Parse(QString::fromStdWString(filePath)); }
+    void CSFParser::Parse(const string& filePath)  { Parse(QString::fromStdString(filePath)); }
+    void CSFParser::Parse(const QString& filePath) { Parse(filePath.toStdString().c_str()); }
 
     streampos CSFParser::SetOffsetAtTheStringStart(ifstream& file, const string& searchStr)
     {

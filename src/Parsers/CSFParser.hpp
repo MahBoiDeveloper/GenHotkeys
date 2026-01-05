@@ -38,12 +38,12 @@ private: //Data
     const uint8_t  WRTS[4] {'W', 'R', 'T', 'S'}; // Begining of any string with extra value
     const uint32_t CNC_CSF_VERSION = 3;          // Standart file format. Legacy by WW
     
-    std::wstring              Path;
     CSFHeader                 Header;
     std::list<CompiledString> Table;
 
 public:
     inline static std::unique_ptr<CSFParser> Instance = nullptr;
+    std::wstring Path;
 
 private: // Methods
     void ReadHeader(std::ifstream* csfFile);
