@@ -1,9 +1,11 @@
+#include <QDir>
 #include <QLineEdit>
-#include <QFile>
 #include <QMessageBox>
 
+#include "../Parsers/CSFParser.hpp"
 #include "../Windows/Registry.hpp"
 #include "../Logger.hpp"
+#include "../Exception.hpp"
 #include "WindowManager.hpp"
 #include "ImageManager.hpp"
 #include "LoadFromTheGameWindow.hpp"
@@ -122,18 +124,8 @@ void SetUpWindowsWrapper::BtnBack_Clicked()         { WINDOW_MANAGER->SetCSFFile
 
 void SetUpWindowsWrapper::LoadFromTheGameWindow_AcceptConfiguration()
 {
-    // TODO: Make it load vanila Generals
-    //       Also as search in all big-archives (see more at GZH source code)
     const QString gamePath = QString::fromStdWString(Windows::Registry::GetPathToGame(Windows::Registry::Games::GeneralsZeroHour));
     const QString pathDataEngGenCsf = gamePath + "Data\\English\\generals.csf";
-    const QString pathEngBig = gamePath + "\\EnglishZH.big";
-
-    if (!QFile::exists(pathDataEngGenCsf) && !QFile::exists(pathEngBig))
-    {
-        QMessageBox::critical(nullptr, L10N(PROGRAM_CONSTANTS->GMFILES_SRCH_ERR_HEADER),
-                                       L10N(PROGRAM_CONSTANTS->BIG_NO_ENGLISH_ZH).arg(pathEngBig));
-        return;
-    }
 
     if (QFile::exists(pathDataEngGenCsf))
     {
@@ -142,8 +134,31 @@ void SetUpWindowsWrapper::LoadFromTheGameWindow_AcceptConfiguration()
     else
     {
         LOGMSG("Unable to find " + pathDataEngGenCsf);
-        LOGMSG("Loading " + pathEngBig + "...");
-        WINDOW_MANAGER->SetCSFFilePath(pathEngBig);
+        LOGMSG("Searching generals.csf in all archives");
+
+        QDir gameDir(gamePath);
+        QFileInfoList fileList = gameDir.entryInfoList(QDir::Filter::Files
+                                                       | QDir::Filter::NoDotAndDotDot
+                                                       | QDir::Filter::Readable,
+                                                       QDir::SortFlag::Name);
+        for(const QFileInfo& elem : fileList)
+        {
+            if (elem.suffix().toUpper() != "BIG")
+                continue;
+
+            LOGMSG("Processing " + elem.absoluteFilePath() + "...");
+            try
+            {
+                CSFParser parser(elem.absoluteFilePath());
+                WINDOW_MANAGER->SetCSFFilePath(elem.absoluteFilePath());
+                break;
+            }
+            catch(...)
+            {
+                LOGMSG("String table doesn't exist in archive");
+                continue;
+            }
+        }
     }
     
     WINDOW_MANAGER->StartUpWindow_AcceptConfiguration();

@@ -236,22 +236,22 @@
         <translation>Невозможно найти &quot;EnglishZH.big&quot; в папке &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="113"/>
+        <location filename="../../ProgramConstants.hpp" line="114"/>
         <source>Buildings</source>
         <translation>Здания</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="114"/>
+        <location filename="../../ProgramConstants.hpp" line="115"/>
         <source>Infantry</source>
         <translation>Пехота</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="115"/>
+        <location filename="../../ProgramConstants.hpp" line="116"/>
         <source>Vehicles</source>
         <translation>Техника</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="116"/>
+        <location filename="../../ProgramConstants.hpp" line="117"/>
         <source>Aircrafts</source>
         <translation>Авиация</translation>
     </message>
