@@ -5,6 +5,7 @@
 #include "../Parsers/CSFParser.hpp"
 #include "../Windows/Registry.hpp"
 #include "../Windows/Locale.hpp"
+#include "../FactionsManager.hpp"
 #include "../Logger.hpp"
 #include "../Convert.hpp"
 #include "../Exception.hpp"
@@ -119,6 +120,7 @@ void WindowManager::SetTranslator()
     pAppTranslator = new QTranslator();
     pAppTranslator->load(lngShortName, PROGRAM_CONSTANTS->TRANSLATIONS_FOLDER);
     qApp->installTranslator(pAppTranslator);
+    FACTIONS_MANAGER->UpdateFactionNames();
 }
 
 void WindowManager::Show()                               { pStartUpWindow->show(); }

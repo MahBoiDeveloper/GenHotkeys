@@ -28,3 +28,18 @@ const Faction& FactionManager::FindByShortName(const QString& name)
     
     return vFactions.at(tmp);
 }
+
+void FactionManager::UpdateFactionNames()
+{
+    for (auto& fct : vFactions)
+    {
+        QString _displayName = L10N(PROGRAM_CONSTANTS->FACTIONS_NAMES.value(fct.GetShortName()).first);
+        QString _displayNameDescription = L10N(PROGRAM_CONSTANTS->FACTIONS_NAMES.value(fct.GetShortName()).second);
+        
+        if (_displayName != StringExt::EmptyString)
+            fct.displayName = _displayName;
+
+        if (_displayNameDescription != StringExt::EmptyString)
+            fct.displayNameDescription = _displayNameDescription;
+    }
+}

@@ -25,4 +25,6 @@ public:
     const Faction& FindByIndex(int position);
     /// @brief Return faction reference.
     const Faction& FindByShortName(const QString& name);
+    /// @brief Updates faction names to the current locale.
+    void UpdateFactionNames();
 };

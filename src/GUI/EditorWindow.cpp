@@ -71,8 +71,8 @@ EditorWindow::EditorWindow(QWidget* parent)
             {
                 const Faction currFaction = FACTIONS_MANAGER->FindByIndex(sectionIndex + i);
 
-                QPushButton* factionButton = new QPushButton{currFaction.GetDisplayName(language)};
-                factionButton->setToolTip(currFaction.GetDisplayNameDescription(language));
+                QPushButton* factionButton = new QPushButton{currFaction.GetDisplayName()};
+                factionButton->setToolTip(currFaction.GetDisplayNameDescription());
 
                 auto shortName = currFaction.GetShortName();
 

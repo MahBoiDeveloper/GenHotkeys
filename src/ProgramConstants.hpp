@@ -115,6 +115,22 @@ public: // Immutable data
         {GameObjectTypes::Aircrafts, QObject::tr("Aircrafts")}
     };
 
+    const QMap<QString, QPair<QString, QString>> FACTIONS_NAMES =
+    {
+        {"USA", {QObject::tr("USA"),         QObject::tr("United Stated Of America")}},
+        {"SWG", {QObject::tr("SUPERWEAPON"), QObject::tr("Superweapons General")}},
+        {"AIR", {QObject::tr("AIR"),         QObject::tr("Airforce General")}},
+        {"LSR", {QObject::tr("LASER"),       QObject::tr("Laser Weapons Generals")}},
+        {"PRC", {QObject::tr("CHINA"),       QObject::tr("China")}},
+        {"INF", {QObject::tr("INFANTRY"),    QObject::tr("Infantry General")}},
+        {"NUK", {QObject::tr("NUKE"),        QObject::tr("Nuke General")}},
+        {"TNK", {QObject::tr("TANK"),        QObject::tr("Tank General")}},
+        {"GLA", {QObject::tr("GLA"),         QObject::tr("Global Liberation Army")}},
+        {"TOX", {QObject::tr("TOXIC"),       QObject::tr("Toxic Weapons General")}},
+        {"STL", {QObject::tr("STEALTH"),     QObject::tr("Stealth General")}},
+        {"DML", {QObject::tr("DEMO"),        QObject::tr("Demolition General")}},
+    };
+
 public: // Mutable data
     inline static std::unique_ptr<ProgramConstants> Instance      = nullptr;
     std::unique_ptr<Settings>                       pSettingsFile = nullptr;

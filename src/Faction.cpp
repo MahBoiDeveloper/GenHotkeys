@@ -12,74 +12,18 @@ Faction::Faction(const QString& _shortName, const QString& _displayName, const Q
 {
 }
 
-Faction::Faction(const QJsonObject& factionAsObject)
-    : shortName{factionAsObject[PROGRAM_CONSTANTS->SHORT_NAME].toString()}
-    , displayName{factionAsObject[PROGRAM_CONSTANTS->DISPLAY_NAME].toString()}
-    , displayNameDescription{factionAsObject[PROGRAM_CONSTANTS->DISPLAY_NAME_DESCRIPTION].toString()}
-    , techTree{ParseJsonObject(factionAsObject)}
+Faction::Faction(const QJsonObject& factionObject)
+    : shortName{factionObject[PROGRAM_CONSTANTS->SHORT_NAME].toString()}
+    , displayName{factionObject[PROGRAM_CONSTANTS->DISPLAY_NAME].toString()}
+    , displayNameDescription{factionObject[PROGRAM_CONSTANTS->DISPLAY_NAME_DESCRIPTION].toString()}
+    , techTree{ParseJsonObject(factionObject)}
 {
-    for (size_t lng : PROGRAM_CONSTANTS->Languages.keys())
-    {
-        QString _displayName = "";
-        QString _displayNameDescription = "";
-        
-        if (lng != PROGRAM_CONSTANTS->DEFAULT_LANGUAGE_CODE)
-        {
-            auto translatedNames = factionAsObject[PROGRAM_CONSTANTS->Languages.value(lng).first].toObject();
-            
-            if (!translatedNames.isEmpty())
-            {
-                if (!translatedNames[PROGRAM_CONSTANTS->DISPLAY_NAME].isNull() 
-                    && !translatedNames[PROGRAM_CONSTANTS->DISPLAY_NAME].isUndefined())
-                {
-                    _displayName = translatedNames[PROGRAM_CONSTANTS->DISPLAY_NAME].toString();
-                }
-
-                if (!translatedNames[PROGRAM_CONSTANTS->DISPLAY_NAME_DESCRIPTION].isNull() 
-                    && !translatedNames[PROGRAM_CONSTANTS->DISPLAY_NAME_DESCRIPTION].isUndefined())
-                {
-                    _displayNameDescription = translatedNames[PROGRAM_CONSTANTS->DISPLAY_NAME_DESCRIPTION].toString();
-                }
-            }
-        }
-        else
-        {
-            continue;
-        }
-
-        localizedDisplay.insert(lng, {_displayName, _displayNameDescription});
-    }
 }
 
 const QString Faction::GetShortName() const { return shortName; }
 const QString Faction::GetDisplayName() const { return displayName; }
 const QString Faction::GetDisplayNameDescription() const { return displayNameDescription; }
 const QMap<Faction::GameObject, GameObjectTypes>& Faction::GetTechTree() const { return techTree; }
-
-const QString Faction::GetDisplayName(size_t lng) const
-{
-    QString ret;
-
-    if (lng != PROGRAM_CONSTANTS->DEFAULT_LANGUAGE_CODE)
-        ret = localizedDisplay.value(lng).first;
-    
-    if (ret == StringExt::EmptyString)
-        ret = displayName;
-
-    return ret;
-}
-const QString Faction::GetDisplayNameDescription(size_t lng) const 
-{
-    QString ret;
-
-    if (lng != PROGRAM_CONSTANTS->DEFAULT_LANGUAGE_CODE)
-        ret = localizedDisplay.value(lng).second;
-    
-    if (ret == StringExt::EmptyString)
-        ret = displayNameDescription;
-
-    return ret;
-}
 
 const QVector<QVector<Faction::Action>> Faction::GetKeyboardLayoutsByObjectName(const QString& objName) const
 {

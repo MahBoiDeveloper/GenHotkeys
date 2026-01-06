@@ -5,12 +5,6 @@
             "ShortName"              : "USA",
             "DisplayName"            : "USA",
             "DisplayNameDescription" : "United Stated Of America",
-            
-            "ru" : 
-            {
-                "DisplayName"            : "США", 
-                "DisplayNameDescription" : "Соединённые штаты Америки"
-            },
 
             "Buildings" : 
             [
@@ -475,12 +469,6 @@
             "ShortName"               : "SWG",
             "DisplayName"             : "SUPERWEAPON",
             "DisplayNameDescription"  : "Superweapons General",
-            
-            "ru" : 
-            {
-                "DisplayName"            : "СВГ",
-                "DisplayNameDescription" : "Генерал супероружейных войск"
-            },
 
             "Buildings" : 
             [
@@ -910,12 +898,6 @@
             "ShortName"               : "AIR",
             "DisplayName"             : "AIR",
             "DisplayNameDescription"  : "Airforce General",
-
-            "ru" : 
-            {
-                "DisplayName"             : "ВВС",
-                "DisplayNameDescription"  : "Генерал ВВС"
-            },
 
             "Buildings" : 
             [
@@ -1363,12 +1345,6 @@
             "DisplayName"             : "LASER",
             "DisplayNameDescription"  : "Laser Weapons Generals",
 
-            "ru" : 
-            {
-                "DisplayName"             : "ЛАЗЕРНИК",
-                "DisplayNameDescription"  : "Генерал лазерного вооружения"
-            },
-
             "Buildings" : 
             [
                 {
@@ -1815,12 +1791,6 @@
             "ShortName"               : "PRC",
             "DisplayName"             : "CHINA",
             "DisplayNameDescription"  : "China",
-
-            "ru" : 
-            {
-                "DisplayName"             : "КИТАЙ",
-                "DisplayNameDescription"  : "Китай"
-            },
             
             "Buildings"               : 
             [
@@ -2342,12 +2312,6 @@
             "DisplayName"             : "INFANTRY",
             "DisplayNameDescription"  : "Infantry General",
 
-            "ru" : 
-            {
-                "DisplayName"             : "ПЕХОТНИК",
-                "DisplayNameDescription"  : "Генерал пехотных войск"
-            },
-
             "Buildings"               : 
             [
                 {
@@ -2813,12 +2777,6 @@
             "ShortName"               : "NUK",
             "DisplayName"             : "NUKE",
             "DisplayNameDescription"  : "Nuke General",
-
-            "ru" : 
-            {
-                "DisplayName"             : "ЯДЕРЩИК",
-                "DisplayNameDescription"  : "Генерал ядерных войск"
-            },
 
             "Buildings"               : 
             [
@@ -3339,12 +3297,6 @@
             "DisplayName"             : "TANK",
             "DisplayNameDescription"  : "Tank General",
 
-            "ru" : 
-            {
-                "DisplayName"             : "ТАНКОВИК",
-                "DisplayNameDescription"  : "Генерал танковых войск"
-            },
-
             "Buildings"               : 
             [
                 {
@@ -3829,12 +3781,6 @@
             "ShortName"               : "GLA",
             "DisplayName"             : "GLA",
             "DisplayNameDescription"  : "Global Liberation Army",
-
-            "ru" : 
-            {
-                "DisplayName"             : "МАО",
-                "DisplayNameDescription"  : "Мировая армия освобождения"
-            },
 
             "Buildings"               : 
             [
@@ -4348,12 +4294,6 @@
             "DisplayName"             : "TOXIC",
             "DisplayNameDescription"  : "Toxic Weapons General",
 
-            "ru" : 
-            {
-                "DisplayName"             : "ТОКС",
-                "DisplayNameDescription"  : "Генерал биохимического оружия"
-            },
-
             "Buildings"               : 
             [
                 {
@@ -4829,12 +4769,6 @@
             "DisplayName"             : "STEALTH",
             "DisplayNameDescription"  : "Stealth General",
 
-            "ru" : 
-            {
-                "DisplayName"             : "СТЕЛС",
-                "DisplayNameDescription"  : "Генерал маскировочных войск"
-            },
-
             "Buildings"               : 
             [
                 {
@@ -5302,12 +5236,6 @@
             "ShortName"               : "DML",
             "DisplayName"             : "DEMO",
             "DisplayNameDescription"  : "Demolition General",
-
-            "ru" : 
-            {
-                "DisplayName"             : "ПОДРЫВНИК",
-                "DisplayNameDescription"  : "Генерал подрывных войск"
-            },
 
             "Buildings"               : 
             [

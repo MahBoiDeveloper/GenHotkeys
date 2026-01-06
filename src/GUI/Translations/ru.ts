@@ -109,12 +109,12 @@
         <translation>Поддержать разработку:</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="572"/>
+        <location filename="../EditorWindow.cpp" line="567"/>
         <source>Binary files</source>
         <translation>Двоичные файлы</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="573"/>
+        <location filename="../EditorWindow.cpp" line="568"/>
         <source>Any files</source>
         <translation>Все файлы</translation>
     </message>
@@ -226,12 +226,124 @@
         <translation>Невозможно найти CSF файл внутри BIG архива &quot;%1&quot;</translation>
     </message>
     <message>
-        <source>Game files search error</source>
-        <translation type="vanished">Ошибка поиска по игровым файлам</translation>
+        <location filename="../../ProgramConstants.hpp" line="120"/>
+        <source>USA</source>
+        <translation>США</translation>
     </message>
     <message>
-        <source>Unable to find &quot;EnglishZH.big&quot; archive in &quot;%1&quot; folder.</source>
-        <translation type="vanished">Невозможно найти &quot;EnglishZH.big&quot; в папке &quot;%1&quot;.</translation>
+        <location filename="../../ProgramConstants.hpp" line="120"/>
+        <source>United Stated Of America</source>
+        <translation>Соединённые штаты Америки</translation>
+    </message>
+    <message>
+        <location filename="../../ProgramConstants.hpp" line="121"/>
+        <source>SUPERWEAPON</source>
+        <translation>СВГ</translation>
+    </message>
+    <message>
+        <location filename="../../ProgramConstants.hpp" line="121"/>
+        <source>Superweapons General</source>
+        <translation>Генерал супероружейных войск</translation>
+    </message>
+    <message>
+        <location filename="../../ProgramConstants.hpp" line="122"/>
+        <source>AIR</source>
+        <translation>ВВС</translation>
+    </message>
+    <message>
+        <location filename="../../ProgramConstants.hpp" line="122"/>
+        <source>Airforce General</source>
+        <translation>Генерал ВВС</translation>
+    </message>
+    <message>
+        <location filename="../../ProgramConstants.hpp" line="123"/>
+        <source>LASER</source>
+        <translation>ЛАЗЕРНИК</translation>
+    </message>
+    <message>
+        <location filename="../../ProgramConstants.hpp" line="123"/>
+        <source>Laser Weapons Generals</source>
+        <translation>Генерал лазерного вооружения</translation>
+    </message>
+    <message>
+        <location filename="../../ProgramConstants.hpp" line="124"/>
+        <source>CHINA</source>
+        <translation>КИТАЙ</translation>
+    </message>
+    <message>
+        <location filename="../../ProgramConstants.hpp" line="124"/>
+        <source>China</source>
+        <translation>Китай</translation>
+    </message>
+    <message>
+        <location filename="../../ProgramConstants.hpp" line="125"/>
+        <source>INFANTRY</source>
+        <translation>ПЕХОТНИК</translation>
+    </message>
+    <message>
+        <location filename="../../ProgramConstants.hpp" line="125"/>
+        <source>Infantry General</source>
+        <translation>Генерал пехотных войск</translation>
+    </message>
+    <message>
+        <location filename="../../ProgramConstants.hpp" line="126"/>
+        <source>NUKE</source>
+        <translation>ЯДЕРЩИК</translation>
+    </message>
+    <message>
+        <location filename="../../ProgramConstants.hpp" line="126"/>
+        <source>Nuke General</source>
+        <translation>Генерал ядерных войск</translation>
+    </message>
+    <message>
+        <location filename="../../ProgramConstants.hpp" line="127"/>
+        <source>TANK</source>
+        <translation>ТАНКОВИК</translation>
+    </message>
+    <message>
+        <location filename="../../ProgramConstants.hpp" line="127"/>
+        <source>Tank General</source>
+        <translation>Генерал танковых войск</translation>
+    </message>
+    <message>
+        <location filename="../../ProgramConstants.hpp" line="128"/>
+        <source>GLA</source>
+        <translation>МАО</translation>
+    </message>
+    <message>
+        <location filename="../../ProgramConstants.hpp" line="128"/>
+        <source>Global Liberation Army</source>
+        <translation>Мировая армия освобождения</translation>
+    </message>
+    <message>
+        <location filename="../../ProgramConstants.hpp" line="129"/>
+        <source>TOXIC</source>
+        <translation>ТОКС</translation>
+    </message>
+    <message>
+        <location filename="../../ProgramConstants.hpp" line="129"/>
+        <source>Toxic Weapons General</source>
+        <translation>Генерал биохимического оружия</translation>
+    </message>
+    <message>
+        <location filename="../../ProgramConstants.hpp" line="130"/>
+        <source>STEALTH</source>
+        <translation>СТЕЛС</translation>
+    </message>
+    <message>
+        <location filename="../../ProgramConstants.hpp" line="130"/>
+        <source>Stealth General</source>
+        <translation>Генерал маскировочных войск</translation>
+    </message>
+    <message>
+        <location filename="../../ProgramConstants.hpp" line="131"/>
+        <source>DEMO</source>
+        <translation>ПОДРЫВНИК</translation>
+    </message>
+    <message>
+        <location filename="../../ProgramConstants.hpp" line="131"/>
+        <source>Demolition General</source>
+        <translation>Генерал подрывных войск</translation>
     </message>
     <message>
         <location filename="../../ProgramConstants.hpp" line="112"/>
