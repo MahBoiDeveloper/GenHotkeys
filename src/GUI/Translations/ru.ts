@@ -109,12 +109,12 @@
         <translation>Поддержать разработку:</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="568"/>
+        <location filename="../EditorWindow.cpp" line="572"/>
         <source>Binary files</source>
         <translation>Двоичные файлы</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="569"/>
+        <location filename="../EditorWindow.cpp" line="573"/>
         <source>Any files</source>
         <translation>Все файлы</translation>
     </message>

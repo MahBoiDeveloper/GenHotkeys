@@ -252,7 +252,7 @@ using namespace StringExt;
 #pragma endregion
 
 #pragma region Getters
-    QString CSFParser::GetStringValue(const char* strName)   const { return GetStringValue(QString{strName}); }
+    QString CSFParser::GetStringValue(const char* strName)   const { return GetStringValue(QString(strName)); }
     wstring CSFParser::GetStringValue(const string& strName) const { return GetStringValue(QString::fromStdString(strName)).toStdWString(); }
     QString CSFParser::GetStringValue(const QString& strName) const
     {
