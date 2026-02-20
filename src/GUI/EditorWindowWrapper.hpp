@@ -5,10 +5,10 @@
 class EditorWindowWrapper final : public QStackedWidget
 {
     Q_OBJECT
-public: // Data
-    bool hasDataChanged = false;
 private:
-    EditorWindow* pEditorWindow = nullptr;
+public: // Data
+    EditorWindow* pEditorWindow  = nullptr;
+    bool          hasDataChanged = false;
 
 private: // Methods
     /// @brief Connects slots and singals.

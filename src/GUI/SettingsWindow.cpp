@@ -21,29 +21,33 @@ SettingsWindow::SettingsWindow(QWidget* parent) : QWidget(parent)
     chkEnableDebugConsole           = new QCheckBox();
     chkEnableDiscordRPC             = new QCheckBox();
     chkForceSystemLanguageOnStartUp = new QCheckBox();
+    chkEnableStatusBar              = new QCheckBox();
     lblLanguage                     = new QLabel();
     cmbLanguage                     = new QComboBox();
 
     chkEnableDebugConsole->setText(tr("Enable debug console"));
     chkEnableDebugConsole->setObjectName(nameof(chkEnableDebugConsole));
-    if (PROGRAM_CONSTANTS->pSettingsFile->IsConsoleEnabled())
-        chkEnableDebugConsole->setCheckState(Qt::CheckState::Checked);
-    else
-        chkEnableDebugConsole->setCheckState(Qt::CheckState::Unchecked);
+    chkEnableDebugConsole->setCheckState(PROGRAM_CONSTANTS->pSettingsFile->IsConsoleEnabled() 
+                                         ? Qt::CheckState::Checked 
+                                         : Qt::CheckState::Unchecked);
 
     chkEnableDiscordRPC->setText(tr("Enable Discord RPC (WIP)"));
     chkEnableDiscordRPC->setObjectName(nameof(chkEnableDiscordRPC));
-    if (PROGRAM_CONSTANTS->pSettingsFile->IsDiscordRPCEnabled())
-        chkEnableDiscordRPC->setCheckState(Qt::CheckState::Checked);
-    else
-        chkEnableDiscordRPC->setCheckState(Qt::CheckState::Unchecked);
+    chkEnableDiscordRPC->setCheckState(PROGRAM_CONSTANTS->pSettingsFile->IsDiscordRPCEnabled()
+                                       ? Qt::CheckState::Checked
+                                       : Qt::CheckState::Unchecked);
 
     chkForceSystemLanguageOnStartUp->setText(tr("Force editor to use system language on start up"));
     chkForceSystemLanguageOnStartUp->setObjectName(nameof(chkForceSystemLanguageOnStartUp));
-    if (PROGRAM_CONSTANTS->pSettingsFile->IsForceSystemLanguageOnStartUpEnabled())
-        chkForceSystemLanguageOnStartUp->setCheckState(Qt::CheckState::Checked);
-    else
-        chkForceSystemLanguageOnStartUp->setCheckState(Qt::CheckState::Unchecked);
+    chkForceSystemLanguageOnStartUp->setCheckState(PROGRAM_CONSTANTS->pSettingsFile->IsForceSystemLanguageOnStartUpEnabled()
+                                                   ? Qt::CheckState::Checked
+                                                   : Qt::CheckState::Unchecked);
+
+    chkEnableStatusBar->setText(tr("Enable status bar"));
+    chkEnableStatusBar->setObjectName(nameof(chkEnableStatusBar));
+    chkEnableStatusBar->setCheckState(PROGRAM_CONSTANTS->pSettingsFile->IsStatusBarEnabled()
+                                      ? Qt::CheckState::Checked
+                                      : Qt::CheckState::Unchecked);
 
     lblLanguage->setText(tr("Language:"));
     lblLanguage->setObjectName(nameof(lblLanguage));
@@ -51,6 +55,8 @@ SettingsWindow::SettingsWindow(QWidget* parent) : QWidget(parent)
     for (size_t i : PROGRAM_CONSTANTS->Languages.keys())
         cmbLanguage->addItem(PROGRAM_CONSTANTS->Languages.value(i).second);
 
+    cmbLanguage->setObjectName(nameof(cmbLanguage));
+    cmbLanguage->setFixedHeight(25); // TODO: remove this 25 px and think how to handle it in css
     cmbLanguage->setCurrentIndex(static_cast<int>(PROGRAM_CONSTANTS->pSettingsFile->GetLanguage()));
     cmbLanguage->setCurrentText(PROGRAM_CONSTANTS->Languages.value(PROGRAM_CONSTANTS->pSettingsFile->GetLanguage()).second);
 
@@ -61,6 +67,7 @@ SettingsWindow::SettingsWindow(QWidget* parent) : QWidget(parent)
     ltLeftColumn->addWidget(chkEnableDebugConsole);
     ltLeftColumn->addWidget(chkEnableDiscordRPC);
     ltLeftColumn->addWidget(chkForceSystemLanguageOnStartUp);
+    ltLeftColumn->addWidget(chkEnableStatusBar);
     ltLeftColumn->addLayout(ltLanguage);
 
     btnSave->setText(tr("SAVE"));
@@ -180,4 +187,17 @@ void SettingsWindow::ConsoleWindowStateUpdate(const Qt::CheckState& state)
 
 void SettingsWindow::DiscordRPCStateUpdate(const Qt::CheckState& state)
 {
+}
+
+void SettingsWindow::StatusBarStateUpdate(const Qt::CheckState& state)
+{
+    switch (state)
+    {
+        case Qt::CheckState::Checked:
+            WINDOW_MANAGER->pHotkeysEditor->pEditorWindow->pStatusBar->setHidden(false);
+            break;
+        case Qt::CheckState::Unchecked:
+            WINDOW_MANAGER->pHotkeysEditor->pEditorWindow->pStatusBar->setHidden(true);
+            break;
+    }
 }

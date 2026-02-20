@@ -55,6 +55,9 @@ QComboBox::drop-down
 QComboBox::down-arrow { image: url(Resources/Theme/ScrollArrowDown.webp); }
 QComboBox::up-arrow   { image: url(Resources/Theme/ScrollArrowUp.webp); }
 
+/* ↓ Doesn't work */
+QComboBox#cmbLanguage { height: 25px; }
+
 QPushButton
 {
     font-family: Calibri;
@@ -150,7 +153,7 @@ QPushButton[faction="PRC"]:pressed:hover { background-color: #e74135; color: #ba
 /* QPushButton[faction="USA"] already defined as basic non-property */
 /* If you want to change -- copy and edit styles down below */
 
-EditorWindow QTreeWidget, EditorWindow QTabWidget, EditorWindow QScrollArea
+EditorWindow QTreeWidget, EditorWindow QTabWidget, EditorWindow QScrollArea, EditorWindow QStatusBar
 {
     background: rgba(0, 0, 0, 0.7);
     border-radius: 3px;
@@ -300,4 +303,11 @@ QScrollArea#Keyboard QPushButton[key="null"]
 {
     background: rgba(0, 0, 0, 0);
     border-color: rgba(0, 0, 0, 0);
+}
+
+QStatusBar
+{
+    font-family: Calibri;
+    font-weight: bold;
+    padding: 10px;
 }

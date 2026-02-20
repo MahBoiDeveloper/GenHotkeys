@@ -23,6 +23,11 @@
 
 using namespace StringExt;
 
+const int PHOTKEYSAREA_STRETCH = 2;
+const int PKEYBOARDWINDOW_STRETCH = 1;
+// Time in miliseconds
+const int STATUS_BAR_TIMEOUT = 3000;
+
 // TODO: Move definition to the something like reflection header
 inline int operator+(Qt::Modifier mod, Qt::Key key) { return (static_cast<int>(mod) + static_cast<int>(key)); }
 
@@ -34,6 +39,7 @@ EditorWindow::EditorWindow(QWidget* parent)
     , pEntitiesTreeWidget{new QTreeWidget}
     , pHotkeysArea{new QScrollArea}
     , pKeyboardWindow{new QScrollArea}
+    , pStatusBar{new QStatusBar}
     , pHotkeysPanelsWidget{nullptr}
     , pAboutDialog{nullptr}
 {
@@ -153,16 +159,19 @@ EditorWindow::EditorWindow(QWidget* parent)
     pKeyboardWindow->setLayout(pKeyboardLines);
 
     QVBoxLayout* ltGameObject = new QVBoxLayout();
-    ltGameObject->addWidget(pHotkeysArea, 2);
-    ltGameObject->addWidget(pKeyboardWindow, 1);
+    ltGameObject->addWidget(pHotkeysArea, PHOTKEYSAREA_STRETCH);
+    ltGameObject->addWidget(pKeyboardWindow, PKEYBOARDWINDOW_STRETCH);
 
     QHBoxLayout* ltContent = new QHBoxLayout();
     ltContent->addWidget(pEntitiesTreeWidget, 4);
     ltContent->addLayout(ltGameObject, 7);
 
+    pStatusBar->setSizeGripEnabled(false);
+
     QVBoxLayout* ltMain = new QVBoxLayout();
     ltMain->addLayout(ltFactions);
     ltMain->addLayout(ltContent);
+    ltMain->addWidget(pStatusBar);
 
     // Main widget
     QWidget* centralWidget = new QWidget();
@@ -544,6 +553,8 @@ void EditorWindow::ActSave_Triggered()
 
     CSF_PARSER->Save();
     LOGMSG("Changes has been saved");
+
+    pStatusBar->showMessage(tr("Changes has been saved to the file:") + " " + CSF_PARSER->Path, STATUS_BAR_TIMEOUT);
 }
 
 void EditorWindow::ActSaveAs_Triggered()

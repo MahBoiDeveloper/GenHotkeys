@@ -34,6 +34,7 @@ void Settings::Parse()
     DebugConsole        = json.Query("$." + nameof(DebugConsole)).toBool();
     DiscordRPC          = json.Query("$." + nameof(DiscordRPC)).toBool();
     ForceSystemLanguage = json.Query("$." + nameof(ForceSystemLanguage)).toBool();
+    StatusBar           = json.Query("$." + nameof(StatusBar)).toBool();
 
     QString twoLetters = StringExt::EmptyString;
     if (ForceSystemLanguage)
@@ -54,6 +55,7 @@ void Settings::Save()
     jsMainObj[nameof(DiscordRPC)]          = DiscordRPC;
     jsMainObj[nameof(ForceSystemLanguage)] = ForceSystemLanguage;
     jsMainObj[nameof(Language)]            = PROGRAM_CONSTANTS->Languages.value(Language).first;
+    jsMainObj[nameof(StatusBar)]           = StatusBar;
 
     QJsonDocument jsDoc;
     jsDoc.setObject(jsMainObj);
@@ -87,6 +89,7 @@ const bool          Settings::IsConsoleEnabled()                      const { re
 const bool          Settings::IsDiscordRPCEnabled()                   const { return DiscordRPC; }
 const bool          Settings::IsForceSystemLanguageOnStartUpEnabled() const { return ForceSystemLanguage; }
 const size_t        Settings::GetLanguage()                           const { return Language; }
+const bool          Settings::IsStatusBarEnabled()                    const { return StatusBar; }
 
 void Settings::SetAllowedKeys(const QSet<Qt::Key>& keys)                    { AllowedHotkeys      = keys; }
 void Settings::SetConsoleStatus(const bool state)                           { DebugConsole        = state; }
@@ -96,3 +99,4 @@ void Settings::SetDiscordRPCStatus(const Qt::CheckState& state)             { Di
 void Settings::SetForceSystemLanguageOnStartUp(const bool state)            { ForceSystemLanguage = state; }
 void Settings::SetForceSystemLanguageOnStartUp(const Qt::CheckState& state) { ForceSystemLanguage = FromQtCheckState(state); }
 void Settings::SetLanguage(const size_t& code)                              { Language            = code; }
+void Settings::SetStatusBarStatus(const Qt::CheckState& state)              { StatusBar           = FromQtCheckState(state); }

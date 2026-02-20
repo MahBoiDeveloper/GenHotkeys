@@ -2,6 +2,8 @@
 #include <QSet>
 #include "Parsers/JSONFile.hpp"
 
+class SettingsWindow;
+
 class Settings final
 {
 private: // Data
@@ -11,6 +13,7 @@ private: // Data
     bool          DiscordRPC;
     bool          ForceSystemLanguage;
     size_t        Language;
+    bool          StatusBar;
 
 private: // Methods
     bool FromQtCheckState(const Qt::CheckState& state);
@@ -35,6 +38,8 @@ public:
     const QSet<Qt::Key> GetAllowedKeys() const;
     /// @brief Returns value of current language from settings file corresponded to the hashtable from the `ProgramConstants`.
     const size_t GetLanguage() const;
+    /// @brief Returns state of the status bar from settings file.
+    const bool IsStatusBarEnabled() const;
 
     /// @brief Sets status for console window.
     void SetConsoleStatus(const Qt::CheckState& state);
@@ -52,4 +57,6 @@ public:
     void SetForceSystemLanguageOnStartUp(const Qt::CheckState& state);
     /// @brief Sets editor's language.
     void SetLanguage(const size_t& locale);
+    /// Sets state for console window.
+    void SetStatusBarStatus(const Qt::CheckState& state);
 };

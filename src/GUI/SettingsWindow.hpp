@@ -10,6 +10,7 @@
 class SettingsWindow final : public QWidget
 {
     Q_OBJECT
+
 private: // Data
     QPushButton* btnBack                         = nullptr;
     QPushButton* btnSave                         = nullptr;
@@ -17,6 +18,7 @@ private: // Data
     QCheckBox*   chkEnableDebugConsole           = nullptr;
     QCheckBox*   chkEnableDiscordRPC             = nullptr;
     QCheckBox*   chkForceSystemLanguageOnStartUp = nullptr;
+    QCheckBox*   chkEnableStatusBar              = nullptr;
     QLabel*      lblLanguage                     = nullptr;
     QComboBox*   cmbLanguage                     = nullptr;
     QVBoxLayout* ltMain                          = nullptr;
@@ -32,6 +34,8 @@ private: // Methods
     /// @brief Enable/disable Discord RPC integration.
     /// @todo Implement later.
     void DiscordRPCStateUpdate(const Qt::CheckState& state);
+    /// @brief Enable/disable status bar.
+    void StatusBarStateUpdate(const Qt::CheckState& state);
 private slots:
     void BtnSave_Clicked();
     void BtnResetAll_Clicked();

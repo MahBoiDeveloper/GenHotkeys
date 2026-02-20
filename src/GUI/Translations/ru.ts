@@ -22,99 +22,108 @@
 <context>
     <name>EditorWindow</name>
     <message>
-        <location filename="../EditorWindow.cpp" line="179"/>
+        <location filename="../EditorWindow.cpp" line="188"/>
         <source>File</source>
         <translation>Файл</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="180"/>
+        <location filename="../EditorWindow.cpp" line="189"/>
         <source>Open</source>
         <translation>Открыть</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="181"/>
+        <location filename="../EditorWindow.cpp" line="190"/>
         <source>Save</source>
         <translation>Сохранить</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="182"/>
+        <location filename="../EditorWindow.cpp" line="191"/>
         <source>Save As...</source>
         <translation>Сохранить как...</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="183"/>
+        <location filename="../EditorWindow.cpp" line="192"/>
         <source>Special</source>
         <translation>Дополнительно</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="199"/>
+        <location filename="../EditorWindow.cpp" line="208"/>
         <source>View</source>
         <translation>Вид</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="200"/>
+        <location filename="../EditorWindow.cpp" line="209"/>
         <source>Status Bar</source>
         <translation>Строка состояния</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="201"/>
+        <location filename="../EditorWindow.cpp" line="210"/>
         <source>Enable</source>
         <translation>Включить</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="202"/>
+        <location filename="../EditorWindow.cpp" line="211"/>
         <source>Disable</source>
         <translation>Отключить</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="206"/>
-        <location filename="../EditorWindow.cpp" line="518"/>
+        <location filename="../EditorWindow.cpp" line="215"/>
+        <location filename="../EditorWindow.cpp" line="527"/>
         <source>Settings</source>
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="210"/>
-        <location filename="../EditorWindow.cpp" line="483"/>
+        <location filename="../EditorWindow.cpp" line="219"/>
+        <location filename="../EditorWindow.cpp" line="492"/>
         <source>About</source>
         <translation>О программе</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="344"/>
+        <location filename="../EditorWindow.cpp" line="353"/>
         <source>Layout %1</source>
         <translation>Раскладка %1</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="463"/>
+        <location filename="../EditorWindow.cpp" line="472"/>
         <source>Authors: </source>
         <translation>Авторы: </translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="464"/>
+        <location filename="../EditorWindow.cpp" line="473"/>
         <source>Version: </source>
         <translation>Версия: </translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="465"/>
+        <location filename="../EditorWindow.cpp" line="474"/>
         <source>Program licensed with </source>
         <translation>Программа лицензирована под </translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="466"/>
+        <location filename="../EditorWindow.cpp" line="475"/>
         <source>GitHub repository:</source>
         <translation>Репозиторий на GitHub:</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="468"/>
+        <location filename="../EditorWindow.cpp" line="477"/>
         <source>Support development:</source>
         <translation>Поддержать разработку:</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="567"/>
+        <location filename="../EditorWindow.cpp" line="557"/>
+        <source>Changes has been saved to the file:</source>
+        <translation>Изменения были сохранены в файл:</translation>
+    </message>
+    <message>
+        <source>Changes has been saved to the file: </source>
+        <translation type="obsolete">Изменения были сохранены в файл:</translation>
+    </message>
+    <message>
+        <location filename="../EditorWindow.cpp" line="578"/>
         <source>Binary files</source>
         <translation>Двоичные файлы</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="568"/>
+        <location filename="../EditorWindow.cpp" line="579"/>
         <source>Any files</source>
         <translation>Все файлы</translation>
     </message>
@@ -369,7 +378,7 @@
 <context>
     <name>SettingsWindow</name>
     <message>
-        <location filename="../SettingsWindow.cpp" line="27"/>
+        <location filename="../SettingsWindow.cpp" line="28"/>
         <source>Enable debug console</source>
         <translation>Включить отладочную консоль</translation>
     </message>
@@ -379,47 +388,52 @@
         <translation>Включить Discord RPC (WIP)</translation>
     </message>
     <message>
-        <location filename="../SettingsWindow.cpp" line="41"/>
+        <location filename="../SettingsWindow.cpp" line="40"/>
         <source>Force editor to use system language on start up</source>
         <translation>Использовать язык системы при запуске</translation>
     </message>
     <message>
-        <location filename="../SettingsWindow.cpp" line="48"/>
+        <location filename="../SettingsWindow.cpp" line="46"/>
+        <source>Enable status bar</source>
+        <translation>Включить строку состояния</translation>
+    </message>
+    <message>
+        <location filename="../SettingsWindow.cpp" line="52"/>
         <source>Language:</source>
         <translation>Язык:</translation>
     </message>
     <message>
-        <location filename="../SettingsWindow.cpp" line="66"/>
+        <location filename="../SettingsWindow.cpp" line="73"/>
         <source>SAVE</source>
         <translation>СОХРАНИТЬ</translation>
     </message>
     <message>
-        <location filename="../SettingsWindow.cpp" line="70"/>
+        <location filename="../SettingsWindow.cpp" line="77"/>
         <source>RESET ALL</source>
         <translation>СБРОСИТЬ ВСЁ</translation>
     </message>
     <message>
-        <location filename="../SettingsWindow.cpp" line="74"/>
+        <location filename="../SettingsWindow.cpp" line="81"/>
         <source>BACK</source>
         <translation>НАЗАД</translation>
     </message>
     <message>
-        <location filename="../SettingsWindow.cpp" line="118"/>
+        <location filename="../SettingsWindow.cpp" line="125"/>
         <source>Setting Apply Confirmation</source>
         <translation>Подтверждение применения настроек</translation>
     </message>
     <message>
-        <location filename="../SettingsWindow.cpp" line="119"/>
+        <location filename="../SettingsWindow.cpp" line="126"/>
         <source>You have selected settings that require a complete restart of the editor. Do you want to apply new settings and restart editor?</source>
         <translation>Вы выбрали настройки, которые требуют полного перезапуска редактора. Вы желаете применить новые настройки и перезапустить редактор?</translation>
     </message>
     <message>
-        <location filename="../SettingsWindow.cpp" line="121"/>
+        <location filename="../SettingsWindow.cpp" line="128"/>
         <source>YES</source>
         <translation>ДА</translation>
     </message>
     <message>
-        <location filename="../SettingsWindow.cpp" line="122"/>
+        <location filename="../SettingsWindow.cpp" line="129"/>
         <source>CANCEL</source>
         <translation>ОТМЕНА</translation>
     </message>

@@ -4,6 +4,7 @@
 #include <QTreeWidgetItem>
 #include <QButtonGroup>
 #include <QHBoxLayout>
+#include <QStatusBar>
 
 #include "../Parsers/JSONFile.hpp"
 #include "ActionHotkeyWidget.hpp"
@@ -13,20 +14,25 @@ class EditorWindow final : public QMainWindow
     Q_OBJECT
 
 private: // Data
-    // Qt object in a single copy
+    // Select faction buttons
     QButtonGroup* pFactionsButtonsGroup = nullptr;
 
-    // Graphic widgets in a single copy
+    // Units list and theirs hotkeys
     QTreeWidget*  pEntitiesTreeWidget   = nullptr;
     QScrollArea*  pHotkeysArea          = nullptr;
     QScrollArea*  pKeyboardWindow       = nullptr;
 
-    // Renewable widgets
-    QTabWidget*   pHotkeysPanelsWidget  = nullptr;
+    // Specific windows
     QDialog*      pAboutDialog          = nullptr;
     QWidget*      pSettingsWindow       = nullptr;
 
+    // Current possible hotkeys layout
+    QTabWidget*   pHotkeysPanelsWidget  = nullptr;
+
+    // Container of the selected unit hotkeys
     QVector<QSet<ActionHotkeyWidget*>> vHotkeyWidgets;
+public:
+    QStatusBar*   pStatusBar            = nullptr;
 
 public: // Methods
     EditorWindow(QWidget* parent = nullptr);
