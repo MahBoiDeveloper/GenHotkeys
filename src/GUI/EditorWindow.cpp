@@ -167,6 +167,7 @@ EditorWindow::EditorWindow(QWidget* parent)
     ltContent->addLayout(ltGameObject, 7);
 
     pStatusBar->setSizeGripEnabled(false);
+    pStatusBar->setHidden(!PROGRAM_CONSTANTS->pSettingsFile->IsStatusBarEnabled());
 
     QVBoxLayout* ltMain = new QVBoxLayout();
     ltMain->addLayout(ltFactions);
@@ -534,6 +535,7 @@ void EditorWindow::ActSettings_Triggered()
 
         connect(sw, &SettingsWindow::languageChanged, this,            [this](){ this->pSettingsWindow->close(); emit languageChanged(); });
         connect(sw, &SettingsWindow::btnBackClicked,  pSettingsWindow, &QWidget::close);
+        connect(sw, &SettingsWindow::enableStatusBar, this,            &EditorWindow::SettingsWindow_EnableStatusBar);
     }
 
     pSettingsWindow->show();
@@ -585,6 +587,8 @@ void EditorWindow::ActOpen_NewHotkeyFileSelected(const QString& filepath)
     LOGMSG("Selected file: " + filepath);
     emit newHotkeyFileSelected(filepath);
 }
+
+void EditorWindow::SettingsWindow_EnableStatusBar(const bool status) { pStatusBar->setHidden(!status); }
 
 #pragma endregion
 

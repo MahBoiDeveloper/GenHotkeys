@@ -26,6 +26,7 @@ void Settings::SetToDefault()
     DebugConsole        = false;
     DiscordRPC          = true;
     ForceSystemLanguage = true;
+    StatusBar           = true;
     Language            = 0; // English
 }
 

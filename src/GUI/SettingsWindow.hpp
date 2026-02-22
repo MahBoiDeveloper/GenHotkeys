@@ -36,12 +36,13 @@ private: // Methods
     void DiscordRPCStateUpdate(const Qt::CheckState& state);
     /// @brief Enable/disable status bar.
     void StatusBarStateUpdate(const Qt::CheckState& state);
+public:
+    SettingsWindow(QWidget* parent = nullptr);
 private slots:
     void BtnSave_Clicked();
     void BtnResetAll_Clicked();
-public:
-    SettingsWindow(QWidget* parent = nullptr);
 signals:
+    void enableStatusBar(const bool status);
     void btnBackClicked();
     void languageChanged();
 };

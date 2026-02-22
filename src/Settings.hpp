@@ -16,10 +16,12 @@ private: // Data
     bool          StatusBar;
 
 private: // Methods
-    bool FromQtCheckState(const Qt::CheckState& state);
 public:
     explicit Settings();
     ~Settings();
+
+    /// @brief Converts Qt::ChechState to the bool.
+    static bool FromQtCheckState(const Qt::CheckState& state);
 
     /// @brief Set all `Settings` class variables to default values.
     void SetToDefault();

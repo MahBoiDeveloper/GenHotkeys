@@ -108,6 +108,9 @@ void SettingsWindow::BtnSave_Clicked()
     DiscordRPCStateUpdate(chkEnableDiscordRPC->checkState());
 
     PROGRAM_CONSTANTS->pSettingsFile->SetForceSystemLanguageOnStartUp(chkForceSystemLanguageOnStartUp->checkState());
+
+    PROGRAM_CONSTANTS->pSettingsFile->SetStatusBarStatus(chkEnableStatusBar->checkState());
+    emit enableStatusBar(Settings::FromQtCheckState(chkEnableStatusBar->checkState()));
     
     bool isNewLanguageAssigned = cmbLanguage->currentIndex() != PROGRAM_CONSTANTS->pSettingsFile->GetLanguage();
     
@@ -116,7 +119,7 @@ void SettingsWindow::BtnSave_Clicked()
 
     PROGRAM_CONSTANTS->pSettingsFile->Save();
 
-    // Might be useful in future, but right now -- dead code
+    // TODO: Might be useful in future, but right now it is a dead code
     if (isRestartRequired)
     {
         QMessageBox msgBox(nullptr);
@@ -187,17 +190,4 @@ void SettingsWindow::ConsoleWindowStateUpdate(const Qt::CheckState& state)
 
 void SettingsWindow::DiscordRPCStateUpdate(const Qt::CheckState& state)
 {
-}
-
-void SettingsWindow::StatusBarStateUpdate(const Qt::CheckState& state)
-{
-    switch (state)
-    {
-        case Qt::CheckState::Checked:
-            WINDOW_MANAGER->pHotkeysEditor->pEditorWindow->pStatusBar->setHidden(false);
-            break;
-        case Qt::CheckState::Unchecked:
-            WINDOW_MANAGER->pHotkeysEditor->pEditorWindow->pStatusBar->setHidden(true);
-            break;
-    }
 }
