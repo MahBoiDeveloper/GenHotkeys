@@ -39,10 +39,12 @@ void EditorWindowWrapper::EditorWindow_LanguageChanged()
 
     DetachConnections();
     pEditorWindow->deleteLater();
+    hide();
 
     AddWidgets();
     AttachConnections();
     setCurrentWidget(pEditorWindow);
+    show();
 }
 
 void EditorWindowWrapper::EditorWindow_NewHotkeyFileSelected(const QString& filepath)
