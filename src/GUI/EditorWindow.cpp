@@ -8,6 +8,7 @@
 #include <QComboBox>
 #include <QFileDialog>
 
+#include "../Extensions/L10NExt.hpp"
 #include "../Windows/Registry.hpp"
 #include "../Windows/Locale.hpp"
 #include "../Parsers/CSFParser.hpp"
@@ -22,11 +23,6 @@
 #include "EditorWindow.hpp"
 
 using namespace StringExt;
-
-const int PHOTKEYSAREA_STRETCH = 2;
-const int PKEYBOARDWINDOW_STRETCH = 1;
-// Time in miliseconds
-const int STATUS_BAR_TIMEOUT = 3000;
 
 // TODO: Move definition to the something like reflection header
 inline int operator+(Qt::Modifier mod, Qt::Key key) { return (static_cast<int>(mod) + static_cast<int>(key)); }
@@ -159,12 +155,12 @@ EditorWindow::EditorWindow(QWidget* parent)
     pKeyboardWindow->setLayout(pKeyboardLines);
 
     QVBoxLayout* ltGameObject = new QVBoxLayout();
-    ltGameObject->addWidget(pHotkeysArea, PHOTKEYSAREA_STRETCH);
-    ltGameObject->addWidget(pKeyboardWindow, PKEYBOARDWINDOW_STRETCH);
+    ltGameObject->addWidget(pHotkeysArea, HOTKEYS_AREA_STRETCH);
+    ltGameObject->addWidget(pKeyboardWindow, KEYBOARD_WINDOW_STRETCH);
 
     QHBoxLayout* ltContent = new QHBoxLayout();
-    ltContent->addWidget(pEntitiesTreeWidget, 4);
-    ltContent->addLayout(ltGameObject, 7);
+    ltContent->addWidget(pEntitiesTreeWidget, ENTITIES_TREE_WIDGET_STRETCH);
+    ltContent->addLayout(ltGameObject, GAME_OBJECT_LAYOUT_STRETCH);
 
     pStatusBar->setSizeGripEnabled(false);
     pStatusBar->setHidden(!PROGRAM_CONSTANTS->pSettingsFile->IsStatusBarEnabled());
@@ -180,7 +176,7 @@ EditorWindow::EditorWindow(QWidget* parent)
     setCentralWidget(centralWidget);
 
     // Set start faction
-    const auto firstFactionButton = pFactionsButtonsGroup->button(-2); // Magic number equals to begining of the array of the all buttons.
+    const auto firstFactionButton = pFactionsButtonsGroup->button(BUTTONS_GROUP_START_ID);
     if (firstFactionButton != nullptr) firstFactionButton->click();
 }
 
@@ -350,7 +346,7 @@ void EditorWindow::SetHotkeysPanels()
 
         QWidget* panelScrollWidget = new QWidget();
         panelScrollWidget->setLayout(ltHotkeys);
-        panelScrollWidget->setObjectName(QString("Layout ") + QString::number(i+1));
+        panelScrollWidget->setObjectName(QString("Layout ") + QString::number(i + 1));
         pHotkeysPanelsWidget->addTab(panelScrollWidget, QString(tr("Layout %1")).arg(++i));
     }
 
@@ -533,7 +529,7 @@ void EditorWindow::ActSettings_Triggered()
         pSettingsWindow->setWindowModality(Qt::WindowModality::ApplicationModal);
         pSettingsWindow->setLayout(lt);
 
-        connect(sw, &SettingsWindow::languageChanged, this,            [this](){ this->pSettingsWindow->close(); emit languageChanged(); });
+        connect(sw, &SettingsWindow::languageChanged, this,            &EditorWindow::SettingsWindow_LanguageChanged);
         connect(sw, &SettingsWindow::btnBackClicked,  pSettingsWindow, &QWidget::close);
         connect(sw, &SettingsWindow::enableStatusBar, this,            &EditorWindow::SettingsWindow_EnableStatusBar);
     }
@@ -569,7 +565,11 @@ void EditorWindow::ActSaveAs_Triggered()
     fdSelectFileWindow->exec();
 }
 
-void EditorWindow::ActSaveAs_SaveToSelectedFile(const QString& filepath) { CSF_PARSER->Save(filepath); }
+void EditorWindow::ActSaveAs_SaveToSelectedFile(const QString& filepath)
+{ 
+    CSF_PARSER->Save(filepath);
+    pStatusBar->showMessage(tr("Saved as:") + " " + filepath, STATUS_BAR_TIMEOUT);
+}
 
 void EditorWindow::ActOpen_Triggered()
 {
@@ -586,9 +586,17 @@ void EditorWindow::ActOpen_NewHotkeyFileSelected(const QString& filepath)
 {
     LOGMSG("Selected file: " + filepath);
     emit newHotkeyFileSelected(filepath);
+    pStatusBar->showMessage(tr("Opening selected file"), STATUS_BAR_TIMEOUT);
 }
 
 void EditorWindow::SettingsWindow_EnableStatusBar(const bool status) { pStatusBar->setHidden(!status); }
+
+void EditorWindow::SettingsWindow_LanguageChanged()
+{
+    this->pSettingsWindow->close();
+    pStatusBar->showMessage(tr("Changing editor language"), STATUS_BAR_TIMEOUT);
+    emit languageChanged();
+}
 
 #pragma endregion
 

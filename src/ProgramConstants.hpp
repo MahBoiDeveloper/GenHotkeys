@@ -6,7 +6,7 @@
 #include <QSize>
 #include <QObject>
 
-#include "StringExt.hpp"
+#include "Extensions/StringExt.hpp"
 #include "Settings.hpp"
 
 #define PROGRAM_CONSTANTS ProgramConstants::Instance

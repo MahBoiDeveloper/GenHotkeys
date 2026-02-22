@@ -1,6 +1,7 @@
 #include <sstream>
 #include <QStringList>
 
+#include "../Extensions/L10NExt.hpp"
 #include "../Logger.hpp"
 #include "../Convert.hpp"
 #include "../Exception.hpp"

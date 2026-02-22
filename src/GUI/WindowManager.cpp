@@ -2,6 +2,7 @@
 #include <QMessageBox>
 #include <QApplication>
 
+#include "../Extensions/L10NExt.hpp"
 #include "../Parsers/CSFParser.hpp"
 #include "../Windows/Registry.hpp"
 #include "../Windows/Locale.hpp"

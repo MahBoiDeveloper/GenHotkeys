@@ -1,3 +1,4 @@
+#include "Extensions/L10NExt.hpp"
 #include "Logger.hpp"
 #include "FactionsManager.hpp"
 

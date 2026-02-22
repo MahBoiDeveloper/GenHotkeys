@@ -2,23 +2,12 @@
 #include <concepts>
 #include <QString>
 
-/// @brief Shortcut for StringExt::l10n()
-#define L10N(x)   StringExt::l10n(x)
 /// @brief Shortcut for QString(#x). WARNING: Macro converting any text to the string, not the specific types/variables/functions.
 #define nameof(x) QString(#x)
 
 namespace StringExt
 {
     inline const QString EmptyString("");
-    
-    /// @brief Shortcut for QCoreApplication::translate("QObject", str)
-    QString l10n(const char*         string);
-    /// @brief Shortcut for QCoreApplication::translate("QObject", str)
-    QString l10n(const QString&      string);
-    /// @brief Shortcut for QCoreApplication::translate("QObject", str)
-    QString l10n(const std::string&  string);
-    /// @brief Shortcut for QCoreApplication::translate("QObject", str)
-    QString l10n(const std::wstring& string);
     
     inline QString ToQString(const std::string& str)  { return QString::fromStdString(str); }
     inline QString ToQString(const std::wstring& str) { return QString::fromStdWString(str); }

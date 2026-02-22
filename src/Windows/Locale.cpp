@@ -5,7 +5,7 @@
 #include <list>
 #include <windows.h>
 
-#include "../StringExt.hpp"
+#include "../Extensions/StringExt.hpp"
 #include "Locale.hpp"
 
 using namespace std;

@@ -7,7 +7,7 @@
 #include <QFontMetrics>
 #include <QLabel>
 
-#include "../StringExt.hpp"
+#include "../Extensions/StringExt.hpp"
 #include "LoadFromTheFileWindow.hpp"
 
 LoadFromTheFileWindow::LoadFromTheFileWindow(QWidget* parent) : QWidget(parent)
