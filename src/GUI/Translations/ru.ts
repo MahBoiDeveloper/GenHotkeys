@@ -71,64 +71,64 @@
         <translation>Отключить</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="214"/>
-        <location filename="../EditorWindow.cpp" line="530"/>
+        <location filename="../EditorWindow.cpp" line="219"/>
+        <location filename="../EditorWindow.cpp" line="535"/>
         <source>Settings</source>
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="218"/>
-        <location filename="../EditorWindow.cpp" line="491"/>
+        <location filename="../EditorWindow.cpp" line="223"/>
+        <location filename="../EditorWindow.cpp" line="496"/>
         <source>About</source>
         <translation>О программе</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="352"/>
+        <location filename="../EditorWindow.cpp" line="357"/>
         <source>Layout %1</source>
         <translation>Раскладка %1</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="471"/>
+        <location filename="../EditorWindow.cpp" line="476"/>
         <source>Authors: </source>
         <translation>Авторы: </translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="472"/>
+        <location filename="../EditorWindow.cpp" line="477"/>
         <source>Version: </source>
         <translation>Версия: </translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="473"/>
+        <location filename="../EditorWindow.cpp" line="478"/>
         <source>Program licensed with </source>
         <translation>Программа лицензирована под </translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="474"/>
+        <location filename="../EditorWindow.cpp" line="479"/>
         <source>GitHub repository:</source>
         <translation>Репозиторий на GitHub:</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="476"/>
+        <location filename="../EditorWindow.cpp" line="481"/>
         <source>Support development:</source>
         <translation>Поддержать разработку:</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="560"/>
+        <location filename="../EditorWindow.cpp" line="567"/>
         <source>Changes has been saved to the file:</source>
         <translation>Изменения были сохранены в файл:</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="576"/>
+        <location filename="../EditorWindow.cpp" line="583"/>
         <source>Saved as:</source>
         <translation>Сохранено как:</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="596"/>
+        <location filename="../EditorWindow.cpp" line="607"/>
         <source>Opening selected file</source>
         <translation>Открываем выбранный файл</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="604"/>
+        <location filename="../EditorWindow.cpp" line="615"/>
         <source>Changing editor language</source>
         <translation>Изменяем язык редактора</translation>
     </message>
@@ -137,12 +137,12 @@
         <translation type="obsolete">Изменения были сохранены в файл:</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="585"/>
+        <location filename="../EditorWindow.cpp" line="592"/>
         <source>Binary files</source>
         <translation>Двоичные файлы</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="586"/>
+        <location filename="../EditorWindow.cpp" line="593"/>
         <source>Any files</source>
         <translation>Все файлы</translation>
     </message>

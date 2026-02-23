@@ -545,6 +545,8 @@ void EditorWindow::ActSettings_Triggered()
     connect(sw, &SettingsWindow::languageChanged, this,            &EditorWindow::SettingsWindow_LanguageChanged);
     connect(sw, &SettingsWindow::btnBackClicked,  pSettingsWindow, &QWidget::close);
     connect(sw, &SettingsWindow::enableStatusBar, this,            &EditorWindow::SettingsWindow_EnableStatusBar);
+
+    pSettingsWindow->show();
 }
 
 void EditorWindow::ActSave_Triggered()
@@ -593,6 +595,10 @@ void EditorWindow::ActOpen_Triggered()
 }
 
 void EditorWindow::ActClose_Triggered() { emit closeEditor(); }
+
+void EditorWindow::ActEnableStatusBar_Triggered() { pStatusBar->setHidden(false); }
+
+void EditorWindow::ActDisableStatusBar_Triggered() { pStatusBar->setHidden(true); }
 
 void EditorWindow::ActOpen_NewHotkeyFileSelected(const QString& filepath)
 {
