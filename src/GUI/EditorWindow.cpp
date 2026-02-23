@@ -186,21 +186,23 @@ void EditorWindow::ConfigureMenu()
     QAction* actOpen     = new QAction(tr("Open"));
     QAction* actSave     = new QAction(tr("Save"));
     QAction* actSaveAs   = new QAction(tr("Save As..."));
-    QAction* actSpecial  = new QAction(tr("Special"));
+    QAction* actClose    = new QAction(tr("Close"));
 
     actOpen->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_O));
     actSave->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_S));
     actSaveAs->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_S));
+    actClose->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_Q));
 
     mnFileOptions->addAction(actOpen);
     mnFileOptions->addAction(actSave);
     mnFileOptions->addAction(actSaveAs);
-    mnFileOptions->addAction(actSpecial);
+    mnFileOptions->addAction(actClose);
     menuBar()->addMenu(mnFileOptions);
 
     connect(actOpen, &QAction::triggered, this, &EditorWindow::ActOpen_Triggered);
     connect(actSave, &QAction::triggered, this, &EditorWindow::ActSave_Triggered);
     connect(actSaveAs, &QAction::triggered, this, &EditorWindow::ActSaveAs_Triggered);
+    connect(actClose, &QAction::triggered, this, &EditorWindow::ActClose_Triggered);
 
     QMenu* mnViewOptions = new QMenu(tr("View"));
     QMenu* mnStatusBarChecbox = new QMenu(tr("Status Bar"));
@@ -509,32 +511,35 @@ void EditorWindow::ActAbout_Triggered()
 
 void EditorWindow::ActSettings_Triggered()
 {
-    if (pSettingsWindow == nullptr)
+    if (pSettingsWindow != nullptr)
     {
-        // Read this thread: 
-        //    https://forum.qt.io/topic/146107/can-t-show-the-border-of-the-class-inheriting-qwidget-class
-        // to understand why QWidget's inherited class has been wrapped into another native QWidget
-
-        auto sw = new SettingsWindow();
-        auto lt = new QVBoxLayout();
-        lt->addWidget(sw);
-
-        pSettingsWindow = new QWidget();
-        pSettingsWindow->setObjectName(nameof(pSettingsWindow));
-        pSettingsWindow->setWindowTitle(tr("Settings"));
-        pSettingsWindow->setFixedSize(PROGRAM_CONSTANTS->SET_UP_WINDOW_SIZE);
-        pSettingsWindow->setWindowFlags(windowFlags() |  Qt::MSWindowsFixedSizeDialogHint);
-        pSettingsWindow->setWindowFlags(windowFlags() & ~Qt::WindowMaximizeButtonHint
-                                                      & ~Qt::WindowMinimizeButtonHint);
-        pSettingsWindow->setWindowModality(Qt::WindowModality::ApplicationModal);
-        pSettingsWindow->setLayout(lt);
-
-        connect(sw, &SettingsWindow::languageChanged, this,            &EditorWindow::SettingsWindow_LanguageChanged);
-        connect(sw, &SettingsWindow::btnBackClicked,  pSettingsWindow, &QWidget::close);
-        connect(sw, &SettingsWindow::enableStatusBar, this,            &EditorWindow::SettingsWindow_EnableStatusBar);
+        pSettingsWindow->show();
+        return;
     }
 
-    pSettingsWindow->show();
+    // Read this thread: 
+    //    https://forum.qt.io/topic/146107/can-t-show-the-border-of-the-class-inheriting-qwidget-class
+    // to understand why QWidget's inherited class has been wrapped into another native QWidget
+
+    auto sw = new SettingsWindow();
+    auto lt = new QVBoxLayout();
+    lt->addWidget(sw);
+
+    pSettingsWindow = new QWidget();
+    pSettingsWindow->setObjectName(nameof(pSettingsWindow));
+    pSettingsWindow->setWindowTitle(tr("Settings"));
+    pSettingsWindow->setFixedSize(PROGRAM_CONSTANTS->SET_UP_WINDOW_SIZE);
+    pSettingsWindow->setWindowFlags(Qt::WindowType::MSWindowsFixedSizeDialogHint);
+    pSettingsWindow->setWindowFlags(pSettingsWindow->windowFlags() 
+                                    & ~Qt::WindowType::WindowMaximizeButtonHint
+                                    & ~Qt::WindowType::WindowMinimizeButtonHint);
+    pSettingsWindow->setWindowModality(Qt::WindowModality::ApplicationModal);
+
+    pSettingsWindow->setLayout(lt);
+
+    connect(sw, &SettingsWindow::languageChanged, this,            &EditorWindow::SettingsWindow_LanguageChanged);
+    connect(sw, &SettingsWindow::btnBackClicked,  pSettingsWindow, &QWidget::close);
+    connect(sw, &SettingsWindow::enableStatusBar, this,            &EditorWindow::SettingsWindow_EnableStatusBar);
 }
 
 void EditorWindow::ActSave_Triggered()
@@ -581,6 +586,8 @@ void EditorWindow::ActOpen_Triggered()
                                         tr("Any files")  + " (*)"});
     fdSelectFileWindow->exec();
 }
+
+void EditorWindow::ActClose_Triggered() { emit closeEditor(); }
 
 void EditorWindow::ActOpen_NewHotkeyFileSelected(const QString& filepath)
 {

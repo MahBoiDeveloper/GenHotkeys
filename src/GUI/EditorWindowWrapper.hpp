@@ -20,6 +20,7 @@ private: // Methods
 public:
     EditorWindowWrapper(QWidget* parent = nullptr);
 public slots:
+    void EditorWindow_CloseEditor();
     void EditorWindow_LanguageChanged();
     void EditorWindow_NewHotkeyFileSelected(const QString& filepath);
 };
