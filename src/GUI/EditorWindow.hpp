@@ -64,12 +64,15 @@ private:
 
 private slots:
     void KeyboardWindow_Update(int id = 0);
+    
     void ActAbout_Triggered();
     void ActSettings_Triggered();
     void ActSave_Triggered();
     void ActSaveAs_Triggered();
     void ActOpen_Triggered();
     void ActClose_Triggered();
+    void ActEnableStatusBar_Triggered();
+    void ActDisableStatusBar_Triggered();
 
     void ActOpen_NewHotkeyFileSelected(const QString& filepath);
     void ActSaveAs_SaveToSelectedFile(const QString& filepath);

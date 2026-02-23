@@ -206,10 +206,15 @@ void EditorWindow::ConfigureMenu()
 
     QMenu* mnViewOptions = new QMenu(tr("View"));
     QMenu* mnStatusBarChecbox = new QMenu(tr("Status Bar"));
-    mnStatusBarChecbox->addAction(tr("Enable"));
-    mnStatusBarChecbox->addAction(tr("Disable"));
+    QAction* actEnableStatusBar = new QAction(tr("Enable"));
+    QAction* actDisableStatusBar = new QAction(tr("Disable"));
+    mnStatusBarChecbox->addAction(actEnableStatusBar);
+    mnStatusBarChecbox->addAction(actDisableStatusBar);
     mnViewOptions->addMenu(mnStatusBarChecbox);
     menuBar()->addMenu(mnViewOptions);
+
+    connect(actEnableStatusBar,  &QAction::triggered, this, &EditorWindow::ActEnableStatusBar_Triggered);
+    connect(actDisableStatusBar, &QAction::triggered, this, &EditorWindow::ActDisableStatusBar_Triggered);
    
     QAction* actSettings = new QAction(tr("Settings"));
     connect(actSettings, &QAction::triggered, this, &EditorWindow::ActSettings_Triggered);
