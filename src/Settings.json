@@ -1,6 +1,7 @@
 {
     "Theme"               : "Default",
     "DebugConsole"        : false,
+    "StatusBar"           : true,
     "DiscordRPC"          : true,
     "ForceSystemLanguage" : true,
     "Language"            : "en",
