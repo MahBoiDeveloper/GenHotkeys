@@ -5,3 +5,6 @@
 [submodule "libs/SteamworksSDK"]
 	path = libs/SteamworksSDK
 	url = https://github.com/rlabrecque/SteamworksSDK
+[submodule "libs/discord-rpc"]
+	path = libs/discord-rpc
+	url = https://github.com/discord/discord-rpc
