@@ -3,6 +3,10 @@
     # Definitions from ../CMakeLists.txt
     get_property(PROJECT_DESTINATION_FOLDER     GLOBAL PROPERTY PROJECT_DESTINATION_FOLDER)     # Exe folder
     get_property(PROJECT_DESTINATION_BIN_FOLDER GLOBAL PROPERTY PROJECT_DESTINATION_BIN_FOLDER) # Bin folder
+    get_property(PROJECT_LIBS_FOLDER            GLOBAL PROPERTY PROJECT_LIBS_FOLDER)            # Lib folder
+
+    # Additional paths
+    set(STEAMAPIDLL ${PROJECT_LIBS_FOLDER}/SteamworksSDK/redistributable_bin/win64/steam_api64.dll)
 
     # Set debug compilation flags
     set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g -fexceptions")
@@ -24,6 +28,12 @@
     
     # Define editor executable
     add_executable(${MAIN_TARGET_NAME})
+
+    # Define Steam API headers
+    file(
+        GLOB_RECURSE STEAMWORKS_SDK_HEADERS
+        ${PROJECT_LIBS_FOLDER}/SteamworksSDK/public/steam/*.h
+    )
 
     # Define a list of all sources 
     file(
@@ -47,6 +57,7 @@
     target_sources(
         ${MAIN_TARGET_NAME}
         PRIVATE
+        ${STEAMWORKS_SDK_HEADERS}
         ${SOURCES}
         "GUI/QtSources/EditorDescription.rc"
     )
@@ -61,6 +72,10 @@
     
     # Add a Windows library dependency to the main target
     target_link_libraries(${MAIN_TARGET_NAME} PRIVATE rpcrt4)
+    
+    # Link Steamworks SDK win64 with main target's exe file and copy file
+    target_link_libraries(${MAIN_TARGET_NAME} PRIVATE ${STEAMAPIDLL})
+    configure_file(${STEAMAPIDLL} ${PROJECT_DESTINATION_BIN_FOLDER} COPYONLY)
 
     # Attach GUI subproject
     add_subdirectory(GUI)

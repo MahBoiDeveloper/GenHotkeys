@@ -8,12 +8,16 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 project(
-    GZHHotkeysEditor
-    VERSION 0.4.0
+    GenHotkeys
+    VERSION 0.5.0
     DESCRIPTION "A tool for editing hotkeys for C&C: Generals and C&C: Generals - Zero Hour"
     LANGUAGES CXX
 )
 
+# Existed paths
+set(PROJECT_LIBS_FOLDER                  "${CMAKE_CURRENT_SOURCE_DIR}/libs"                 CACHE STRING "Global project libraries path")
+
+# Generated paths
 set(PROJECT_DESTINATION_FOLDER           "${CMAKE_BINARY_DIR}/exe"                          CACHE STRING "Global project path")
 set(PROJECT_DESTINATION_RESOURCES_FOLDER "${PROJECT_DESTINATION_FOLDER}/Resources"          CACHE STRING "Global project resources path")
 set(PROJECT_DESTINATION_BIN_FOLDER       "${PROJECT_DESTINATION_RESOURCES_FOLDER}/Binaries" CACHE STRING "Global project binary path")
@@ -26,6 +30,6 @@ file(MAKE_DIRECTORY ${PROJECT_DESTINATION_LOGS_FOLDER})
 # TODO: temporary
 set(CMAKE_PREFIX_PATH "C:/Qt/5.15.2/mingw81_64" "C:/Qt/Tools/mingw_64")
 
-set(CMAKE_BUILD_PARALLEL_LEVEL 10)
+set(CMAKE_BUILD_PARALLEL_LEVEL 4)
 
 add_subdirectory(src)

@@ -1,7 +1,8 @@
 # General settings
     
-    # Resources folder
+    # Definitions from ../CMakeLists.txt
     get_property(PROJECT_DESTINATION_RESOURCES_FOLDER GLOBAL PROPERTY PROJECT_DESTINATION_SOURCES_FOLDER)
+    get_property(PROJECT_LIBS_FOLDER                  GLOBAL PROPERTY PROJECT_LIBS_FOLDER)
 
     set(CMAKE_AUTOUIC ON)
     set(CMAKE_AUTOMOC ON)
@@ -86,12 +87,12 @@
     # Assign translation source files to the GUI target
     target_sources(${TARGET_NAME} PRIVATE ${TRANSLATION_SOURCES})
 
-# Lbwebp configuration
+# LibWEBP configuration
 
-    set(LIB_WEBP_TARGET_NAME webpdecoder)                           # Define lib folder path
-    set(LIB_WEBP_TARGET_FILE "lib${LIB_WEBP_TARGET_NAME}.a")        # Define lib file
-    set(LIB_WEBP_SOURCE_DIR ${CMAKE_SOURCE_DIR}/libwebp)            # Define lib folder path
-    set(LIB_WEBP_BINARY_DIR ${CMAKE_CURRENT_BINARY_DIR}/libwebp)    # Define lib build folder
+    set(LIB_WEBP_TARGET_NAME webpdecoder)                        # Define lib folder path
+    set(LIB_WEBP_TARGET_FILE "lib${LIB_WEBP_TARGET_NAME}.a")     # Define lib file
+    set(LIB_WEBP_SOURCE_DIR ${PROJECT_LIBS_FOLDER}/libwebp)         # Define lib folder path
+    set(LIB_WEBP_BINARY_DIR ${CMAKE_CURRENT_BINARY_DIR}/libwebp) # Define lib build folder
 
     # Create a lib build folder
     file(MAKE_DIRECTORY ${LIB_WEBP_BINARY_DIR})

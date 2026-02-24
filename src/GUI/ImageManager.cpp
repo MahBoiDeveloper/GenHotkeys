@@ -2,7 +2,7 @@
 #include <QImage>
 #include <QPixmap>
 
-#include "../../libwebp/src/webp/decode.h"
+#include "../../libs/libwebp/src/webp/decode.h"
 #include "../Logger.hpp"
 #include "ImageManager.hpp"
 
