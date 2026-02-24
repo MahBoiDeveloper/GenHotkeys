@@ -8,6 +8,8 @@
 #include <QMessageBox>
 #include <QDebug>
 
+#include "../libs/SteamworksSDK/public/steam/steam_api.h"
+
 // Project headers
 #include "GUI/WindowManager.hpp"
 #include "FactionsManager.hpp"
@@ -30,6 +32,16 @@ int ShowErrorMessage(const QString& txt)
 
 int main(int argc, const char** argv)
 {
+    SteamErrMsg errMsg = { 0 };
+    if ( SteamAPI_InitEx( &errMsg ) != k_ESteamAPIInitResult_OK )
+    {
+        OutputDebugString( "SteamAPI_Init() failed: " );
+        OutputDebugString( errMsg );
+        OutputDebugString( "\n" );
+        LOGMSG("Fatal Error: Steam must be running to play this game (SteamAPI_Init() failed).");
+        return EXIT_FAILURE;
+    }
+
     // Call parsing the Settings.json
     PROGRAM_CONSTANTS = make_unique<ProgramConstants>();
 
