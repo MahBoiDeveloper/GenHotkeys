@@ -18,7 +18,6 @@ private: // Data
     QCheckBox*   chkEnableDebugConsole           = nullptr;
     QCheckBox*   chkEnableDiscordRPC             = nullptr;
     QCheckBox*   chkForceSystemLanguageOnStartUp = nullptr;
-    QCheckBox*   chkEnableStatusBar              = nullptr;
     QLabel*      lblLanguage                     = nullptr;
     QComboBox*   cmbLanguage                     = nullptr;
     QVBoxLayout* ltMain                          = nullptr;
@@ -42,7 +41,6 @@ private slots:
     void BtnSave_Clicked();
     void BtnResetAll_Clicked();
 signals:
-    void enableStatusBar(const bool status);
     void btnBackClicked();
     void languageChanged();
 };

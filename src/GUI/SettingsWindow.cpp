@@ -21,7 +21,6 @@ SettingsWindow::SettingsWindow(QWidget* parent) : QWidget(parent)
     chkEnableDebugConsole           = new QCheckBox();
     chkEnableDiscordRPC             = new QCheckBox();
     chkForceSystemLanguageOnStartUp = new QCheckBox();
-    chkEnableStatusBar              = new QCheckBox();
     lblLanguage                     = new QLabel();
     cmbLanguage                     = new QComboBox();
 
@@ -43,12 +42,6 @@ SettingsWindow::SettingsWindow(QWidget* parent) : QWidget(parent)
                                                    ? Qt::CheckState::Checked
                                                    : Qt::CheckState::Unchecked);
 
-    chkEnableStatusBar->setText(tr("Enable status bar"));
-    chkEnableStatusBar->setObjectName(nameof(chkEnableStatusBar));
-    chkEnableStatusBar->setCheckState(PROGRAM_CONSTANTS->pSettingsFile->IsStatusBarEnabled()
-                                      ? Qt::CheckState::Checked
-                                      : Qt::CheckState::Unchecked);
-
     lblLanguage->setText(tr("Language:"));
     lblLanguage->setObjectName(nameof(lblLanguage));
     
@@ -56,7 +49,7 @@ SettingsWindow::SettingsWindow(QWidget* parent) : QWidget(parent)
         cmbLanguage->addItem(PROGRAM_CONSTANTS->Languages.value(i).second);
 
     cmbLanguage->setObjectName(nameof(cmbLanguage));
-    cmbLanguage->setFixedHeight(25); // TODO: remove this 25 px and think how to handle it in css
+    // cmbLanguage->setFixedHeight(25); // TODO: remove this 25 px and think how to handle it in css
     cmbLanguage->setCurrentIndex(static_cast<int>(PROGRAM_CONSTANTS->pSettingsFile->GetLanguage()));
     cmbLanguage->setCurrentText(PROGRAM_CONSTANTS->Languages.value(PROGRAM_CONSTANTS->pSettingsFile->GetLanguage()).second);
 
@@ -67,7 +60,6 @@ SettingsWindow::SettingsWindow(QWidget* parent) : QWidget(parent)
     ltLeftColumn->addWidget(chkEnableDebugConsole);
     ltLeftColumn->addWidget(chkEnableDiscordRPC);
     ltLeftColumn->addWidget(chkForceSystemLanguageOnStartUp);
-    ltLeftColumn->addWidget(chkEnableStatusBar);
     ltLeftColumn->addLayout(ltLanguage);
 
     btnSave->setText(tr("SAVE"));
@@ -109,9 +101,6 @@ void SettingsWindow::BtnSave_Clicked()
 
     PROGRAM_CONSTANTS->pSettingsFile->SetForceSystemLanguageOnStartUp(chkForceSystemLanguageOnStartUp->checkState());
 
-    PROGRAM_CONSTANTS->pSettingsFile->SetStatusBarStatus(chkEnableStatusBar->checkState());
-    emit enableStatusBar(Settings::FromQtCheckState(chkEnableStatusBar->checkState()));
-    
     bool isNewLanguageAssigned = cmbLanguage->currentIndex() != PROGRAM_CONSTANTS->pSettingsFile->GetLanguage();
     
     if (isNewLanguageAssigned)

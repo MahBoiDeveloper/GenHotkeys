@@ -25,6 +25,7 @@ private: // Data
     // Specific windows
     QDialog*      pAboutDialog          = nullptr;
     QWidget*      pSettingsWindow       = nullptr;
+    QStatusBar*   pStatusBar            = nullptr;
 
     // Current possible hotkeys layout
     QTabWidget*   pHotkeysPanelsWidget  = nullptr;
@@ -32,7 +33,6 @@ private: // Data
     // Container of the selected unit hotkeys
     QVector<QSet<ActionHotkeyWidget*>> vHotkeyWidgets;
 public:
-    QStatusBar*   pStatusBar            = nullptr;
     
     const int HOTKEYS_AREA_STRETCH = 2;
     const int KEYBOARD_WINDOW_STRETCH = 1;
@@ -59,8 +59,10 @@ private:
     void SetActionHotkey(const QString& fctShortName, const QString& goName, const QString& actName, const QString& hk);
     /// @brief Creates line of keys for keyboard layout.
     QHBoxLayout* CreateKeysOnKeyboard(const QString& str);
-    /// @brief Saves changes into file.
+    /// @brief Saves changes into CSF file.
     void Save();
+    /// @brief Updates status bar after each setting change.
+    void UpdateStatusBar(const Qt::CheckState& state);
 
 private slots:
     void KeyboardWindow_Update(int id = 0);
@@ -77,7 +79,6 @@ private slots:
     void ActOpen_NewHotkeyFileSelected(const QString& filepath);
     void ActSaveAs_SaveToSelectedFile(const QString& filepath);
     
-    void SettingsWindow_EnableStatusBar(const bool status);
     void SettingsWindow_LanguageChanged();
 
 signals:

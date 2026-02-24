@@ -208,6 +208,7 @@ void EditorWindow::ConfigureMenu()
     QMenu* mnStatusBarChecbox = new QMenu(tr("Status Bar"));
     QAction* actEnableStatusBar = new QAction(tr("Enable"));
     QAction* actDisableStatusBar = new QAction(tr("Disable"));
+    actDisableStatusBar->setProperty("selected", !PROGRAM_CONSTANTS->pSettingsFile->IsStatusBarEnabled());
     mnStatusBarChecbox->addAction(actEnableStatusBar);
     mnStatusBarChecbox->addAction(actDisableStatusBar);
     mnViewOptions->addMenu(mnStatusBarChecbox);
@@ -544,7 +545,6 @@ void EditorWindow::ActSettings_Triggered()
 
     connect(sw, &SettingsWindow::languageChanged, this,            &EditorWindow::SettingsWindow_LanguageChanged);
     connect(sw, &SettingsWindow::btnBackClicked,  pSettingsWindow, &QWidget::close);
-    connect(sw, &SettingsWindow::enableStatusBar, this,            &EditorWindow::SettingsWindow_EnableStatusBar);
 
     pSettingsWindow->show();
 }
@@ -596,9 +596,17 @@ void EditorWindow::ActOpen_Triggered()
 
 void EditorWindow::ActClose_Triggered() { emit closeEditor(); }
 
-void EditorWindow::ActEnableStatusBar_Triggered() { pStatusBar->setHidden(false); }
+void EditorWindow::UpdateStatusBar(const Qt::CheckState& state)
+{
+    bool bState = Settings::FromQtCheckState(state);
+    PROGRAM_CONSTANTS->pSettingsFile->SetStatusBarStatus(state);
+    PROGRAM_CONSTANTS->pSettingsFile->Save();
+    pStatusBar->setHidden(!bState);
+}
 
-void EditorWindow::ActDisableStatusBar_Triggered() { pStatusBar->setHidden(true); }
+void EditorWindow::ActEnableStatusBar_Triggered() { UpdateStatusBar(Qt::CheckState::Checked); }
+
+void EditorWindow::ActDisableStatusBar_Triggered() { UpdateStatusBar(Qt::CheckState::Unchecked); }
 
 void EditorWindow::ActOpen_NewHotkeyFileSelected(const QString& filepath)
 {
@@ -606,8 +614,6 @@ void EditorWindow::ActOpen_NewHotkeyFileSelected(const QString& filepath)
     emit newHotkeyFileSelected(filepath);
     pStatusBar->showMessage(tr("Opening selected file"), STATUS_BAR_TIMEOUT);
 }
-
-void EditorWindow::SettingsWindow_EnableStatusBar(const bool status) { pStatusBar->setHidden(!status); }
 
 void EditorWindow::SettingsWindow_LanguageChanged()
 {
