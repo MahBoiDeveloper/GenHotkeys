@@ -2,3 +2,6 @@
 	path = libwebp
 	url = https://github.com/webmproject/libwebp.git
 	branch = 1.3.2
+[submodule "libs/SteamworksSDK"]
+	path = libs/SteamworksSDK
+	url = https://github.com/rlabrecque/SteamworksSDK
