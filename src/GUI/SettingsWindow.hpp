@@ -5,7 +5,6 @@
 #include <QLabel>
 #include <QComboBox>
 #include <QVBoxLayout>
-#include "../Settings.hpp"
 
 class SettingsWindow final : public QWidget
 {
@@ -18,6 +17,7 @@ private: // Data
     QCheckBox*   chkEnableDebugConsole           = nullptr;
     QCheckBox*   chkEnableDiscordRPC             = nullptr;
     QCheckBox*   chkForceSystemLanguageOnStartUp = nullptr;
+    QCheckBox*   chkEnableSteamIntegration       = nullptr;
     QLabel*      lblLanguage                     = nullptr;
     QComboBox*   cmbLanguage                     = nullptr;
     QVBoxLayout* ltMain                          = nullptr;
@@ -28,13 +28,13 @@ private: // Data
     QHBoxLayout* ltLanguage                      = nullptr;
 
 private: // Methods
-    /// @brief Enable/disable debug console.
+    /// @brief Enables/disables debug console.
     void ConsoleWindowStateUpdate(const Qt::CheckState& state);
-    /// @brief Enable/disable Discord RPC integration.
+    /// @brief Enables/disables Discord RPC integration.
     /// @todo Implement later.
     void DiscordRPCStateUpdate(const Qt::CheckState& state);
-    /// @brief Enable/disable status bar.
-    void StatusBarStateUpdate(const Qt::CheckState& state);
+    /// @brief Enables/disables Steam integration.
+    void SteamAPIStateUpdate(const Qt::CheckState& state);
 public:
     SettingsWindow(QWidget* parent = nullptr);
 private slots:

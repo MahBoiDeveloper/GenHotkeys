@@ -27,7 +27,9 @@ void Settings::SetToDefault()
     DiscordRPC          = true;
     ForceSystemLanguage = true;
     StatusBar           = true;
-    Language            = 0; // English
+    SteamAPI            = true;
+    SteamAppID          = 2732960; // ZH APP ID
+    Language            = 0;       // English
 }
 
 void Settings::Parse()
@@ -36,6 +38,8 @@ void Settings::Parse()
     DiscordRPC          = json.Query("$." + nameof(DiscordRPC)).toBool();
     ForceSystemLanguage = json.Query("$." + nameof(ForceSystemLanguage)).toBool();
     StatusBar           = json.Query("$." + nameof(StatusBar)).toBool();
+    SteamAppID          = json.Query("$." + nameof(SteamAppID)).toInt();
+    SteamAPI            = json.Query("$." + nameof(SteamAPI)).toBool();
 
     QString twoLetters = StringExt::EmptyString;
     if (ForceSystemLanguage)
@@ -57,6 +61,8 @@ void Settings::Save()
     jsMainObj[nameof(ForceSystemLanguage)] = ForceSystemLanguage;
     jsMainObj[nameof(Language)]            = PROGRAM_CONSTANTS->Languages.value(Language).first;
     jsMainObj[nameof(StatusBar)]           = StatusBar;
+    jsMainObj[nameof(SteamAppID)]          = StringExt::ToQString(SteamAppID);
+    jsMainObj[nameof(SteamAPI)]            = SteamAPI;
 
     QJsonDocument jsDoc;
     jsDoc.setObject(jsMainObj);
@@ -70,34 +76,14 @@ void Settings::Save()
     LOGMSG("Setting changes has been saved.");
 }
 
-bool Settings::FromQtCheckState(const Qt::CheckState& state)
-{
-    bool flag;
-    switch (state)
-    {
-        case (Qt::CheckState::Checked):
-            flag = true;
-            break;
-        case (Qt::CheckState::Unchecked):
-            flag = false;
-            break;
-    }
-    return flag;
-}
-
 const QSet<Qt::Key> Settings::GetAllowedKeys()                        const { return AllowedHotkeys; }
+const size_t        Settings::GetLanguage()                           const { return Language; }
+const size_t        Settings::GetSteamAppID()                         const { return SteamAppID; }
 const bool          Settings::IsConsoleEnabled()                      const { return DebugConsole; }
 const bool          Settings::IsDiscordRPCEnabled()                   const { return DiscordRPC; }
 const bool          Settings::IsForceSystemLanguageOnStartUpEnabled() const { return ForceSystemLanguage; }
-const size_t        Settings::GetLanguage()                           const { return Language; }
 const bool          Settings::IsStatusBarEnabled()                    const { return StatusBar; }
+const bool          Settings::IsSteamIntegrationEnabled()             const { return SteamAPI; }
 
-void Settings::SetAllowedKeys(const QSet<Qt::Key>& keys)                    { AllowedHotkeys      = keys; }
-void Settings::SetConsoleStatus(const bool state)                           { DebugConsole        = state; }
-void Settings::SetConsoleStatus(const Qt::CheckState& state)                { DebugConsole        = FromQtCheckState(state); }
-void Settings::SetDiscordRPCStatus(const bool state)                        { DiscordRPC          = state; }
-void Settings::SetDiscordRPCStatus(const Qt::CheckState& state)             { DiscordRPC          = FromQtCheckState(state); }
-void Settings::SetForceSystemLanguageOnStartUp(const bool state)            { ForceSystemLanguage = state; }
-void Settings::SetForceSystemLanguageOnStartUp(const Qt::CheckState& state) { ForceSystemLanguage = FromQtCheckState(state); }
-void Settings::SetLanguage(const size_t& code)                              { Language            = code; }
-void Settings::SetStatusBarStatus(const Qt::CheckState& state)              { StatusBar           = FromQtCheckState(state); }
+void Settings::SetAllowedKeys(const QSet<Qt::Key>& keys){ AllowedHotkeys = keys; }
+void Settings::SetLanguage(const size_t& code)          { Language       = code; }

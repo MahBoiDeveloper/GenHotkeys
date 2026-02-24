@@ -8,6 +8,7 @@
 #include <QComboBox>
 #include <QFileDialog>
 
+#include "../Extensions/BoolExt.hpp"
 #include "../Extensions/L10NExt.hpp"
 #include "../Windows/Registry.hpp"
 #include "../Windows/Locale.hpp"
@@ -23,6 +24,7 @@
 #include "EditorWindow.hpp"
 
 using namespace StringExt;
+using namespace BoolExt;
 
 // TODO: Move definition to the something like reflection header
 inline int operator+(Qt::Modifier mod, Qt::Key key) { return (static_cast<int>(mod) + static_cast<int>(key)); }
@@ -598,7 +600,7 @@ void EditorWindow::ActClose_Triggered() { emit closeEditor(); }
 
 void EditorWindow::UpdateStatusBar(const Qt::CheckState& state)
 {
-    bool bState = Settings::FromQtCheckState(state);
+    bool bState = ToBool(state);
     PROGRAM_CONSTANTS->pSettingsFile->SetStatusBarStatus(state);
     PROGRAM_CONSTANTS->pSettingsFile->Save();
     pStatusBar->setHidden(!bState);

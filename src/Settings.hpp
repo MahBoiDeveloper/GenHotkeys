@@ -1,6 +1,9 @@
 #pragma once
 #include <QSet>
+#include "Extensions/BoolExt.hpp"
 #include "Parsers/JSONFile.hpp"
+
+#define SET_PROPERTY(x, y) if constexpr(std::same_as<T, bool>) { x = y; } else { x = FromQtCheckState(y); }
 
 class SettingsWindow;
 
@@ -14,14 +17,13 @@ private: // Data
     bool          ForceSystemLanguage;
     size_t        Language;
     bool          StatusBar;
+    size_t        SteamAppID;
+    bool          SteamAPI;
 
 private: // Methods
 public:
     explicit Settings();
     ~Settings();
-
-    /// @brief Converts Qt::ChechState to the bool.
-    static bool FromQtCheckState(const Qt::CheckState& state);
 
     /// @brief Set all `Settings` class variables to default values.
     void SetToDefault();
@@ -30,35 +32,35 @@ public:
     /// @brief Save changes to the `Resources\Settings.json`.
     void Save();
 
+    /// @brief Returns `QSet` of available keys from `QWEWRTY` keyboard to choice by user.
+    const QSet<Qt::Key> GetAllowedKeys() const;
+    /// @brief Returns value of current language from settings file corresponded to the hashtable from the `ProgramConstants`.
+    const size_t GetLanguage() const;
+    /// @brief Return Steam APP ID code.
+    const size_t GetSteamAppID() const;
     /// @brief Returns status for console from settings file.
     const bool IsConsoleEnabled() const;
     /// @brief Returns status for Discord RPC from settings file.
     const bool IsDiscordRPCEnabled() const;
     /// @brief Returns status for force editor use system language from settings file.
     const bool IsForceSystemLanguageOnStartUpEnabled() const;
-    /// @brief Returns `QSet` of available keys from `QWEWRTY` keyboard to choice by user.
-    const QSet<Qt::Key> GetAllowedKeys() const;
-    /// @brief Returns value of current language from settings file corresponded to the hashtable from the `ProgramConstants`.
-    const size_t GetLanguage() const;
     /// @brief Returns state of the status bar from settings file.
     const bool IsStatusBarEnabled() const;
+    /// @brief Returns status for Steam API from settings file
+    const bool IsSteamIntegrationEnabled() const;
 
-    /// @brief Sets status for console window.
-    void SetConsoleStatus(const Qt::CheckState& state);
-    /// @brief Sets status for console window.
-    void SetConsoleStatus(const bool state);
     /// @brief Sets `QSet` of allowed keys.
     void SetAllowedKeys(const QSet<Qt::Key>& keys);
-    /// @brief Sets status for Discord RPC.
-    void SetDiscordRPCStatus(const Qt::CheckState& state);
-    /// @brief Sets status for Discord RPC.
-    void SetDiscordRPCStatus(const bool state);
-    /// @brief Sets status to force editor use system language.
-    void SetForceSystemLanguageOnStartUp(const bool state);
-    /// @brief Sets status to force editor use system language.
-    void SetForceSystemLanguageOnStartUp(const Qt::CheckState& state);
     /// @brief Sets editor's language.
     void SetLanguage(const size_t& locale);
-    /// Sets state for console window.
-    void SetStatusBarStatus(const Qt::CheckState& state);
+    /// @brief Sets status for console window.
+    template<BoolExt::IsStateDescriptor T> void SetConsoleStatus(const T state)                { DebugConsole        = BoolExt::ToBool(state); }
+    /// @brief Sets status for Discord RPC.
+    template<BoolExt::IsStateDescriptor T> void SetDiscordRPCStatus(const T state)             { DiscordRPC          = BoolExt::ToBool(state); }
+    /// @brief Sets status to force editor use system language on the start.
+    template<BoolExt::IsStateDescriptor T> void SetForceSystemLanguageOnStartUp(const T state) { ForceSystemLanguage = BoolExt::ToBool(state); }
+    /// @brief Sets status for console window.
+    template<BoolExt::IsStateDescriptor T> void SetStatusBarStatus(const T state)              { StatusBar           = BoolExt::ToBool(state); }
+    /// @brief Sets status for Steam API Integration.
+    template<BoolExt::IsStateDescriptor T> void SetSteamIntegrationStatus(const T state)       { SteamAPI            = BoolExt::ToBool(state); }
 };

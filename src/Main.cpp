@@ -17,6 +17,7 @@
 #include "Logger.hpp"
 
 using namespace std;
+using namespace StringExt;
 
 int ShowErrorMessage(const QString& txt)
 {
@@ -32,16 +33,6 @@ int ShowErrorMessage(const QString& txt)
 
 int main(int argc, const char** argv)
 {
-    SteamErrMsg errMsg = { 0 };
-    if ( SteamAPI_InitEx( &errMsg ) != k_ESteamAPIInitResult_OK )
-    {
-        OutputDebugString( "SteamAPI_Init() failed: " );
-        OutputDebugString( errMsg );
-        OutputDebugString( "\n" );
-        LOGMSG("Fatal Error: Steam must be running to play this game (SteamAPI_Init() failed).");
-        return EXIT_FAILURE;
-    }
-
     // Call parsing the Settings.json
     PROGRAM_CONSTANTS = make_unique<ProgramConstants>();
 
@@ -79,6 +70,31 @@ int main(int argc, const char** argv)
     // Show console, that by default is hiding by Logger class
     if (PROGRAM_CONSTANTS->pSettingsFile->IsConsoleEnabled()) 
         ShowWindow(GetConsoleWindow(), SW_SHOW);
+
+    // Enable Steam integration and create steam_appid.txt, if it doesn't exist
+    if (PROGRAM_CONSTANTS->pSettingsFile->IsSteamIntegrationEnabled())
+    {
+        QString steamapitxt = PROGRAM_CONSTANTS->BINARIES_FOLDER + "\\steam_appid.txt"q;
+        
+        if (!filesystem::exists(steamapitxt.toStdString().c_str()))
+        {
+            ofstream file(steamapitxt.toStdString().c_str());
+            
+            if (!file.is_open())
+                file.open(steamapitxt.toStdString().c_str());
+
+            string id = ToQString(PROGRAM_CONSTANTS->pSettingsFile->GetSteamAppID()).toStdString();
+            file << id << endl;
+        }
+
+        SteamErrMsg errMsg = { 0 };
+        if (SteamAPI_InitEx( &errMsg ) != k_ESteamAPIInitResult_OK)
+        {
+            OutputDebugString("SteamAPI_Init() failed: ");
+            OutputDebugString(errMsg);
+            OutputDebugString("\n");
+        }
+    }
 
     // Initialize TechTree.json parsing
     FACTIONS_MANAGER = make_unique<FactionManager>();

@@ -1,11 +1,17 @@
 #include <windows.h> // Allows disable console
 #include <QMessageBox>
 
-#include "../Logger.hpp"
-#include "../ProgramConstants.hpp"
+#include "../../libs/SteamworksSDK/public/steam/steam_api.h"
+
+#include "../Extensions/BoolExt.hpp"
 #include "../Windows/Locale.hpp"
+#include "../ProgramConstants.hpp"
+#include "../Logger.hpp"
+
 #include "WindowManager.hpp"
 #include "SettingsWindow.hpp"
+
+using namespace BoolExt;
 
 SettingsWindow::SettingsWindow(QWidget* parent) : QWidget(parent)
 {
@@ -20,6 +26,7 @@ SettingsWindow::SettingsWindow(QWidget* parent) : QWidget(parent)
     btnResetAll                     = new QPushButton();
     chkEnableDebugConsole           = new QCheckBox();
     chkEnableDiscordRPC             = new QCheckBox();
+    chkEnableSteamIntegration       = new QCheckBox();
     chkForceSystemLanguageOnStartUp = new QCheckBox();
     lblLanguage                     = new QLabel();
     cmbLanguage                     = new QComboBox();
@@ -33,6 +40,12 @@ SettingsWindow::SettingsWindow(QWidget* parent) : QWidget(parent)
     chkEnableDiscordRPC->setText(tr("Enable Discord RPC (WIP)"));
     chkEnableDiscordRPC->setObjectName(nameof(chkEnableDiscordRPC));
     chkEnableDiscordRPC->setCheckState(PROGRAM_CONSTANTS->pSettingsFile->IsDiscordRPCEnabled()
+                                       ? Qt::CheckState::Checked
+                                       : Qt::CheckState::Unchecked);
+
+    chkEnableSteamIntegration->setText(tr("Enable Steam Integration"));
+    chkEnableSteamIntegration->setObjectName(nameof(chkEnableSteamIntegration));
+    chkEnableSteamIntegration->setCheckState(PROGRAM_CONSTANTS->pSettingsFile->IsSteamIntegrationEnabled()
                                        ? Qt::CheckState::Checked
                                        : Qt::CheckState::Unchecked);
 
@@ -59,6 +72,7 @@ SettingsWindow::SettingsWindow(QWidget* parent) : QWidget(parent)
 
     ltLeftColumn->addWidget(chkEnableDebugConsole);
     ltLeftColumn->addWidget(chkEnableDiscordRPC);
+    ltLeftColumn->addWidget(chkEnableSteamIntegration);
     ltLeftColumn->addWidget(chkForceSystemLanguageOnStartUp);
     ltLeftColumn->addLayout(ltLanguage);
 
@@ -98,6 +112,9 @@ void SettingsWindow::BtnSave_Clicked()
 
     PROGRAM_CONSTANTS->pSettingsFile->SetDiscordRPCStatus(chkEnableDiscordRPC->checkState());
     DiscordRPCStateUpdate(chkEnableDiscordRPC->checkState());
+
+    PROGRAM_CONSTANTS->pSettingsFile->SetSteamIntegrationStatus(chkEnableSteamIntegration->checkState());
+    SteamAPIStateUpdate(chkEnableSteamIntegration->checkState());
 
     PROGRAM_CONSTANTS->pSettingsFile->SetForceSystemLanguageOnStartUp(chkForceSystemLanguageOnStartUp->checkState());
 
@@ -179,4 +196,22 @@ void SettingsWindow::ConsoleWindowStateUpdate(const Qt::CheckState& state)
 
 void SettingsWindow::DiscordRPCStateUpdate(const Qt::CheckState& state)
 {
+}
+
+void SettingsWindow::SteamAPIStateUpdate(const Qt::CheckState& state)
+{
+    if (ToBool(state))
+    {
+        SteamErrMsg errMsg = { 0 };
+        if (SteamAPI_InitEx( &errMsg ) != k_ESteamAPIInitResult_OK)
+        {
+            OutputDebugString("SteamAPI_Init() failed: ");
+            OutputDebugString(errMsg);
+            OutputDebugString("\n");
+        }
+    }
+    else
+    {
+        SteamAPI_Shutdown();
+    }
 }
