@@ -1,5 +1,5 @@
-[submodule "libwebp"]
-	path = libwebp
+[submodule "libs/libwebp"]
+	path = libs/libwebp
 	url = https://github.com/webmproject/libwebp.git
 	branch = 1.3.2
 [submodule "libs/SteamworksSDK"]
