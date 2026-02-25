@@ -73,7 +73,7 @@ void Settings::Save()
     settingsJson.open(QIODevice::WriteOnly | QIODevice::Text);
     settingsJson.write(jsDoc.toJson());
     settingsJson.close();
-    LOGMSG("Setting changes has been saved.");
+    LOGMSG("Setting changes has been saved");
 }
 
 const QSet<Qt::Key> Settings::GetAllowedKeys()                        const { return AllowedHotkeys; }

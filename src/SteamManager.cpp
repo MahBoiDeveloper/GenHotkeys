@@ -26,7 +26,7 @@ void SteamManager::Initialize()
         file << appId.toStdString().c_str() << endl;
     }
 
-    LOGMSG("Initializing Steam Integration");
+    LOGMSG("Initializing Steam integration...");
     SteamErrMsg errMsg = { 0 };
     if (SteamAPI_InitEx( &errMsg ) != k_ESteamAPIInitResult_OK)
     {
