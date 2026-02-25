@@ -12,7 +12,7 @@ private: // Data
     QString details = "";
 public:
     inline static std::unique_ptr<DiscordManager> Instance = std::make_unique<DiscordManager>();
-    const char* AppID = "830497958034145300";
+    const char* AppID = "1476177039966081097";
     const int   SendPresence = 1;
 
 private: // Methods
