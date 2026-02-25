@@ -163,23 +163,26 @@ void SettingsWindow::BtnResetAll_Clicked()
 { 
     PROGRAM_CONSTANTS->pSettingsFile->SetToDefault();
 
-    if (PROGRAM_CONSTANTS->pSettingsFile->IsConsoleEnabled())
-        chkEnableDebugConsole->setCheckState(Qt::CheckState::Checked);
-    else
-        chkEnableDebugConsole->setCheckState(Qt::CheckState::Unchecked);
 
-    if (PROGRAM_CONSTANTS->pSettingsFile->IsDiscordRPCEnabled())
-        chkEnableDiscordRPC->setCheckState(Qt::CheckState::Checked);
-    else
-        chkEnableDiscordRPC->setCheckState(Qt::CheckState::Unchecked);
+    chkEnableDebugConsole->setCheckState(PROGRAM_CONSTANTS->pSettingsFile->IsConsoleEnabled()
+                                         ? Qt::CheckState::Checked
+                                         : Qt::CheckState::Unchecked);
+
+    chkEnableDiscordRPC->setCheckState(PROGRAM_CONSTANTS->pSettingsFile->IsDiscordRPCEnabled()
+                                       ? Qt::CheckState::Checked
+                                       : Qt::CheckState::Unchecked);
+
+    chkEnableSteamIntegration->setCheckState(PROGRAM_CONSTANTS->pSettingsFile->IsSteamIntegrationEnabled()
+                                             ? Qt::CheckState::Checked
+                                             : Qt::CheckState::Unchecked);
     
-    if (PROGRAM_CONSTANTS->pSettingsFile->IsForceSystemLanguageOnStartUpEnabled())
-        chkForceSystemLanguageOnStartUp->setCheckState(Qt::CheckState::Checked);
-    else
-        chkForceSystemLanguageOnStartUp->setCheckState(Qt::CheckState::Unchecked);
+    chkForceSystemLanguageOnStartUp->setCheckState(PROGRAM_CONSTANTS->pSettingsFile->IsForceSystemLanguageOnStartUpEnabled()
+                                                   ? Qt::CheckState::Checked
+                                                   : Qt::CheckState::Unchecked);
 
     chkEnableDebugConsole->update();
     chkEnableDiscordRPC->update();
+    chkEnableSteamIntegration->update();
     chkForceSystemLanguageOnStartUp->update();
 }
 
