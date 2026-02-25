@@ -68,13 +68,8 @@ jobs:
       - name: Run Cppcheck
         shell: cmd
         run: |
-          (
-            rmdir /s /q build 
-            cmake -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE -DCMAKE_C_COMPILER:FILEPATH=C:\Qt\Tools\mingw_64\bin\gcc.exe -DCMAKE_CXX_COMPILER:FILEPATH=C:\Qt\Tools\mingw_64\bin\g++.exe -S.\ -B.\build -G "MinGW Makefiles"
-            cmake --build .\build --config Debug --target all -j 16
-          ) > nul 2> nul
-
-          cppcheck\cppcheck --enable=all --suppress=missingIncludeSystem --report-progress --check-level=exhaustive --template=">>>{file}:{line}: {severity}: {message}\n{code}<<<" --template-location=">>>{file}:{line}: note: {info}\n{code}<<<" --platform=win64 --project=build\compile_commands.json --project-configuration="Release"  --output-file=cppcheckresult.log  --max-ctu-depth=10 --inconclusive -j 12
+          cd src
+          ..\cppcheck\cppcheck --enable=all --suppress=missingIncludeSystem --report-progress --check-level=exhaustive --template=">>>{file}:{line}: {severity}: {message}\n{code}<<<" --template-location=">>>{file}:{line}: note: {info}\n{code}<<<" --platform=win64 --project=build\compile_commands.json --project-configuration="Release"  --output-file=cppcheckresult.log  --max-ctu-depth=10 --inconclusive -j 12
 
       # Show cpppcheck results
       - name: Publish Results
