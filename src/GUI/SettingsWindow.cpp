@@ -6,6 +6,7 @@
 #include "../Extensions/BoolExt.hpp"
 #include "../Windows/Locale.hpp"
 #include "../ProgramConstants.hpp"
+#include "../DiscordManager.hpp"
 #include "../SteamManager.hpp"
 #include "../Logger.hpp"
 
@@ -38,7 +39,7 @@ SettingsWindow::SettingsWindow(QWidget* parent) : QWidget(parent)
                                          ? Qt::CheckState::Checked 
                                          : Qt::CheckState::Unchecked);
 
-    chkEnableDiscordRPC->setText(tr("Enable Discord RPC (WIP)"));
+    chkEnableDiscordRPC->setText(tr("Enable Discord RPC"));
     chkEnableDiscordRPC->setObjectName(nameof(chkEnableDiscordRPC));
     chkEnableDiscordRPC->setCheckState(PROGRAM_CONSTANTS->pSettingsFile->IsDiscordRPCEnabled()
                                        ? Qt::CheckState::Checked
@@ -63,7 +64,7 @@ SettingsWindow::SettingsWindow(QWidget* parent) : QWidget(parent)
         cmbLanguage->addItem(PROGRAM_CONSTANTS->Languages.value(i).second);
 
     cmbLanguage->setObjectName(nameof(cmbLanguage));
-    // cmbLanguage->setFixedHeight(25); // TODO: remove this 25 px and think how to handle it in css
+    cmbLanguage->setFixedHeight(23); // TODO: remove this 25 px and think how to handle it in css
     cmbLanguage->setCurrentIndex(static_cast<int>(PROGRAM_CONSTANTS->pSettingsFile->GetLanguage()));
     cmbLanguage->setCurrentText(PROGRAM_CONSTANTS->Languages.value(PROGRAM_CONSTANTS->pSettingsFile->GetLanguage()).second);
 
@@ -197,6 +198,14 @@ void SettingsWindow::ConsoleWindowStateUpdate(const Qt::CheckState& state)
 
 void SettingsWindow::DiscordRPCStateUpdate(const Qt::CheckState& state)
 {
+    if (ToBool(state))
+    {
+        DISCORD_MANAGER->Initialize();
+    }
+    else
+    {
+        DISCORD_MANAGER->Dispose();
+    }
 }
 
 void SettingsWindow::SteamAPIStateUpdate(const Qt::CheckState& state)

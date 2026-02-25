@@ -393,22 +393,21 @@
 <context>
     <name>SettingsWindow</name>
     <message>
-        <location filename="../SettingsWindow.cpp" line="35"/>
+        <location filename="../SettingsWindow.cpp" line="36"/>
         <source>Enable debug console</source>
         <translation>Включить отладочную консоль</translation>
     </message>
     <message>
-        <location filename="../SettingsWindow.cpp" line="41"/>
         <source>Enable Discord RPC (WIP)</source>
-        <translation>Включить Discord RPC (WIP)</translation>
+        <translation type="vanished">Включить Discord RPC (WIP)</translation>
     </message>
     <message>
-        <location filename="../SettingsWindow.cpp" line="47"/>
+        <location filename="../SettingsWindow.cpp" line="48"/>
         <source>Enable Steam Integration</source>
         <translation>Включить интеграцию со Steam</translation>
     </message>
     <message>
-        <location filename="../SettingsWindow.cpp" line="53"/>
+        <location filename="../SettingsWindow.cpp" line="54"/>
         <source>Force editor to use system language on start up</source>
         <translation>Использовать язык системы при запуске</translation>
     </message>
@@ -417,42 +416,47 @@
         <translation type="vanished">Включить строку состояния</translation>
     </message>
     <message>
-        <location filename="../SettingsWindow.cpp" line="59"/>
+        <location filename="../SettingsWindow.cpp" line="42"/>
+        <source>Enable Discord RPC</source>
+        <translation>Включить Discord RPC</translation>
+    </message>
+    <message>
+        <location filename="../SettingsWindow.cpp" line="60"/>
         <source>Language:</source>
         <translation>Язык:</translation>
     </message>
     <message>
-        <location filename="../SettingsWindow.cpp" line="80"/>
+        <location filename="../SettingsWindow.cpp" line="81"/>
         <source>SAVE</source>
         <translation>СОХРАНИТЬ</translation>
     </message>
     <message>
-        <location filename="../SettingsWindow.cpp" line="84"/>
+        <location filename="../SettingsWindow.cpp" line="85"/>
         <source>RESET ALL</source>
         <translation>СБРОСИТЬ ВСЁ</translation>
     </message>
     <message>
-        <location filename="../SettingsWindow.cpp" line="88"/>
+        <location filename="../SettingsWindow.cpp" line="89"/>
         <source>BACK</source>
         <translation>НАЗАД</translation>
     </message>
     <message>
-        <location filename="../SettingsWindow.cpp" line="135"/>
+        <location filename="../SettingsWindow.cpp" line="136"/>
         <source>Setting Apply Confirmation</source>
         <translation>Подтверждение применения настроек</translation>
     </message>
     <message>
-        <location filename="../SettingsWindow.cpp" line="136"/>
+        <location filename="../SettingsWindow.cpp" line="137"/>
         <source>You have selected settings that require a complete restart of the editor. Do you want to apply new settings and restart editor?</source>
         <translation>Вы выбрали настройки, которые требуют полного перезапуска редактора. Вы желаете применить новые настройки и перезапустить редактор?</translation>
     </message>
     <message>
-        <location filename="../SettingsWindow.cpp" line="138"/>
+        <location filename="../SettingsWindow.cpp" line="139"/>
         <source>YES</source>
         <translation>ДА</translation>
     </message>
     <message>
-        <location filename="../SettingsWindow.cpp" line="139"/>
+        <location filename="../SettingsWindow.cpp" line="140"/>
         <source>CANCEL</source>
         <translation>ОТМЕНА</translation>
     </message>

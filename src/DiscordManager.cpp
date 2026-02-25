@@ -1,42 +1,49 @@
 #include "Logger.hpp"
-#include "DiscordRPCManager.hpp"
+#include "DiscordManager.hpp"
 
-DiscordRPCManager::DiscordRPCManager()
+DiscordManager::DiscordManager()
 {
 }
 
-DiscordRPCManager::~DiscordRPCManager()
+DiscordManager::~DiscordManager()
 {
     Discord_Shutdown();
 }
 
-void DiscordRPCManager::Initialize()
+void DiscordManager::Initialize()
 {
+    LOGMSG("Initializing Discord RPC...");
     DiscordEventHandlers handlers;
     memset(&handlers, 0, sizeof(handlers));
     handlers.ready        = &HandleDiscordReady;
     handlers.disconnected = &HandleDiscordDisconnected;
     handlers.errored      = &HandleDiscordError;
-    Discord_Initialize(APPLICATION_ID, NULL, 1, NULL);
+    Discord_Initialize(AppID, NULL, 1, NULL);
     UpdateDiscordPresence();
+    LOGMSG("Discord RPC is running");
 }
 
-void DiscordRPCManager::HandleDiscordReady(const DiscordUser* connectedUser)
+void DiscordManager::Dispose()
+{
+    Discord_Shutdown();
+}
+
+void DiscordManager::HandleDiscordReady(const DiscordUser* connectedUser)
 {
     LOGMSG("Discord: connected to user" + connectedUser->username + "#" + connectedUser->discriminator + " - " + connectedUser->userId);
 }
 
-void DiscordRPCManager::HandleDiscordDisconnected(int errcode, const char* message)
+void DiscordManager::HandleDiscordDisconnected(int errcode, const char* message)
 {
     LOGMSG("Discord: disconnected (" + errcode + ":" + message);
 }
 
-void DiscordRPCManager::HandleDiscordError(int errcode, const char* message)
+void DiscordManager::HandleDiscordError(int errcode, const char* message)
 {
     LOGMSG("Discord: error (" + errcode + ":" + message);
 }
 
-void DiscordRPCManager::UpdateDiscordPresence()
+void DiscordManager::UpdateDiscordPresence()
 {
     if (SendPresence)
     {

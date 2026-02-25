@@ -12,6 +12,7 @@
 #include "GUI/WindowManager.hpp"
 #include "ProgramConstants.hpp"
 #include "FactionsManager.hpp"
+#include "DiscordManager.hpp"
 #include "SteamManager.hpp"
 #include "Logger.hpp"
 
@@ -73,6 +74,10 @@ int main(int argc, const char** argv)
     // Enable Steam integration and create steam_appid.txt, if it doesn't exist
     if (PROGRAM_CONSTANTS->pSettingsFile->IsSteamIntegrationEnabled())
         STEAM_MANAGER->Initialize();
+    
+    // Enable Discord RPC
+    if (PROGRAM_CONSTANTS->pSettingsFile->IsDiscordRPCEnabled())
+        DISCORD_MANAGER->Initialize();
 
     // Initialize TechTree.json parsing
     FACTIONS_MANAGER = make_unique<FactionManager>();
