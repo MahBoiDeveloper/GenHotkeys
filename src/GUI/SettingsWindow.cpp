@@ -6,6 +6,7 @@
 #include "../Extensions/BoolExt.hpp"
 #include "../Windows/Locale.hpp"
 #include "../ProgramConstants.hpp"
+#include "../SteamManager.hpp"
 #include "../Logger.hpp"
 
 #include "WindowManager.hpp"
@@ -202,16 +203,10 @@ void SettingsWindow::SteamAPIStateUpdate(const Qt::CheckState& state)
 {
     if (ToBool(state))
     {
-        SteamErrMsg errMsg = { 0 };
-        if (SteamAPI_InitEx( &errMsg ) != k_ESteamAPIInitResult_OK)
-        {
-            OutputDebugString("SteamAPI_Init() failed: ");
-            OutputDebugString(errMsg);
-            OutputDebugString("\n");
-        }
+        STEAM_MANAGER->Initialize();
     }
     else
     {
-        SteamAPI_Shutdown();
+        STEAM_MANAGER->Dispose();
     }
 }

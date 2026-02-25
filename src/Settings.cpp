@@ -38,7 +38,7 @@ void Settings::Parse()
     DiscordRPC          = json.Query("$." + nameof(DiscordRPC)).toBool();
     ForceSystemLanguage = json.Query("$." + nameof(ForceSystemLanguage)).toBool();
     StatusBar           = json.Query("$." + nameof(StatusBar)).toBool();
-    SteamAppID          = json.Query("$." + nameof(SteamAppID)).toInt();
+    SteamAppID          = json.Query("$." + nameof(SteamAppID)).toInt() != 0 ? json.Query("$." + nameof(SteamAppID)).toInt() : SteamAppID;
     SteamAPI            = json.Query("$." + nameof(SteamAPI)).toBool();
 
     QString twoLetters = StringExt::EmptyString;

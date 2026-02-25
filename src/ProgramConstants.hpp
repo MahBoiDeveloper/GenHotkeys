@@ -22,6 +22,7 @@ enum class GameObjectTypes
 class ProgramConstants
 {
 public: // Immutable data
+    const size_t ZH_STEAM_APP_ID       = 2732960;
     const size_t DEFAULT_LANGUAGE_CODE = 0;
 
     // Folders

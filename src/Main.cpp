@@ -8,12 +8,11 @@
 #include <QMessageBox>
 #include <QDebug>
 
-#include "../libs/SteamworksSDK/public/steam/steam_api.h"
-
 // Project headers
 #include "GUI/WindowManager.hpp"
-#include "FactionsManager.hpp"
 #include "ProgramConstants.hpp"
+#include "FactionsManager.hpp"
+#include "SteamManager.hpp"
 #include "Logger.hpp"
 
 using namespace std;
@@ -73,28 +72,7 @@ int main(int argc, const char** argv)
 
     // Enable Steam integration and create steam_appid.txt, if it doesn't exist
     if (PROGRAM_CONSTANTS->pSettingsFile->IsSteamIntegrationEnabled())
-    {
-        QString steamapitxt = PROGRAM_CONSTANTS->BINARIES_FOLDER + "\\steam_appid.txt"q;
-        
-        if (!filesystem::exists(steamapitxt.toStdString().c_str()))
-        {
-            ofstream file(steamapitxt.toStdString().c_str());
-            
-            if (!file.is_open())
-                file.open(steamapitxt.toStdString().c_str());
-
-            string id = ToQString(PROGRAM_CONSTANTS->pSettingsFile->GetSteamAppID()).toStdString();
-            file << id << endl;
-        }
-
-        SteamErrMsg errMsg = { 0 };
-        if (SteamAPI_InitEx( &errMsg ) != k_ESteamAPIInitResult_OK)
-        {
-            OutputDebugString("SteamAPI_Init() failed: ");
-            OutputDebugString(errMsg);
-            OutputDebugString("\n");
-        }
-    }
+        STEAM_MANAGER->Initialize();
 
     // Initialize TechTree.json parsing
     FACTIONS_MANAGER = make_unique<FactionManager>();

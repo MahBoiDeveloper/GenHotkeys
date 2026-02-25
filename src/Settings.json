@@ -5,7 +5,6 @@
     "DiscordRPC"          : true,
     "ForceSystemLanguage" : true,
     "SteamAPI"            : true,
-    "SteamAppID"          : 2732960,
     "Language"            : "en",
 
     "AllowedHotkeys" :
