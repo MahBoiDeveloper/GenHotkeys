@@ -9,7 +9,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 project(
     GenHotkeys
-    VERSION 0.5.0
+    VERSION 0.6.0
     DESCRIPTION "A tool for editing hotkeys for C&C: Generals and C&C: Generals - Zero Hour"
     LANGUAGES CXX
 )
