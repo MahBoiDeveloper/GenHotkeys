@@ -8,12 +8,11 @@
 class DiscordManager final
 {
 private: // Data
-    QString state = "Editing hotkeys";
-    QString details = "";
+    const char* appID = "1476177039966081097";
+    const char* state = "Editing hotkeys";
+    const char* details = "";
 public:
     inline static std::unique_ptr<DiscordManager> Instance = std::make_unique<DiscordManager>();
-    const char* AppID = "1476177039966081097";
-    const int   SendPresence = 1;
 
 private: // Methods
     static void HandleDiscordReady(const DiscordUser* connectedUser);
