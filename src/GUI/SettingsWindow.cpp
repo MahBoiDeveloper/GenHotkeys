@@ -160,30 +160,23 @@ void SettingsWindow::BtnSave_Clicked()
 }
 
 void SettingsWindow::BtnResetAll_Clicked()
-{ 
+{
+    #define SET_CHECK_STATE(x, y) \
+    { \
+        x->setCheckState(y \
+                         ? Qt::CheckState::Checked \
+                         : Qt::CheckState::Unchecked); \
+        x->update(); \
+    }
+
     PROGRAM_CONSTANTS->pSettingsFile->SetToDefault();
 
+    SET_CHECK_STATE(chkEnableDebugConsole,           PROGRAM_CONSTANTS->pSettingsFile->IsConsoleEnabled());
+    SET_CHECK_STATE(chkEnableDiscordRPC,             PROGRAM_CONSTANTS->pSettingsFile->IsDiscordRPCEnabled());
+    SET_CHECK_STATE(chkEnableSteamIntegration,       PROGRAM_CONSTANTS->pSettingsFile->IsSteamIntegrationEnabled());
+    SET_CHECK_STATE(chkForceSystemLanguageOnStartUp, PROGRAM_CONSTANTS->pSettingsFile->IsForceSystemLanguageOnStartUpEnabled());
 
-    chkEnableDebugConsole->setCheckState(PROGRAM_CONSTANTS->pSettingsFile->IsConsoleEnabled()
-                                         ? Qt::CheckState::Checked
-                                         : Qt::CheckState::Unchecked);
-
-    chkEnableDiscordRPC->setCheckState(PROGRAM_CONSTANTS->pSettingsFile->IsDiscordRPCEnabled()
-                                       ? Qt::CheckState::Checked
-                                       : Qt::CheckState::Unchecked);
-
-    chkEnableSteamIntegration->setCheckState(PROGRAM_CONSTANTS->pSettingsFile->IsSteamIntegrationEnabled()
-                                             ? Qt::CheckState::Checked
-                                             : Qt::CheckState::Unchecked);
-    
-    chkForceSystemLanguageOnStartUp->setCheckState(PROGRAM_CONSTANTS->pSettingsFile->IsForceSystemLanguageOnStartUpEnabled()
-                                                   ? Qt::CheckState::Checked
-                                                   : Qt::CheckState::Unchecked);
-
-    chkEnableDebugConsole->update();
-    chkEnableDiscordRPC->update();
-    chkEnableSteamIntegration->update();
-    chkForceSystemLanguageOnStartUp->update();
+    #undef SET_CHECK_STATE
 }
 
 void SettingsWindow::ConsoleWindowStateUpdate(const Qt::CheckState& state)
