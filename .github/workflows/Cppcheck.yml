@@ -33,7 +33,8 @@ jobs:
           powershell Expand-Archive -path .\cppcheck.zip -DestinationPath .
           clang-format --version
 
-      - name: Remove clang-format from PATH
+      # Remove clang-format due to incompatybility with Discord RPC library
+      - name: Remove clang-format From OS And PATH
         shell: powershell
         run: |
           $clangPath = "C:\Program Files\LLVM\bin\clang-format.exe"

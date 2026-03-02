@@ -19,6 +19,16 @@ jobs:
         with:
           submodules: true
 
+      # Remove clang-format due to incompatybility with Discord RPC library
+      - name: Remove clang-format From OS And PATH
+        shell: powershell
+        run: |
+          $clangPath = "C:\Program Files\LLVM\bin\clang-format.exe"
+          if (Test-Path $clangPath) {
+            Remove-Item -Force $clangPath
+            Write-Host "Clang-format deleted successfully."
+          }
+
       # Check this about more info: https://github.com/marketplace/actions/install-version-specific-mingw
       # Setting up MinGW_x64 version 8.1.0
       - name: Set Up MinGW
