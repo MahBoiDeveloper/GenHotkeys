@@ -98,11 +98,12 @@ void WindowManager::StartUpWindow_AcceptConfiguration()
     if (!InitializeCSFParser())
         return;
 
+    pStartUpWindow->hide();
+
     LOGMSG("Loading editor window...");
     pHotkeysEditor = new EditorWindowWrapper();
     pHotkeysEditor->setWindowTitle(strWindowName);
     pHotkeysEditor->show();
-    pStartUpWindow->close();
     LOGMSG("Editor window has been loaded");
 }
 
