@@ -1,4 +1,4 @@
-name: Code Analysis
+name: Static Analysis
 
 # Workflow will trigger on any push to the master/main branch
 on: 
@@ -55,8 +55,7 @@ jobs:
       - name: Set Up Project
         shell: cmd
         run: |
-          call Build.bat > nul 2> nul
-          cmake -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE -DCMAKE_C_COMPILER:FILEPATH=C:\Qt\Tools\mingw_64\bin\gcc.exe -DCMAKE_CXX_COMPILER:FILEPATH=C:\Qt\Tools\mingw_64\bin\g++.exe -S.\ -B.\build -G "MinGW Makefiles"
+          call Build.bat
 
       # Deploy cppcheck from https://github.com/MahBoiDeveloper/CI-CD-buffer/releases/tag/v1.0
       - name: Download Cppcheck
