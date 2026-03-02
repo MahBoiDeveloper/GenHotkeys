@@ -68,8 +68,7 @@ jobs:
       - name: Run Cppcheck
         shell: cmd
         run: |
-          cd src
-          ..\cppcheck\cppcheck --enable=all --suppress=missingIncludeSystem --report-progress --check-level=exhaustive --template=">>>{file}:{line}: {severity}: {message}\n{code}<<<" --template-location=">>>{file}:{line}: note: {info}\n{code}<<<" --platform=win64 --project=build\compile_commands.json --project-configuration="Release"  --output-file=cppcheckresult.log  --max-ctu-depth=10 --inconclusive -j 12
+          cppcheck\cppcheck --enable=all --suppress=missingIncludeSystem --report-progress --check-level=exhaustive --platform=win64 --project=build\compile_commands.json --project-configuration="Release"  --output-file=cppcheckresult.log  --max-ctu-depth=10 --inconclusive -j 12 --template=">>>{file}:{line}: {severity}: {message}\n{code}<<<" --template-location=">>>{file}:{line}: note: {info}\n{code}<<<"
 
       # Show cpppcheck results
       - name: Publish Results
