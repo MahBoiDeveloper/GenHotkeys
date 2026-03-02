@@ -43,7 +43,6 @@
     endforeach()
 
 # Translation files configuration
-
     # Declare available translation languages
     set(LANGUAGES ru)
 

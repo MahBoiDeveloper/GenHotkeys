@@ -21,10 +21,9 @@
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static-libgcc -static-libstdc++ -static -lwinpthread")
 
 # Main target configuration
-
     # Editor target name
     set(MAIN_TARGET_NAME "HotkeyEditor")
-    set(ACTUAL_EXE_NAME "LoadEditor")
+    set(ACTUAL_EXE_NAME  "LoadEditor")
     
     # Define editor executable
     add_executable(${MAIN_TARGET_NAME})
