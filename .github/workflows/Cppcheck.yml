@@ -29,52 +29,54 @@ jobs:
         
       - name: Set Up Cppcheck
         shell: cmd
-        run: powershell Expand-Archive -path .\cppcheck.zip -DestinationPath .
-
-      # Check this about more info: https://github.com/marketplace/actions/install-version-specific-mingw
-      # Setting up MinGW_x64 version 8.1.0
-      - name: Set Up MinGW
-        uses: egor-tensin/setup-mingw@v2
-        with:
-          platform: x64
-          version: 12.2.0
-
-      # Check this about more info: https://github.com/marketplace/actions/install-qt
-      # This action cannot download needed mingw810
-      # So it downloads only Qt part
-      - name: Set Up Qt
-        uses: jurplel/install-qt-action@v3
-        with: 
-          version: 5.15.2
-          arch: win64_mingw81
-          target: desktop
-          dir: C:\
-
-      # Check this about more info: https://github.com/marketplace/actions/cmake-action
-      - name: Set Up CMake
-        uses: threeal/cmake-action@v1.3.0
-        with:
-          run-build: false
-
-      - name: Run Cppcheck
-        shell: cmd
         run: |
-          mkdir C:\Qt\Tools > nul
-          mklink C:\Qt\Tools\mingw_64 C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64 > nul
-          set PATH=%PATH%;C:\Qt\5.15.2\mingw81_64\bin;C:\Qt\Tools\mingw_64\bin
-          call Build.bat
-          cppcheck\cppcheck.exe --enable=all --suppress=missingIncludeSystem --report-progress --check-level=exhaustive --platform=win64 --project=build\compile_commands.json --project-configuration="Release"  --output-file=cppcheckresult.log  --max-ctu-depth=10 --inconclusive -j 12 --template=">>>{file}:{line}: {severity}: {message}\n{code}<<<" --template-location=">>>{file}:{line}: note: {info}\n{code}<<<"
+          powershell Expand-Archive -path .\cppcheck.zip -DestinationPath .
+          clang-format --version
 
-      # Show cpppcheck results
-      - name: Publish Results
-        shell: cmd
-        run: type cppcheckresult.log
+      # # Check this about more info: https://github.com/marketplace/actions/install-version-specific-mingw
+      # # Setting up MinGW_x64 version 8.1.0
+      # - name: Set Up MinGW
+      #   uses: egor-tensin/setup-mingw@v2
+      #   with:
+      #     platform: x64
+      #     version: 12.2.0
 
-      # Upload artifact to the GitHub
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-           # ${{github.sha}} - commit long hash name
-           name: cppcheckresult-${{github.sha}}
-           # zip all content in the "build\exe" folder
-           path: cppcheckresult.log
+      # # Check this about more info: https://github.com/marketplace/actions/install-qt
+      # # This action cannot download needed mingw810
+      # # So it downloads only Qt part
+      # - name: Set Up Qt
+      #   uses: jurplel/install-qt-action@v3
+      #   with: 
+      #     version: 5.15.2
+      #     arch: win64_mingw81
+      #     target: desktop
+      #     dir: C:\
+
+      # # Check this about more info: https://github.com/marketplace/actions/cmake-action
+      # - name: Set Up CMake
+      #   uses: threeal/cmake-action@v1.3.0
+      #   with:
+      #     run-build: false
+
+      # - name: Run Cppcheck
+      #   shell: cmd
+      #   run: |
+      #     mkdir C:\Qt\Tools > nul
+      #     mklink C:\Qt\Tools\mingw_64 C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64 > nul
+      #     set PATH=%PATH%;C:\Qt\5.15.2\mingw81_64\bin;C:\Qt\Tools\mingw_64\bin
+      #     call Build.bat
+      #     cppcheck\cppcheck.exe --enable=all --suppress=missingIncludeSystem --report-progress --check-level=exhaustive --platform=win64 --project=build\compile_commands.json --project-configuration="Release"  --output-file=cppcheckresult.log  --max-ctu-depth=10 --inconclusive -j 12 --template=">>>{file}:{line}: {severity}: {message}\n{code}<<<" --template-location=">>>{file}:{line}: note: {info}\n{code}<<<"
+
+      # # Show cpppcheck results
+      # - name: Publish Results
+      #   shell: cmd
+      #   run: type cppcheckresult.log
+
+      # # Upload artifact to the GitHub
+      # - name: Upload Artifact
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #      # ${{github.sha}} - commit long hash name
+      #      name: cppcheckresult-${{github.sha}}
+      #      # zip all content in the "build\exe" folder
+      #      path: cppcheckresult.log
