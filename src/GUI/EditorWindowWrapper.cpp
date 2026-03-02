@@ -3,7 +3,7 @@
 
 EditorWindowWrapper::EditorWindowWrapper(QWidget* parent) : QStackedWidget(parent)
 {
-    resize(PROGRAM_CONSTANTS->EDITOR_WINDOW_SIZE);
+    resize(PROGRAM_CONSTANTS->EDITOR_INITIAL_WINDOW_SIZE);
     AddWidgets();
     setCurrentWidget(pEditorWindow);
     AttachConnections();

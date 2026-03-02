@@ -43,7 +43,7 @@ EditorWindow::EditorWindow(QWidget* parent)
 {
     LOGMSG("Total faction count that has been read from json file: " + FACTIONS_MANAGER->Count());
 
-    resize(PROGRAM_CONSTANTS->EDITOR_WINDOW_SIZE);
+    resize(PROGRAM_CONSTANTS->EDITOR_INITIAL_WINDOW_SIZE);
     ConfigureMenu();
 
     pEntitiesTreeWidget->header()->hide();
@@ -246,7 +246,7 @@ void EditorWindow::SetGameObjectList(const QString& factionShortName)
 
         // Decorate
         newTopEntityItem->setIcon(0, ImageManager::GetGameObjectTypePixmap(objectType)
-                                               .scaledToHeight(PROGRAM_CONSTANTS->ICON_SCALING_HEIGHT, Qt::SmoothTransformation));
+                                                   .scaledToHeight(PROGRAM_CONSTANTS->ICON_SCALING_HEIGHT, Qt::SmoothTransformation));
 
         // If there no objects by type - then skip
         if (goMap.keys(objectType).isEmpty()) continue;
@@ -423,7 +423,7 @@ void EditorWindow::SetActionHotkey(const QString& fctShortName, const QString& g
 
 void EditorWindow::KeyboardWindow_Nullify()
 {
-    for (QChar& qc : QString("QWERTYUIOPASDFGHJKLZXCVBNM")) 
+    for (const QChar& qc : QString("QWERTYUIOPASDFGHJKLZXCVBNM")) 
     {
         auto key = pKeyboardWindow->findChild<QPushButton*>(qc, Qt::FindChildrenRecursively);
         key->setProperty("status", "null");
@@ -475,7 +475,7 @@ void EditorWindow::ActAbout_Triggered()
         
     QLabel* lblAboutText = new QLabel
     {
-        QString("<p>") 
+        "<p>"q
         + tr("Authors: ") + AUTHORS + "<br>"
         + tr("Version: ") + VERSION + "<br><br>"
         + tr("Program licensed with ") + "<a style=\"color: #baff0c;\" href=\"https://github.com/MahBoiDeveloper/GZHHotkeysEditor/blob/main/LICENSE\">GNU GPL v3</a><br><br>" 
