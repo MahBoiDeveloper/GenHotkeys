@@ -68,6 +68,7 @@ jobs:
       - name: Run Cppcheck
         shell: cmd
         run: |
+          cmake -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE -DCMAKE_C_COMPILER:FILEPATH=C:\Qt\Tools\mingw_64\bin\gcc.exe -DCMAKE_CXX_COMPILER:FILEPATH=C:\Qt\Tools\mingw_64\bin\g++.exe -S.\ -B.\build -G "MinGW Makefiles"
           cppcheck\cppcheck --enable=all --suppress=missingIncludeSystem --report-progress --check-level=exhaustive --platform=win64 --project=build\compile_commands.json --project-configuration="Release"  --output-file=cppcheckresult.log  --max-ctu-depth=10 --inconclusive -j 12 --template=">>>{file}:{line}: {severity}: {message}\n{code}<<<" --template-location=">>>{file}:{line}: note: {info}\n{code}<<<"
 
       # Show cpppcheck results
