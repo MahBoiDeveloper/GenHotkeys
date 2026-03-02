@@ -19,6 +19,18 @@ jobs:
         with:
           submodules: true
 
+      # Deploy cppcheck from https://github.com/MahBoiDeveloper/CI-CD-buffer/releases/tag/v1.0
+      - name: Download Cppcheck
+        uses: robinraju/release-downloader@v1
+        with:
+          repository: MahBoiDeveloper/CI-CD-buffer
+          latest: true
+          fileName: cppcheck*
+        
+      - name: Set Up Cppcheck
+        shell: cmd
+        run: powershell Expand-Archive -path .\cppcheck.zip -DestinationPath .
+
       # Check this about more info: https://github.com/marketplace/actions/install-version-specific-mingw
       # Setting up MinGW_x64 version 8.1.0
       - name: Set Up MinGW
@@ -38,29 +50,11 @@ jobs:
           target: desktop
           dir: C:\
 
-      # Make link to the MinGW x64 due to install-qt-action limitations
-      - name: Link MinGW
-        shell: cmd
-        run: |
-          
-
       # Check this about more info: https://github.com/marketplace/actions/cmake-action
       - name: Set Up CMake
         uses: threeal/cmake-action@v1.3.0
         with:
           run-build: false
-
-      # Deploy cppcheck from https://github.com/MahBoiDeveloper/CI-CD-buffer/releases/tag/v1.0
-      - name: Download Cppcheck
-        uses: robinraju/release-downloader@v1
-        with:
-          repository: MahBoiDeveloper/CI-CD-buffer
-          latest: true
-          fileName: cppcheck*
-        
-      - name: Set Up Cppcheck
-        shell: cmd
-        run: powershell Expand-Archive -path .\cppcheck.zip -DestinationPath .
 
       - name: Run Cppcheck
         shell: cmd
@@ -69,7 +63,7 @@ jobs:
           mklink C:\Qt\Tools\mingw_64 C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64 > nul
           set PATH=%PATH%;C:\Qt\5.15.2\mingw81_64\bin;C:\Qt\Tools\mingw_64\bin
           call Build.bat
-          cppcheck\cppcheck --enable=all --suppress=missingIncludeSystem --report-progress --check-level=exhaustive --platform=win64 --project=build\compile_commands.json --project-configuration="Release"  --output-file=cppcheckresult.log  --max-ctu-depth=10 --inconclusive -j 12 --template=">>>{file}:{line}: {severity}: {message}\n{code}<<<" --template-location=">>>{file}:{line}: note: {info}\n{code}<<<"
+          cppcheck\cppcheck.exe --enable=all --suppress=missingIncludeSystem --report-progress --check-level=exhaustive --platform=win64 --project=build\compile_commands.json --project-configuration="Release"  --output-file=cppcheckresult.log  --max-ctu-depth=10 --inconclusive -j 12 --template=">>>{file}:{line}: {severity}: {message}\n{code}<<<" --template-location=">>>{file}:{line}: note: {info}\n{code}<<<"
 
       # Show cpppcheck results
       - name: Publish Results
