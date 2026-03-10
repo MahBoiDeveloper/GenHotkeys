@@ -84,45 +84,6 @@
     # Assign translation source files to the GUI target
     target_sources(${TARGET_NAME} PRIVATE ${TRANSLATION_SOURCES})
 
-# Discord RPC configuration
-    set(DRPC_TARGET_NAME discord-rpc)                            # Define lib folder path
-    set(DRPC_TARGET_FILE "lib${DRPC_TARGET_NAME}.a")             # Define lib file
-    set(DRPC_SOURCE_DIR ${PROJECT_LIBS_FOLDER}/discord-rpc)      # Define lib folder path
-    set(DRPC_BINARY_DIR ${CMAKE_CURRENT_BINARY_DIR}/discord-rpc) # Define lib build folder
-
-    # Create a lib build folder
-    file(MAKE_DIRECTORY ${DRPC_BINARY_DIR})
-
-    # Compile Discord RPC library
-    add_custom_command(
-        OUTPUT "${PROJECT_LIBS_FOLDER}/${DRPC_TARGET_FILE}"
-        # Cmake configure
-        COMMAND ${CMAKE_COMMAND} --no-warn-unused-cli
-                                 -DCMAKE_POLICY_VERSION_MINIMUM=3.10 # Solves error the minimum version doesn't fit
-                                 -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE
-                                 -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
-                                 -DCMAKE_C_COMPILER=${CMAKE_C_COMPILER}
-                                 -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}
-                                 -G ${CMAKE_GENERATOR}
-                                 ${DRPC_SOURCE_DIR}
-        # Cmake build
-        COMMAND ${CMAKE_COMMAND} --build . --config ${CMAKE_BUILD_TYPE} --target ${DRPC_TARGET_NAME}
-        COMMAND ${CMAKE_COMMAND} -E copy "${DRPC_BINARY_DIR}/src/${DRPC_TARGET_FILE}" "${PROJECT_LIBS_FOLDER}"
-        WORKING_DIRECTORY ${DRPC_BINARY_DIR}
-    )
-
-    # Define the target that is launched by the build command and activates the rebuild of the main target 
-    add_custom_target(DiscordRPCTarget DEPENDS "${PROJECT_LIBS_FOLDER}/${DRPC_TARGET_FILE}")
-
-    # Add a libwebp target as a dependency to GUI target
-    add_dependencies(${TARGET_NAME} DiscordRPCTarget)
-
-    # Make the libwebp target output file visible to the GUI target
-    target_link_directories(${TARGET_NAME} PUBLIC ${PROJECT_LIBS_FOLDER})
-
-    # Link the libwebp target to the GUI target
-    target_link_libraries(${TARGET_NAME} PRIVATE ${DRPC_TARGET_NAME})
-
 # LibWEBP configuration
     set(LIB_WEBP_TARGET_NAME webpdecoder)                         # Define lib folder path
     set(LIB_WEBP_TARGET_FILE "lib${LIB_WEBP_TARGET_NAME}.a")      # Define lib file
