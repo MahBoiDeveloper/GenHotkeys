@@ -475,14 +475,15 @@ void EditorWindow::ActAbout_Triggered()
         
     QLabel* lblAboutText = new QLabel
     {
-        "<p>"q
-        + tr("Authors: ") + AUTHORS + "<br>"
-        + tr("Version: ") + VERSION + "<br><br>"
-        + tr("Program licensed with ") + "<a style=\"color: #baff0c;\" href=\"https://github.com/MahBoiDeveloper/GZHHotkeysEditor/blob/main/LICENSE\">GNU GPL v3</a><br><br>" 
-        + tr("GitHub repository:") + "<br>"
-        + "<a style=\"color: #baff0c;\" href=\"https://github.com/MahBoiDeveloper/GZHHotkeysEditor\">github.com/MahBoiDeveloper/GZHHotkeysEditor</a><br><br>"
-        + tr("Support development:") + "<br>"
-        + "<a style=\"color: #baff0c;\" href=\"https://boosty.to/mah_boi\">boosty.to/mah_boi</a></p>"
+        tr("<p>Authors: %1<br>Version: %2<br><br>Program licensed with %3<br><br>GitHub repository:<br>%4<br><br>Support development:<br>%5</p>")
+            .arg(AUTHORS)
+            .arg(VERSION)
+            .arg("<a style=\"color: CLR;\" href=\"https://github.com/MahBoiDeveloper/GZHHotkeysEditor/blob/main/LICENSE\">GNU GPL v3</a>"q
+                .replace("CLR", PROGRAM_CONSTANTS->LINK_COLOR))
+            .arg("<a style=\"color: CLR;\" href=\"https://github.com/MahBoiDeveloper/GZHHotkeysEditor\">github.com/MahBoiDeveloper/GZHHotkeysEditor</a>"q
+                .replace("CLR", PROGRAM_CONSTANTS->LINK_COLOR))
+            .arg("<a style=\"color: CLR;\" href=\"https://boosty.to/mah_boi\">boosty.to/mah_boi</a></p>"q
+                .replace("CLR", PROGRAM_CONSTANTS->LINK_COLOR))
     };
     lblAboutText->setObjectName("left");
     lblAboutText->setTextFormat(Qt::RichText);

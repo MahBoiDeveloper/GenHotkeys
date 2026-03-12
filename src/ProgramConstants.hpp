@@ -26,6 +26,9 @@ public: // Immutable data
     const size_t GENERALS_STEAM_APP_ID = 2229870;
     const size_t DEFAULT_LANGUAGE_CODE = 0;
 
+    // Colors
+    const QString LINK_COLOR = "#baff0c";
+
     // Folders
     const QString RESOURCE_FOLDER         = "Resources";
     const QString BINARIES_FOLDER         = RESOURCE_FOLDER + "\\Binaries";
@@ -59,14 +62,16 @@ public: // Immutable data
 
     // Magic numbers that become known
     const double  START_WIDGET_SIZE_RATIO = 3./7.;
-    const QSize   START_BUTTON_SIZE       = QSize(230, 110);
-    const QSize   LANGUAGE_CHANGE_SIZE    = QSize(250, 100);
-    const QSize   SET_UP_WINDOW_SIZE      = QSize(795, 440);
-    const QSize   EDITOR_INITIAL_WINDOW_SIZE      = QSize(1200, 800);
     const int     ICON_MIN_HEIGHT         = 80;
     const int     ICON_SCALING_HEIGHT     = 25;
     const int     KEYBOARD_KEY_WIDTH      = 50;
     const int     EMPTY_KEY_WIDTH         = 25;
+
+    // Widget sizes
+    const QSize   START_BUTTON_SIZE          = QSize(230, 110);
+    const QSize   LANGUAGE_CHANGE_SIZE       = QSize(250, 100);
+    const QSize   SET_UP_WINDOW_SIZE         = QSize(795, 440);
+    const QSize   EDITOR_INITIAL_WINDOW_SIZE = QSize(1200, 800);
 
     // Error strings
     const QString SETTINGS_NO_FOUND       = "Unable to find \"Settings.json\" in \"Resource\" folder.";
