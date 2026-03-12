@@ -14,12 +14,12 @@ ActionHotkeyWidget::ActionHotkeyWidget(const QString& actionName,
     , actionNameLabel{actionName}
     , btnHotkey{hotkey}
     , signalTimer{}
-    , timerMseconds{1300}
+    , timerMseconds{TIMER_TIMEOUT}
 {
     // Object name for css
     btnHotkey.setObjectName(nameof(btnHotkey));
     btnHotkey.setProperty("unique", false);
-    btnHotkey.setMinimumSize(ImageManager::DecodeMissingWebpIcon().size().width() + 15, // Checked for letter W
+    btnHotkey.setMinimumSize(ImageManager::DecodeMissingWebpIcon().size().width() + DEFAULT_HOTKEY_BUTTON_WIDTH,
                              ImageManager::DecodeMissingWebpIcon().size().height());
 
     connect(&btnHotkey, &QPushButton::pressed, this, &ActionHotkeyWidget::ChangeHotkeyClick);
