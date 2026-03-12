@@ -14,6 +14,14 @@ class EditorWindow final : public QMainWindow
     Q_OBJECT
 
 private: // Data
+    // Constants
+    const int HOTKEYS_AREA_STRETCH         = 2;
+    const int KEYBOARD_WINDOW_STRETCH      = 1;
+    const int ENTITIES_TREE_WIDGET_STRETCH = 4;
+    const int GAME_OBJECT_LAYOUT_STRETCH   = 7;
+    const int BUTTONS_GROUP_START_ID       = -2; // Magic number equals to begining of the array of the all buttons
+    const int STATUS_BAR_TIMEOUT           = 3 * 1000; // Time in miliseconds
+
     // Select faction buttons
     QButtonGroup* pFactionsButtonsGroup = nullptr;
 
@@ -32,14 +40,6 @@ private: // Data
 
     // Container of the selected unit hotkeys
     QVector<QSet<ActionHotkeyWidget*>> vHotkeyWidgets;
-public:
-    
-    const int HOTKEYS_AREA_STRETCH = 2;
-    const int KEYBOARD_WINDOW_STRETCH = 1;
-    const int ENTITIES_TREE_WIDGET_STRETCH = 4;
-    const int GAME_OBJECT_LAYOUT_STRETCH = 7;
-    const int BUTTONS_GROUP_START_ID = -2; // Magic number equals to begining of the array of the all buttons
-    const int STATUS_BAR_TIMEOUT = 3000; // Time in miliseconds
 
 public: // Methods
     EditorWindow(QWidget* parent = nullptr);
