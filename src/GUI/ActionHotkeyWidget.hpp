@@ -8,8 +8,8 @@ class ActionHotkeyWidget : public QWidget
     Q_OBJECT
 
 private: // Data
-    const int   TIMER_TIMEOUT               = 1300;  // Checked for W, the widest letter
-    const int   DEFAULT_HOTKEY_BUTTON_WIDTH = 15;
+    const int   TIMER_TIMEOUT               = 1300;
+    const int   DEFAULT_HOTKEY_BUTTON_WIDTH = 15; // Checked for W, the widest letter
 
     QString     hotkey;
     QLabel      actionNameLabel;
