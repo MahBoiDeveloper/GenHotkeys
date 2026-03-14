@@ -7,7 +7,9 @@ FactionManager::FactionManager()
     vFactions.reserve(12);
 
     for(const auto& elem : TECH_TREE_SOURCE.Query("$.TechTree").toArray())
+    {
         vFactions.push_back(Faction{elem.toObject()});
+    }
 }
 
 int FactionManager::Count() { return vFactions.size(); }
