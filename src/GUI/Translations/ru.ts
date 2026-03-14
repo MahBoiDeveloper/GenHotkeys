@@ -4,17 +4,22 @@
 <context>
     <name>ActionHotkeyWidget</name>
     <message>
-        <location filename="../ActionHotkeyWidget.cpp" line="82"/>
+        <location filename="../ActionHotkeyWidget.cpp" line="42"/>
+        <source>Edit source text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ActionHotkeyWidget.cpp" line="177"/>
         <source>It isn&apos;t character key!</source>
         <translation>Эта клавиша не буква!</translation>
     </message>
     <message>
-        <location filename="../ActionHotkeyWidget.cpp" line="84"/>
+        <location filename="../ActionHotkeyWidget.cpp" line="178"/>
         <source>This key isn&apos;t allowed!</source>
         <translation>Эта клавиша не разрешена!</translation>
     </message>
     <message>
-        <location filename="../ActionHotkeyWidget.cpp" line="122"/>
+        <location filename="../ActionHotkeyWidget.cpp" line="226"/>
         <source>Press the key...</source>
         <translation>Нажмите клавишу...</translation>
     </message>
@@ -72,23 +77,23 @@
     </message>
     <message>
         <location filename="../EditorWindow.cpp" line="222"/>
-        <location filename="../EditorWindow.cpp" line="536"/>
+        <location filename="../EditorWindow.cpp" line="535"/>
         <source>Settings</source>
         <translation>Настройки</translation>
     </message>
     <message>
         <location filename="../EditorWindow.cpp" line="226"/>
-        <location filename="../EditorWindow.cpp" line="497"/>
+        <location filename="../EditorWindow.cpp" line="496"/>
         <source>About</source>
         <translation>О программе</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="360"/>
+        <location filename="../EditorWindow.cpp" line="356"/>
         <source>Layout %1</source>
         <translation>Раскладка %1</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="478"/>
+        <location filename="../EditorWindow.cpp" line="474"/>
         <source>&lt;p&gt;Authors: %1&lt;br&gt;Version: %2&lt;br&gt;&lt;br&gt;Program licensed with %3&lt;br&gt;&lt;br&gt;GitHub repository:&lt;br&gt;%4&lt;br&gt;&lt;br&gt;Support development:&lt;br&gt;%5&lt;/p&gt;</source>
         <translation>&lt;p&gt;Авторы: %1&lt;br&gt;Версия: %2&lt;br&gt;&lt;br&gt;Программа лицензирована под %3&lt;br&gt;&lt;br&gt;Репозиторий на GitHub:&lt;br&gt;%4&lt;br&gt;&lt;br&gt;Поддержать разработку:&lt;br&gt;%5&lt;/p&gt;</translation>
     </message>
@@ -113,32 +118,32 @@
         <translation type="vanished">Поддержать разработку:</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="567"/>
+        <location filename="../EditorWindow.cpp" line="566"/>
         <source>Changes has been saved to the file:</source>
         <translation>Изменения были сохранены в файл:</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="583"/>
+        <location filename="../EditorWindow.cpp" line="582"/>
         <source>Saved as:</source>
         <translation>Сохранено как:</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="615"/>
+        <location filename="../EditorWindow.cpp" line="614"/>
         <source>Opening selected file</source>
         <translation>Открываем выбранный файл</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="621"/>
+        <location filename="../EditorWindow.cpp" line="620"/>
         <source>Changing editor language</source>
         <translation>Изменяем язык редактора</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="592"/>
+        <location filename="../EditorWindow.cpp" line="591"/>
         <source>Binary files</source>
         <translation>Двоичные файлы</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="593"/>
+        <location filename="../EditorWindow.cpp" line="592"/>
         <source>Any files</source>
         <translation>Все файлы</translation>
     </message>
@@ -250,142 +255,153 @@
         <translation>Невозможно найти CSF файл внутри BIG архива &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="127"/>
+        <location filename="../../ProgramConstants.hpp" line="94"/>
+        <source>Erroneous assignment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../ProgramConstants.hpp" line="95"/>
+        <source>You have assign as hotkey non-ASCII character &quot;%1&quot;.
+Make sure that you are using ASCII only symbols.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../ProgramConstants.hpp" line="131"/>
         <source>USA</source>
         <translation>США</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="127"/>
+        <location filename="../../ProgramConstants.hpp" line="131"/>
         <source>United Stated Of America</source>
         <translation>Соединённые штаты Америки</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="128"/>
+        <location filename="../../ProgramConstants.hpp" line="132"/>
         <source>SUPERWEAPON</source>
         <translation>СВГ</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="128"/>
+        <location filename="../../ProgramConstants.hpp" line="132"/>
         <source>Superweapons General</source>
         <translation>Генерал супероружейных войск</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="129"/>
+        <location filename="../../ProgramConstants.hpp" line="133"/>
         <source>AIR</source>
         <translation>ВВС</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="129"/>
+        <location filename="../../ProgramConstants.hpp" line="133"/>
         <source>Airforce General</source>
         <translation>Генерал ВВС</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="130"/>
+        <location filename="../../ProgramConstants.hpp" line="134"/>
         <source>LASER</source>
         <translation>ЛАЗЕРНИК</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="130"/>
+        <location filename="../../ProgramConstants.hpp" line="134"/>
         <source>Laser Weapons Generals</source>
         <translation>Генерал лазерного вооружения</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="131"/>
+        <location filename="../../ProgramConstants.hpp" line="135"/>
         <source>CHINA</source>
         <translation>КИТАЙ</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="131"/>
+        <location filename="../../ProgramConstants.hpp" line="135"/>
         <source>China</source>
         <translation>Китай</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="132"/>
+        <location filename="../../ProgramConstants.hpp" line="136"/>
         <source>INFANTRY</source>
         <translation>ПЕХОТНИК</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="132"/>
+        <location filename="../../ProgramConstants.hpp" line="136"/>
         <source>Infantry General</source>
         <translation>Генерал пехотных войск</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="133"/>
+        <location filename="../../ProgramConstants.hpp" line="137"/>
         <source>NUKE</source>
         <translation>ЯДЕРЩИК</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="133"/>
+        <location filename="../../ProgramConstants.hpp" line="137"/>
         <source>Nuke General</source>
         <translation>Генерал ядерных войск</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="134"/>
+        <location filename="../../ProgramConstants.hpp" line="138"/>
         <source>TANK</source>
         <translation>ТАНКОВИК</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="134"/>
+        <location filename="../../ProgramConstants.hpp" line="138"/>
         <source>Tank General</source>
         <translation>Генерал танковых войск</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="135"/>
+        <location filename="../../ProgramConstants.hpp" line="139"/>
         <source>GLA</source>
         <translation>МАО</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="135"/>
+        <location filename="../../ProgramConstants.hpp" line="139"/>
         <source>Global Liberation Army</source>
         <translation>Мировая армия освобождения</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="136"/>
+        <location filename="../../ProgramConstants.hpp" line="140"/>
         <source>TOXIC</source>
         <translation>ТОКС</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="136"/>
+        <location filename="../../ProgramConstants.hpp" line="140"/>
         <source>Toxic Weapons General</source>
         <translation>Генерал биохимического оружия</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="137"/>
+        <location filename="../../ProgramConstants.hpp" line="141"/>
         <source>STEALTH</source>
         <translation>СТЕЛС</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="137"/>
+        <location filename="../../ProgramConstants.hpp" line="141"/>
         <source>Stealth General</source>
         <translation>Генерал маскировочных войск</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="138"/>
+        <location filename="../../ProgramConstants.hpp" line="142"/>
         <source>DEMO</source>
         <translation>ПОДРЫВНИК</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="138"/>
+        <location filename="../../ProgramConstants.hpp" line="142"/>
         <source>Demolition General</source>
         <translation>Генерал подрывных войск</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="119"/>
+        <location filename="../../ProgramConstants.hpp" line="123"/>
         <source>Buildings</source>
         <translation>Здания</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="120"/>
+        <location filename="../../ProgramConstants.hpp" line="124"/>
         <source>Infantry</source>
         <translation>Пехота</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="121"/>
+        <location filename="../../ProgramConstants.hpp" line="125"/>
         <source>Vehicles</source>
         <translation>Техника</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="122"/>
+        <location filename="../../ProgramConstants.hpp" line="126"/>
         <source>Aircrafts</source>
         <translation>Авиация</translation>
     </message>

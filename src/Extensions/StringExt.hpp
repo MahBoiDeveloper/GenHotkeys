@@ -36,6 +36,19 @@ namespace StringExt
     inline QString ToQString(const char ch)           { return QString(QChar(ch)); }
     inline QString ToQString(const wchar_t ch)        { return QString(QChar(ch)); }
     inline QString ToQString(const size_t num)        { return QString::number(num); }
+    
+    /// @brief Converts `QChar` to the `wchar_t`.
+    template<IsSymbol C>
+    inline wchar_t ToWchar(const C& ch)
+    {
+        if      constexpr (std::same_as<C, wchar_t>) return ch;
+        else if constexpr (std::same_as<C, QChar>)   return static_cast<wchar_t>(ch.unicode());
+        else                                         return static_cast<wchar_t>(ch);
+    }
+
+    /// @brief Checks if character is ASCII-compitable.
+    template<IsSymbol T>
+    inline bool IsACII(const T& chr) { return QChar(chr).unicode() <= 127; }
 
     /// @brief Checks if all characters in string are ASCII-compitable.
     template<IsString T>

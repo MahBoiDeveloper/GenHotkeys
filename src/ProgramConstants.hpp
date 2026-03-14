@@ -90,10 +90,14 @@ public: // Immutable data
     const QString CSF_EMPTY_DATA_ENGLISH  = QObject::tr("Unable to find \"generals.csf\" file in \"%1\" folder.");
     const QString CSF_NO_CSF_IN_BIG       = QObject::tr("Unable to find CSF file inside BIG archive \"%1\"");
 
+    // Input errors
+    const QString NON_ASCII_HOTKEY_HEADER      = QObject::tr("Erroneous assignment");
+    const QString NON_ASCII_HOTKEY_DESCRIPTION = QObject::tr("You have assign as hotkey non-ASCII character \"%1\".\nMake sure that you are using ASCII only symbols.");
+
     // Other string constants
-    const QString HOTKEY_CSF_CATEGORY     = "CONTROLBAR";
-    const QString OBJECT_CSF_CATEGORY     = "OBJECT";
-    const QString BIG_ARCHIVE_CSF_PATH    = "Data\\English\\generals.csf";
+    const QString HOTKEY_CSF_CATEGORY  = "CONTROLBAR";
+    const QString OBJECT_CSF_CATEGORY  = "OBJECT";
+    const QString BIG_ARCHIVE_CSF_PATH = "Data\\English\\generals.csf";
 
     // Constant containers
     const QVector<QString> GLA_SHORT_NAMES = {"GLA", "TOX", "STL", "DML"};

@@ -367,76 +367,9 @@ using namespace StringExt;
 
         return returnList;
     }
-
-    QString CSFParser::GetClearName(const QString& strName)   const { return GetStringValue(strName).remove(QRegExp{"((\\[|\\()&([A-Z]|[a-z])(\\]|\\)))|&"}).trimmed(); }
-    QChar   CSFParser::GetHotkey(const string& strName)       const { return QChar(GetHotkeyWchar(strName)); }
-    QChar   CSFParser::GetHotkey(const char* strName)         const { return QChar(GetHotkeyWchar(strName)); }
-    QChar   CSFParser::GetHotkey(const QString& strName)      const { return QChar(GetHotkeyWchar(strName)); }
-    wchar_t CSFParser::GetHotkeyWchar(const char* strName)    const { return GetHotkeyWchar(string(strName)); }
-    wchar_t CSFParser::GetHotkeyWchar(const string& strName)  const { return GetHotkeyWchar(QString::fromStdString(strName)); }
-    wchar_t CSFParser::GetHotkeyWchar(const QString& strName) const
-    {
-        wchar_t hk    = L' ';
-        size_t  index = 0;
-
-        for (const auto& elem : Table)
-            if (elem.Name.toUpper() == strName.trimmed().toUpper())
-            {
-                index = elem.Value.indexOf(L'&');
-                if (index != -1 )
-                {
-                    hk = elem.Value.toUpper().toStdWString().at(index + 1);
-                    break;
-                }
-            }
-
-        if (hk == L' ')
-        {
-            LOGMSG("Warning: unable to find hotkey character for " + strName);
-        }
-        
-        return hk;
-    }
-
-    list<CSFParser::HotkeyAssociation> CSFParser::GetHotkeys(const list<string>& lstStringNames) const
-    {
-        list<HotkeyAssociation> returnList;
-
-        for (const auto& strName : lstStringNames)
-            for (const auto& elem : Table)
-                if (elem.Name == QString::fromStdString(strName))
-                {
-                    returnList.push_back({QString::fromStdString(strName), CSFParser::GetHotkeyWchar(strName)});
-                    break;
-                }
-
-        return returnList;
-    }
 #pragma endregion
 
 #pragma region Setters
-    void CSFParser::SetHotkey(const string& input, const wchar_t& wchLetter) { SetHotkey(QString::fromStdString(input), wchLetter); }
-    void CSFParser::SetHotkey(const char* strName, const wchar_t& wchLetter) { SetHotkey(string(strName), wchLetter); }
-    void CSFParser::SetHotkey(const QString& strName, const wchar_t& wchLetter)
-    {
-        if (wchLetter == L' ') return;
-
-        LOGSTM << "Changing for string \"" << strName.toStdWString() << "\" hotkey assingment to letter \"" << wchLetter << "\"" << endl;
-
-        for (auto& elem : Table)
-        {
-            if (elem.Name != strName)
-                continue;
-
-            if (!elem.Value.contains(L'&') || elem.Value.size() <= 4) // if not "[&F]"
-                elem.Value = "[&"q + QChar(wchLetter) + "] " + elem.Value;
-            else
-                elem.Value[elem.Value.indexOf(L'&') + 1] = wchLetter;
-
-            break;
-        }
-    }
-
     void CSFParser::SetStringValue(const string& strName, const wstring& wstrValue)
     {
         LOGSTM << "Changing value for string \"" << strName.c_str() << "\"" << endl;

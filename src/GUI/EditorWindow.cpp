@@ -291,7 +291,8 @@ void EditorWindow::SetHotkeysPanels()
 
     // Skip if it's the top level section item
     for (int i = 0; i < pEntitiesTreeWidget->topLevelItemCount(); ++i)
-        if (pItem == pEntitiesTreeWidget->topLevelItem(i)) return;
+        if (pItem == pEntitiesTreeWidget->topLevelItem(i))
+            return;
 
     const QPair<QString, QString> specialItemInfo = pItem->data(0, Qt::UserRole).value<QPair<QString, QString>>();
 
@@ -317,12 +318,7 @@ void EditorWindow::SetHotkeysPanels()
 
         for (const auto& currAction : currLayout)
         {
-            ActionHotkeyWidget* actionHotkey = new ActionHotkeyWidget{CSF_PARSER->GetClearName(currAction.hotkeyString), 
-                                                                      CSF_PARSER->GetHotkey(currAction.hotkeyString),
-                                                                      currAction.iconName};
-
-            // TODO: Make it dynamic
-            actionHotkey->setToolTip(currAction.hotkeyString + "\n\n" + CSF_PARSER->GetStringValue(currAction.hotkeyString));
+            ActionHotkeyWidget* actionHotkey = new ActionHotkeyWidget(currAction.hotkeyString, currAction.iconName);
 
             connect(actionHotkey, &ActionHotkeyWidget::HotkeyChanged, this, [=, this](const QString& newHotkey)
             {

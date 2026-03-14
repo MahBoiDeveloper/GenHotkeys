@@ -2,6 +2,7 @@
 #include "Windows/Locale.hpp"
 #include "Parsers/CSFParser.hpp"
 #include "Parsers/JSONFile.hpp"
+#include "Parsers/TextParser.hpp"
 #include "Logger.hpp"
 #include "Faction.hpp"
 
@@ -87,7 +88,8 @@ void Faction::SetHotkey(const QString& goName, const QString& actName, const QSt
                 if(currAct.iconName != actName)
                     continue;
                 
-                CSF_PARSER->SetHotkey(currAct.hotkeyString, hk.toStdWString()[0]);
+                CSF_PARSER->SetStringValue(currAct.hotkeyString.toStdString(), 
+                                           TextParser::SetHotkey(CSF_PARSER->GetStringValue(currAct.hotkeyString), hk.toStdWString()[0]).toStdWString());
                 break;
             }
         }
