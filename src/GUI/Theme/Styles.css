@@ -89,6 +89,8 @@ GreetingWindow QPushButton { font-size: 18pt; }
 
 QLabel, QRadioButton, QCheckBox { color: white; }
 
+QLineEdit#txtActionName { font-style: italic; }
+
 QPushButton#btnReview
 {
     padding-top: 2px;
