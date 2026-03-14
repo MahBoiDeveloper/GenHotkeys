@@ -7,7 +7,8 @@ namespace BoolExt
     template<class T>
     concept IsStateDescriptor = std::same_as<T, bool> || std:: same_as<T, Qt::CheckState>;
 
-    template<IsStateDescriptor T> constexpr bool ToBool(const T state)
+    template<IsStateDescriptor T>
+    constexpr bool ToBool(const T state)
     {
         if constexpr (std::same_as<T, bool>)
         {
