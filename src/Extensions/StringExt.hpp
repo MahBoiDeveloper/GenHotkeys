@@ -2,9 +2,11 @@
 #include <concepts>
 #include <QString>
 
-/// @brief Shortcut for QString(#x). WARNING: Macro converting any text to the string, not the specific types/variables/functions.
+/// @brief Shortcut for QString(#x).
+/// @attention Macro converting any text to the string, not the specific types/variables/functions.
 #define nameof(x) QString(#x)
 
+/// @brief QString, std-strings and c-strings extension.
 namespace StringExt
 {
     inline const QString EmptyString("");
@@ -35,6 +37,21 @@ namespace StringExt
     inline QString ToQString(const wchar_t ch)        { return QString(QChar(ch)); }
     inline QString ToQString(const size_t num)        { return QString::number(num); }
 
+    /// @brief Checks if all characters in string are ASCII-compitable.
+    template<IsString T>
+    inline bool IsACII(const T& str)
+    {
+        for(const QChar& ch : ToQString(str))
+        {
+            if (ch.unicode() > 127)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     // Doesn't work due to attempt of redefinition pointers mathematic.
     // template<IsCString S, IsCString T> inline QString operator+ (const S& str1, const T& str2) { return EmptyString; }
 
@@ -45,11 +62,11 @@ namespace StringExt
     template<IsSymbol C, IsString S> inline QString operator+ (const S& str,  const C& ch)            { return ToQString(str).append(ToQString(ch)); }
                                      inline QString operator+ (const QString& qstr, const bool& flag) { return QString(qstr).append(flag ? "true" : "false"); }
 
-    // Ingores ""q and ""tr instead of ""_q and ""_tr. Thank you C++ committee for another useless warning.
+    // Ingores ""q instead of ""_q. Thank you C++ committee for another useless warning.
     #pragma GCC diagnostic push
     #pragma GCC diagnostic ignored "-Wliteral-suffix"
     /// @brief Works fine, but not a compile-time optimized.
-    /// @brief To be able optimize it in compile-time update to Qt 6.4 >= due to constexpr ctor in QString.
+    /// @brief To be able optimize it in compile-time update to Qt 6.4 >= due to constexpr ctor in QString class.
     /// @brief Reference: https://doc.qt.io/qt-6/qstring.html#operator-22-22_s
     /// @example QString qstr = "text"q + "sample";
     /// @attention It is possible to use only if `using namespace StringExt;` was declared!
