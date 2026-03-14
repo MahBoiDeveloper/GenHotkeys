@@ -198,16 +198,16 @@ using namespace StringExt;
 
         if(csfFile.is_open())
         {
-            LOGSTM << (StringExt::EmptyString + "Attempt to write binary file \"" + Path + "\"").toStdString() << endl;
+            LOGSTM << (StringExt::EmptyString + "Attempt to write binary file \"" + Path + "\"").toStdWString() << endl;
 
             CSFParser::WriteHeader(&csfFile);
             CSFParser::WriteBody(&csfFile);
 
-            LOGSTM << (StringExt::EmptyString + "File saved as \"" + Path + "\"").toStdString() << endl;
+            LOGSTM << (StringExt::EmptyString + "File saved as \"" + Path + "\"").toStdWString() << endl;
         }
         else
         {
-            LOGSTM << (StringExt::EmptyString + "Could not open file \"" + Path + "\" to save").toStdString() << endl;
+            LOGSTM << (StringExt::EmptyString + "Could not open file \"" + Path + "\" to save").toStdWString() << endl;
         }
 
         csfFile.close();
@@ -421,7 +421,7 @@ using namespace StringExt;
     {
         if (wchLetter == L' ') return;
 
-        LOGSTM << "Changing for string \"" << strName.toStdString() << "\" hotkey assingment to letter \"" << (const char)wchLetter << "\"" << endl;
+        LOGSTM << "Changing for string \"" << strName.toStdWString() << "\" hotkey assingment to letter \"" << wchLetter << "\"" << endl;
 
         for (auto& elem : Table)
         {
@@ -439,7 +439,7 @@ using namespace StringExt;
 
     void CSFParser::SetStringValue(const string& strName, const wstring& wstrValue)
     {
-        LOGSTM << "Changing value for string \"" << strName << "\"" << endl;
+        LOGSTM << "Changing value for string \"" << strName.c_str() << "\"" << endl;
 
         QString name = QString::fromStdString(strName);
         for (auto& elem : Table)
@@ -449,7 +449,7 @@ using namespace StringExt;
 
     void CSFParser::SetStringValue(const CompiledString& stString)
     {
-        LOGSTM << "Changing value for string \"" << stString.Name.toStdString() << "\"" << endl;
+        LOGSTM << "Changing value for string \"" << stString.Name.toStdWString() << "\"" << endl;
 
         for (auto& elem : Table)
             if (elem.Name == stString.Name)

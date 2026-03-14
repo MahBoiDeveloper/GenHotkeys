@@ -60,7 +60,7 @@ using namespace std;
         for (int iter = 0; iter < splitList.length(); iter++)
         {
             QString currSplit = splitList.at(iter);
-            LOGSTM << "Current search value : [" << currSplit.toStdString() << ']' << endl;
+            LOGSTM << "Current search value : [" << currSplit.toStdWString() << ']' << endl;
 
             // Current value actually is array
             if (currSplit.contains('[') && currSplit.contains(']'))

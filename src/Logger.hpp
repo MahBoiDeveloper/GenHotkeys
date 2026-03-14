@@ -17,14 +17,14 @@ public: // Data
     inline const static std::unique_ptr<Logger> Instance = std::make_unique<Logger>();
     inline const static QString EXCEPTION_HEADER = "I'VE GOT A PRESENT FOR YA";
 private:
-    std::ofstream LogFile;
+    std::wofstream LogFile;
 
 public: // Methods
     explicit Logger();
     ~Logger();
 
     /// @brief Write [DATE-TIME] and return stream to write other data. Needs to be ended with `endl`
-    std::ofstream& Log();
+    std::wofstream& Log();
     
     /// @brief Write message to the console.
     void LogToConsole(const char* msg) const;
