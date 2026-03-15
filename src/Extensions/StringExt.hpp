@@ -102,7 +102,7 @@ namespace StringExt
     /// @attention It is possible to use only if `using namespace StringExt;` was declared!
     inline QString operator""q (const char*    str, size_t len) noexcept { return QString::fromUtf8(str, len); }
     
-    /// @brief Look at example with `const char*`.
+    /// @brief Look at `""q` example with `const char*`.
     inline QString operator""q (const wchar_t* str, size_t len) noexcept { return QString::fromWCharArray(str, len); }
     #pragma GCC diagnostic pop
 }
