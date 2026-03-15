@@ -12,7 +12,16 @@ namespace StringExt
     inline const QString EmptyString("");
 
     template<class T>
-    concept IsNumber = std::same_as<T, int> || std::same_as<T, size_t> || std::same_as<T, std::size_t> || std::same_as<T, ushort>;
+    concept IsIntegerOrFloat =    std::same_as<T, long>      || std::same_as<T, int>
+                               || std::same_as<T, qlonglong> || std::same_as<T, qulonglong>
+                               || std::same_as<T, uint>      || std::same_as<T, ulong>
+                               || std::same_as<T, double>    || std::same_as<T, float>;
+
+    template<class T>
+    concept IsInteger =    std::same_as<T, long>        || std::same_as<T, int>
+                        || std::same_as<T, qlonglong>   || std::same_as<T, qulonglong>
+                        || std::same_as<T, uint>        || std::same_as<T, ulong>
+                        || std::same_as<T, std::size_t> || std::same_as<T, ushort>;
 
     template<class T>
     concept IsSymbol = std::same_as<T, char> || std::same_as<T, wchar_t> || std::same_as<T, QChar>;
@@ -44,10 +53,10 @@ namespace StringExt
     template<IsSymbol C>
     inline constexpr QString ToQString(const C& ch)
     {
-        if      constexpr (std::same_as<C, QChar>)        return QString(ch);
-        else if constexpr (std::same_as<C, char>)         return QString(QChar(ch));
-        else if constexpr (std::same_as<C, wchar_t>)      return QString(QChar(ch));
-        else                                              return EmptyString;
+        if      constexpr (std::same_as<C, QChar>)   return QString(ch);
+        else if constexpr (std::same_as<C, char>)    return QString(QChar(ch));
+        else if constexpr (std::same_as<C, wchar_t>) return QString(QChar(ch));
+        else                                         return EmptyString;
     }
 
     /// @brief Converts `size_t`-like integer types to the `QString`.
@@ -85,12 +94,12 @@ namespace StringExt
     // Doesn't work due to attempt of redefinition pointers mathematic.
     // template<IsCString S, IsCString T> inline QString operator+ (const S& str1, const T& str2) { return EmptyString; }
 
-    template<IsString S, IsString T> inline constexpr QString operator+ (const S& str1, const T& str2)   { return ToQString(str1).append(ToQString(str2)); }
-    template<IsString S, IsNumber N> inline constexpr QString operator+ (const S& str,  const N& num)    { return ToQString(str).append(QString::number(num)); }
-    template<IsNumber N, IsString S> inline constexpr QString operator+ (const N& num,  const S& str)    { return QString::number(num).append(ToQString(str)); }
-    template<IsString S, IsSymbol C> inline constexpr QString operator+ (const S& str,  const C& ch)     { return ToQString(str).append(ToQString(ch)); }
-    template<IsSymbol C, IsString S> inline constexpr QString operator+ (const S& str,  const C& ch)     { return ToQString(str).append(ToQString(ch)); }
-    template<IsString S>             inline constexpr QString operator+ (const S& str, const bool& flag) { return ToQString(str).append(flag ? "true" : "false"); }
+    template<IsString S,  IsString T>  inline constexpr QString operator+ (const S& str1, const T& str2)   { return ToQString(str1).append(ToQString(str2)); }
+    template<IsString S,  IsInteger N> inline constexpr QString operator+ (const S& str,  const N& num)    { return ToQString(str).append(QString::number(num)); }
+    template<IsInteger N, IsString S>  inline constexpr QString operator+ (const N& num,  const S& str)    { return QString::number(num).append(ToQString(str)); }
+    template<IsString S,  IsSymbol C>  inline constexpr QString operator+ (const S& str,  const C& ch)     { return ToQString(str).append(ToQString(ch)); }
+    template<IsSymbol C,  IsString S>  inline constexpr QString operator+ (const S& str,  const C& ch)     { return ToQString(str).append(ToQString(ch)); }
+    template<IsString S>               inline constexpr QString operator+ (const S& str, const bool& flag) { return ToQString(str).append(flag ? "true" : "false"); }
 
     // Ingores ""q instead of ""_q. Thank you C++ committee for another useless warning.
     #pragma GCC diagnostic push
