@@ -91,8 +91,9 @@ public: // Immutable data
     const QString CSF_NO_CSF_IN_BIG       = QObject::tr("Unable to find CSF file inside BIG archive \"%1\"");
 
     // Input errors
-    const QString NON_ASCII_HOTKEY_HEADER      = QObject::tr("Erroneous assignment");
-    const QString NON_ASCII_HOTKEY_DESCRIPTION = QObject::tr("You have assign as hotkey non-ASCII character \"%1\".\nMake sure that you are using ASCII only symbols.");
+    const QString NO_ALLOWED_HOTKEY_ERROR_HEADER     = QObject::tr("Erroneous assignment");
+    const QString NON_ASCII_HOTKEY_ERROR_DESCRIPTION = QObject::tr("You have assign as hotkey a non-ASCII character \"%1\".\nMake sure that you are using ASCII only symbols.");
+    const QString FORBIDDEN_HOTKEY_ERROR_DESCRIPTION = QObject::tr("You have assign as hotkey a forbidden character \"%1\".\nMake sure that you are using only allowed symbols.");
 
     // Other string constants
     const QString HOTKEY_CSF_CATEGORY  = "CONTROLBAR";

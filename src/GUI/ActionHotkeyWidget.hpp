@@ -25,15 +25,17 @@ private: // Data
     QHBoxLayout ltMainBlock;
     QLabel      lblImage;
     QLabel      lblActionName;
-    QLineEdit   txtActionName; // Questionable. Need experiments with enabling edits in QLabel in runtime.
+    QLineEdit*  txtActionName;
     QPushButton btnHotkey;
 
 private: // Methods
     /// @brief Hide/show action label to show/hide text editor.
     void HideActionLabel(bool value);
 protected:
-    void keyPressEvent(QKeyEvent*            event) override;
-    void focusOutEvent(QFocusEvent*          event) override;
+    /// @brief Triggers when key pressed on button edits or line edit.
+    void keyPressEvent(QKeyEvent*   event) override;
+    /// @brief Triggers when user clicks out of button range.
+    void focusOutEvent(QFocusEvent* event) override;
 public:
     explicit ActionHotkeyWidget(const QString& csfString, const QString& iconName, QWidget* parent = nullptr);
     /// @brief Returns current action name without ampersand.
@@ -44,10 +46,12 @@ public:
     void    HighlightKey(bool isKeysLessThanTwo);
 
 signals:
-    void RepeatNewHotkeySignal();
+    void RepeatButtonTimerSignal();
     /// @brief Emits new hotkey after change.
     void HotkeyChanged(QString hotkey);
 private slots:
-    void ChangeHotkeyClick();
+    void BtnHotkey_Clicked();
     void ActEdit_Triggered();
+    void TxtActionName_ResetChanges();
+    void TxtActionName_EditingFinished();
 };
