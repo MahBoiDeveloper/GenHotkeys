@@ -28,22 +28,39 @@ namespace StringExt
                        std::same_as<T, std::string> || std::same_as<T, std::wstring>   || 
                        std::same_as<T, QString>;
     
-    inline QString ToQString(const std::string& str)  { return QString::fromStdString(str); }
-    inline QString ToQString(const std::wstring& str) { return QString::fromStdWString(str); }
-    inline QString ToQString(const QString& str)      { return str; }
-    inline QString ToQString(const char* ch)          { return ToQString(std::string(ch)); }
-    inline QString ToQString(const wchar_t* ch)       { return ToQString(std::wstring(ch)); }
-    inline QString ToQString(const char ch)           { return QString(QChar(ch)); }
-    inline QString ToQString(const wchar_t ch)        { return QString(QChar(ch)); }
-    inline QString ToQString(const size_t num)        { return QString::number(num); }
+    /// @brief Converts std-strings and c-strings to the `QString`.
+    template<IsString S>
+    inline constexpr QString ToQString(const S& str)
+    {
+        if      constexpr (std::same_as<S, QString>)      return str;
+        else if constexpr (std::same_as<S, std::string>)  return QString::fromStdString(str);
+        else if constexpr (std::same_as<S, std::wstring>) return QString::fromStdWString(str);
+        else if constexpr (std::same_as<S, char*>)        return QString::fromStdString(std::string(str));
+        else if constexpr (std::same_as<S, wchar_t*>)     return QString::fromStdWString(std::wstring(str));
+        else                                              return EmptyString;
+    }
+
+    /// @brief Converts characters to the `QString`.
+    template<IsSymbol C>
+    inline constexpr QString ToQString(const C& ch)
+    {
+        if      constexpr (std::same_as<C, QChar>)        return QString(ch);
+        else if constexpr (std::same_as<C, char>)         return QString(QChar(ch));
+        else if constexpr (std::same_as<C, wchar_t>)      return QString(QChar(ch));
+        else                                              return EmptyString;
+    }
+
+    /// @brief Converts `size_t`-like integer types to the `QString`.
+    inline QString ToQString(const size_t num) { return QString::number(num); }
     
     /// @brief Converts `QChar` to the `wchar_t`.
     template<IsSymbol C>
     inline wchar_t ToWchar(const C& ch)
     {
         if      constexpr (std::same_as<C, wchar_t>) return ch;
+        else if constexpr (std::same_as<C, char>)    return static_cast<wchar_t>(ch);
         else if constexpr (std::same_as<C, QChar>)   return static_cast<wchar_t>(ch.unicode());
-        else                                         return static_cast<wchar_t>(ch);
+        else                                         return L'\0';
     }
 
     /// @brief Checks if character is ASCII-compitable.
@@ -68,12 +85,12 @@ namespace StringExt
     // Doesn't work due to attempt of redefinition pointers mathematic.
     // template<IsCString S, IsCString T> inline QString operator+ (const S& str1, const T& str2) { return EmptyString; }
 
-    template<IsString S, IsString T> inline QString operator+ (const S& str1, const T& str2)          { return ToQString(str1).append(ToQString(str2)); }
-    template<IsString S, IsNumber N> inline QString operator+ (const S& str,  const N& num)           { return ToQString(str).append(QString::number(num)); }
-    template<IsNumber N, IsString S> inline QString operator+ (const N& num,  const S& str)           { return QString::number(num).append(ToQString(str)); }
-    template<IsString S, IsSymbol C> inline QString operator+ (const S& str,  const C& ch)            { return ToQString(str).append(ToQString(ch)); }
-    template<IsSymbol C, IsString S> inline QString operator+ (const S& str,  const C& ch)            { return ToQString(str).append(ToQString(ch)); }
-                                     inline QString operator+ (const QString& qstr, const bool& flag) { return QString(qstr).append(flag ? "true" : "false"); }
+    template<IsString S, IsString T> inline constexpr QString operator+ (const S& str1, const T& str2)   { return ToQString(str1).append(ToQString(str2)); }
+    template<IsString S, IsNumber N> inline constexpr QString operator+ (const S& str,  const N& num)    { return ToQString(str).append(QString::number(num)); }
+    template<IsNumber N, IsString S> inline constexpr QString operator+ (const N& num,  const S& str)    { return QString::number(num).append(ToQString(str)); }
+    template<IsString S, IsSymbol C> inline constexpr QString operator+ (const S& str,  const C& ch)     { return ToQString(str).append(ToQString(ch)); }
+    template<IsSymbol C, IsString S> inline constexpr QString operator+ (const S& str,  const C& ch)     { return ToQString(str).append(ToQString(ch)); }
+    template<IsString S>             inline constexpr QString operator+ (const S& str, const bool& flag) { return ToQString(str).append(flag ? "true" : "false"); }
 
     // Ingores ""q instead of ""_q. Thank you C++ committee for another useless warning.
     #pragma GCC diagnostic push
