@@ -33,9 +33,6 @@ int ShowErrorMessage(const QString& txt)
 
 int main(int argc, const char** argv)
 {
-    // Call parsing the Settings.json
-    PROGRAM_CONSTANTS = make_unique<ProgramConstants>();
-
     // Initialize main Qt application
     QApplication HotkeyEditor(argc, const_cast<char**>(argv));
 

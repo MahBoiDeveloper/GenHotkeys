@@ -22,8 +22,14 @@ enum class GameObjectTypes
 class ProgramConstants
 {
 public: // Immutable data
+    // Singleton access instance
+    inline const static std::unique_ptr<ProgramConstants> Instance = std::make_unique<ProgramConstants>();
+
+    // Steam data
     const size_t ZH_STEAM_APP_ID       = 2732960;
     const size_t GENERALS_STEAM_APP_ID = 2229870;
+    
+    // Language
     const size_t DEFAULT_LANGUAGE_CODE = 0;
 
     // Colors
@@ -144,7 +150,6 @@ public: // Immutable data
     };
 
 public: // Mutable data
-    inline static std::unique_ptr<ProgramConstants> Instance      = nullptr;
     std::unique_ptr<Settings>                       pSettingsFile = nullptr;
     QMap<size_t, QPair<QString, QString>>           Languages     = {};
 
