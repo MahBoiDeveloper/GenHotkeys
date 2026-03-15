@@ -3,7 +3,7 @@
 #include <QTranslator>
 
 /// @brief Shortcut for StringExt::l10n(x, "QObject")
-#define L10N(x)    L10NExt::l10n(x)
+#define L10N(x) L10NExt::l10n(x)
 
 namespace L10NExt
 {
