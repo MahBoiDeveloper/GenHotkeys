@@ -7,6 +7,7 @@
 #include "../Logger.hpp"
 
 using namespace std;
+using namespace StringExt;
 
 #pragma region CTORs and DTORs
     JSONFile::JSONFile()
@@ -34,8 +35,8 @@ using namespace std;
         }
     }
 
-    JSONFile::JSONFile(const char* filePath)        {JSONFile(QString(filePath));}
-    JSONFile::JSONFile(const std::string& filePath) {JSONFile(QString::fromStdString(filePath));}
+    JSONFile::JSONFile(const char* filePath)        {*this = JSONFile(QString(filePath));}
+    JSONFile::JSONFile(const std::string& filePath) {*this = JSONFile(QString::fromStdString(filePath));}
 #pragma endregion
 
 #pragma region Getters
@@ -48,7 +49,10 @@ using namespace std;
     QJsonValue JSONFile::Query(const QJsonObject& jsonObject, const QString& strQuery)
     {
         // Find dollar sign in place of the first character
-        if (strQuery.at(0) != '$') throw Exception(string{"JSON path doesn't begin with \'$\'"});
+        if (strQuery.at(0) != '$')
+        {
+            throw Exception("JSON path doesn't begin with \'$\'"q);
+        }
 
         QStringList splitList = strQuery.split('.');
         splitList.removeFirst();
@@ -94,7 +98,7 @@ using namespace std;
 
     QJsonValue JSONFile::Query(const QJsonObject& jsonObject, const char* strQuery)
     {
-        return Query(jsonObject, strQuery);
+        return Query(jsonObject, QString(strQuery));
     }
 
     void JSONFile::LogInfoAboutValue(const QJsonValue& val)
