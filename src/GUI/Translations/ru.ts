@@ -4,22 +4,22 @@
 <context>
     <name>ActionHotkeyWidget</name>
     <message>
-        <location filename="../ActionHotkeyWidget.cpp" line="42"/>
+        <location filename="../ActionHotkeyWidget.cpp" line="43"/>
         <source>Edit source text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ActionHotkeyWidget.cpp" line="197"/>
+        <location filename="../ActionHotkeyWidget.cpp" line="198"/>
         <source>It isn&apos;t character key!</source>
         <translation>Эта клавиша не буква!</translation>
     </message>
     <message>
-        <location filename="../ActionHotkeyWidget.cpp" line="198"/>
+        <location filename="../ActionHotkeyWidget.cpp" line="199"/>
         <source>This key isn&apos;t allowed!</source>
         <translation>Эта клавиша не разрешена!</translation>
     </message>
     <message>
-        <location filename="../ActionHotkeyWidget.cpp" line="250"/>
+        <location filename="../ActionHotkeyWidget.cpp" line="251"/>
         <source>Press the key...</source>
         <translation>Нажмите клавишу...</translation>
     </message>

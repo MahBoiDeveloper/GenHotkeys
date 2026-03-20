@@ -7,6 +7,7 @@
 #include "../Extensions/L10NExt.hpp"
 #include "../Parsers/CSFParser.hpp"
 #include "../Parsers/TextParser.hpp"
+#include "../Convert.hpp"
 #include "../Logger.hpp"
 
 #include "ImageManager.hpp"
@@ -104,7 +105,7 @@ void ActionHotkeyWidget::keyPressEvent(QKeyEvent* event)
 {
     auto key_native = event->nativeVirtualKey();
     auto key_layout = event->key();
-    auto key        = static_cast<Qt::Key>(key_native);
+    auto key        = Convert::ToQtKey(key_native);
 
     // Skip if there are modifiers
     if (event->modifiers() != Qt::NoModifier)
@@ -142,7 +143,7 @@ void ActionHotkeyWidget::keyPressEvent(QKeyEvent* event)
             }
 
             // Sanitize input: not allowed key
-            if (!PROGRAM_CONSTANTS->pSettingsFile->GetAllowedKeys().contains(static_cast<Qt::Key>(ch.unicode())))
+            if (!PROGRAM_CONSTANTS->pSettingsFile->GetAllowedKeys().contains(Convert::ToQtKey(ch)))
             {
                 QMessageBox::critical(nullptr, L10N(PROGRAM_CONSTANTS->NO_ALLOWED_HOTKEY_ERROR_HEADER),
                                                L10N(PROGRAM_CONSTANTS->FORBIDDEN_HOTKEY_ERROR_DESCRIPTION.arg(ch)));
