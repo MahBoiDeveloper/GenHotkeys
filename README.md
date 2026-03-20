@@ -31,6 +31,8 @@ GenHotkeys is an attempt to create a tool for editing C&C: Generals and C&C: Gen
 * [DESolatorTrooper](https://www.moddb.com/members/deso3latortro0per/addons) — background edits
 ### Others
 * [WebM Project](https://github.com/webmproject) — [webp library](https://github.com/webmproject/libwebp) (WebM Project License)
+* [rlabrecque](https://github.com/rlabrecque) — mirroring [SteamworksSDK](https://partner.steamgames.com/doc/sdk) to [GitHub](https://github.com/rlabrecque/SteamworksSDK)
+* [Discord](https://github.com/discord) — example of [Discord RPC](https://github.com/discord/discord-rpc) implementation
 
 ## Legal 
 EA has not endorsed and does not support this product. Command & Conquer, Command & Conquer: Generals, Command & Conquer: Generals — Zero Hour are registered trademarks of Electronic Arts Inc. All Rights Reserved.
