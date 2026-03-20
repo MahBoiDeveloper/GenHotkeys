@@ -12,7 +12,7 @@ private: // Data
     const char* state = "Editing hotkeys";
     const char* details = "";
 public:
-    inline static std::unique_ptr<DiscordManager> Instance = std::make_unique<DiscordManager>();
+    inline const static std::unique_ptr<DiscordManager> Instance = std::make_unique<DiscordManager>();
 
 private: // Methods
     static void HandleDiscordReady(const DiscordUser* connectedUser);
