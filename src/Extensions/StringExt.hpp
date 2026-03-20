@@ -41,12 +41,12 @@ namespace StringExt
     template<IsString S>
     inline constexpr QString ToQString(const S& str)
     {
-        if      constexpr (std::same_as<S, QString>)      return str;
-        else if constexpr (std::same_as<S, std::string>)  return QString::fromStdString(str);
-        else if constexpr (std::same_as<S, std::wstring>) return QString::fromStdWString(str);
-        else if constexpr (std::same_as<S, char*>)        return QString::fromStdString(std::string(str));
-        else if constexpr (std::same_as<S, wchar_t*>)     return QString::fromStdWString(std::wstring(str));
-        else                                              return EmptyString;
+        if      constexpr (std::same_as<S, QString>)        return str;
+        else if constexpr (std::same_as<S, std::string>)    return QString::fromStdString(str);
+        else if constexpr (std::same_as<S, std::wstring>)   return QString::fromStdWString(str);
+        else if constexpr (std::same_as<S, const char*>)    return QString::fromStdString(std::string(str));
+        else if constexpr (std::same_as<S, const wchar_t*>) return QString::fromStdWString(std::wstring(str));
+        else                                                {} // Generates compile-time error for new types
     }
 
     /// @brief Converts characters to the `QString`.
@@ -56,7 +56,7 @@ namespace StringExt
         if      constexpr (std::same_as<C, QChar>)   return QString(ch);
         else if constexpr (std::same_as<C, char>)    return QString(QChar(ch));
         else if constexpr (std::same_as<C, wchar_t>) return QString(QChar(ch));
-        else                                         return EmptyString;
+        else                                         {} // Generates compile-time error for new types
     }
 
     /// @brief Converts `size_t`-like integer types to the `QString`.
@@ -69,7 +69,7 @@ namespace StringExt
         if      constexpr (std::same_as<C, wchar_t>) return ch;
         else if constexpr (std::same_as<C, char>)    return static_cast<wchar_t>(ch);
         else if constexpr (std::same_as<C, QChar>)   return static_cast<wchar_t>(ch.unicode());
-        else                                         return L'\0';
+        else                                         {} // Generates compile-time error for new types
     }
 
     /// @brief Checks if character is ASCII-compitable.

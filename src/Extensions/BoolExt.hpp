@@ -5,8 +5,9 @@
 namespace BoolExt
 {
     template<class T>
-    concept IsStateDescriptor = std::same_as<T, bool> || std:: same_as<T, Qt::CheckState>;
+    concept IsStateDescriptor = std::same_as<T, bool> || std::same_as<T, Qt::CheckState>;
 
+    /// @brief Converts specific types and enums to bool. 
     template<IsStateDescriptor T>
     constexpr bool ToBool(const T state)
     {
@@ -14,7 +15,7 @@ namespace BoolExt
         {
             return state;
         }
-        else
+        else if constexpr (std::same_as<T, Qt::CheckState>)
         {
             switch (state)
             {
@@ -25,6 +26,10 @@ namespace BoolExt
                 default:
                     return false;
             }
+        }
+        else
+        {
+            // Generates compile-time error for new types
         }
     }
 }
