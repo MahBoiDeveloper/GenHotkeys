@@ -28,8 +28,8 @@ void Settings::SetToDefault()
     ForceSystemLanguage = true;
     StatusBar           = true;
     SteamAPI            = true;
-    SteamAppID          = 2732960; // ZH APP ID
-    Language            = 0;       // English
+    SteamAppID          = PROGRAM_CONSTANTS->ZH_STEAM_APP_ID;
+    Language            = 0; // English
 }
 
 void Settings::Parse()
@@ -43,14 +43,20 @@ void Settings::Parse()
 
     QString twoLetters = StringExt::EmptyString;
     if (ForceSystemLanguage)
+    {
         twoLetters = QString::fromStdString(Windows::Registry::GetCurrentUserLanguage()).toLower();
+    }
     else
+    {
         twoLetters = json.Query("$." + nameof(Language)).toString().toLower();
+    }
     
     Language = PROGRAM_CONSTANTS->Languages.key({twoLetters, Windows::Locale::LanguageName(twoLetters)});
 
     for (const QJsonValue& ch : json.Query("$." + nameof(AllowedHotkeys)).toArray())
+    {
         AllowedHotkeys.insert(PROGRAM_CONSTANTS->KEYBOARD_KEYS.value(ch.toString()[0]));
+    }
 }
 
 void Settings::Save()
@@ -85,5 +91,5 @@ const bool          Settings::IsForceSystemLanguageOnStartUpEnabled() const { re
 const bool          Settings::IsStatusBarEnabled()                    const { return StatusBar; }
 const bool          Settings::IsSteamIntegrationEnabled()             const { return SteamAPI; }
 
-void Settings::SetAllowedKeys(const QSet<Qt::Key>& keys){ AllowedHotkeys = keys; }
-void Settings::SetLanguage(const size_t& code)          { Language       = code; }
+void Settings::SetAllowedKeys(const QSet<Qt::Key>& keys) { AllowedHotkeys = keys; }
+void Settings::SetLanguage(const size_t& code)           { Language       = code; }
