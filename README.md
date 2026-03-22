@@ -3,7 +3,7 @@
 [![Github All Releases](https://img.shields.io/github/downloads/MahBoiDeveloper/GenHotkeys/total.svg)](https://github.com/MahBoiDeveloper/GenHotkeys/releases) [![Support me on Boosty](https://img.shields.io/badge/boosty-50₽/month-green.svg?logo=boosty)](https://boosty.to/mah_boi)
 
 ## About the project
-GenHotkeys is an attempt to create a tool for editing C&C: Generals and C&C: Generals — Zero Hour hotkeys without editing the main game text file (`generals.csf`). At the moment the editor is in beta stage, which means that the program is unstable and many features aren't implemented yet.
+GenHotkeys is a tool for editing C&C: Generals and C&C: Generals — Zero Hour hotkeys without changing the main game text file manually (`generals.csf`). At the moment the editor is in beta stage, which means that the program is unstable and many features aren't implemented yet.
 
 ## Building Manually
 0. Download and install [Qt 5.15.2](https://www.qt.io/offline-installers) to the `C:\Qt` folder
@@ -13,7 +13,7 @@ GenHotkeys is an attempt to create a tool for editing C&C: Generals and C&C: Gen
 4. Run `Build.bat` to compile release build
 
 ## Requirements
-* OS: Windows 10 x64 or newer
+* OS: Windows 7 x64 or newer
 * Memory: 128 MB RAM
 
 ## Main Project's Features
@@ -24,9 +24,9 @@ GenHotkeys is an attempt to create a tool for editing C&C: Generals and C&C: Gen
 
 ## Credits
 ### Developers
-* [mah_boi](https://github.com/MahBoiDeveloper) — project's leader
-* [nikitvs](https://github.com/nikitvs) — retired maintainer
+* [mah_boi](https://github.com/MahBoiDeveloper) — project's lead
 ### Contributors
+* [nikitvs](https://github.com/nikitvs) — prototyping and help with CMake configs
 * [TitoWWN](https://vk.com/artcandc20) — missing and editor icon author
 * [DESolatorTrooper](https://www.moddb.com/members/deso3latortro0per/addons) — background edits
 ### Others
