@@ -249,7 +249,10 @@ void EditorWindow::SetGameObjectList(const QString& factionShortName)
                                                    .scaledToHeight(PROGRAM_CONSTANTS->ICON_SCALING_HEIGHT, Qt::SmoothTransformation));
 
         // If there no objects by type - then skip
-        if (goMap.keys(objectType).isEmpty()) continue;
+        if (goMap.keys(objectType).isEmpty())
+        {
+            continue;
+        }
         
         // Append entities to the section
         for (const auto& go : goMap.keys(objectType))
@@ -291,8 +294,12 @@ void EditorWindow::SetHotkeysPanels()
 
     // Skip if it's the top level section item
     for (int i = 0; i < pEntitiesTreeWidget->topLevelItemCount(); ++i)
+    {
         if (pItem == pEntitiesTreeWidget->topLevelItem(i))
+        {
             return;
+        }
+    }
 
     const QPair<QString, QString> specialItemInfo = pItem->data(0, Qt::UserRole).value<QPair<QString, QString>>();
 

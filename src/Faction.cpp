@@ -29,8 +29,12 @@ const QMap<Faction::GameObject, GameObjectTypes>& Faction::GetTechTree() const {
 const QVector<QVector<Faction::Action>> Faction::GetKeyboardLayoutsByObjectName(const QString& objName) const
 {
     for(const Faction::GameObject& go : techTree.keys())
+    {
         if(go.iconName == objName)
+        {
             return go.keyboardLayouts;
+        }
+    }
 
     return {};
 }

@@ -77,23 +77,23 @@
     </message>
     <message>
         <location filename="../EditorWindow.cpp" line="222"/>
-        <location filename="../EditorWindow.cpp" line="535"/>
+        <location filename="../EditorWindow.cpp" line="542"/>
         <source>Settings</source>
         <translation>Настройки</translation>
     </message>
     <message>
         <location filename="../EditorWindow.cpp" line="226"/>
-        <location filename="../EditorWindow.cpp" line="496"/>
+        <location filename="../EditorWindow.cpp" line="503"/>
         <source>About</source>
         <translation>О программе</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="356"/>
+        <location filename="../EditorWindow.cpp" line="363"/>
         <source>Layout %1</source>
         <translation>Раскладка %1</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="474"/>
+        <location filename="../EditorWindow.cpp" line="481"/>
         <source>&lt;p&gt;Authors: %1&lt;br&gt;Version: %2&lt;br&gt;&lt;br&gt;Program licensed with %3&lt;br&gt;&lt;br&gt;GitHub repository:&lt;br&gt;%4&lt;br&gt;&lt;br&gt;Support development:&lt;br&gt;%5&lt;/p&gt;</source>
         <translation>&lt;p&gt;Авторы: %1&lt;br&gt;Версия: %2&lt;br&gt;&lt;br&gt;Программа лицензирована под %3&lt;br&gt;&lt;br&gt;Репозиторий на GitHub:&lt;br&gt;%4&lt;br&gt;&lt;br&gt;Поддержать разработку:&lt;br&gt;%5&lt;/p&gt;</translation>
     </message>
@@ -118,32 +118,32 @@
         <translation type="vanished">Поддержать разработку:</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="566"/>
+        <location filename="../EditorWindow.cpp" line="573"/>
         <source>Changes has been saved to the file:</source>
         <translation>Изменения были сохранены в файл:</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="582"/>
+        <location filename="../EditorWindow.cpp" line="589"/>
         <source>Saved as:</source>
         <translation>Сохранено как:</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="614"/>
+        <location filename="../EditorWindow.cpp" line="621"/>
         <source>Opening selected file</source>
         <translation>Открываем выбранный файл</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="620"/>
+        <location filename="../EditorWindow.cpp" line="627"/>
         <source>Changing editor language</source>
         <translation>Изменяем язык редактора</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="591"/>
+        <location filename="../EditorWindow.cpp" line="598"/>
         <source>Binary files</source>
         <translation>Двоичные файлы</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="592"/>
+        <location filename="../EditorWindow.cpp" line="599"/>
         <source>Any files</source>
         <translation>Все файлы</translation>
     </message>
