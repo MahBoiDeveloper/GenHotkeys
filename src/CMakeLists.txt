@@ -1,5 +1,4 @@
 # General settings
-
     # Definitions from ../CMakeLists.txt
     get_property(PROJECT_DESTINATION_FOLDER     GLOBAL PROPERTY PROJECT_DESTINATION_FOLDER)     # Exe folder
     get_property(PROJECT_DESTINATION_BIN_FOLDER GLOBAL PROPERTY PROJECT_DESTINATION_BIN_FOLDER) # Bin folder
@@ -123,7 +122,7 @@
 
 # Starter target configuration
     # Starter target name
-    set(PROXY_EXE_NAME "GenHotkeys")
+    set(PROXY_EXE_NAME      "GenHotkeys")
     set(STARTER_TARGET_NAME "HotkeyEditorStarter")
 
     # Define starter executable with source files
@@ -147,7 +146,6 @@
     )
 
 # Managing additional source files
-
     # Declare json files
     set(
         ADDITIONAL_RESOURCES
@@ -164,16 +162,16 @@
         )
     endforeach()
 
-    # Create datasamples directory
+    # Create hotkey preset directory
     file(MAKE_DIRECTORY ${PROJECT_DESTINATION_RESOURCES_FOLDER}/Presets)
 
-    # Find datasamples files
+    # Find hotkey preset files
     file(
         GLOB_RECURSE DATA_SAMPLES_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/Presets/*
     )
     
-    # Copy datasamples files
+    # Copy hotkey preset files
     foreach(CURRENT_FILE ${DATA_SAMPLES_FILES})
         configure_file(
             ${CURRENT_FILE}
@@ -183,7 +181,6 @@
     endforeach()
 
 # Qt libs linking aka copying dependecies to the standalone release version of the project
-    
     # Find the qt libs deploy program
     find_program(WINDEPLOYQT_PROGRAM windeployqt)
 
