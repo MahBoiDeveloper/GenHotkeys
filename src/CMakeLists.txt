@@ -149,8 +149,8 @@
     # Declare json files
     set(
         ADDITIONAL_RESOURCES
-        "TechTree.json"
-        "Settings.json"
+        "Resources/TechTree.json"
+        "Resources/Settings.json"
     )
 
     # Copy json files
