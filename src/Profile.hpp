@@ -41,6 +41,6 @@ public:
     QString GetFolderPath() const;
     QString GetTechTreePath() const;
     QString GetThemeFolderPath() const;
-    QString GetThemeOverridesPath() const;
+    QString GetThemeStylesPath() const;
     QString GetInstalledCSFPath() const;
 };

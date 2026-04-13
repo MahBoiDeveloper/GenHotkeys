@@ -62,7 +62,7 @@ Registry::Games Profile::GetRegistryGame() const { return registryGame.value_or(
 QString Profile::GetFolderPath() const { return folderPath; }
 QString Profile::GetTechTreePath() const { return folderPath + "/" + techTreeFileName; }
 QString Profile::GetThemeFolderPath() const { return folderPath + "/Theme"; }
-QString Profile::GetThemeOverridesPath() const { return GetThemeFolderPath() + "/Overrides.css"; }
+QString Profile::GetThemeStylesPath() const { return GetThemeFolderPath() + "/Styles.css"; }
 
 QString Profile::GetInstalledCSFPath() const
 {

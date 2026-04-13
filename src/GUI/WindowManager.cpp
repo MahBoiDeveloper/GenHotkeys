@@ -48,7 +48,7 @@ bool WindowManager::ApplyTheme(const Profile* profile)
 
     if (profile != nullptr)
     {
-        const QString overridePath = profile->GetThemeOverridesPath();
+        const QString overridePath = profile->GetThemeStylesPath();
 
         if (QFile::exists(overridePath))
         {
