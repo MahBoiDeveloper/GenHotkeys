@@ -3,6 +3,7 @@
     get_property(PROJECT_DESTINATION_FOLDER     GLOBAL PROPERTY PROJECT_DESTINATION_FOLDER)     # Exe folder
     get_property(PROJECT_DESTINATION_BIN_FOLDER GLOBAL PROPERTY PROJECT_DESTINATION_BIN_FOLDER) # Bin folder
     get_property(PROJECT_LIBS_FOLDER            GLOBAL PROPERTY PROJECT_LIBS_FOLDER)            # Lib folder
+    get_property(PROJECT_RESOURCE_FOLDER        GLOBAL PROPERTY PROJECT_RESOURCE_FOLDER)        # Resource folder
 
     # Additional paths
     set(STEAMAPIDLL ${PROJECT_LIBS_FOLDER}/SteamworksSDK/redistributable_bin/win64/steam_api64.dll)
@@ -57,7 +58,7 @@
         PRIVATE
         ${STEAMWORKS_SDK_HEADERS}
         ${SOURCES}
-        "GUI/QtSources/EditorDescription.rc"
+        "${PROJECT_RESOURCE_FOLDER}/QtSources/EditorDescription.rc"
     )
 
     # Set output directory
@@ -129,7 +130,7 @@
     add_executable(
         ${STARTER_TARGET_NAME}
         "MainStarter.cpp"
-        "GUI/QtSources/StarterDescription.rc"
+        "${PROJECT_RESOURCE_FOLDER}/QtSources/StarterDescription.rc"
     )
 
     # Define output directory and file name
@@ -149,8 +150,8 @@
     # Declare json files
     set(
         ADDITIONAL_RESOURCES
-        "Resources/TechTree.json"
-        "Resources/Settings.json"
+        "${PROJECT_RESOURCE_FOLDER}/TechTree.json"
+        "${PROJECT_RESOURCE_FOLDER}/Settings.json"
     )
 
     # Copy json files

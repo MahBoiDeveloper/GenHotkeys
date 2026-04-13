@@ -1,6 +1,7 @@
 # General settings
     # Definitions from ../CMakeLists.txt
     get_property(PROJECT_DESTINATION_RESOURCES_FOLDER GLOBAL PROPERTY PROJECT_DESTINATION_SOURCES_FOLDER)
+    get_property(PROJECT_RESOURCE_FOLDER              GLOBAL PROPERTY PROJECT_RESOURCE_FOLDER)
     get_property(PROJECT_LIBS_FOLDER                  GLOBAL PROPERTY PROJECT_LIBS_FOLDER)
 
     set(CMAKE_AUTOUIC ON)
@@ -35,7 +36,7 @@
     target_sources(${TARGET_NAME} PRIVATE ${SOURCES})
 
     # Assign qt sources file to the GUI target
-    target_sources(${TARGET_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/QtSources/CompilationSources.qrc)
+    target_sources(${TARGET_NAME} PRIVATE ${PROJECT_RESOURCE_FOLDER}/QtSources/CompilationSources.qrc)
 
     # link qt libs
     foreach(LIB ${QT_LIBS})
@@ -56,9 +57,8 @@
 
     # Generate translation files
     foreach(LANGUAGE ${LANGUAGES})
-
         # Define source translation file
-        set(TS_FILE ${CMAKE_CURRENT_SOURCE_DIR}/translations/${LANGUAGE}.ts)
+        set(TS_FILE ${PROJECT_RESOURCE_FOLDER}/Translations/${LANGUAGE}.ts)
 
         # Define all source translation files
         set(TRANSLATION_SOURCES ${TRANSLATION_SOURCES} ${TS_FILE})
@@ -78,7 +78,6 @@
             DEPENDS ${SOURCES} ${TS_FILE}
             WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
         )
-
     endforeach()
 
     # Assign translation source files to the GUI target
@@ -125,15 +124,15 @@
 # Copying folders with configs, but without update
     # Copy icons
     file(
-        COPY "${CMAKE_CURRENT_SOURCE_DIR}/Icons"
+        COPY "${PROJECT_RESOURCE_FOLDER}/Icons"
         DESTINATION ${PROJECT_DESTINATION_RESOURCES_FOLDER}
     )
     
     # Copy theme files
     file(
-        COPY "${CMAKE_CURRENT_SOURCE_DIR}/Theme"
+        COPY "${PROJECT_RESOURCE_FOLDER}/Theme"
         DESTINATION ${PROJECT_DESTINATION_RESOURCES_FOLDER}
     )
 
 # Copy Styles.css with updates
-    configure_file("${CMAKE_CURRENT_SOURCE_DIR}/Theme/Styles.css" "${PROJECT_DESTINATION_RESOURCES_FOLDER}/Theme/Styles.css")
+    configure_file("${PROJECT_RESOURCE_FOLDER}/Theme/Styles.css" "${PROJECT_DESTINATION_RESOURCES_FOLDER}/Theme/Styles.css")

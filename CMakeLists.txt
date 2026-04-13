@@ -16,12 +16,13 @@ project(
 
 # Existed paths
 set(PROJECT_LIBS_FOLDER                  "${CMAKE_CURRENT_SOURCE_DIR}/libs"                 CACHE STRING "Global project libraries path")
+set(PROJECT_RESOURCE_FOLDER              "${CMAKE_CURRENT_SOURCE_DIR}/src/Resources"        CACHE STRING "Global project resources path")
 
 # Generated paths
-set(PROJECT_DESTINATION_FOLDER           "${CMAKE_BINARY_DIR}/exe"                          CACHE STRING "Global project path")
-set(PROJECT_DESTINATION_RESOURCES_FOLDER "${PROJECT_DESTINATION_FOLDER}/Resources"          CACHE STRING "Global project resources path")
-set(PROJECT_DESTINATION_BIN_FOLDER       "${PROJECT_DESTINATION_RESOURCES_FOLDER}/Binaries" CACHE STRING "Global project binary path")
-set(PROJECT_DESTINATION_LOGS_FOLDER      "${PROJECT_DESTINATION_FOLDER}/Logs"               CACHE STRING "Global project logs path")
+set(PROJECT_DESTINATION_FOLDER           "${CMAKE_BINARY_DIR}/exe"                          CACHE STRING "Global project destination path")
+set(PROJECT_DESTINATION_RESOURCES_FOLDER "${PROJECT_DESTINATION_FOLDER}/Resources"          CACHE STRING "Global project destination resources path")
+set(PROJECT_DESTINATION_BIN_FOLDER       "${PROJECT_DESTINATION_RESOURCES_FOLDER}/Binaries" CACHE STRING "Global project destination binary path")
+set(PROJECT_DESTINATION_LOGS_FOLDER      "${PROJECT_DESTINATION_FOLDER}/Logs"               CACHE STRING "Global project destination logs path")
 file(MAKE_DIRECTORY ${PROJECT_DESTINATION_FOLDER})
 file(MAKE_DIRECTORY ${PROJECT_DESTINATION_RESOURCES_FOLDER})
 file(MAKE_DIRECTORY ${PROJECT_DESTINATION_BIN_FOLDER})
