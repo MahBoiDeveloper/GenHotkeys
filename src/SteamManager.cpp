@@ -12,16 +12,20 @@ SteamManager::~SteamManager() { Dispose(); }
 
 void SteamManager::Initialize()
 {
+    if (isInitialized)
+        Dispose();
+
     QString steamapitxt = PROGRAM_CONSTANTS->BINARIES_FOLDER + "\\steam_appid.txt"q;
-    appId = QString::number(PROGRAM_CONSTANTS->pSettingsFile->GetSteamAppID());
-        
-    if (!filesystem::exists(steamapitxt.toStdString().c_str()))
+    appId = QString::number(PROGRAM_CONSTANTS->GetActiveProfile().GetSteamAppID());
+
     {
-        LOGMSG("steam_appid.txt not found, generating file");
-        ofstream file(steamapitxt.toStdString().c_str());
-        
+        LOGMSG("Writing steam_appid.txt for active profile");
+        ofstream file(steamapitxt.toStdString().c_str(), ios::trunc);
+
         if (!file.is_open())
+        {
             file.open(steamapitxt.toStdString().c_str());
+        }
 
         file << appId.toStdString().c_str() << endl;
     }
@@ -32,16 +36,22 @@ void SteamManager::Initialize()
     {
         LOGSTM << "SteamAPI_Init() failed: " << errMsg << endl;
         LOGMSG("Failed to initialize Steam integration");
+        isInitialized = false;
     }
     else
     {
         LOGMSG("Steam Integration running");
+        isInitialized = true;
     }
 }
 
 void SteamManager::Dispose()
 {
+    if (!isInitialized)
+        return;
+
     SteamAPI_Shutdown();
+    isInitialized = false;
 }
 
 QString SteamManager::GetAppID()                  { return appId; }

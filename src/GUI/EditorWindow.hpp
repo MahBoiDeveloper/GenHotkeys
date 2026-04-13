@@ -76,7 +76,7 @@ private slots:
     void ActEnableStatusBar_Triggered();
     void ActDisableStatusBar_Triggered();
 
-    void ActOpen_NewHotkeyFileSelected(const QString& filepath);
+    void ActOpen_NewHotkeyFileSelected(const QString& filepath, const QString& profileId);
     void ActSaveAs_SaveToSelectedFile(const QString& filepath);
     
     void SettingsWindow_LanguageChanged();
@@ -84,5 +84,5 @@ private slots:
 signals:
     void closeEditor();
     void languageChanged();
-    void newHotkeyFileSelected(const QString& filepath);
+    void newHotkeyFileSelected(const QString& filepath, const QString& profileId);
 };

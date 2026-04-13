@@ -1,5 +1,6 @@
 #pragma once
 #include <QStackedWidget>
+#include <QString>
 #include "GreetingWindow.hpp"
 #include "LoadFromTheGameWindow.hpp"
 #include "LoadFromTheFileWindow.hpp"
@@ -35,6 +36,8 @@ private slots:
     void BtnLoadFromFile_Clicked();
     /// @brief Show window to load hotkeys information from the game.
     void BtnLoadFromGame_Clicked();
+    /// @brief Preview theme for the currently selected profile.
+    void LoadWindow_ProfileChanged(const QString& profileId);
     /// @brief Returns checked configuration of user preferences.
     void LoadFromTheFileWindow_AcceptConfiguration();
     /// @brief Returns checked configuration of user preferences.

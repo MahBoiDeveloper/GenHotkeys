@@ -149,7 +149,6 @@
     # Declare json files
     set(
         ADDITIONAL_RESOURCES
-        "Resources/TechTree.json"
         "Resources/Settings.json"
     )
 
@@ -161,6 +160,12 @@
             COPYONLY
         )
     endforeach()
+
+    # Copy profiles data
+    file(
+        COPY "${CMAKE_CURRENT_SOURCE_DIR}/Resources/Profiles"
+        DESTINATION ${PROJECT_DESTINATION_RESOURCES_FOLDER}
+    )
 
     # Create hotkey preset directory
     file(MAKE_DIRECTORY ${PROJECT_DESTINATION_RESOURCES_FOLDER}/Presets)

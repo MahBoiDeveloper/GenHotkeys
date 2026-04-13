@@ -19,6 +19,7 @@
 #include "../FactionsManager.hpp"
 
 #include "ImageManager.hpp"
+#include "LoadFromTheFileWindow.hpp"
 #include "WindowManager.hpp"
 #include "SettingsWindow.hpp"
 #include "EditorWindow.hpp"
@@ -54,61 +55,70 @@ EditorWindow::EditorWindow(QWidget* parent)
 
     connect(pEntitiesTreeWidget, &QTreeWidget::itemSelectionChanged, this, &EditorWindow::SetHotkeysPanels);
 
-    QBoxLayout* ltFactions = nullptr;
-    int factonsCount = FACTIONS_MANAGER->Count();
-    size_t language = PROGRAM_CONSTANTS->pSettingsFile->GetLanguage();
+    QHBoxLayout* ltFactions = new QHBoxLayout();
+    ltFactions->setObjectName(nameof(ltFactions));
 
-    if (factonsCount == Faction::BASIC_FACTION_COUNT)
+    QVector<QVector<QString>> factionGroups = PROGRAM_CONSTANTS->GetActiveProfile().GetFactionGroups();
+    if (factionGroups.isEmpty())
     {
-        ltFactions = new QHBoxLayout();
-        ltFactions->setObjectName(nameof(ltFactions));
+        QVector<QString> fallbackGroup;
+        for (int i = 0; i < FACTIONS_MANAGER->Count(); ++i)
+            fallbackGroup.push_back(FACTIONS_MANAGER->FindByIndex(i).GetShortName());
 
-        // Only 3 blocks with factions and subfactions. 4 in each block and 12 in total
-        for (int sectionIndex = 0; sectionIndex < Faction::BASIC_FACTION_COUNT; sectionIndex += 4)
-        {
-            QVBoxLayout* ltCurrentFaction    = new QVBoxLayout();
-            QHBoxLayout* ltCurrentSubfaction = new QHBoxLayout();
-            ltCurrentFaction->setObjectName(nameof(ltCurrentFaction));
-            ltCurrentSubfaction->setObjectName(nameof(ltCurrentSubfaction));
-
-            for (int i = 0; i < 4; ++i)
-            {
-                const Faction currFaction = FACTIONS_MANAGER->FindByIndex(sectionIndex + i);
-
-                QPushButton* factionButton = new QPushButton{currFaction.GetDisplayName()};
-                factionButton->setToolTip(currFaction.GetDisplayNameDescription());
-
-                auto shortName = currFaction.GetShortName();
-
-                if (PROGRAM_CONSTANTS->USA_SHORT_NAMES.contains(shortName))
-                    factionButton->setProperty("faction", "USA");
-
-                if (PROGRAM_CONSTANTS->PRC_SHORT_NAMES.contains(shortName))
-                    factionButton->setProperty("faction", "PRC");
-
-                if (PROGRAM_CONSTANTS->GLA_SHORT_NAMES.contains(shortName))
-                    factionButton->setProperty("faction", "GLA");
-
-                connect(factionButton, &QPushButton::pressed, this, [=, this]()
-                {
-                    SetGameObjectList(shortName);
-                });
-
-                pFactionsButtonsGroup->addButton(factionButton);
-
-                if (i == 0) // main faction
-                    ltCurrentFaction->addWidget(factionButton);
-                else        // subfactions
-                    ltCurrentSubfaction->addWidget(factionButton);
-            }
-
-            ltCurrentFaction->addLayout(ltCurrentSubfaction);
-            ltFactions->addLayout(ltCurrentFaction);
-        }
+        if (!fallbackGroup.isEmpty())
+            factionGroups.push_back(fallbackGroup);
     }
-    else
+
+    for (const auto& group : factionGroups)
     {
-        LOGMSG("Unable to parse more than 12 factions. Found factions : " + factonsCount);
+        QVBoxLayout* ltCurrentFaction    = new QVBoxLayout();
+        QHBoxLayout* ltCurrentSubfaction = new QHBoxLayout();
+        ltCurrentFaction->setObjectName(nameof(ltCurrentFaction));
+        ltCurrentSubfaction->setObjectName(nameof(ltCurrentSubfaction));
+
+        int addedButtons = 0;
+
+        for (const auto& shortName : group)
+        {
+            if (!FACTIONS_MANAGER->ContainsShortName(shortName))
+                continue;
+
+            const Faction& currFaction = FACTIONS_MANAGER->FindByShortName(shortName);
+
+            QPushButton* factionButton = new QPushButton{currFaction.GetDisplayName()};
+            factionButton->setToolTip(currFaction.GetDisplayNameDescription());
+
+            if (PROGRAM_CONSTANTS->USA_SHORT_NAMES.contains(shortName))
+                factionButton->setProperty("faction", "USA");
+
+            if (PROGRAM_CONSTANTS->PRC_SHORT_NAMES.contains(shortName))
+                factionButton->setProperty("faction", "PRC");
+
+            if (PROGRAM_CONSTANTS->GLA_SHORT_NAMES.contains(shortName))
+                factionButton->setProperty("faction", "GLA");
+
+            connect(factionButton, &QPushButton::pressed, this, [=, this]()
+            {
+                SetGameObjectList(shortName);
+            });
+
+            pFactionsButtonsGroup->addButton(factionButton);
+
+            if (addedButtons == 0)
+                ltCurrentFaction->addWidget(factionButton);
+            else
+                ltCurrentSubfaction->addWidget(factionButton);
+
+            ++addedButtons;
+        }
+
+        if (addedButtons == 0)
+            continue;
+
+        if (addedButtons > 1)
+            ltCurrentFaction->addLayout(ltCurrentSubfaction);
+
+        ltFactions->addLayout(ltCurrentFaction);
     }
 
     connect(pFactionsButtonsGroup, &QButtonGroup::idClicked, this, [=, this](int id)
@@ -561,10 +571,15 @@ void EditorWindow::ActSave_Triggered()
     
     if (CSF_PARSER->Path.ends_with(L".big") || CSF_PARSER->Path.ends_with(L".BIG"))
     {
-        CSF_PARSER->Path = (QString::fromStdWString(
-                                Windows::Registry::GetPathToGame(
-                                    Windows::Registry::Games::GeneralsZeroHour)) 
-                            + "Data\\English\\generals.csf"q).toStdWString();
+        const QString installedPath = PROGRAM_CONSTANTS->GetActiveProfile().GetInstalledCSFPath();
+
+        if (installedPath.isEmpty())
+        {
+            ActSaveAs_Triggered();
+            return;
+        }
+
+        CSF_PARSER->Path = installedPath.toStdWString();
     }
 
     CSF_PARSER->Save();
@@ -591,13 +606,33 @@ void EditorWindow::ActSaveAs_SaveToSelectedFile(const QString& filepath)
 
 void EditorWindow::ActOpen_Triggered()
 {
-    QFileDialog* fdSelectFileWindow = new QFileDialog();
-    connect(fdSelectFileWindow, &QFileDialog::fileSelected, this, &EditorWindow::ActOpen_NewHotkeyFileSelected);
-    fdSelectFileWindow->setFileMode(QFileDialog::FileMode::ExistingFile);
-    fdSelectFileWindow->setAcceptMode(QFileDialog::AcceptMode::AcceptOpen);
-    fdSelectFileWindow->setNameFilters({tr("Binary files") + " (*.csf *.big)",
-                                        tr("Any files")  + " (*)"});
-    fdSelectFileWindow->exec();
+    QDialog dialog(this);
+    dialog.setWindowTitle(tr("Open"));
+    dialog.setFixedSize(PROGRAM_CONSTANTS->SET_UP_WINDOW_SIZE);
+    dialog.setWindowFlags(dialog.windowFlags() & ~Qt::WindowContextHelpButtonHint | Qt::MSWindowsFixedSizeDialogHint);
+    dialog.setWindowModality(Qt::WindowModality::ApplicationModal);
+
+    auto* openWidget = new LoadFromTheFileWindow(&dialog);
+    auto* layout = new QVBoxLayout();
+    layout->addWidget(openWidget);
+    dialog.setLayout(layout);
+
+    connect(openWidget, &LoadFromTheFileWindow::btnBackClicked, &dialog, &QDialog::reject);
+    connect(openWidget, &LoadFromTheFileWindow::selectedProfileChanged, &dialog, [](const QString& profileId)
+    {
+        WINDOW_MANAGER->PreviewThemeForProfile(profileId);
+    });
+    connect(openWidget, &LoadFromTheFileWindow::btnStartClicked, this, [this, openWidget, &dialog]()
+    {
+        ActOpen_NewHotkeyFileSelected(openWidget->GetSelectedFilePath(), openWidget->GetSelectedProfileId());
+        dialog.accept();
+    });
+    connect(&dialog, &QDialog::rejected, this, []()
+    {
+        WINDOW_MANAGER->ApplyTheme();
+    });
+
+    dialog.exec();
 }
 
 void EditorWindow::ActClose_Triggered() { emit closeEditor(); }
@@ -614,10 +649,10 @@ void EditorWindow::ActEnableStatusBar_Triggered() { UpdateStatusBar(Qt::CheckSta
 
 void EditorWindow::ActDisableStatusBar_Triggered() { UpdateStatusBar(Qt::CheckState::Unchecked); }
 
-void EditorWindow::ActOpen_NewHotkeyFileSelected(const QString& filepath)
+void EditorWindow::ActOpen_NewHotkeyFileSelected(const QString& filepath, const QString& profileId)
 {
     LOGMSG("Selected file: " + filepath);
-    emit newHotkeyFileSelected(filepath);
+    emit newHotkeyFileSelected(filepath, profileId);
     pStatusBar->showMessage(tr("Opening selected file"), STATUS_BAR_TIMEOUT);
 }
 

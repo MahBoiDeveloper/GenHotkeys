@@ -3,10 +3,12 @@
 #include "FactionsManager.hpp"
 
 FactionManager::FactionManager()
+    : TECH_TREE_SOURCE{PROGRAM_CONSTANTS->GetActiveProfile().GetTechTreePath()}
 {
-    vFactions.reserve(12);
+    const auto factionsArray = TECH_TREE_SOURCE.Query("$.TechTree").toArray();
+    vFactions.reserve(factionsArray.size());
 
-    for(const auto& elem : TECH_TREE_SOURCE.Query("$.TechTree").toArray())
+    for(const auto& elem : factionsArray)
     {
         vFactions.push_back(Faction{elem.toObject()});
     }
@@ -14,6 +16,17 @@ FactionManager::FactionManager()
 
 int FactionManager::Count() { return vFactions.size(); }
 const Faction& FactionManager::FindByIndex(int position) { return vFactions.at(position); }
+bool FactionManager::ContainsShortName(const QString& name) const
+{
+    for (const auto& elem : vFactions)
+    {
+        if (elem.GetShortName() == name)
+            return true;
+    }
+
+    return false;
+}
+
 const Faction& FactionManager::FindByShortName(const QString& name)
 {
     int tmp = 0;

@@ -1,0 +1,17 @@
+{
+    "Id"               : "zero-hour",
+    "DisplayName"      : "Generals Zero Hour",
+    "WindowTitle"      : "Generals Zero Hour Hotkey Editor",
+    "ShortWindowTitle" : "Generals Zero Hour Hotkey Editor",
+    "RegistryGame"     : "GeneralsZeroHour",
+    "SteamAppID"       : 2732960,
+    "CSFRelativePath"  : "Data\\English\\generals.csf",
+    "TechTreeFile"     : "TechTree.json",
+    "SortOrder"        : 0,
+    "FactionGroups"    :
+    [
+        ["USA", "SWG", "AIR", "LSR"],
+        ["PRC", "INF", "NUK", "TNK"],
+        ["GLA", "TOX", "STL", "DML"]
+    ]
+}

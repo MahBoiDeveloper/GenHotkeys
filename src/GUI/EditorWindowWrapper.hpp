@@ -22,5 +22,5 @@ public:
 public slots:
     void EditorWindow_CloseEditor();
     void EditorWindow_LanguageChanged();
-    void EditorWindow_NewHotkeyFileSelected(const QString& filepath);
+    void EditorWindow_NewHotkeyFileSelected(const QString& filepath, const QString& profileId);
 };

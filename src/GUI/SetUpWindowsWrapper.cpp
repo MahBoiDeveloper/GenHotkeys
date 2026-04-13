@@ -2,6 +2,7 @@
 #include <QLineEdit>
 #include <QMessageBox>
 
+#include "../Extensions/L10NExt.hpp"
 #include "../Parsers/CSFParser.hpp"
 #include "../Windows/Registry.hpp"
 #include "../Logger.hpp"
@@ -40,12 +41,18 @@ void SetUpWindowsWrapper::AttachConnections()
 
     connect(pLoadFromTheFileWindow, &LoadFromTheFileWindow::btnBackClicked,
             this,                   &SetUpWindowsWrapper::BtnBack_Clicked);
+
+    connect(pLoadFromTheFileWindow, &LoadFromTheFileWindow::selectedProfileChanged,
+            this,                   &SetUpWindowsWrapper::LoadWindow_ProfileChanged);
     
     connect(pLoadFromTheFileWindow, &LoadFromTheFileWindow::btnStartClicked,
             this,                   &SetUpWindowsWrapper::LoadFromTheFileWindow_AcceptConfiguration);
 
     connect(pLoadFromTheGameWindow, &LoadFromTheGameWindow::btnBackClicked,
             this,                   &SetUpWindowsWrapper::BtnBack_Clicked);
+
+    connect(pLoadFromTheGameWindow, &LoadFromTheGameWindow::selectedProfileChanged,
+            this,                   &SetUpWindowsWrapper::LoadWindow_ProfileChanged);
     
     connect(pLoadFromTheGameWindow, &LoadFromTheGameWindow::btnStartClicked,
             this,                   &SetUpWindowsWrapper::LoadFromTheGameWindow_AcceptConfiguration);
@@ -71,11 +78,17 @@ void SetUpWindowsWrapper::DetachConnections()
     disconnect(pLoadFromTheFileWindow, &LoadFromTheFileWindow::btnBackClicked,
                this,                   &SetUpWindowsWrapper::BtnBack_Clicked);
 
+    disconnect(pLoadFromTheFileWindow, &LoadFromTheFileWindow::selectedProfileChanged,
+               this,                   &SetUpWindowsWrapper::LoadWindow_ProfileChanged);
+
     disconnect(pLoadFromTheFileWindow, &LoadFromTheFileWindow::btnStartClicked,
                this,                   &SetUpWindowsWrapper::LoadFromTheFileWindow_AcceptConfiguration);
 
     disconnect(pLoadFromTheGameWindow, &LoadFromTheGameWindow::btnBackClicked,
                this,                   &SetUpWindowsWrapper::BtnBack_Clicked);
+
+    disconnect(pLoadFromTheGameWindow, &LoadFromTheGameWindow::selectedProfileChanged,
+               this,                   &SetUpWindowsWrapper::LoadWindow_ProfileChanged);
 
     disconnect(pLoadFromTheGameWindow, &LoadFromTheGameWindow::btnStartClicked,
                this,                   &SetUpWindowsWrapper::LoadFromTheGameWindow_AcceptConfiguration);
@@ -120,16 +133,44 @@ void SetUpWindowsWrapper::SettingsWindow_LanguageChanged()
 void SetUpWindowsWrapper::BtnLoadFromFile_Clicked() { setCurrentWidget(pLoadFromTheFileWindow); }
 void SetUpWindowsWrapper::BtnLoadFromGame_Clicked() { setCurrentWidget(pLoadFromTheGameWindow); }
 void SetUpWindowsWrapper::BtnSettings_Clicked()     { setCurrentWidget(pSettingsWindow); }
-void SetUpWindowsWrapper::BtnBack_Clicked()         { WINDOW_MANAGER->SetCSFFilePath(""); setCurrentWidget(pGreetingWidget); }
+void SetUpWindowsWrapper::BtnBack_Clicked()
+{
+    WINDOW_MANAGER->SetCSFFilePath("");
+    WINDOW_MANAGER->ApplyTheme();
+    setCurrentWidget(pGreetingWidget);
+}
+
+void SetUpWindowsWrapper::LoadWindow_ProfileChanged(const QString& profileId)
+{
+    WINDOW_MANAGER->PreviewThemeForProfile(profileId);
+}
 
 void SetUpWindowsWrapper::LoadFromTheGameWindow_AcceptConfiguration()
 {
-    const QString gamePath = QString::fromStdWString(Windows::Registry::GetPathToGame(Windows::Registry::Games::GeneralsZeroHour));
-    const QString pathDataEngGenCsf = gamePath + "Data\\English\\generals.csf";
+    const QString profileId = pLoadFromTheGameWindow->GetSelectedProfileId();
+
+    if (!PROGRAM_CONSTANTS->SetActiveProfile(profileId))
+        return;
+
+    const Profile& activeProfile = PROGRAM_CONSTANTS->GetActiveProfile();
+    const QString gamePath = QString::fromStdWString(Windows::Registry::GetPathToGame(activeProfile.GetRegistryGame()));
+    const QString pathDataEngGenCsf = activeProfile.GetInstalledCSFPath();
+    bool hasFoundStringTable = false;
+
+    WINDOW_MANAGER->SetCSFFilePath("");
+
+    if (gamePath.isEmpty())
+    {
+        QMessageBox::critical(nullptr,
+                              L10N(PROGRAM_CONSTANTS->CSF_ERROR_HEADER),
+                              L10N(PROGRAM_CONSTANTS->GAME_PATH_NOT_FOUND).arg(activeProfile.GetDisplayName()));
+        return;
+    }
 
     if (QFile::exists(pathDataEngGenCsf))
     {
         WINDOW_MANAGER->SetCSFFilePath(pathDataEngGenCsf);
+        hasFoundStringTable = true;
     }
     else
     {
@@ -151,6 +192,7 @@ void SetUpWindowsWrapper::LoadFromTheGameWindow_AcceptConfiguration()
             {
                 CSFParser parser(elem.absoluteFilePath());
                 WINDOW_MANAGER->SetCSFFilePath(elem.absoluteFilePath());
+                hasFoundStringTable = true;
                 break;
             }
             catch(...)
@@ -160,12 +202,23 @@ void SetUpWindowsWrapper::LoadFromTheGameWindow_AcceptConfiguration()
             }
         }
     }
+
+    if (!hasFoundStringTable)
+    {
+        QMessageBox::critical(nullptr,
+                              L10N(PROGRAM_CONSTANTS->CSF_ERROR_HEADER),
+                              L10N(PROGRAM_CONSTANTS->CSF_EMPTY_DATA_ENGLISH).arg(QDir::toNativeSeparators(gamePath)));
+        return;
+    }
     
     WINDOW_MANAGER->StartUpWindow_AcceptConfiguration();
 }
 
 void SetUpWindowsWrapper::LoadFromTheFileWindow_AcceptConfiguration() 
 {
+    if (!PROGRAM_CONSTANTS->SetActiveProfile(pLoadFromTheFileWindow->GetSelectedProfileId()))
+        return;
+
     WINDOW_MANAGER->SetCSFFilePath(pLoadFromTheFileWindow->findChild<QLineEdit*>("lneFilePath", Qt::FindChildrenRecursively)->text());
     WINDOW_MANAGER->StartUpWindow_AcceptConfiguration();
 }

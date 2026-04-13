@@ -28,7 +28,6 @@ void Settings::SetToDefault()
     ForceSystemLanguage = true;
     StatusBar           = true;
     SteamAPI            = true;
-    SteamAppID          = PROGRAM_CONSTANTS->ZH_STEAM_APP_ID;
     Language            = 0; // English
 }
 
@@ -38,7 +37,6 @@ void Settings::Parse()
     DiscordRPC          = json.Query("$." + nameof(DiscordRPC)).toBool();
     ForceSystemLanguage = json.Query("$." + nameof(ForceSystemLanguage)).toBool();
     StatusBar           = json.Query("$." + nameof(StatusBar)).toBool();
-    SteamAppID          = json.Query("$." + nameof(SteamAppID)).toInt() != 0 ? json.Query("$." + nameof(SteamAppID)).toInt() : SteamAppID;
     SteamAPI            = json.Query("$." + nameof(SteamAPI)).toBool();
 
     QString twoLetters = StringExt::EmptyString;
@@ -67,7 +65,6 @@ void Settings::Save()
     jsMainObj[nameof(ForceSystemLanguage)] = ForceSystemLanguage;
     jsMainObj[nameof(Language)]            = PROGRAM_CONSTANTS->Languages.value(Language).first;
     jsMainObj[nameof(StatusBar)]           = StatusBar;
-    jsMainObj[nameof(SteamAppID)]          = StringExt::ToQString(SteamAppID);
     jsMainObj[nameof(SteamAPI)]            = SteamAPI;
 
     QJsonDocument jsDoc;
@@ -84,7 +81,6 @@ void Settings::Save()
 
 const QSet<Qt::Key> Settings::GetAllowedKeys()                        const { return AllowedHotkeys; }
 const size_t        Settings::GetLanguage()                           const { return Language; }
-const size_t        Settings::GetSteamAppID()                         const { return SteamAppID; }
 const bool          Settings::IsConsoleEnabled()                      const { return DebugConsole; }
 const bool          Settings::IsDiscordRPCEnabled()                   const { return DiscordRPC; }
 const bool          Settings::IsForceSystemLanguageOnStartUpEnabled() const { return ForceSystemLanguage; }

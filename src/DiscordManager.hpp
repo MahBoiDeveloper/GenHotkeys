@@ -11,6 +11,7 @@ private: // Data
     const char* appID = "1476177039966081097";
     const char* state = "Editing hotkeys";
     const char* details = "";
+    bool        isInitialized = false;
 public:
     inline const static std::unique_ptr<DiscordManager> Instance = std::make_unique<DiscordManager>();
 

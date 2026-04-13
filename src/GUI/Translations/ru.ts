@@ -27,22 +27,23 @@
 <context>
     <name>EditorWindow</name>
     <message>
-        <location filename="../EditorWindow.cpp" line="187"/>
+        <location filename="../EditorWindow.cpp" line="197"/>
         <source>File</source>
         <translation>Файл</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="188"/>
+        <location filename="../EditorWindow.cpp" line="198"/>
+        <location filename="../EditorWindow.cpp" line="610"/>
         <source>Open</source>
         <translation>Открыть</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="189"/>
+        <location filename="../EditorWindow.cpp" line="199"/>
         <source>Save</source>
         <translation>Сохранить</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="190"/>
+        <location filename="../EditorWindow.cpp" line="200"/>
         <source>Save As...</source>
         <translation>Сохранить как...</translation>
     </message>
@@ -51,49 +52,49 @@
         <translation type="vanished">Дополнительно</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="191"/>
+        <location filename="../EditorWindow.cpp" line="201"/>
         <source>Close</source>
         <translation>Закрыть</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="209"/>
+        <location filename="../EditorWindow.cpp" line="219"/>
         <source>View</source>
         <translation>Вид</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="210"/>
+        <location filename="../EditorWindow.cpp" line="220"/>
         <source>Status Bar</source>
         <translation>Строка состояния</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="211"/>
+        <location filename="../EditorWindow.cpp" line="221"/>
         <source>Enable</source>
         <translation>Включить</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="212"/>
+        <location filename="../EditorWindow.cpp" line="222"/>
         <source>Disable</source>
         <translation>Отключить</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="222"/>
-        <location filename="../EditorWindow.cpp" line="542"/>
+        <location filename="../EditorWindow.cpp" line="232"/>
+        <location filename="../EditorWindow.cpp" line="552"/>
         <source>Settings</source>
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="226"/>
-        <location filename="../EditorWindow.cpp" line="503"/>
+        <location filename="../EditorWindow.cpp" line="236"/>
+        <location filename="../EditorWindow.cpp" line="513"/>
         <source>About</source>
         <translation>О программе</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="363"/>
+        <location filename="../EditorWindow.cpp" line="373"/>
         <source>Layout %1</source>
         <translation>Раскладка %1</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="481"/>
+        <location filename="../EditorWindow.cpp" line="491"/>
         <source>&lt;p&gt;Authors: %1&lt;br&gt;Version: %2&lt;br&gt;&lt;br&gt;Program licensed with %3&lt;br&gt;&lt;br&gt;GitHub repository:&lt;br&gt;%4&lt;br&gt;&lt;br&gt;Support development:&lt;br&gt;%5&lt;/p&gt;</source>
         <translation>&lt;p&gt;Авторы: %1&lt;br&gt;Версия: %2&lt;br&gt;&lt;br&gt;Программа лицензирована под %3&lt;br&gt;&lt;br&gt;Репозиторий на GitHub:&lt;br&gt;%4&lt;br&gt;&lt;br&gt;Поддержать разработку:&lt;br&gt;%5&lt;/p&gt;</translation>
     </message>
@@ -118,34 +119,32 @@
         <translation type="vanished">Поддержать разработку:</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="573"/>
+        <location filename="../EditorWindow.cpp" line="588"/>
         <source>Changes has been saved to the file:</source>
         <translation>Изменения были сохранены в файл:</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="589"/>
+        <location filename="../EditorWindow.cpp" line="604"/>
         <source>Saved as:</source>
         <translation>Сохранено как:</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="621"/>
+        <location filename="../EditorWindow.cpp" line="656"/>
         <source>Opening selected file</source>
         <translation>Открываем выбранный файл</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="627"/>
+        <location filename="../EditorWindow.cpp" line="662"/>
         <source>Changing editor language</source>
         <translation>Изменяем язык редактора</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="598"/>
         <source>Binary files</source>
-        <translation>Двоичные файлы</translation>
+        <translation type="vanished">Двоичные файлы</translation>
     </message>
     <message>
-        <location filename="../EditorWindow.cpp" line="599"/>
         <source>Any files</source>
-        <translation>Все файлы</translation>
+        <translation type="vanished">Все файлы</translation>
     </message>
 </context>
 <context>
@@ -170,32 +169,37 @@
 <context>
     <name>LoadFromTheFileWindow</name>
     <message>
-        <location filename="../LoadFromTheFileWindow.cpp" line="16"/>
+        <location filename="../LoadFromTheFileWindow.cpp" line="17"/>
         <source>START</source>
         <translation>НАЧАТЬ</translation>
     </message>
     <message>
-        <location filename="../LoadFromTheFileWindow.cpp" line="17"/>
+        <location filename="../LoadFromTheFileWindow.cpp" line="18"/>
         <source>BACK</source>
         <translation>НАЗАД</translation>
     </message>
     <message>
-        <location filename="../LoadFromTheFileWindow.cpp" line="20"/>
+        <location filename="../LoadFromTheFileWindow.cpp" line="21"/>
         <source>Select .csf or .big file:</source>
         <translation>Выберите .csf или .big файл:</translation>
     </message>
     <message>
-        <location filename="../LoadFromTheFileWindow.cpp" line="67"/>
+        <location filename="../LoadFromTheFileWindow.cpp" line="40"/>
+        <source>Profile:</source>
+        <translation>Профиль:</translation>
+    </message>
+    <message>
+        <location filename="../LoadFromTheFileWindow.cpp" line="99"/>
         <source>Binary files</source>
         <translation>Двоичные файлы</translation>
     </message>
     <message>
-        <location filename="../LoadFromTheFileWindow.cpp" line="68"/>
+        <location filename="../LoadFromTheFileWindow.cpp" line="100"/>
         <source>Any files</source>
         <translation>Все файлы</translation>
     </message>
     <message>
-        <location filename="../LoadFromTheFileWindow.cpp" line="71"/>
+        <location filename="../LoadFromTheFileWindow.cpp" line="103"/>
         <source>REVIEW</source>
         <translation>ОБЗОР</translation>
     </message>
@@ -203,12 +207,12 @@
 <context>
     <name>LoadFromTheGameWindow</name>
     <message>
-        <location filename="../LoadFromTheGameWindow.cpp" line="16"/>
+        <location filename="../LoadFromTheGameWindow.cpp" line="15"/>
         <source>START</source>
         <translation>НАЧАТЬ</translation>
     </message>
     <message>
-        <location filename="../LoadFromTheGameWindow.cpp" line="17"/>
+        <location filename="../LoadFromTheGameWindow.cpp" line="16"/>
         <source>BACK</source>
         <translation>НАЗАД</translation>
     </message>
@@ -216,31 +220,36 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="91"/>
+        <location filename="../../ProgramConstants.hpp" line="90"/>
         <source>Error with CSF file</source>
         <translation>Ошибка с CSF файлом</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="92"/>
+        <location filename="../../ProgramConstants.hpp" line="91"/>
         <source>Cannot process the empty file.</source>
         <translation>Невозможно обработать пустой файл.</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="93"/>
+        <location filename="../../ProgramConstants.hpp" line="92"/>
         <source>Unable to find selected CSF file.</source>
         <translation>Невозможно найти указанный CSF файл.</translation>
+    </message>
+    <message>
+        <location filename="../../ProgramConstants.hpp" line="95"/>
+        <source>Unable to find the installed game directory for &quot;%1&quot;.</source>
+        <translation>Невозможно найти папку установленной игры &quot;%1&quot;.</translation>
     </message>
     <message>
         <source></source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="94"/>
+        <location filename="../../ProgramConstants.hpp" line="93"/>
         <source>Choosen CSF file doesn&apos;t have CONTROLBAR category. Make sure that you are load correct file.</source>
         <translation>У выбранного CSF файла отсутствует категория CONTROLBAR. Проверьте, что вы загружаете правильный файл.</translation>
     </message>
     <message>
-        <location filename="../../ProgramConstants.hpp" line="95"/>
+        <location filename="../../ProgramConstants.hpp" line="94"/>
         <source>Choosen CSF file doesn&apos;t have OBJECT category. Make sure that you are load correct file.</source>
         <translation>У выбранного CSF файла отсутствует категория OBJECT. Проверьте, что вы загружаете правильный файл.</translation>
     </message>

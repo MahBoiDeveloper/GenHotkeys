@@ -8,6 +8,7 @@
 #include <QLabel>
 
 #include "../Extensions/StringExt.hpp"
+#include "../ProgramConstants.hpp"
 #include "LoadFromTheFileWindow.hpp"
 
 LoadFromTheFileWindow::LoadFromTheFileWindow(QWidget* parent) : QWidget(parent)
@@ -34,6 +35,37 @@ LoadFromTheFileWindow::LoadFromTheFileWindow(QWidget* parent) : QWidget(parent)
 
     lblSelectFile->setObjectName(nameof(lblSelectFile));
     lblSelectFile->setAlignment(Qt::AlignLeft);
+
+    pProfilesGroup = new QButtonGroup(this);
+    QLabel* lblSelectProfile = new QLabel(tr("Profile:"));
+    lblSelectProfile->setObjectName(nameof(lblSelectProfile));
+
+    QVBoxLayout* ltProfiles = new QVBoxLayout();
+    ltProfiles->addWidget(lblSelectProfile);
+
+    const QString activeProfileId = PROGRAM_CONSTANTS->HasActiveProfile()
+        ? PROGRAM_CONSTANTS->GetActiveProfile().GetId()
+        : QString();
+    bool hasSelectedProfile = false;
+    for (const auto& profile : PROGRAM_CONSTANTS->Profiles)
+    {
+        QRadioButton* button = new QRadioButton(profile.GetDisplayName());
+        button->setProperty("profileId", profile.GetId());
+        button->setObjectName(profile.GetId());
+        pProfilesGroup->addButton(button);
+        ltProfiles->addWidget(button);
+        connect(button, &QRadioButton::toggled, this, [this, button](const bool isChecked)
+        {
+            if (isChecked)
+                emit selectedProfileChanged(button->property("profileId").toString());
+        });
+
+        if (!hasSelectedProfile && (activeProfileId.isEmpty() || profile.GetId() == activeProfileId))
+        {
+            button->setChecked(true);
+            hasSelectedProfile = true;
+        }
+    }
 
     QLineEdit* lneFilePath = new QLineEdit();
     lneFilePath->setObjectName(nameof(lneFilePath));
@@ -82,6 +114,8 @@ LoadFromTheFileWindow::LoadFromTheFileWindow(QWidget* parent) : QWidget(parent)
     ltMain->setContentsMargins(80,0,80,0);
     ltMain->setAlignment(Qt::Alignment::enum_type::AlignCenter);
     ltMain->addStretch(3);
+    ltMain->addLayout(ltProfiles);
+    ltMain->addSpacing(15);
     ltMain->addWidget(lblSelectFile);
     ltMain->addSpacing(5);
     ltMain->addLayout(ltReview);
@@ -90,4 +124,20 @@ LoadFromTheFileWindow::LoadFromTheFileWindow(QWidget* parent) : QWidget(parent)
     ltMain->addStretch(1);
 
     setLayout(ltMain);
+}
+
+QString LoadFromTheFileWindow::GetSelectedFilePath() const
+{
+    const auto* lineEdit = findChild<QLineEdit*>("lneFilePath", Qt::FindChildrenRecursively);
+    return lineEdit != nullptr ? lineEdit->text() : QString();
+}
+
+QString LoadFromTheFileWindow::GetSelectedProfileId() const
+{
+    const auto* checkedButton = pProfilesGroup->checkedButton();
+
+    if (checkedButton == nullptr)
+        return QString();
+
+    return checkedButton->property("profileId").toString();
 }

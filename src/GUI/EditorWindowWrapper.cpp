@@ -53,8 +53,9 @@ void EditorWindowWrapper::EditorWindow_LanguageChanged()
     show();
 }
 
-void EditorWindowWrapper::EditorWindow_NewHotkeyFileSelected(const QString& filepath)
+void EditorWindowWrapper::EditorWindow_NewHotkeyFileSelected(const QString& filepath, const QString& profileId)
 {
+    PROGRAM_CONSTANTS->SetActiveProfile(profileId);
     WINDOW_MANAGER->SetCSFFilePath(filepath);
     WINDOW_MANAGER->EditorWindow_NewHotkeyFileSelected();
 }

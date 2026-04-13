@@ -1,0 +1,21 @@
+/* Zero Hour keeps the default base theme with a custom square checkbox. */
+
+QCheckBox::indicator
+{
+    width: 14px;
+    height: 14px;
+    background-color: rgba(177, 183, 255, 0.18);
+    border: 2px solid #b1b7ff;
+}
+
+QCheckBox::indicator:hover
+{
+    background-color: rgba(177, 183, 255, 0.28);
+    border-color: #d8dcff;
+}
+
+QCheckBox::indicator:checked
+{
+    background-color: #3543e7;
+    border-color: #d8dcff;
+}

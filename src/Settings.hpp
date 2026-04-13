@@ -17,7 +17,6 @@ private: // Data
     bool          ForceSystemLanguage;
     size_t        Language;
     bool          StatusBar;
-    size_t        SteamAppID;
     bool          SteamAPI;
 
 private: // Methods
@@ -36,8 +35,6 @@ public:
     const QSet<Qt::Key> GetAllowedKeys() const;
     /// @brief Returns value of current language from settings file corresponded to the hashtable from the `ProgramConstants`.
     const size_t GetLanguage() const;
-    /// @brief Return Steam APP ID code.
-    const size_t GetSteamAppID() const;
     /// @brief Returns status for console from settings file.
     const bool IsConsoleEnabled() const;
     /// @brief Returns status for Discord RPC from settings file.

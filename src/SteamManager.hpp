@@ -8,6 +8,7 @@ class SteamManager final
 {
 private: // Data
     QString appId;
+    bool    isInitialized = false;
 public:
     inline const static std::unique_ptr<SteamManager> Instance = std::make_unique<SteamManager>();
 

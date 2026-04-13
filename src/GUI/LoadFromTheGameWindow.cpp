@@ -6,8 +6,7 @@
 #include <QCheckBox>
 #include <QTranslator>
 
-#include "../Windows/Registry.hpp"
-#include "../Logger.hpp"
+#include "../ProgramConstants.hpp"
 #include "LoadFromTheGameWindow.hpp"
 
 LoadFromTheGameWindow::LoadFromTheGameWindow(QWidget* parent) : QWidget(parent)
@@ -34,21 +33,47 @@ LoadFromTheGameWindow::LoadFromTheGameWindow(QWidget* parent) : QWidget(parent)
     connect(btnOk,     &QPushButton::clicked, this, [=, this] { emit btnStartClicked(); });
     connect(btnCancel, &QPushButton::clicked, this, [=, this] { emit btnBackClicked(); });
 
-    // configure game buttons
-    QRadioButton* rdxGenerals = new QRadioButton(Windows::Registry::ToQString(Windows::Registry::Games::Generals));
-    rdxGenerals->setDisabled(true);
-    rdxGenerals->setObjectName(nameof(rdxGenerals));
-    QFont rbxGeneralsFont = rdxGenerals->font();
-    rbxGeneralsFont.setStrikeOut(true);
-    rdxGenerals->setFont(rbxGeneralsFont);
-
-    QRadioButton* rdxZeroHour = new QRadioButton(Windows::Registry::ToQString(Windows::Registry::Games::GeneralsZeroHour));
-    rdxZeroHour->setChecked(true);
-    rdxGenerals->setObjectName(nameof(rdxGenerals));
-
+    pProfilesGroup = new QButtonGroup(this);
     QVBoxLayout* ltChoiseGame = new QVBoxLayout();
-    ltChoiseGame->addWidget(rdxGenerals);
-    ltChoiseGame->addWidget(rdxZeroHour);
+    const QString activeProfileId = PROGRAM_CONSTANTS->HasActiveProfile()
+        ? PROGRAM_CONSTANTS->GetActiveProfile().GetId()
+        : QString();
+    bool hasSelectedProfile = false;
+    QRadioButton* firstButton = nullptr;
+
+    for (const auto& profile : PROGRAM_CONSTANTS->Profiles)
+    {
+        if (!profile.HasRegistryGame())
+            continue;
+
+        QRadioButton* button = new QRadioButton(profile.GetDisplayName());
+        button->setProperty("profileId", profile.GetId());
+        button->setObjectName(profile.GetId());
+        pProfilesGroup->addButton(button);
+        connect(button, &QRadioButton::toggled, this, [this, button](const bool isChecked)
+        {
+            if (isChecked)
+                emit selectedProfileChanged(button->property("profileId").toString());
+        });
+
+        if (firstButton == nullptr)
+            firstButton = button;
+
+        if (!hasSelectedProfile && profile.GetId() == activeProfileId)
+        {
+            button->setChecked(true);
+            hasSelectedProfile = true;
+        }
+
+        ltChoiseGame->addWidget(button);
+    }
+
+    if (!hasSelectedProfile && firstButton != nullptr)
+    {
+        firstButton->setChecked(true);
+    }
+
+    btnOk->setEnabled(firstButton != nullptr);
 
     // configure dialog view
     QVBoxLayout* ltMainBlock = new QVBoxLayout();
@@ -59,4 +84,14 @@ LoadFromTheGameWindow::LoadFromTheGameWindow(QWidget* parent) : QWidget(parent)
     ltMainBlock->addLayout(ltOkAndCancel);
     ltMainBlock->addStretch(1);
     setLayout(ltMainBlock);
+}
+
+QString LoadFromTheGameWindow::GetSelectedProfileId() const
+{
+    const auto* checkedButton = pProfilesGroup->checkedButton();
+
+    if (checkedButton == nullptr)
+        return QString();
+
+    return checkedButton->property("profileId").toString();
 }

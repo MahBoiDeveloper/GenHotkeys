@@ -12,6 +12,12 @@ DiscordManager::~DiscordManager()
 
 void DiscordManager::Initialize()
 {
+    if (isInitialized)
+    {
+        UpdateDiscordPresence();
+        return;
+    }
+
     LOGMSG("Initializing Discord RPC...");
     DiscordEventHandlers handlers;
     memset(&handlers, 0, sizeof(handlers));
@@ -20,12 +26,17 @@ void DiscordManager::Initialize()
     handlers.errored      = &HandleDiscordError;
     Discord_Initialize(appID, NULL, 1, NULL);
     UpdateDiscordPresence();
+    isInitialized = true;
     LOGMSG("Discord RPC is running");
 }
 
 void DiscordManager::Dispose()
 {
+    if (!isInitialized)
+        return;
+
     Discord_Shutdown();
+    isInitialized = false;
 }
 
 void DiscordManager::HandleDiscordReady(const DiscordUser* connectedUser)

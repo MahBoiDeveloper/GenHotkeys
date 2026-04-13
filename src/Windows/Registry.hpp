@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <map>
+#include <vector>
 #include <QString>
 
 namespace Windows
@@ -26,13 +27,21 @@ namespace Windows
             HKCU
         };
 
-        /// @brief Paths in Window's registry to the C&C: Generals and C&C: Generals — Zero Hour
-        inline static const std::map<Games, std::map<Arch, std::wstring>> PATHS_TO_GAMES =
+        /// @brief Candidate registry keys for installed C&C: Generals and Zero Hour.
+        inline static const std::map<Games, std::vector<std::wstring>> PATHS_TO_GAMES =
         {
-            {Games::Generals,      {{Arch::Win32, L"SOFTWARE\\Electronic Arts\\EA Games\\Generals"},
-                                    {Arch::Win64, L"SOFTWARE\\WOW6432Node\\Electronic Arts\\EA Games\\Generals"}}},
-            {Games::GeneralsZeroHour, {{Arch::Win32, L"SOFTWARE\\Electronic Arts\\EA Games\\Command and Conquer Generals Zero Hour"},
-                                       {Arch::Win64, L"SOFTWARE\\WOW6432Node\\Electronic Arts\\EA Games\\Command and Conquer Generals Zero Hour"}}},
+            {Games::Generals,
+                {
+                    L"SOFTWARE\\Electronic Arts\\EA Games\\Generals",
+                    L"SOFTWARE\\WOW6432Node\\Electronic Arts\\EA Games\\Generals"
+                }},
+            {Games::GeneralsZeroHour,
+                {
+                    L"SOFTWARE\\Electronic Arts\\EA Games\\Command and Conquer Generals Zero Hour",
+                    L"SOFTWARE\\WOW6432Node\\Electronic Arts\\EA Games\\Command and Conquer Generals Zero Hour",
+                    L"SOFTWARE\\Electronic Arts\\EA Games\\ZeroHour",
+                    L"SOFTWARE\\WOW6432Node\\Electronic Arts\\EA Games\\ZeroHour"
+                }},
         };
 
     public: // Methods

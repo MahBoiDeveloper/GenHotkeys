@@ -5,8 +5,10 @@
 #include <QPair>
 #include <QSize>
 #include <QObject>
+#include <QVector>
 
 #include "Extensions/StringExt.hpp"
+#include "Profile.hpp"
 #include "Settings.hpp"
 
 #define PROGRAM_CONSTANTS ProgramConstants::Instance
@@ -25,10 +27,6 @@ public: // Immutable data
     // Singleton access instance
     inline const static std::unique_ptr<ProgramConstants> Instance = std::make_unique<ProgramConstants>();
 
-    // Steam data
-    const size_t ZH_STEAM_APP_ID       = 2732960;
-    const size_t GENERALS_STEAM_APP_ID = 2229870;
-    
     // Language
     const size_t DEFAULT_LANGUAGE_CODE = 0;
 
@@ -38,13 +36,13 @@ public: // Immutable data
     // Folders
     const QString RESOURCE_FOLDER         = "Resources";
     const QString BINARIES_FOLDER         = RESOURCE_FOLDER + "\\Binaries";
+    const QString PROFILES_FOLDER         = RESOURCE_FOLDER + "/Profiles";
     const QString TRANSLATIONS_FOLDER     = RESOURCE_FOLDER + "/Translations";
     const QString ICONS_FOLDER            = RESOURCE_FOLDER + "/Icons";
     const QString THEME_FOLDER            = RESOURCE_FOLDER + "/Theme";
     const QString QT_ICONS_FOLDER         = ":/icons";
     
     // Resource files
-    const QString TECH_TREE_FILE          = RESOURCE_FOLDER + "/TechTree.json";
     const QString SETTINGS_FILE           = RESOURCE_FOLDER + "/Settings.json";
     const QString STYLES_SHEET_FILE       = THEME_FOLDER    + "/Styles.css";
 
@@ -55,8 +53,8 @@ public: // Immutable data
     const QString GEARS_ICON_FILE         = QT_ICONS_FOLDER + "/Gears.webp";
 
     // Window titles
-    const QString COMMON_TITLE            = "C&C: Generals Zero Hour Hotkey Editor";
-    const QString SHORT_COMMON_TITLE      = "C&C: GZH Hotkey Editor";
+    const QString COMMON_TITLE            = "Generals Hotkey Editor";
+    const QString SHORT_COMMON_TITLE      = "Generals Hotkey Editor";
     const QString EDITOR_TITLE            = SHORT_COMMON_TITLE + " — Editor";
     const QString LOAD_TITLE              = SHORT_COMMON_TITLE + " — Load";
     const QString CREATE_TITLE            = SHORT_COMMON_TITLE + " — New Set Up";
@@ -81,7 +79,8 @@ public: // Immutable data
 
     // Error strings
     const QString SETTINGS_NO_FOUND       = "Unable to find \"Settings.json\" in \"Resource\" folder.";
-    const QString TECH_TREE_NO_FOUND      = "Unable to find \"TechTree.json\" in \"Resource\" folder.";
+    const QString PROFILES_NO_FOUND       = "Unable to find \"Resources/Profiles\" folder.";
+    const QString PROFILES_EMPTY          = "\"Resources/Profiles\" does not contain any valid profiles.";
     const QString THEME_FOLDER_NO_FOUND   = "Unable to find \"Resource/Theme\" folder.";
     const QString ICONS_FOLDER_NO_FOUND   = "Unable to find \"Resource/Icons\" folder.";
     const QString TRANSLATIONS_NO_FOUND   = "Unable to find \"Resource/Translations\" folder.";
@@ -93,6 +92,7 @@ public: // Immutable data
     const QString CSF_DOESNT_EXIST_ERROR  = QObject::tr("Unable to find selected CSF file.");
     const QString CSF_NO_CTLBAR_ERROR     = QObject::tr("Choosen CSF file doesn't have CONTROLBAR category. Make sure that you are load correct file.");
     const QString CSF_NO_OBJECT_ERROR     = QObject::tr("Choosen CSF file doesn't have OBJECT category. Make sure that you are load correct file.");
+    const QString GAME_PATH_NOT_FOUND     = QObject::tr("Unable to find the installed game directory for \"%1\".");
     const QString CSF_EMPTY_DATA_ENGLISH  = QObject::tr("Unable to find \"generals.csf\" file in \"%1\" folder.");
     const QString CSF_NO_CSF_IN_BIG       = QObject::tr("Unable to find CSF file inside BIG archive \"%1\"");
 
@@ -152,11 +152,21 @@ public: // Immutable data
 public: // Mutable data
     std::unique_ptr<Settings>                       pSettingsFile = nullptr;
     QMap<size_t, QPair<QString, QString>>           Languages     = {};
+    QVector<Profile>                                Profiles      = {};
+    std::unique_ptr<Profile>                        pActiveProfile = nullptr;
 
 public: // Methods
     explicit ProgramConstants();
     /// @brief Parse `Resources\Settings.json` to the `Settings` class.
     void InitializeFileSettings();
+    /// @brief Parse profile descriptors from `Resources/Profiles`.
+    void InitializeProfiles();
     /// @brief Parse `*.qm` files in the `Resources\Translations` folder.
     void InitializeTranslations();
+    /// @brief Set currently active profile.
+    bool SetActiveProfile(const QString& profileId);
+    /// @brief Returns true if any profile is active.
+    bool HasActiveProfile() const;
+    /// @brief Returns currently active profile.
+    const Profile& GetActiveProfile() const;
 };

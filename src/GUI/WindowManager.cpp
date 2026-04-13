@@ -1,15 +1,19 @@
 #include <QFileInfo>
 #include <QMessageBox>
 #include <QApplication>
+#include <QDir>
+#include <QFile>
 
 #include "../Extensions/L10NExt.hpp"
 #include "../Parsers/CSFParser.hpp"
 #include "../Windows/Registry.hpp"
 #include "../Windows/Locale.hpp"
 #include "../FactionsManager.hpp"
+#include "../DiscordManager.hpp"
 #include "../Logger.hpp"
 #include "../Convert.hpp"
 #include "../Exception.hpp"
+#include "../SteamManager.hpp"
 
 #include "ImageManager.hpp"
 #include "WindowManager.hpp"
@@ -17,26 +21,79 @@
 WindowManager::WindowManager()
 {    
     SetTranslator();
+    UpdateWindowTitle();
 
     qApp->setWindowIcon(QIcon(QPixmap::fromImage(ImageManager::DecodeEditorWebpIcon())));
-    
-    LOGMSG("Loading \"" + PROGRAM_CONSTANTS->STYLES_SHEET_FILE + "\"...");
-    QFile css{PROGRAM_CONSTANTS->STYLES_SHEET_FILE};
-    if (css.open(QIODevice::ReadOnly))
-    {
-        qApp->setStyleSheet(css.readAll());
-        css.close();
-        LOGMSG("Styles sheet has been loaded");
-    }
-    else
-    {
-        LOGMSG("Unable to read the style file");
-    }
+    ApplyTheme();
 
     LOGMSG("Loading launch window...");
     pStartUpWindow = new SetUpWindowsWrapper();
     pStartUpWindow->setWindowTitle(strWindowName);
     LOGMSG("Launch window has been loaded");
+}
+
+bool WindowManager::ApplyTheme(const Profile* profile)
+{
+    LOGMSG("Loading \"" + PROGRAM_CONSTANTS->STYLES_SHEET_FILE + "\"...");
+
+    QFile baseCss{PROGRAM_CONSTANTS->STYLES_SHEET_FILE};
+    if (!baseCss.open(QIODevice::ReadOnly))
+    {
+        LOGMSG("Unable to read the style file");
+        return false;
+    }
+
+    QString styleSheet = QString::fromUtf8(baseCss.readAll());
+    baseCss.close();
+
+    if (profile != nullptr)
+    {
+        const QString overridePath = profile->GetThemeOverridesPath();
+
+        if (QFile::exists(overridePath))
+        {
+            LOGMSG("Loading profile theme overrides \"" + overridePath + "\"...");
+
+            QFile overridesCss{overridePath};
+            if (overridesCss.open(QIODevice::ReadOnly))
+            {
+                QString overrides = QString::fromUtf8(overridesCss.readAll());
+                overridesCss.close();
+
+                overrides.replace("@PROFILE_THEME_ROOT@", QDir::fromNativeSeparators(profile->GetThemeFolderPath()));
+                styleSheet += "\n\n" + overrides;
+            }
+            else
+            {
+                LOGMSG("Unable to read profile theme override file");
+            }
+        }
+    }
+
+    qApp->setStyleSheet(styleSheet);
+    LOGMSG("Styles sheet has been applied");
+    return true;
+}
+
+bool WindowManager::ApplyTheme()
+{
+    if (PROGRAM_CONSTANTS->HasActiveProfile())
+        return ApplyTheme(&PROGRAM_CONSTANTS->GetActiveProfile());
+
+    return ApplyTheme(nullptr);
+}
+
+bool WindowManager::PreviewThemeForProfile(const QString& profileId)
+{
+    for (const auto& profile : PROGRAM_CONSTANTS->Profiles)
+    {
+        if (profile.GetId().compare(profileId, Qt::CaseInsensitive) != 0)
+            continue;
+
+        return ApplyTheme(&profile);
+    }
+
+    return ApplyTheme();
 }
 
 bool WindowManager::InitializeCSFParser()
@@ -98,6 +155,20 @@ void WindowManager::StartUpWindow_AcceptConfiguration()
     if (!InitializeCSFParser())
         return;
 
+    if (PROGRAM_CONSTANTS->HasActiveProfile())
+    {
+        FACTIONS_MANAGER = std::make_unique<FactionManager>();
+        SetTranslator();
+        UpdateWindowTitle();
+        ApplyTheme();
+    }
+
+    if (PROGRAM_CONSTANTS->pSettingsFile->IsSteamIntegrationEnabled())
+        STEAM_MANAGER->Initialize();
+
+    if (PROGRAM_CONSTANTS->pSettingsFile->IsDiscordRPCEnabled())
+        DISCORD_MANAGER->Initialize();
+
     pStartUpWindow->hide();
 
     LOGMSG("Loading editor window...");
@@ -122,7 +193,23 @@ void WindowManager::SetTranslator()
     pAppTranslator = new QTranslator();
     pAppTranslator->load(lngShortName, PROGRAM_CONSTANTS->TRANSLATIONS_FOLDER);
     qApp->installTranslator(pAppTranslator);
-    FACTIONS_MANAGER->UpdateFactionNames();
+
+    if (FACTIONS_MANAGER != nullptr)
+        FACTIONS_MANAGER->UpdateFactionNames();
+}
+
+void WindowManager::UpdateWindowTitle()
+{
+    if (PROGRAM_CONSTANTS->HasActiveProfile())
+        strWindowName = PROGRAM_CONSTANTS->GetActiveProfile().GetWindowTitle();
+    else
+        strWindowName = PROGRAM_CONSTANTS->COMMON_TITLE;
+
+    if (pStartUpWindow != nullptr)
+        pStartUpWindow->setWindowTitle(strWindowName);
+
+    if (pHotkeysEditor != nullptr)
+        pHotkeysEditor->setWindowTitle(strWindowName);
 }
 
 void WindowManager::Show()                               { pStartUpWindow->show(); }
@@ -133,7 +220,6 @@ void WindowManager::EditorWindow_NewHotkeyFileSelected()
     CSF_PARSER = nullptr;
     pHotkeysEditor->close();
     pHotkeysEditor = nullptr;
-    InitializeCSFParser();
     StartUpWindow_AcceptConfiguration();
 }
 

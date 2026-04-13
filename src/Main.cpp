@@ -49,9 +49,6 @@ int main(int argc, const char** argv)
     if (!filesystem::exists(PROGRAM_CONSTANTS->SETTINGS_FILE.toStdString().c_str()))
         return ShowErrorMessage(PROGRAM_CONSTANTS->SETTINGS_NO_FOUND);
 
-    if (!filesystem::exists(PROGRAM_CONSTANTS->TECH_TREE_FILE.toStdString().c_str()))
-        return ShowErrorMessage(PROGRAM_CONSTANTS->TECH_TREE_NO_FOUND);
-
     if (!filesystem::exists(PROGRAM_CONSTANTS->ICONS_FOLDER.toStdString().c_str()))
         return ShowErrorMessage(PROGRAM_CONSTANTS->ICONS_FOLDER_NO_FOUND);
 
@@ -61,23 +58,19 @@ int main(int argc, const char** argv)
     if (!filesystem::exists(PROGRAM_CONSTANTS->TRANSLATIONS_FOLDER.toStdString().c_str()))
         return ShowErrorMessage(PROGRAM_CONSTANTS->TRANSLATIONS_NO_FOUND);
 
+    if (!filesystem::exists(PROGRAM_CONSTANTS->PROFILES_FOLDER.toStdString().c_str()))
+        return ShowErrorMessage(PROGRAM_CONSTANTS->PROFILES_NO_FOUND);
+
     PROGRAM_CONSTANTS->InitializeTranslations();
     PROGRAM_CONSTANTS->InitializeFileSettings();
+    PROGRAM_CONSTANTS->InitializeProfiles();
+
+    if (PROGRAM_CONSTANTS->Profiles.isEmpty())
+        return ShowErrorMessage(PROGRAM_CONSTANTS->PROFILES_EMPTY);
 
     // Show console, that by default is hiding by Logger class
     if (PROGRAM_CONSTANTS->pSettingsFile->IsConsoleEnabled()) 
         ShowWindow(GetConsoleWindow(), SW_SHOW);
-
-    // Enable Steam integration and create steam_appid.txt, if it doesn't exist
-    if (PROGRAM_CONSTANTS->pSettingsFile->IsSteamIntegrationEnabled())
-        STEAM_MANAGER->Initialize();
-    
-    // Enable Discord RPC
-    if (PROGRAM_CONSTANTS->pSettingsFile->IsDiscordRPCEnabled())
-        DISCORD_MANAGER->Initialize();
-
-    // Initialize TechTree.json parsing
-    FACTIONS_MANAGER = make_unique<FactionManager>();
 
     // Define logger as the singleton class, that could be used anywhere in the project
     WINDOW_MANAGER = make_unique<WindowManager>();

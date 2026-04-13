@@ -1,0 +1,17 @@
+{
+    "Id"               : "generals",
+    "DisplayName"      : "Generals",
+    "WindowTitle"      : "Generals Hotkey Editor",
+    "ShortWindowTitle" : "Generals Hotkey Editor",
+    "RegistryGame"     : "Generals",
+    "SteamAppID"       : 2229870,
+    "CSFRelativePath"  : "Data\\English\\generals.csf",
+    "TechTreeFile"     : "TechTree.json",
+    "SortOrder"        : 1,
+    "FactionGroups"    :
+    [
+        ["USA"],
+        ["PRC"],
+        ["GLA"]
+    ]
+}

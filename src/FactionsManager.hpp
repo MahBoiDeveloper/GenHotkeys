@@ -9,7 +9,7 @@
 class FactionManager final
 {
 private: // Data
-    const JSONFile TECH_TREE_SOURCE{PROGRAM_CONSTANTS->TECH_TREE_FILE};
+    const JSONFile TECH_TREE_SOURCE;
     QVector<Faction> vFactions;
 public:
     inline static std::unique_ptr<FactionManager> Instance = nullptr;
@@ -23,6 +23,8 @@ public:
     int Count();
     /// @brief Return faction by its index in container.
     const Faction& FindByIndex(int position);
+    /// @brief Returns true if faction with short name exists.
+    bool ContainsShortName(const QString& name) const;
     /// @brief Return faction reference.
     const Faction& FindByShortName(const QString& name);
     /// @brief Updates faction names to the current locale.
