@@ -58,6 +58,26 @@ QComboBox::up-arrow   { image: url(Resources/Theme/ScrollArrowUp.webp); }
 /* ↓ Doesn't work */
 QComboBox#cmbLanguage { height: 25px; }
 
+QCheckBox::indicator
+{
+    width: 14px;
+    height: 14px;
+    background-color: rgba(177, 183, 255, 0.18);
+    border: 2px solid #b1b7ff;
+}
+
+QCheckBox::indicator:hover
+{
+    background-color: rgba(177, 183, 255, 0.28);
+    border-color: #d8dcff;
+}
+
+QCheckBox::indicator:checked
+{
+    background-color: #d8dcff;
+    border-color: white;
+}
+
 QPushButton
 {
     font-family: Calibri;
@@ -116,7 +136,7 @@ LoadFromTheFileWindow, SetUpWindowsWrapper, LoadFromTheGameWindow, SettingsWindo
     background-color: black;
 }
 
-/* Main editor window style settings */
+/* Editor window style settings */
 EditorWindow
 {
     border-image: url(Resources/Theme/EditorBackground.webp) 0 0 0 0 stretch stretch;
