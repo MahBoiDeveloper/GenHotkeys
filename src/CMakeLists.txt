@@ -57,7 +57,7 @@
         PRIVATE
         ${STEAMWORKS_SDK_HEADERS}
         ${SOURCES}
-        "GUI/QtSources/EditorDescription.rc"
+        "Resources/QtSources/EditorDescription.rc"
     )
 
     # Set output directory
@@ -129,7 +129,7 @@
     add_executable(
         ${STARTER_TARGET_NAME}
         "MainStarter.cpp"
-        "GUI/QtSources/StarterDescription.rc"
+        "Resources/QtSources/StarterDescription.rc"
     )
 
     # Define output directory and file name

@@ -35,7 +35,7 @@
     target_sources(${TARGET_NAME} PRIVATE ${SOURCES})
 
     # Assign qt sources file to the GUI target
-    target_sources(${TARGET_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/QtSources/CompilationSources.qrc)
+    target_sources(${TARGET_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../Resources/QtSources/CompilationSources.qrc)
 
     # link qt libs
     foreach(LIB ${QT_LIBS})
@@ -58,7 +58,7 @@
     foreach(LANGUAGE ${LANGUAGES})
 
         # Define source translation file
-        set(TS_FILE ${CMAKE_CURRENT_SOURCE_DIR}/translations/${LANGUAGE}.ts)
+        set(TS_FILE ${CMAKE_CURRENT_SOURCE_DIR}/../Resources/Translations/${LANGUAGE}.ts)
 
         # Define all source translation files
         set(TRANSLATION_SOURCES ${TRANSLATION_SOURCES} ${TS_FILE})
@@ -76,7 +76,7 @@
             COMMAND ${LRELEASE_EXECUTABLE} ${TS_FILE} -qm ${QM_FILE}
             MAIN_DEPENDENCY ${SOURCES} ${TS_FILE}
             DEPENDS ${SOURCES} ${TS_FILE}
-            WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/../Resources
         )
 
     endforeach()
@@ -125,15 +125,15 @@
 # Copying folders with configs, but without update
     # Copy icons
     file(
-        COPY "${CMAKE_CURRENT_SOURCE_DIR}/Icons"
+        COPY "${CMAKE_CURRENT_SOURCE_DIR}/../Resources/Icons"
         DESTINATION ${PROJECT_DESTINATION_RESOURCES_FOLDER}
     )
     
     # Copy theme files
     file(
-        COPY "${CMAKE_CURRENT_SOURCE_DIR}/Theme"
+        COPY "${CMAKE_CURRENT_SOURCE_DIR}/../Resources/Theme"
         DESTINATION ${PROJECT_DESTINATION_RESOURCES_FOLDER}
     )
 
 # Copy Styles.css with updates
-    configure_file("${CMAKE_CURRENT_SOURCE_DIR}/Theme/Styles.css" "${PROJECT_DESTINATION_RESOURCES_FOLDER}/Theme/Styles.css")
+    configure_file("${CMAKE_CURRENT_SOURCE_DIR}/../Resources/Theme/Styles.css" "${PROJECT_DESTINATION_RESOURCES_FOLDER}/Theme/Styles.css")
