@@ -1,6 +1,6 @@
 # General settings
     # Definitions from ../CMakeLists.txt
-    get_property(PROJECT_DESTINATION_RESOURCES_FOLDER GLOBAL PROPERTY PROJECT_DESTINATION_SOURCES_FOLDER)
+    get_property(PROJECT_DESTINATION_RESOURCES_FOLDER GLOBAL PROPERTY PROJECT_DESTINATION_RESOURCES_FOLDER)
     get_property(PROJECT_RESOURCE_FOLDER              GLOBAL PROPERTY PROJECT_RESOURCE_FOLDER)
     get_property(PROJECT_LIBS_FOLDER                  GLOBAL PROPERTY PROJECT_LIBS_FOLDER)
 
@@ -121,18 +121,4 @@
     # Link the libwebp target to the GUI target
     target_link_libraries(${TARGET_NAME} PRIVATE ${LIB_WEBP_TARGET_NAME})
 
-# Copying folders with configs, but without update
-    # Copy icons
-    file(
-        COPY "${PROJECT_RESOURCE_FOLDER}/Icons"
-        DESTINATION ${PROJECT_DESTINATION_RESOURCES_FOLDER}
-    )
-    
-    # Copy theme files
-    file(
-        COPY "${PROJECT_RESOURCE_FOLDER}/Theme"
-        DESTINATION ${PROJECT_DESTINATION_RESOURCES_FOLDER}
-    )
-
-# Copy Styles.css with updates
-    configure_file("${PROJECT_RESOURCE_FOLDER}/Theme/Styles.css" "${PROJECT_DESTINATION_RESOURCES_FOLDER}/Theme/Styles.css")
+# Profile resources are copied by the root src CMakeLists.txt.
