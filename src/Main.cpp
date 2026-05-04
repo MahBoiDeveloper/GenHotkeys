@@ -46,11 +46,12 @@ int main(int argc, const char** argv)
         filesystem::current_path(workingDirectory.toStdWString());
     }
 
-    if (!filesystem::exists(PROGRAM_CONSTANTS->SETTINGS_FILE.toStdString().c_str()))
-        return ShowErrorMessage(PROGRAM_CONSTANTS->SETTINGS_NO_FOUND);
+    // Check if needed folders are exist
+    if (!filesystem::exists(PROGRAM_CONSTANTS->PROFILES_FOLDER.toStdString().c_str()))
+        return ShowErrorMessage(PROGRAM_CONSTANTS->PROFILES_FOLDER_NO_FOUND);
 
-    if (!filesystem::exists(PROGRAM_CONSTANTS->TECH_TREE_FILE.toStdString().c_str()))
-        return ShowErrorMessage(PROGRAM_CONSTANTS->TECH_TREE_NO_FOUND);
+    if (!filesystem::exists(PROGRAM_CONSTANTS->PROFILE_FOLDER.toStdString().c_str()))
+        return ShowErrorMessage(PROGRAM_CONSTANTS->PROFILE_FOLDER_NO_FOUND);
 
     if (!filesystem::exists(PROGRAM_CONSTANTS->ICONS_FOLDER.toStdString().c_str()))
         return ShowErrorMessage(PROGRAM_CONSTANTS->ICONS_FOLDER_NO_FOUND);
@@ -61,6 +62,20 @@ int main(int argc, const char** argv)
     if (!filesystem::exists(PROGRAM_CONSTANTS->TRANSLATIONS_FOLDER.toStdString().c_str()))
         return ShowErrorMessage(PROGRAM_CONSTANTS->TRANSLATIONS_NO_FOUND);
 
+    // Check if needed files are exist
+    if (!filesystem::exists(PROGRAM_CONSTANTS->SETTINGS_FILE.toStdString().c_str()))
+        return ShowErrorMessage(PROGRAM_CONSTANTS->SETTINGS_NO_FOUND);
+
+    if (!filesystem::exists(PROGRAM_CONSTANTS->TECH_TREE_FILE.toStdString().c_str()))
+        return ShowErrorMessage(PROGRAM_CONSTANTS->TECH_TREE_NO_FOUND);
+
+    if (!filesystem::exists(PROGRAM_CONSTANTS->GLOBAL_STYLES_SHEET_FILE.toStdString().c_str()))
+        return ShowErrorMessage(PROGRAM_CONSTANTS->GLOBAL_STYLES_SHEET_NO_FOUND);
+
+    if (!filesystem::exists(PROGRAM_CONSTANTS->STYLES_SHEET_FILE.toStdString().c_str()))
+        return ShowErrorMessage(PROGRAM_CONSTANTS->STYLES_SHEET_NO_FOUND);
+
+    // Finish init the ProgramConstants singleton
     PROGRAM_CONSTANTS->InitializeTranslations();
     PROGRAM_CONSTANTS->InitializeFileSettings();
 

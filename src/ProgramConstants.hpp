@@ -28,7 +28,7 @@ public: // Immutable data
     // Steam data
     const size_t ZH_STEAM_APP_ID       = 2732960;
     const size_t GENERALS_STEAM_APP_ID = 2229870;
-    
+
     // Language
     const size_t DEFAULT_LANGUAGE_CODE = 0;
 
@@ -39,14 +39,20 @@ public: // Immutable data
     const QString RESOURCE_FOLDER         = "Resources";
     const QString BINARIES_FOLDER         = RESOURCE_FOLDER + "\\Binaries";
     const QString TRANSLATIONS_FOLDER     = RESOURCE_FOLDER + "/Translations";
-    const QString ICONS_FOLDER            = RESOURCE_FOLDER + "/Icons";
-    const QString THEME_FOLDER            = RESOURCE_FOLDER + "/Theme";
+    const QString PROFILES_FOLDER         = RESOURCE_FOLDER + "/Profiles";
+    const QString G_PROFILE_FOLDER        = "Generals";
+    const QString GZH_PROFILE_FOLDER      = "GeneralsZH";
+    const QString DEFAULT_PROFILE_NAME    = G_PROFILE_FOLDER;
+    const QString PROFILE_FOLDER          = PROFILES_FOLDER + "/" + DEFAULT_PROFILE_NAME;
+    const QString ICONS_FOLDER            = PROFILE_FOLDER + "/Images";
+    const QString THEME_FOLDER            = PROFILE_FOLDER + "/Theme";
     const QString QT_ICONS_FOLDER         = ":/icons";
-    
+
     // Resource files
-    const QString TECH_TREE_FILE          = RESOURCE_FOLDER + "/TechTree.json";
-    const QString SETTINGS_FILE           = RESOURCE_FOLDER + "/Settings.json";
-    const QString STYLES_SHEET_FILE       = THEME_FOLDER    + "/Styles.css";
+    const QString TECH_TREE_FILE           = PROFILE_FOLDER  + "/TechTree.json";
+    const QString SETTINGS_FILE            = RESOURCE_FOLDER + "/Settings.json";
+    const QString GLOBAL_STYLES_SHEET_FILE = PROFILES_FOLDER + "/GlobalStyles.css";
+    const QString STYLES_SHEET_FILE        = THEME_FOLDER     + "/Styles.css";
 
     // Build-in files
     const QString MISSING_ICON_FILE       = QT_ICONS_FOLDER + "/NoImageSmall.webp";
@@ -80,12 +86,16 @@ public: // Immutable data
     const QSize   EDITOR_INITIAL_WINDOW_SIZE = QSize(1200, 800);
 
     // Error strings
-    const QString SETTINGS_NO_FOUND       = "Unable to find \"Settings.json\" in \"Resource\" folder.";
-    const QString TECH_TREE_NO_FOUND      = "Unable to find \"TechTree.json\" in \"Resource\" folder.";
-    const QString THEME_FOLDER_NO_FOUND   = "Unable to find \"Resource/Theme\" folder.";
-    const QString ICONS_FOLDER_NO_FOUND   = "Unable to find \"Resource/Icons\" folder.";
-    const QString TRANSLATIONS_NO_FOUND   = "Unable to find \"Resource/Translations\" folder.";
-    const QString UNKNOWN_ERROR           = "Unknown error has been occured.";
+    const QString SETTINGS_NO_FOUND            = "Unable to find \"" + SETTINGS_FILE + "\".";
+    const QString PROFILES_FOLDER_NO_FOUND     = "Unable to find \"" + PROFILES_FOLDER + "\" folder.";
+    const QString PROFILE_FOLDER_NO_FOUND      = "Unable to find default profile folder \"" + PROFILE_FOLDER + "\".";
+    const QString TECH_TREE_NO_FOUND           = "Unable to find \"" + TECH_TREE_FILE + "\".";
+    const QString THEME_FOLDER_NO_FOUND        = "Unable to find \"" + THEME_FOLDER + "\" folder.";
+    const QString ICONS_FOLDER_NO_FOUND        = "Unable to find \"" + ICONS_FOLDER + "\" folder.";
+    const QString GLOBAL_STYLES_SHEET_NO_FOUND = "Unable to find \"" + GLOBAL_STYLES_SHEET_FILE + "\".";
+    const QString STYLES_SHEET_NO_FOUND        = "Unable to find \"" + STYLES_SHEET_FILE + "\".";
+    const QString TRANSLATIONS_NO_FOUND        = "Unable to find \"" + TRANSLATIONS_FOLDER + "\" folder.";
+    const QString UNKNOWN_ERROR                = "Unknown error has been occured.";
 
     // Translated error strings
     const QString CSF_ERROR_HEADER        = QObject::tr("Error with CSF file");

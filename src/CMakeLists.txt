@@ -150,7 +150,6 @@
     # Declare json files
     set(
         ADDITIONAL_RESOURCES
-        "${PROJECT_RESOURCE_FOLDER}/TechTree.json"
         "${PROJECT_RESOURCE_FOLDER}/Settings.json"
     )
 
@@ -162,6 +161,20 @@
             COPYONLY
         )
     endforeach()
+
+    # Copy profiles
+    file(
+        REMOVE_RECURSE
+        "${PROJECT_DESTINATION_RESOURCES_FOLDER}/Profiles"
+        "${PROJECT_DESTINATION_RESOURCES_FOLDER}/Icons"
+        "${PROJECT_DESTINATION_RESOURCES_FOLDER}/Theme"
+        "${PROJECT_DESTINATION_RESOURCES_FOLDER}/TechTree.json"
+    )
+
+    file(
+        COPY "${PROJECT_RESOURCE_FOLDER}/Profiles"
+        DESTINATION ${PROJECT_DESTINATION_RESOURCES_FOLDER}
+    )
 
     # Create hotkey preset directory
     file(MAKE_DIRECTORY ${PROJECT_DESTINATION_RESOURCES_FOLDER}/Presets)

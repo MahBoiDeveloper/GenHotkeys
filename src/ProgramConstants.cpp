@@ -24,7 +24,7 @@ void ProgramConstants::InitializeTranslations()
         return;
     }
 
-    for (const auto& file : transDir.entryInfoList(QStringList( "*.qm" ), QDir::Filter::Files))
+    for (const auto& file : transDir.entryInfoList(QStringList("*.qm"), QDir::Filter::Files))
     {
         ++i;
         LOGMSG("Listed translation: {" + file.completeBaseName().toLower() + ", " + Windows::Locale::LanguageName(file.completeBaseName().toLower()) + "}");
