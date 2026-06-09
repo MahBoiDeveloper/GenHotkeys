@@ -16,8 +16,8 @@
 
     # Look at cmake.org about how to link .dlls           - https://cmake.org/pipermail/cmake/2018-August/068011.html
     # And look at gnu.org about how to work ld.exe linker - https://ftp.gnu.org/old-gnu/Manuals/ld-2.9.1/html_node/ld_3.html#:~:text=Output%20Sections).-,%2D%2Dwhole%2Darchive,-For%20each%20archive
-    # --no-whole-archive used due to because --whole-archive gives error at linking time with .rc files
-    # 3 days pissing off cmake and this fucking config (c) mah_boi
+    # --no-whole-archive used because --whole-archive gives an error at linking time with .rc files
+    # 3 days cmake and this fucking config pissing me off (c) mah_boi
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static-libgcc -static-libstdc++ -static -lwinpthread")
 
 # Main target configuration
