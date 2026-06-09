@@ -121,18 +121,5 @@
     # Link the libwebp target to the GUI target
     target_link_libraries(${TARGET_NAME} PRIVATE ${LIB_WEBP_TARGET_NAME})
 
-# Copying folders with configs, but without update
-    # Copy icons
-    file(
-        COPY "${PROJECT_RESOURCE_FOLDER}/Icons"
-        DESTINATION ${PROJECT_DESTINATION_RESOURCES_FOLDER}
-    )
-    
-    # Copy theme files
-    file(
-        COPY "${PROJECT_RESOURCE_FOLDER}/Theme"
-        DESTINATION ${PROJECT_DESTINATION_RESOURCES_FOLDER}
-    )
-
 # Copy Styles.css with updates
     configure_file("${PROJECT_RESOURCE_FOLDER}/Theme/Styles.css" "${PROJECT_DESTINATION_RESOURCES_FOLDER}/Theme/Styles.css")

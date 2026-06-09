@@ -146,6 +146,12 @@
         -DPROJECT_EXE_RELATIVE_PATH="$<PATH:RELATIVE_PATH,$<TARGET_FILE:${MAIN_TARGET_NAME}>,${PROJECT_DESTINATION_FOLDER}>"
     )
 
+# Copying Resource folder with subfolders, configs and files
+    file(
+        COPY "${PROJECT_RESOURCE_FOLDER}"
+        DESTINATION ${PROJECT_DESTINATION_RESOURCES_FOLDER}/..
+    )
+
 # Managing additional source files
     # Declare json files
     set(
@@ -154,29 +160,11 @@
         "${PROJECT_RESOURCE_FOLDER}/Settings.json"
     )
 
-    # Copy json files
+    # Copy json files if file updates
     foreach(CURRENT_FILE ${ADDITIONAL_RESOURCES})
         configure_file(
             ${CURRENT_FILE}
             ${PROJECT_DESTINATION_RESOURCES_FOLDER}
-            COPYONLY
-        )
-    endforeach()
-
-    # Create hotkey preset directory
-    file(MAKE_DIRECTORY ${PROJECT_DESTINATION_RESOURCES_FOLDER}/Presets)
-
-    # Find hotkey preset files
-    file(
-        GLOB_RECURSE DATA_SAMPLES_FILES
-        ${CMAKE_CURRENT_SOURCE_DIR}/Presets/*
-    )
-    
-    # Copy hotkey preset files
-    foreach(CURRENT_FILE ${DATA_SAMPLES_FILES})
-        configure_file(
-            ${CURRENT_FILE}
-            ${PROJECT_DESTINATION_RESOURCES_FOLDER}/Presets
             COPYONLY
         )
     endforeach()
