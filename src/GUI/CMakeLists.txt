@@ -122,3 +122,5 @@
     target_link_libraries(${TARGET_NAME} PRIVATE ${LIB_WEBP_TARGET_NAME})
 
 # Profile resources are copied by the root src CMakeLists.txt.
+# Copy Styles.css with updates
+    configure_file("${PROJECT_RESOURCE_FOLDER}/Theme/Styles.css" "${PROJECT_DESTINATION_RESOURCES_FOLDER}/Theme/Styles.css")
