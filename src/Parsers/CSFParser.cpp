@@ -1,10 +1,10 @@
 #include <sstream>
 #include <QStringList>
 
+#include "../Extensions/ExceptionExt.hpp"
 #include "../Extensions/L10NExt.hpp"
 #include "../Logger.hpp"
 #include "../Convert.hpp"
-#include "../Exception.hpp"
 #include "CSFParser.hpp"
 
 using namespace std;

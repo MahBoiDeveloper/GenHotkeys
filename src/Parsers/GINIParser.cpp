@@ -1,7 +1,7 @@
 #include <QStringList>
 
+#include "../Extensions/ExceptionExt.hpp"
 #include "../Logger.hpp"
-#include "../Exception.hpp"
 #include "GINIParser.hpp"
 
 using namespace std;

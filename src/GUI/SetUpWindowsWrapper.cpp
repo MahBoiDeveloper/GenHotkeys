@@ -2,10 +2,10 @@
 #include <QLineEdit>
 #include <QMessageBox>
 
+#include "../Extensions/ExceptionExt.hpp"
 #include "../Parsers/CSFParser.hpp"
 #include "../Windows/Registry.hpp"
 #include "../Logger.hpp"
-#include "../Exception.hpp"
 #include "WindowManager.hpp"
 #include "ImageManager.hpp"
 #include "LoadFromTheGameWindow.hpp"

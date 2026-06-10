@@ -3,13 +3,13 @@
 #include <QApplication>
 
 #include "../Extensions/L10NExt.hpp"
+#include "../Extensions/ExceptionExt.hpp"
 #include "../Parsers/CSFParser.hpp"
 #include "../Windows/Registry.hpp"
 #include "../Windows/Locale.hpp"
 #include "../Managers/FactionsManager.hpp"
 #include "../Logger.hpp"
 #include "../Convert.hpp"
-#include "../Exception.hpp"
 
 #include "ImageManager.hpp"
 #include "WindowManager.hpp"
