@@ -31,7 +31,7 @@ using namespace StringExt;
         else
         {
             LOGMSG("Errors while parsing: " + err.errorString());
-            throw Exception("Bad file name; unable to open file \"" + QString{filePath} + "\"");
+            throw ExceptionExt("Bad file name; unable to open file \"" + QString{filePath} + "\"");
         }
     }
 
@@ -51,7 +51,7 @@ using namespace StringExt;
         // Find dollar sign in place of the first character
         if (strQuery.at(0) != '$')
         {
-            throw Exception("JSON path doesn't begin with \'$\'"q);
+            throw ExceptionExt("JSON path doesn't begin with \'$\'"q);
         }
 
         QStringList splitList = strQuery.split('.');

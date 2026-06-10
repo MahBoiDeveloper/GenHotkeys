@@ -65,7 +65,7 @@ bool WindowManager::InitializeCSFParser()
     {
         CSF_PARSER = std::make_unique<CSFParser>(strCSFFilePath);
     }
-    catch(const Exception& e)
+    catch(const ExceptionExt& e)
     {
         QMessageBox::critical(nullptr, L10N(PROGRAM_CONSTANTS->CSF_ERROR_HEADER),
                                        e.what());
