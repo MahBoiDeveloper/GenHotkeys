@@ -1,7 +1,7 @@
 #include <QStringList>
 
-#include "../Logger.hpp"
-#include "../Exception.hpp"
+#include "../Extensions/ExceptionExt.hpp"
+#include "../Core/Logger.hpp"
 #include "GINIParser.hpp"
 
 using namespace std;
@@ -52,7 +52,7 @@ using namespace StringExt;
 
                         // If line equals END and section name doesn't set, then throw exception
                         if ((qstr.toUpper() == "END") && (buffSectionName == ""))
-                            throw Exception(string("Unexpected \"END\" of section in [") + buff + 
+                            throw ExceptionExt(string("Unexpected \"END\" of section in [") + buff + 
                                             string("] at line ") + 
                                             QString::number(fileLineIndex).toStdString());
 
@@ -79,7 +79,7 @@ using namespace StringExt;
                         break;
 
                     case 0: // Error due to only equal sign in line
-                        throw Exception("Unexpected \"=\" sign in [" + buff + "] at line " + QString::number(fileLineIndex).toStdString());
+                        throw ExceptionExt("Unexpected \"=\" sign in [" + buff + "] at line " + QString::number(fileLineIndex).toStdString());
                         break;
                 
                     default: // Read line is a value
@@ -95,7 +95,7 @@ using namespace StringExt;
         }
         else
         {
-            throw Exception("Bad file name; unable to open file \"" + Path + "\"");
+            throw ExceptionExt("Bad file name; unable to open file \"" + Path + "\"");
         }
 
         file.close();
@@ -123,7 +123,7 @@ using namespace StringExt;
         }
         else
         {
-            throw Exception("Unable write settings to file \"" + Path + "\"; make sure program have right to write into folder and into file.");
+            throw ExceptionExt("Unable write settings to file \"" + Path + "\"; make sure program have right to write into folder and into file.");
         }
     }
 

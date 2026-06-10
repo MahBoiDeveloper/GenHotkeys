@@ -1,4 +1,4 @@
-#include "Windows/Locale.hpp"
+#include "../Windows/Locale.hpp"
 #include "Convert.hpp"
 using namespace std;
 

@@ -1,6 +1,6 @@
 #pragma once
 #include <QString>
-#include "../ProgramConstants.hpp"
+#include "../Core/ProgramConstants.hpp"
 
 namespace Windows
 {

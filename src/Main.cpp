@@ -10,11 +10,11 @@
 
 // Project headers
 #include "GUI/WindowManager.hpp"
-#include "ProgramConstants.hpp"
-#include "FactionsManager.hpp"
-#include "DiscordManager.hpp"
-#include "SteamManager.hpp"
-#include "Logger.hpp"
+#include "Managers/FactionsManager.hpp"
+#include "Managers/DiscordManager.hpp"
+#include "Managers/SteamManager.hpp"
+#include "Core/ProgramConstants.hpp"
+#include "Core/Logger.hpp"
 
 using namespace std;
 using namespace StringExt;

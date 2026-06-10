@@ -1,8 +1,8 @@
 #pragma once
 #include <memory>
 #include <QVector>
-#include "Parsers/JSONFile.hpp"
-#include "Faction.hpp"
+#include "../Parsers/JSONFile.hpp"
+#include "../Core/Faction.hpp"
 
 #define FACTIONS_MANAGER FactionManager::Instance
 

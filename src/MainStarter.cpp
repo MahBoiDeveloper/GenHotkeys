@@ -1,9 +1,9 @@
 #ifdef PROJECT_EXE_RELATIVE_PATH
 
 #define EXCEPTION_HEADER "I'VE GOT A PRESENT FOR YA"
-#define RESOURCES "Resources"
-#define BINARIES "Resources/Binaries"
-#define ERROR_HEADER "Error"
+#define RESOURCES        "Resources"
+#define BINARIES         "Resources/Binaries"
+#define ERROR_HEADER     "Error"
 
 #include <vector>
 #include <string>

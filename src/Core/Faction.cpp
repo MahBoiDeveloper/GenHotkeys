@@ -1,8 +1,8 @@
 #include <QSet>
-#include "Windows/Locale.hpp"
-#include "Parsers/CSFParser.hpp"
-#include "Parsers/JSONFile.hpp"
-#include "Parsers/TextParser.hpp"
+#include "../Windows/Locale.hpp"
+#include "../Parsers/CSFParser.hpp"
+#include "../Parsers/JSONFile.hpp"
+#include "../Parsers/TextParser.hpp"
 #include "Logger.hpp"
 #include "Faction.hpp"
 

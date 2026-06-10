@@ -4,8 +4,8 @@
 #include <QVBoxLayout>
 
 #include "../Windows/Locale.hpp"
-#include "../Logger.hpp"
-#include "../ProgramConstants.hpp"
+#include "../Core/Logger.hpp"
+#include "../Core/ProgramConstants.hpp"
 #include "WindowManager.hpp"
 #include "ImageManager.hpp"
 #include "GreetingWindow.hpp"

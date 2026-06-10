@@ -1,7 +1,7 @@
 #include <QJsonArray>
 #include <QDir>
-#include "Parsers/JSONFile.hpp"
-#include "Windows/Locale.hpp"
+#include "../Parsers/JSONFile.hpp"
+#include "../Windows/Locale.hpp"
 #include "Logger.hpp"
 
 #include "ProgramConstants.hpp"

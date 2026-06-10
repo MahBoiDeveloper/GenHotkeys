@@ -5,10 +5,10 @@
 
 #include "../Extensions/BoolExt.hpp"
 #include "../Windows/Locale.hpp"
-#include "../ProgramConstants.hpp"
-#include "../DiscordManager.hpp"
-#include "../SteamManager.hpp"
-#include "../Logger.hpp"
+#include "../Managers/DiscordManager.hpp"
+#include "../Managers/SteamManager.hpp"
+#include "../Core/ProgramConstants.hpp"
+#include "../Core/Logger.hpp"
 
 #include "WindowManager.hpp"
 #include "SettingsWindow.hpp"

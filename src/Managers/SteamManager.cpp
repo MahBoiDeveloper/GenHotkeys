@@ -1,7 +1,7 @@
 #include <filesystem>
-#include "../libs/SteamworksSDK/public/steam/steam_api.h"
-#include "Logger.hpp"
-#include "ProgramConstants.hpp"
+#include "../../libs/SteamworksSDK/public/steam/steam_api.h"
+#include "../Core/Logger.hpp"
+#include "../Core/ProgramConstants.hpp"
 #include "SteamManager.hpp"
 
 using namespace std;

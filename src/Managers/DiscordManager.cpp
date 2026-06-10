@@ -1,4 +1,4 @@
-#include "Logger.hpp"
+#include "../Core/Logger.hpp"
 #include "DiscordManager.hpp"
 
 DiscordManager::DiscordManager()

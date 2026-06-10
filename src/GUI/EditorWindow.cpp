@@ -13,10 +13,10 @@
 #include "../Windows/Registry.hpp"
 #include "../Windows/Locale.hpp"
 #include "../Parsers/CSFParser.hpp"
+#include "../Core/Logger.hpp"
+#include "../Core/Convert.hpp"
+#include "../Managers/FactionsManager.hpp"
 #include "../Info.hpp"
-#include "../Logger.hpp"
-#include "../Convert.hpp"
-#include "../FactionsManager.hpp"
 
 #include "ImageManager.hpp"
 #include "WindowManager.hpp"

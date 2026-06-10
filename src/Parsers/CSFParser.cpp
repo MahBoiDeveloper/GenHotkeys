@@ -1,10 +1,10 @@
 #include <sstream>
 #include <QStringList>
 
+#include "../Extensions/ExceptionExt.hpp"
 #include "../Extensions/L10NExt.hpp"
-#include "../Logger.hpp"
-#include "../Convert.hpp"
-#include "../Exception.hpp"
+#include "../Core/Logger.hpp"
+#include "../Core/Convert.hpp"
 #include "CSFParser.hpp"
 
 using namespace std;
@@ -40,7 +40,7 @@ using namespace StringExt;
         }
         else
         {
-            throw Exception("Bad file name error. Unable to open file \""q + Path + "\"");
+            throw ExceptionExt("Bad file name error. Unable to open file \""q + Path + "\"");
         }
     }
     void CSFParser::Parse(const wstring& filePath) { Parse(QString::fromStdWString(filePath)); }
@@ -81,7 +81,7 @@ using namespace StringExt;
             file.clear();
             file.seekg(startOffset);
             LOGMSG(PROGRAM_CONSTANTS->CSF_NO_CSF_IN_BIG.arg(Path));
-            throw Exception(L10N(PROGRAM_CONSTANTS->CSF_NO_CSF_IN_BIG).arg(Path));
+            throw ExceptionExt(L10N(PROGRAM_CONSTANTS->CSF_NO_CSF_IN_BIG).arg(Path));
         }
 
         streampos offset = file.tellg();

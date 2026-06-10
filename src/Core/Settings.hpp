@@ -1,7 +1,7 @@
 #pragma once
 #include <QSet>
-#include "Extensions/BoolExt.hpp"
-#include "Parsers/JSONFile.hpp"
+#include "../Extensions/BoolExt.hpp"
+#include "../Parsers/JSONFile.hpp"
 
 #define SET_PROPERTY(x, y) if constexpr(std::same_as<T, bool>) { x = y; } else { x = FromQtCheckState(y); }
 

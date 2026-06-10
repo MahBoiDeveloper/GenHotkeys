@@ -5,9 +5,9 @@
 #include <QMessageBox>
 #include <QDebug>
 
-#include "Windows/Registry.hpp"
+#include "../Windows/Registry.hpp"
+#include "../Info.hpp"
 #include "Logger.hpp"
-#include "Info.hpp"
 
 using namespace std;
 using namespace StringExt;

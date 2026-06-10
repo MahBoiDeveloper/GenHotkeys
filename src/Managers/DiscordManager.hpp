@@ -1,7 +1,7 @@
 #pragma once
 #include <memory>
 #include <QString>
-#include "../libs/discord-rpc/include/discord_rpc.h"
+#include "../../libs/discord-rpc/include/discord_rpc.h"
 
 #define DISCORD_MANAGER DiscordManager::Instance
 

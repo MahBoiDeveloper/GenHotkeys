@@ -3,13 +3,13 @@
 #include <QApplication>
 
 #include "../Extensions/L10NExt.hpp"
+#include "../Extensions/ExceptionExt.hpp"
 #include "../Parsers/CSFParser.hpp"
 #include "../Windows/Registry.hpp"
 #include "../Windows/Locale.hpp"
-#include "../FactionsManager.hpp"
-#include "../Logger.hpp"
-#include "../Convert.hpp"
-#include "../Exception.hpp"
+#include "../Managers/FactionsManager.hpp"
+#include "../Core/Logger.hpp"
+#include "../Core/Convert.hpp"
 
 #include "ImageManager.hpp"
 #include "WindowManager.hpp"
@@ -70,7 +70,7 @@ bool WindowManager::InitializeCSFParser()
     {
         CSF_PARSER = std::make_unique<CSFParser>(strCSFFilePath);
     }
-    catch(const Exception& e)
+    catch(const ExceptionExt& e)
     {
         QMessageBox::critical(nullptr, L10N(PROGRAM_CONSTANTS->CSF_ERROR_HEADER),
                                        e.what());
