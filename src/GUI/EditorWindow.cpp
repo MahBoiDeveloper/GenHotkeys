@@ -16,7 +16,7 @@
 #include "../Info.hpp"
 #include "../Logger.hpp"
 #include "../Convert.hpp"
-#include "../FactionsManager.hpp"
+#include "../Managers/FactionsManager.hpp"
 
 #include "ImageManager.hpp"
 #include "WindowManager.hpp"

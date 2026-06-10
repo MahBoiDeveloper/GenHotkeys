@@ -5,9 +5,9 @@
 
 #include "../Extensions/BoolExt.hpp"
 #include "../Windows/Locale.hpp"
+#include "../Managers/DiscordManager.hpp"
+#include "../Managers/SteamManager.hpp"
 #include "../ProgramConstants.hpp"
-#include "../DiscordManager.hpp"
-#include "../SteamManager.hpp"
 #include "../Logger.hpp"
 
 #include "WindowManager.hpp"

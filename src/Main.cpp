@@ -10,10 +10,10 @@
 
 // Project headers
 #include "GUI/WindowManager.hpp"
+#include "Managers/FactionsManager.hpp"
+#include "Managers/DiscordManager.hpp"
+#include "Managers/SteamManager.hpp"
 #include "ProgramConstants.hpp"
-#include "FactionsManager.hpp"
-#include "DiscordManager.hpp"
-#include "SteamManager.hpp"
 #include "Logger.hpp"
 
 using namespace std;

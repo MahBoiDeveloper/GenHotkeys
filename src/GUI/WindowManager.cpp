@@ -6,7 +6,7 @@
 #include "../Parsers/CSFParser.hpp"
 #include "../Windows/Registry.hpp"
 #include "../Windows/Locale.hpp"
-#include "../FactionsManager.hpp"
+#include "../Managers/FactionsManager.hpp"
 #include "../Logger.hpp"
 #include "../Convert.hpp"
 #include "../Exception.hpp"
