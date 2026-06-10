@@ -3,7 +3,7 @@
 #include <QJsonArray>
 
 #include "../Extensions/ExceptionExt.hpp"
-#include "../Logger.hpp"
+#include "../Core/Logger.hpp"
 #include "JSONFile.hpp"
 
 using namespace std;

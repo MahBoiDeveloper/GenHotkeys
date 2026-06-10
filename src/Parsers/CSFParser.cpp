@@ -3,8 +3,8 @@
 
 #include "../Extensions/ExceptionExt.hpp"
 #include "../Extensions/L10NExt.hpp"
-#include "../Logger.hpp"
-#include "../Convert.hpp"
+#include "../Core/Logger.hpp"
+#include "../Core/Convert.hpp"
 #include "CSFParser.hpp"
 
 using namespace std;

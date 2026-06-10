@@ -1,7 +1,7 @@
 #include <QString>
 #include <QRegExp>
 #include "../Extensions/StringExt.hpp"
-#include "../Logger.hpp"
+#include "../Core/Logger.hpp"
 
 namespace TextParser
 {

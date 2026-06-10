@@ -1,5 +1,5 @@
 #include "../Extensions/L10NExt.hpp"
-#include "../Logger.hpp"
+#include "../Core/Logger.hpp"
 #include "FactionsManager.hpp"
 
 FactionManager::FactionManager()

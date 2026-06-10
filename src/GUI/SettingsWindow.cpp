@@ -7,8 +7,8 @@
 #include "../Windows/Locale.hpp"
 #include "../Managers/DiscordManager.hpp"
 #include "../Managers/SteamManager.hpp"
-#include "../ProgramConstants.hpp"
-#include "../Logger.hpp"
+#include "../Core/ProgramConstants.hpp"
+#include "../Core/Logger.hpp"
 
 #include "WindowManager.hpp"
 #include "SettingsWindow.hpp"

@@ -13,8 +13,8 @@
 #include "Managers/FactionsManager.hpp"
 #include "Managers/DiscordManager.hpp"
 #include "Managers/SteamManager.hpp"
-#include "ProgramConstants.hpp"
-#include "Logger.hpp"
+#include "Core/ProgramConstants.hpp"
+#include "Core/Logger.hpp"
 
 using namespace std;
 using namespace StringExt;

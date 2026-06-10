@@ -7,7 +7,7 @@
 #include <QTranslator>
 
 #include "../Windows/Registry.hpp"
-#include "../Logger.hpp"
+#include "../Core/Logger.hpp"
 #include "LoadFromTheGameWindow.hpp"
 
 LoadFromTheGameWindow::LoadFromTheGameWindow(QWidget* parent) : QWidget(parent)

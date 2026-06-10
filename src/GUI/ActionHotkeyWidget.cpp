@@ -7,8 +7,8 @@
 #include "../Extensions/L10NExt.hpp"
 #include "../Parsers/CSFParser.hpp"
 #include "../Parsers/TextParser.hpp"
-#include "../Convert.hpp"
-#include "../Logger.hpp"
+#include "../Core/Convert.hpp"
+#include "../Core/Logger.hpp"
 
 #include "ImageManager.hpp"
 #include "ActionHotkeyWidget.hpp"

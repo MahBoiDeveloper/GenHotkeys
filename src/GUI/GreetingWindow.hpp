@@ -1,6 +1,6 @@
 #pragma once
 #include <QWidget>
-#include "../ProgramConstants.hpp"
+#include "../Core/ProgramConstants.hpp"
 
 class GreetingWindow : public QWidget
 {

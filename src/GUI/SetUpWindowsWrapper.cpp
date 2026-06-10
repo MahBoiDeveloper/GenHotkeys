@@ -5,9 +5,9 @@
 #include "../Extensions/ExceptionExt.hpp"
 #include "../Parsers/CSFParser.hpp"
 #include "../Windows/Registry.hpp"
-#include "../Logger.hpp"
-#include "WindowManager.hpp"
+#include "../Core/Logger.hpp"
 #include "ImageManager.hpp"
+#include "WindowManager.hpp"
 #include "LoadFromTheGameWindow.hpp"
 #include "SetUpWindowsWrapper.hpp"
 

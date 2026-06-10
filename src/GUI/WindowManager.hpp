@@ -1,7 +1,7 @@
 #pragma once
 #include <QTranslator>
 
-#include "../ProgramConstants.hpp"
+#include "../Core/ProgramConstants.hpp"
 
 #include "SetUpWindowsWrapper.hpp"
 #include "EditorWindowWrapper.hpp"

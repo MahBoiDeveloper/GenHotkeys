@@ -3,7 +3,7 @@
 #include <QPixmap>
 
 #include "../../libs/libwebp/src/webp/decode.h"
-#include "../Logger.hpp"
+#include "../Core/Logger.hpp"
 #include "ImageManager.hpp"
 
 QImage ImageManager::DecodeWebpIcon(const QString& iconName)
