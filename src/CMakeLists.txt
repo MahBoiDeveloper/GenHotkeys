@@ -152,23 +152,6 @@
         DESTINATION ${PROJECT_DESTINATION_RESOURCES_FOLDER}/..
     )
 
-# Managing additional source files
-    # Declare json files
-    set(
-        ADDITIONAL_RESOURCES
-        "${PROJECT_RESOURCE_FOLDER}/TechTree.json"
-        "${PROJECT_RESOURCE_FOLDER}/Settings.json"
-    )
-
-    # Copy json files if file updates
-    foreach(CURRENT_FILE ${ADDITIONAL_RESOURCES})
-        configure_file(
-            ${CURRENT_FILE}
-            ${PROJECT_DESTINATION_RESOURCES_FOLDER}
-            COPYONLY
-        )
-    endforeach()
-
 # Qt libs linking aka copying dependecies to the standalone release version of the project
     # Find the qt libs deploy program
     find_program(WINDEPLOYQT_PROGRAM windeployqt)

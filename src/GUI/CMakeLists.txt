@@ -120,6 +120,3 @@
 
     # Link the libwebp target to the GUI target
     target_link_libraries(${TARGET_NAME} PRIVATE ${LIB_WEBP_TARGET_NAME})
-
-# Copy Styles.css with updates
-    configure_file("${PROJECT_RESOURCE_FOLDER}/Theme/Styles.css" "${PROJECT_DESTINATION_RESOURCES_FOLDER}/Theme/Styles.css")
