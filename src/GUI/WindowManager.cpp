@@ -20,17 +20,17 @@ WindowManager::WindowManager()
 
     qApp->setWindowIcon(QIcon(QPixmap::fromImage(ImageManager::DecodeEditorWebpIcon())));
     
-    LOGMSG("Loading \"" + PROGRAM_CONSTANTS->STYLES_SHEET_FILE + "\"...");
-    QFile css{PROGRAM_CONSTANTS->STYLES_SHEET_FILE};
+    LOGMSG("Loading \"" + PROGRAM_CONSTANTS->MAIN_STYLES_FILE + "\"...");
+    QFile css(PROGRAM_CONSTANTS->MAIN_STYLES_FILE);
     if (css.open(QIODevice::ReadOnly))
     {
         qApp->setStyleSheet(css.readAll());
         css.close();
-        LOGMSG("Styles sheet has been loaded");
+        LOGMSG("Main styles sheet has been loaded");
     }
     else
     {
-        LOGMSG("Unable to read the style file");
+        LOGMSG("Unable to read the main style file");
     }
 
     LOGMSG("Loading launch window...");

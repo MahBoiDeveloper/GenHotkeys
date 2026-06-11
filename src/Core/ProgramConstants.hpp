@@ -50,6 +50,7 @@ public: // Immutable data
     const QString GZH_PROFILE_FOLDER      = PROFILES_FOLDER    + "/GeneralsZH";
     const QString ICONS_FOLDER            = GZH_PROFILE_FOLDER + "/Icons";
     const QString THEME_FOLDER            = GZH_PROFILE_FOLDER + "/Theme";
+    const QString MAIN_STYLES_FILE        = PROFILES_FOLDER    + STYLES_FILENAME;
 
     // Profile files. TODO: Make profile related
     const QString TECH_TREE_FILE          = RESOURCE_FOLDER + "/TechTree.json";
