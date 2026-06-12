@@ -20,17 +20,32 @@ WindowManager::WindowManager()
 
     qApp->setWindowIcon(QIcon(QPixmap::fromImage(ImageManager::DecodeEditorWebpIcon())));
     
+    //  Apply general style
     LOGMSG("Loading \"" + PROGRAM_CONSTANTS->MAIN_STYLES_FILE + "\"...");
-    QFile css(PROGRAM_CONSTANTS->MAIN_STYLES_FILE);
-    if (css.open(QIODevice::ReadOnly))
+    QFile cssGLobal(PROGRAM_CONSTANTS->MAIN_STYLES_FILE);
+    if (cssGLobal.open(QIODevice::ReadOnly))
     {
-        qApp->setStyleSheet(css.readAll());
-        css.close();
+        qApp->setStyleSheet(cssGLobal.readAll());
+        cssGLobal.close();
         LOGMSG("Main styles sheet has been loaded");
     }
     else
     {
         LOGMSG("Unable to read the main style file");
+    }
+
+    // Apply ZH style as default
+    LOGMSG("Loading \"" + PROGRAM_CONSTANTS->GZH_PROFILE_FOLDER + "/" + PROGRAM_CONSTANTS->STYLES_FILENAME + "\"...");
+    QFile cssGZH(PROGRAM_CONSTANTS->GZH_PROFILE_FOLDER + "/" + PROGRAM_CONSTANTS->STYLES_FILENAME);
+    if (cssGZH.open(QIODevice::ReadOnly))
+    {
+        qApp->setStyleSheet(cssGZH.readAll());
+        cssGZH.close();
+        LOGMSG("GeneralsZH styles sheet has been loaded");
+    }
+    else
+    {
+        LOGMSG("Unable to read the GeneralsZH style file");
     }
 
     LOGMSG("Loading launch window...");
@@ -122,7 +137,10 @@ void WindowManager::SetTranslator()
     pAppTranslator = new QTranslator();
     pAppTranslator->load(lngShortName, PROGRAM_CONSTANTS->TRANSLATIONS_FOLDER);
     qApp->installTranslator(pAppTranslator);
-    FACTIONS_MANAGER->UpdateFactionNames();
+    if (FACTIONS_MANAGER != nullptr)
+    {
+        FACTIONS_MANAGER->UpdateFactionNames();
+    }
 }
 
 void WindowManager::Show()                               { pStartUpWindow->show(); }

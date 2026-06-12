@@ -37,6 +37,8 @@ public: // Immutable data
 
     // General strings
     const QString STYLES_FILENAME = "Styles.css";
+    const QString G_FOLDER_NAME   = "Generals";
+    const QString GZH_FOLDER_NAME = "GeneralsZH";
 
     // General editor folders
     const QString QT_ICONS_FOLDER         = ":/icons";
@@ -46,8 +48,8 @@ public: // Immutable data
 
     // Profile folders. TODO: Make profile related
     const QString PROFILES_FOLDER         = RESOURCE_FOLDER    + "/Profiles";
-    const QString G_PROFILE_FOLDER        = PROFILES_FOLDER    + "/Generals";
-    const QString GZH_PROFILE_FOLDER      = PROFILES_FOLDER    + "/GeneralsZH";
+    const QString G_PROFILE_FOLDER        = PROFILES_FOLDER    + G_FOLDER_NAME;
+    const QString GZH_PROFILE_FOLDER      = PROFILES_FOLDER    + GZH_FOLDER_NAME;
     const QString ICONS_FOLDER            = GZH_PROFILE_FOLDER + "/Icons";
     const QString THEME_FOLDER            = GZH_PROFILE_FOLDER + "/Theme";
     const QString MAIN_STYLES_FILE        = PROFILES_FOLDER    + STYLES_FILENAME;

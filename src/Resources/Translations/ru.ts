@@ -216,17 +216,17 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../Core/ProgramConstants.hpp" line="102"/>
+        <location filename="../../Core/ProgramConstants.hpp" line="105"/>
         <source>Error with CSF file</source>
         <translation>Ошибка с CSF файлом</translation>
     </message>
     <message>
-        <location filename="../../Core/ProgramConstants.hpp" line="103"/>
+        <location filename="../../Core/ProgramConstants.hpp" line="106"/>
         <source>Cannot process the empty file.</source>
         <translation>Невозможно обработать пустой файл.</translation>
     </message>
     <message>
-        <location filename="../../Core/ProgramConstants.hpp" line="104"/>
+        <location filename="../../Core/ProgramConstants.hpp" line="107"/>
         <source>Unable to find selected CSF file.</source>
         <translation>Невозможно найти указанный CSF файл.</translation>
     </message>
@@ -235,179 +235,179 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../../Core/ProgramConstants.hpp" line="105"/>
+        <location filename="../../Core/ProgramConstants.hpp" line="108"/>
         <source>Choosen CSF file doesn&apos;t have CONTROLBAR category. Make sure that you are load correct file.</source>
         <translation>У выбранного CSF файла отсутствует категория CONTROLBAR. Проверьте, что вы загружаете правильный файл.</translation>
     </message>
     <message>
-        <location filename="../../Core/ProgramConstants.hpp" line="106"/>
+        <location filename="../../Core/ProgramConstants.hpp" line="109"/>
         <source>Choosen CSF file doesn&apos;t have OBJECT category. Make sure that you are load correct file.</source>
         <translation>У выбранного CSF файла отсутствует категория OBJECT. Проверьте, что вы загружаете правильный файл.</translation>
     </message>
     <message>
-        <location filename="../../Core/ProgramConstants.hpp" line="107"/>
+        <location filename="../../Core/ProgramConstants.hpp" line="110"/>
         <source>Unable to find &quot;generals.csf&quot; file in &quot;%1&quot; folder.</source>
         <translation>Невозможно найти &quot;generals.csf&quot; в папке &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="../../Core/ProgramConstants.hpp" line="108"/>
+        <location filename="../../Core/ProgramConstants.hpp" line="111"/>
         <source>Unable to find CSF file inside BIG archive &quot;%1&quot;</source>
         <translation>Невозможно найти CSF файл внутри BIG архива &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../../Core/ProgramConstants.hpp" line="111"/>
+        <location filename="../../Core/ProgramConstants.hpp" line="114"/>
         <source>Erroneous assignment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Core/ProgramConstants.hpp" line="149"/>
+        <location filename="../../Core/ProgramConstants.hpp" line="152"/>
         <source>USA</source>
         <translation>США</translation>
     </message>
     <message>
-        <location filename="../../Core/ProgramConstants.hpp" line="149"/>
+        <location filename="../../Core/ProgramConstants.hpp" line="152"/>
         <source>United Stated Of America</source>
         <translation>Соединённые штаты Америки</translation>
     </message>
     <message>
-        <location filename="../../Core/ProgramConstants.hpp" line="150"/>
+        <location filename="../../Core/ProgramConstants.hpp" line="153"/>
         <source>SUPERWEAPON</source>
         <translation>СВГ</translation>
     </message>
     <message>
-        <location filename="../../Core/ProgramConstants.hpp" line="150"/>
+        <location filename="../../Core/ProgramConstants.hpp" line="153"/>
         <source>Superweapons General</source>
         <translation>Генерал супероружейных войск</translation>
     </message>
     <message>
-        <location filename="../../Core/ProgramConstants.hpp" line="151"/>
+        <location filename="../../Core/ProgramConstants.hpp" line="154"/>
         <source>AIR</source>
         <translation>ВВС</translation>
     </message>
     <message>
-        <location filename="../../Core/ProgramConstants.hpp" line="151"/>
+        <location filename="../../Core/ProgramConstants.hpp" line="154"/>
         <source>Airforce General</source>
         <translation>Генерал ВВС</translation>
     </message>
     <message>
-        <location filename="../../Core/ProgramConstants.hpp" line="152"/>
+        <location filename="../../Core/ProgramConstants.hpp" line="155"/>
         <source>LASER</source>
         <translation>ЛАЗЕРНИК</translation>
     </message>
     <message>
-        <location filename="../../Core/ProgramConstants.hpp" line="152"/>
+        <location filename="../../Core/ProgramConstants.hpp" line="155"/>
         <source>Laser Weapons Generals</source>
         <translation>Генерал лазерного вооружения</translation>
     </message>
     <message>
-        <location filename="../../Core/ProgramConstants.hpp" line="153"/>
+        <location filename="../../Core/ProgramConstants.hpp" line="156"/>
         <source>CHINA</source>
         <translation>КИТАЙ</translation>
     </message>
     <message>
-        <location filename="../../Core/ProgramConstants.hpp" line="153"/>
+        <location filename="../../Core/ProgramConstants.hpp" line="156"/>
         <source>China</source>
         <translation>Китай</translation>
     </message>
     <message>
-        <location filename="../../Core/ProgramConstants.hpp" line="154"/>
+        <location filename="../../Core/ProgramConstants.hpp" line="157"/>
         <source>INFANTRY</source>
         <translation>ПЕХОТНИК</translation>
     </message>
     <message>
-        <location filename="../../Core/ProgramConstants.hpp" line="154"/>
+        <location filename="../../Core/ProgramConstants.hpp" line="157"/>
         <source>Infantry General</source>
         <translation>Генерал пехотных войск</translation>
     </message>
     <message>
-        <location filename="../../Core/ProgramConstants.hpp" line="155"/>
+        <location filename="../../Core/ProgramConstants.hpp" line="158"/>
         <source>NUKE</source>
         <translation>ЯДЕРЩИК</translation>
     </message>
     <message>
-        <location filename="../../Core/ProgramConstants.hpp" line="155"/>
+        <location filename="../../Core/ProgramConstants.hpp" line="158"/>
         <source>Nuke General</source>
         <translation>Генерал ядерных войск</translation>
     </message>
     <message>
-        <location filename="../../Core/ProgramConstants.hpp" line="156"/>
+        <location filename="../../Core/ProgramConstants.hpp" line="159"/>
         <source>TANK</source>
         <translation>ТАНКОВИК</translation>
     </message>
     <message>
-        <location filename="../../Core/ProgramConstants.hpp" line="156"/>
+        <location filename="../../Core/ProgramConstants.hpp" line="159"/>
         <source>Tank General</source>
         <translation>Генерал танковых войск</translation>
     </message>
     <message>
-        <location filename="../../Core/ProgramConstants.hpp" line="157"/>
+        <location filename="../../Core/ProgramConstants.hpp" line="160"/>
         <source>GLA</source>
         <translation>МАО</translation>
     </message>
     <message>
-        <location filename="../../Core/ProgramConstants.hpp" line="157"/>
+        <location filename="../../Core/ProgramConstants.hpp" line="160"/>
         <source>Global Liberation Army</source>
         <translation>Мировая армия освобождения</translation>
     </message>
     <message>
-        <location filename="../../Core/ProgramConstants.hpp" line="158"/>
+        <location filename="../../Core/ProgramConstants.hpp" line="161"/>
         <source>TOXIC</source>
         <translation>ТОКС</translation>
     </message>
     <message>
-        <location filename="../../Core/ProgramConstants.hpp" line="158"/>
+        <location filename="../../Core/ProgramConstants.hpp" line="161"/>
         <source>Toxic Weapons General</source>
         <translation>Генерал биохимического оружия</translation>
     </message>
     <message>
-        <location filename="../../Core/ProgramConstants.hpp" line="159"/>
+        <location filename="../../Core/ProgramConstants.hpp" line="162"/>
         <source>STEALTH</source>
         <translation>СТЕЛС</translation>
     </message>
     <message>
-        <location filename="../../Core/ProgramConstants.hpp" line="159"/>
+        <location filename="../../Core/ProgramConstants.hpp" line="162"/>
         <source>Stealth General</source>
         <translation>Генерал маскировочных войск</translation>
     </message>
     <message>
-        <location filename="../../Core/ProgramConstants.hpp" line="160"/>
+        <location filename="../../Core/ProgramConstants.hpp" line="163"/>
         <source>DEMO</source>
         <translation>ПОДРЫВНИК</translation>
     </message>
     <message>
-        <location filename="../../Core/ProgramConstants.hpp" line="160"/>
+        <location filename="../../Core/ProgramConstants.hpp" line="163"/>
         <source>Demolition General</source>
         <translation>Генерал подрывных войск</translation>
     </message>
     <message>
-        <location filename="../../Core/ProgramConstants.hpp" line="141"/>
+        <location filename="../../Core/ProgramConstants.hpp" line="144"/>
         <source>Buildings</source>
         <translation>Здания</translation>
     </message>
     <message>
-        <location filename="../../Core/ProgramConstants.hpp" line="112"/>
+        <location filename="../../Core/ProgramConstants.hpp" line="115"/>
         <source>You have assign as hotkey a non-ASCII character &quot;%1&quot;.
 Make sure that you are using ASCII only symbols.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Core/ProgramConstants.hpp" line="113"/>
+        <location filename="../../Core/ProgramConstants.hpp" line="116"/>
         <source>You have assign as hotkey a forbidden character &quot;%1&quot;.
 Make sure that you are using only allowed symbols.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Core/ProgramConstants.hpp" line="142"/>
+        <location filename="../../Core/ProgramConstants.hpp" line="145"/>
         <source>Infantry</source>
         <translation>Пехота</translation>
     </message>
     <message>
-        <location filename="../../Core/ProgramConstants.hpp" line="143"/>
+        <location filename="../../Core/ProgramConstants.hpp" line="146"/>
         <source>Vehicles</source>
         <translation>Техника</translation>
     </message>
     <message>
-        <location filename="../../Core/ProgramConstants.hpp" line="144"/>
+        <location filename="../../Core/ProgramConstants.hpp" line="147"/>
         <source>Aircrafts</source>
         <translation>Авиация</translation>
     </message>

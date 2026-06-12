@@ -3,12 +3,14 @@
 #include "GreetingWindow.hpp"
 #include "LoadFromTheGameWindow.hpp"
 #include "LoadFromTheFileWindow.hpp"
+#include "SelectProfileWindow.hpp"
 #include "SettingsWindow.hpp"
 
 class SetUpWindowsWrapper final : public QStackedWidget
 {
     Q_OBJECT
 private: // Data
+    SelectProfileWindow*   pSelectProfileWindow   = nullptr;
     GreetingWindow*        pGreetingWidget        = nullptr;
     LoadFromTheGameWindow* pLoadFromTheGameWindow = nullptr;
     LoadFromTheFileWindow* pLoadFromTheFileWindow = nullptr;

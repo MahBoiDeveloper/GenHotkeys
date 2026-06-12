@@ -20,7 +20,7 @@ SetUpWindowsWrapper::SetUpWindowsWrapper(QWidget* parent) : QStackedWidget(paren
                                    ~Qt::WindowMinimizeButtonHint);
 
     AddWidgets();
-    setCurrentWidget(pGreetingWidget);
+    setCurrentWidget(pSelectProfileWindow);
     AttachConnections();
 }
 
@@ -29,18 +29,18 @@ void SetUpWindowsWrapper::AttachConnections()
     connect(pSettingsWindow,        &SettingsWindow::languageChanged,
             this,                   &SetUpWindowsWrapper::SettingsWindow_LanguageChanged);
 
-    connect(pGreetingWidget,        &GreetingWindow::btnLoadFromFileClicked,
-            this,                   &SetUpWindowsWrapper::BtnLoadFromFile_Clicked);
-    
-    connect(pGreetingWidget,        &GreetingWindow::btnLoadFromGameClicked,
-            this,                   &SetUpWindowsWrapper::BtnLoadFromGame_Clicked);
+    // connect(pGreetingWidget,        &GreetingWindow::btnLoadFromFileClicked,
+    //         this,                   &SetUpWindowsWrapper::BtnLoadFromFile_Clicked);
 
-    connect(pGreetingWidget,        &GreetingWindow::btnSettingsClicked,
-            this,                   &SetUpWindowsWrapper::BtnSettings_Clicked);
+    // connect(pGreetingWidget,        &GreetingWindow::btnLoadFromGameClicked,
+    //         this,                   &SetUpWindowsWrapper::BtnLoadFromGame_Clicked);
+
+    // connect(pGreetingWidget,        &GreetingWindow::btnSettingsClicked,
+    //         this,                   &SetUpWindowsWrapper::BtnSettings_Clicked);
 
     connect(pLoadFromTheFileWindow, &LoadFromTheFileWindow::btnBackClicked,
             this,                   &SetUpWindowsWrapper::BtnBack_Clicked);
-    
+
     connect(pLoadFromTheFileWindow, &LoadFromTheFileWindow::btnStartClicked,
             this,                   &SetUpWindowsWrapper::LoadFromTheFileWindow_AcceptConfiguration);
 
@@ -59,15 +59,15 @@ void SetUpWindowsWrapper::DetachConnections()
     disconnect(pSettingsWindow,        &SettingsWindow::languageChanged,
                this,                   &SetUpWindowsWrapper::SettingsWindow_LanguageChanged);
 
-    disconnect(pGreetingWidget,        &GreetingWindow::btnLoadFromFileClicked,
-               this,                   &SetUpWindowsWrapper::BtnLoadFromFile_Clicked);
-        
-    disconnect(pGreetingWidget,        &GreetingWindow::btnLoadFromGameClicked,
-               this,                   &SetUpWindowsWrapper::BtnLoadFromGame_Clicked);
+    // disconnect(pGreetingWidget,        &GreetingWindow::btnLoadFromFileClicked,
+    //            this,                   &SetUpWindowsWrapper::BtnLoadFromFile_Clicked);
 
-    disconnect(pGreetingWidget,        &GreetingWindow::btnSettingsClicked,
-               this,                   &SetUpWindowsWrapper::BtnBack_Clicked);
-    
+    // disconnect(pGreetingWidget,        &GreetingWindow::btnLoadFromGameClicked,
+    //            this,                   &SetUpWindowsWrapper::BtnLoadFromGame_Clicked);
+
+    // disconnect(pGreetingWidget,        &GreetingWindow::btnSettingsClicked,
+    //            this,                   &SetUpWindowsWrapper::BtnBack_Clicked);
+
     disconnect(pLoadFromTheFileWindow, &LoadFromTheFileWindow::btnBackClicked,
                this,                   &SetUpWindowsWrapper::BtnBack_Clicked);
 
@@ -86,17 +86,20 @@ void SetUpWindowsWrapper::DetachConnections()
 
 void SetUpWindowsWrapper::AddWidgets()
 {
-    pGreetingWidget        = new GreetingWindow();
+    pSelectProfileWindow   = new SelectProfileWindow();
+    // pGreetingWidget        = new GreetingWindow();
     pLoadFromTheGameWindow = new LoadFromTheGameWindow();
     pLoadFromTheFileWindow = new LoadFromTheFileWindow();
     pSettingsWindow        = new SettingsWindow();
 
-    pGreetingWidget->setFixedSize(size());
+    pSelectProfileWindow->setFixedSize(size());
+    // pGreetingWidget->setFixedSize(size());
     pLoadFromTheGameWindow->setFixedSize(size());
     pLoadFromTheFileWindow->setFixedSize(size());
     pSettingsWindow->setFixedSize(size());
 
-    addWidget(pGreetingWidget);
+    addWidget(pSelectProfileWindow);
+    // addWidget(pGreetingWidget);
     addWidget(pLoadFromTheGameWindow);
     addWidget(pLoadFromTheFileWindow);
     addWidget(pSettingsWindow);
@@ -107,7 +110,7 @@ void SetUpWindowsWrapper::SettingsWindow_LanguageChanged()
     WINDOW_MANAGER->SetTranslator();
 
     DetachConnections();
-    pGreetingWidget->deleteLater();
+    // pGreetingWidget->deleteLater();
     pLoadFromTheGameWindow->deleteLater();
     pLoadFromTheFileWindow->deleteLater();
     pSettingsWindow->deleteLater();
@@ -120,7 +123,7 @@ void SetUpWindowsWrapper::SettingsWindow_LanguageChanged()
 void SetUpWindowsWrapper::BtnLoadFromFile_Clicked() { setCurrentWidget(pLoadFromTheFileWindow); }
 void SetUpWindowsWrapper::BtnLoadFromGame_Clicked() { setCurrentWidget(pLoadFromTheGameWindow); }
 void SetUpWindowsWrapper::BtnSettings_Clicked()     { setCurrentWidget(pSettingsWindow); }
-void SetUpWindowsWrapper::BtnBack_Clicked()         { WINDOW_MANAGER->SetCSFFilePath(""); setCurrentWidget(pGreetingWidget); }
+void SetUpWindowsWrapper::BtnBack_Clicked()         { WINDOW_MANAGER->SetCSFFilePath(""); setCurrentWidget(pSelectProfileWindow); }
 
 void SetUpWindowsWrapper::LoadFromTheGameWindow_AcceptConfiguration()
 {

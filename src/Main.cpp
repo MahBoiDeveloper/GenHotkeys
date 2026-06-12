@@ -7,6 +7,7 @@
 #include <QApplication>
 #include <QMessageBox>
 #include <QDebug>
+#include <QDir>
 
 // Project headers
 #include "GUI/WindowManager.hpp"
@@ -83,11 +84,11 @@ int main(int argc, const char** argv)
     if (PROGRAM_CONSTANTS->pSettingsFile->IsDiscordRPCEnabled())
         DISCORD_MANAGER->Initialize();
 
-    // Initialize TechTree.json parsing
-    FACTIONS_MANAGER = make_unique<FactionManager>();
-
     // Define logger as the singleton class, that could be used anywhere in the project
     WINDOW_MANAGER = make_unique<WindowManager>();
+
+    // Initialize TechTree.json parsing
+    // FACTIONS_MANAGER = make_unique<FactionManager>();
 
     try
     {
