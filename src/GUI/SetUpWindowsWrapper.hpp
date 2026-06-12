@@ -11,7 +11,6 @@ class SetUpWindowsWrapper final : public QStackedWidget
     Q_OBJECT
 private: // Data
     SelectProfileWindow*   pSelectProfileWindow   = nullptr;
-    GreetingWindow*        pGreetingWidget        = nullptr;
     LoadFromTheGameWindow* pLoadFromTheGameWindow = nullptr;
     LoadFromTheFileWindow* pLoadFromTheFileWindow = nullptr;
     SettingsWindow*        pSettingsWindow        = nullptr;

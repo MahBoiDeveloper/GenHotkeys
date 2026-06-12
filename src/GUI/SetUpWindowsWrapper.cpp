@@ -87,19 +87,16 @@ void SetUpWindowsWrapper::DetachConnections()
 void SetUpWindowsWrapper::AddWidgets()
 {
     pSelectProfileWindow   = new SelectProfileWindow();
-    // pGreetingWidget        = new GreetingWindow();
     pLoadFromTheGameWindow = new LoadFromTheGameWindow();
     pLoadFromTheFileWindow = new LoadFromTheFileWindow();
     pSettingsWindow        = new SettingsWindow();
 
     pSelectProfileWindow->setFixedSize(size());
-    // pGreetingWidget->setFixedSize(size());
     pLoadFromTheGameWindow->setFixedSize(size());
     pLoadFromTheFileWindow->setFixedSize(size());
     pSettingsWindow->setFixedSize(size());
 
     addWidget(pSelectProfileWindow);
-    // addWidget(pGreetingWidget);
     addWidget(pLoadFromTheGameWindow);
     addWidget(pLoadFromTheFileWindow);
     addWidget(pSettingsWindow);
@@ -110,7 +107,6 @@ void SetUpWindowsWrapper::SettingsWindow_LanguageChanged()
     WINDOW_MANAGER->SetTranslator();
 
     DetachConnections();
-    // pGreetingWidget->deleteLater();
     pLoadFromTheGameWindow->deleteLater();
     pLoadFromTheFileWindow->deleteLater();
     pSettingsWindow->deleteLater();
