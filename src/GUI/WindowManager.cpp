@@ -1,3 +1,4 @@
+#include <QFile>
 #include <QFileInfo>
 #include <QMessageBox>
 #include <QApplication>
@@ -16,41 +17,10 @@
 
 WindowManager::WindowManager()
 {
-    QString style = StringExt::EmptyString;
-    
     SetTranslator();
 
     qApp->setWindowIcon(QIcon(QPixmap::fromImage(ImageManager::DecodeEditorWebpIcon())));
-    
-    //  Apply general style
-    LOGMSG("Loading \"" + PROGRAM_CONSTANTS->MAIN_STYLES_FILE + "\"...");
-    QFile cssGLobal(PROGRAM_CONSTANTS->MAIN_STYLES_FILE);
-    if (cssGLobal.open(QIODevice::ReadOnly))
-    {
-        style += cssGLobal.readAll();
-        LOGMSG("Main styles sheet has been loaded");
-    }
-    else
-    {
-        LOGMSG("Unable to read the main style file");
-    }
-
-    style += "\n";
-
-    // Apply ZH style as default
-    LOGMSG("Loading \"" + PROGRAM_CONSTANTS->GZH_PROFILE_FOLDER + "/Theme/" + PROGRAM_CONSTANTS->STYLES_FILENAME + "\"...");
-    QFile cssGZH(PROGRAM_CONSTANTS->GZH_PROFILE_FOLDER + "/Theme/" + PROGRAM_CONSTANTS->STYLES_FILENAME);
-    if (cssGZH.open(QIODevice::ReadOnly))
-    {
-        style += cssGZH.readAll();
-        LOGMSG("GeneralsZH styles sheet has been loaded");
-    }
-    else
-    {
-        LOGMSG("Unable to read the GeneralsZH style file");
-    }
-
-    qApp->setStyleSheet(style);
+    ApplyProfileStyleSheet(PROGRAM_CONSTANTS->GZH_PROFILE_FOLDER);
 
     LOGMSG("Loading launch window...");
     pStartUpWindow = new SetUpWindowsWrapper();
@@ -106,6 +76,38 @@ bool WindowManager::InitializeCSFParser()
     }
 
     return true;
+}
+
+QString WindowManager::ReadStyleSheet(const QString& filepath, const QString& name) const
+{
+    LOGMSG("Loading \"" + filepath + "\"...");
+
+    QFile css(filepath);
+    if (css.open(QIODevice::ReadOnly))
+    {
+        LOGMSG(name + " stylesheet has been loaded");
+        return QString::fromUtf8(css.readAll());
+    }
+
+    LOGMSG("Unable to read the " + name + " stylesheet");
+    return StringExt::EmptyString;
+}
+
+void WindowManager::ApplyProfileStyleSheet(const QString& profileFolder)
+{
+    QString style = ReadStyleSheet(PROGRAM_CONSTANTS->MAIN_STYLES_FILE, "Main");
+    style += "\n";
+
+    const QString profileName = QFileInfo(profileFolder).fileName();
+    const QString profileStylesFile = profileFolder + "/Theme/" + PROGRAM_CONSTANTS->STYLES_FILENAME;
+    style += ReadStyleSheet(profileStylesFile, profileName);
+
+    qApp->setStyleSheet(style);
+}
+
+void WindowManager::ApplyDefaultProfileStyleSheet()
+{
+    ApplyProfileStyleSheet(PROGRAM_CONSTANTS->GZH_PROFILE_FOLDER);
 }
 
 void WindowManager::StartUpWindow_AcceptConfiguration()
@@ -166,6 +168,8 @@ void WindowManager::StartUpWindow_GProfileSelected()
         FACTIONS_MANAGER.release();
     }
 
+    ApplyProfileStyleSheet(PROGRAM_CONSTANTS->G_PROFILE_FOLDER);
+
     FACTIONS_MANAGER = std::make_unique<FactionManager>(PROGRAM_CONSTANTS->G_PROFILE_FOLDER
                                                         + "/" + PROGRAM_CONSTANTS->TECH_TREE_FILENAME);
 }
@@ -176,6 +180,8 @@ void WindowManager::StartUpWindow_GZHProfileSelected()
     {
         FACTIONS_MANAGER.release();
     }
+
+    ApplyProfileStyleSheet(PROGRAM_CONSTANTS->GZH_PROFILE_FOLDER);
 
     FACTIONS_MANAGER = std::make_unique<FactionManager>(PROGRAM_CONSTANTS->GZH_PROFILE_FOLDER
                                                         + "/" + PROGRAM_CONSTANTS->TECH_TREE_FILENAME);
@@ -188,8 +194,10 @@ void WindowManager::StartUpWindow_CustomProfileSelected(const QString& folder)
         FACTIONS_MANAGER.release();
     }
     
-    FACTIONS_MANAGER = std::make_unique<FactionManager>(PROGRAM_CONSTANTS->PROFILES_FOLDER 
-                                                        + "/" + folder + "/" + PROGRAM_CONSTANTS->TECH_TREE_FILENAME);
+    const QString profileFolder = PROGRAM_CONSTANTS->PROFILES_FOLDER + "/" + folder;
+    ApplyProfileStyleSheet(profileFolder);
+    
+    FACTIONS_MANAGER = std::make_unique<FactionManager>(profileFolder + "/" + PROGRAM_CONSTANTS->TECH_TREE_FILENAME);
 }
 
 

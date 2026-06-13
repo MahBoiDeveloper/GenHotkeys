@@ -22,6 +22,10 @@ public:
 private: // Methods
     /// @brief Checks csf file to be compitable with GZH format.
     bool InitializeCSFParser();
+    /// @brief Applies common styles and selected profile theme.
+    void ApplyProfileStyleSheet(const QString& profileFolder);
+    /// @brief Read stylesheet file contents and write loading result to log.
+    QString ReadStyleSheet(const QString& filepath, const QString& name) const;
 public:
     WindowManager();
     ~WindowManager();
@@ -29,6 +33,8 @@ public:
     void Show();
     /// @brief Set common L10N translator for the whole project app.
     void SetTranslator();
+    /// @brief Applies default startup theme.
+    void ApplyDefaultProfileStyleSheet();
     /// @brief Set CSF file path. Uses if in `LoadFromTheFileWindow` file has been set.
     void SetCSFFilePath(const QString& filepath);
     /// @brief Reinitialize CSF parser and editor window when new CSF/BIG file has been selected.

@@ -113,7 +113,12 @@ void SetUpWindowsWrapper::SettingsWindow_LanguageChanged()
 void SetUpWindowsWrapper::BtnLoadFromFile_Clicked() { setCurrentWidget(pLoadFromTheFileWindow); }
 void SetUpWindowsWrapper::BtnLoadFromGame_Clicked() { setCurrentWidget(pLoadFromTheGameWindow); }
 void SetUpWindowsWrapper::BtnSettings_Clicked()     { setCurrentWidget(pSettingsWindow); }
-void SetUpWindowsWrapper::BtnBack_Clicked()         { setCurrentWidget(pSelectProfileWindow); WINDOW_MANAGER->SetCSFFilePath(""); }
+void SetUpWindowsWrapper::BtnBack_Clicked()
+{
+    setCurrentWidget(pSelectProfileWindow);
+    WINDOW_MANAGER->SetCSFFilePath("");
+    WINDOW_MANAGER->ApplyDefaultProfileStyleSheet();
+}
 
 void SetUpWindowsWrapper::SelectProfileWindow_GProfileSelected()                           { WINDOW_MANAGER->StartUpWindow_GProfileSelected(); BtnLoadFromFile_Clicked(); }
 void SetUpWindowsWrapper::SelectProfileWindow_GZHProfileSelected()                         { WINDOW_MANAGER->StartUpWindow_GZHProfileSelected(); BtnLoadFromFile_Clicked(); }
