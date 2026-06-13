@@ -15,7 +15,9 @@ SelectProfileWindow::SelectProfileWindow(QWidget* parent) : QWidget(parent)
     btnGeneralsZH    = new QPushButton(tr(PROGRAM_CONSTANTS->GZH_FOLDER_NAME.toStdString().c_str()));
 
     btnGenerals->setObjectName(nameof(btnGenerals));
+    connect(btnGenerals, &QPushButton::clicked, this, &SelectProfileWindow::BtnGenerals_Clicked);
     btnGeneralsZH->setObjectName(nameof(btnGeneralsZH));
+    connect(btnGeneralsZH, &QPushButton::clicked, this, &SelectProfileWindow::BtnGeneralsZH_Clicked);
     ltGameProfiles->addWidget(btnGenerals);
     ltGameProfiles->addWidget(btnGeneralsZH);
 
@@ -29,6 +31,7 @@ SelectProfileWindow::SelectProfileWindow(QWidget* parent) : QWidget(parent)
         QPushButton* btnCustomProfile = new QPushButton();
         btnCustomProfile->setObjectName("btn"q + elem);
         btnCustomProfile->setText(elem);
+        connect(btnCustomProfile, &QPushButton::clicked, this, &SelectProfileWindow::BtnCustomProfile_Clicked);
         ltCustomProfiles->addWidget(btnCustomProfile);
     }
 
@@ -36,4 +39,15 @@ SelectProfileWindow::SelectProfileWindow(QWidget* parent) : QWidget(parent)
     ltMain->addLayout(ltCustomProfiles);
 
     setLayout(ltMain);
+}
+
+void SelectProfileWindow::BtnGenerals_Clicked()   { emit gProfileSelected(); }
+void SelectProfileWindow::BtnGeneralsZH_Clicked() { emit gzhProfileSelected(); }
+void SelectProfileWindow::BtnCustomProfile_Clicked()
+{
+    auto btn = qobject_cast<QPushButton*>(sender());
+    if (btn == nullptr)
+        return;
+
+    emit customProfileSelected(btn->text());
 }

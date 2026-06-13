@@ -155,6 +155,40 @@ void WindowManager::EditorWindow_NewHotkeyFileSelected()
     StartUpWindow_AcceptConfiguration();
 }
 
+void WindowManager::StartUpWindow_GProfileSelected()
+{
+    if (FACTIONS_MANAGER != nullptr)
+    {
+        FACTIONS_MANAGER.release();
+    }
+
+    FACTIONS_MANAGER = std::make_unique<FactionManager>(PROGRAM_CONSTANTS->G_PROFILE_FOLDER
+                                                        + "/" + PROGRAM_CONSTANTS->TECH_TREE_FILENAME);
+}
+
+void WindowManager::StartUpWindow_GZHProfileSelected()
+{
+    if (FACTIONS_MANAGER != nullptr)
+    {
+        FACTIONS_MANAGER.release();
+    }
+
+    FACTIONS_MANAGER = std::make_unique<FactionManager>(PROGRAM_CONSTANTS->GZH_PROFILE_FOLDER
+                                                        + "/" + PROGRAM_CONSTANTS->TECH_TREE_FILENAME);
+}
+
+void WindowManager::StartUpWindow_CustomProfileSelected(const QString& folder)
+{
+    if (FACTIONS_MANAGER != nullptr)
+    {
+        FACTIONS_MANAGER.release();
+    }
+    
+    FACTIONS_MANAGER = std::make_unique<FactionManager>(PROGRAM_CONSTANTS->PROFILES_FOLDER 
+                                                        + "/" + folder + "/" + PROGRAM_CONSTANTS->TECH_TREE_FILENAME);
+}
+
+
 WindowManager::~WindowManager()
 {
     if (pHotkeysEditor != nullptr) pHotkeysEditor->deleteLater();

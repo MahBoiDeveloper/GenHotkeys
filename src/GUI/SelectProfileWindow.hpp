@@ -15,4 +15,12 @@ private: // Data
     QPushButton* btnGeneralsZH    = nullptr;
 public: // Methods
     SelectProfileWindow(QWidget* parent = nullptr);
+signals:
+    void gProfileSelected();
+    void gzhProfileSelected();
+    void customProfileSelected(QString data);
+private slots:
+    void BtnGenerals_Clicked();
+    void BtnGeneralsZH_Clicked();
+    void BtnCustomProfile_Clicked();
 };

@@ -36,9 +36,10 @@ public: // Immutable data
     const QString LINK_COLOR = "#baff0c";
 
     // General strings
-    const QString STYLES_FILENAME = "Styles.css";
-    const QString G_FOLDER_NAME   = "Generals";
-    const QString GZH_FOLDER_NAME = "GeneralsZH";
+    const QString STYLES_FILENAME    = "Styles.css";
+    const QString TECH_TREE_FILENAME = "TechTree.json";
+    const QString G_FOLDER_NAME      = "Generals";
+    const QString GZH_FOLDER_NAME    = "GeneralsZH";
 
     // General editor folders
     const QString QT_ICONS_FOLDER         = ":/icons";
@@ -46,18 +47,14 @@ public: // Immutable data
     const QString BINARIES_FOLDER         = RESOURCE_FOLDER + "\\Binaries";
     const QString TRANSLATIONS_FOLDER     = RESOURCE_FOLDER + "/Translations";
 
-    // Profile folders. TODO: Make profile related
+    // Profile folders
     const QString PROFILES_FOLDER         = RESOURCE_FOLDER    + "/Profiles";
-    const QString G_PROFILE_FOLDER        = PROFILES_FOLDER    + G_FOLDER_NAME;
-    const QString GZH_PROFILE_FOLDER      = PROFILES_FOLDER    + GZH_FOLDER_NAME;
+    const QString G_PROFILE_FOLDER        = PROFILES_FOLDER    + "/" + G_FOLDER_NAME;
+    const QString GZH_PROFILE_FOLDER      = PROFILES_FOLDER    + "/" + GZH_FOLDER_NAME;
     const QString ICONS_FOLDER            = GZH_PROFILE_FOLDER + "/Icons";
     const QString THEME_FOLDER            = GZH_PROFILE_FOLDER + "/Theme";
     const QString MAIN_STYLES_FILE        = PROFILES_FOLDER    + STYLES_FILENAME;
 
-    // Profile files. TODO: Make profile related
-    const QString TECH_TREE_FILE          = RESOURCE_FOLDER + "/TechTree.json";
-    const QString STYLES_SHEET_FILE       = THEME_FOLDER    + STYLES_FILENAME;
-    
     // Profile unrelated resource files
     const QString SETTINGS_FILE           = RESOURCE_FOLDER + "/Settings.json";
     const QString GLOBAL_STYLES_FILE      = RESOURCE_FOLDER + STYLES_FILENAME;

@@ -35,4 +35,10 @@ public:
     void EditorWindow_NewHotkeyFileSelected();
     /// @brief Return CSF file path. Uses if in `LoadFromTheFileWindow` file has been set.
     void StartUpWindow_AcceptConfiguration();
+    /// @brief Initialize TechTree.json parsing by Generals profile.
+    void StartUpWindow_GProfileSelected();
+    /// @brief Initialize TechTree.json parsing by GeneralsZH profile.
+    void StartUpWindow_GZHProfileSelected();
+    /// @brief Initialize TechTree.json parsing by custom profile.
+    void StartUpWindow_CustomProfileSelected(const QString& data);
 };

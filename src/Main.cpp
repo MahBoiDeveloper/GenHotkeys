@@ -87,9 +87,6 @@ int main(int argc, const char** argv)
     // Define logger as the singleton class, that could be used anywhere in the project
     WINDOW_MANAGER = make_unique<WindowManager>();
 
-    // Initialize TechTree.json parsing
-    // FACTIONS_MANAGER = make_unique<FactionManager>();
-
     try
     {
         WINDOW_MANAGER->Show();
