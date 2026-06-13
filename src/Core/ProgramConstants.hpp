@@ -53,7 +53,7 @@ public: // Immutable data
     const QString GZH_PROFILE_FOLDER      = PROFILES_FOLDER    + "/" + GZH_FOLDER_NAME;
     const QString ICONS_FOLDER            = GZH_PROFILE_FOLDER + "/Icons";
     const QString THEME_FOLDER            = GZH_PROFILE_FOLDER + "/Theme";
-    const QString MAIN_STYLES_FILE        = PROFILES_FOLDER    + STYLES_FILENAME;
+    const QString MAIN_STYLES_FILE        = PROFILES_FOLDER    + "/" + STYLES_FILENAME;
 
     // Profile unrelated resource files
     const QString SETTINGS_FILE           = RESOURCE_FOLDER + "/Settings.json";

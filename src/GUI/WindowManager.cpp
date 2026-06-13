@@ -15,7 +15,9 @@
 #include "WindowManager.hpp"
 
 WindowManager::WindowManager()
-{    
+{
+    QString style = StringExt::EmptyString;
+    
     SetTranslator();
 
     qApp->setWindowIcon(QIcon(QPixmap::fromImage(ImageManager::DecodeEditorWebpIcon())));
@@ -25,8 +27,7 @@ WindowManager::WindowManager()
     QFile cssGLobal(PROGRAM_CONSTANTS->MAIN_STYLES_FILE);
     if (cssGLobal.open(QIODevice::ReadOnly))
     {
-        qApp->setStyleSheet(cssGLobal.readAll());
-        cssGLobal.close();
+        style += cssGLobal.readAll();
         LOGMSG("Main styles sheet has been loaded");
     }
     else
@@ -34,19 +35,22 @@ WindowManager::WindowManager()
         LOGMSG("Unable to read the main style file");
     }
 
+    style += "\n";
+
     // Apply ZH style as default
-    LOGMSG("Loading \"" + PROGRAM_CONSTANTS->GZH_PROFILE_FOLDER + "/" + PROGRAM_CONSTANTS->STYLES_FILENAME + "\"...");
-    QFile cssGZH(PROGRAM_CONSTANTS->GZH_PROFILE_FOLDER + "/" + PROGRAM_CONSTANTS->STYLES_FILENAME);
+    LOGMSG("Loading \"" + PROGRAM_CONSTANTS->GZH_PROFILE_FOLDER + "/Theme/" + PROGRAM_CONSTANTS->STYLES_FILENAME + "\"...");
+    QFile cssGZH(PROGRAM_CONSTANTS->GZH_PROFILE_FOLDER + "/Theme/" + PROGRAM_CONSTANTS->STYLES_FILENAME);
     if (cssGZH.open(QIODevice::ReadOnly))
     {
-        qApp->setStyleSheet(cssGZH.readAll());
-        cssGZH.close();
+        style += cssGZH.readAll();
         LOGMSG("GeneralsZH styles sheet has been loaded");
     }
     else
     {
         LOGMSG("Unable to read the GeneralsZH style file");
     }
+
+    qApp->setStyleSheet(style);
 
     LOGMSG("Loading launch window...");
     pStartUpWindow = new SetUpWindowsWrapper();
