@@ -22,7 +22,7 @@ QComboBox
     
     border-style: outset;
     border-width: 2px;
-    border-color: #b1b7ff;
+    border-color: #d8b36a;
     border-radius: 3px;
 }
 
@@ -37,9 +37,9 @@ QComboBox QAbstractItemView
     border-width: 2px;
     border-radius: 3px;
     border-style: outset;
-    border-color: #b1b7ff;
+    border-color: #d8b36a;
     color: white;
-    background-color: #242c88;
+    background-color: #3a2414;
     selection-background-color: #b36e2e;
 }
 
@@ -47,7 +47,7 @@ QComboBox::drop-down
 {
      width: 15px;
      color: white;
-     border-color: #b1b7ff;
+     border-color: #d8b36a;
      border-radius: 3px;
      padding-left: 10px;
 }
@@ -62,19 +62,19 @@ QCheckBox::indicator
 {
     width: 14px;
     height: 14px;
-    background-color: rgba(177, 183, 255, 0.18);
-    border: 2px solid #b1b7ff;
+    background-color: rgba(216, 179, 106, 0.18);
+    border: 2px solid #d8b36a;
 }
 
 QCheckBox::indicator:hover
 {
-    background-color: rgba(177, 183, 255, 0.28);
-    border-color: #d8dcff;
+    background-color: rgba(216, 179, 106, 0.28);
+    border-color: #f2d187;
 }
 
 QCheckBox::indicator:checked
 {
-    background-color: #d8dcff;
+    background-color: #f2d187;
     border-color: white;
 }
 
@@ -85,11 +85,11 @@ QPushButton
     padding: 10px;
     
     color: white;
-    background-color: #181d5a;
+    background-color: #4a3217;
     
     border-style: outset;
     border-width: 2px;
-    border-color: #b1b7ff;
+    border-color: #d8b36a;
     border-radius: 3px;
 }
 
@@ -149,12 +149,12 @@ EditorWindow QPushButton
     font-weight: bold;
     padding: 10px;
     
-    background-color: #181d5a;
+    background-color: #4a3217;
     color: white;
     
     border-style: outset;
     border-width: 2px;
-    border-color: #b1b7ff;
+    border-color: #d8b36a;
     border-radius: 3px;
 }
 

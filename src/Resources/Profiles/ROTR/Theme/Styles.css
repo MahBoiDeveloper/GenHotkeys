@@ -1,4 +1,4 @@
-/* Lightweight test theme. Reuses GeneralsZH bitmap backgrounds to avoid duplicating assets. */
+/* Lightweight non-ZH theme. */
 *
 {
     font-family: Calibri;
@@ -8,13 +8,11 @@
 
 LoadFromTheFileWindow, SetUpWindowsWrapper, LoadFromTheGameWindow, SettingsWindow, SelectProfileWindow, QWidget#pSettingsWindow, QDialog
 {
-    border-image: url(Resources/Profiles/GeneralsZH/Theme/StartMenuBackground.webp) 0 0 0 0 stretch stretch;
     background-color: #121712;
 }
 
 EditorWindow
 {
-    border-image: url(Resources/Profiles/GeneralsZH/Theme/EditorBackground.webp) 0 0 0 0 stretch stretch;
     background-color: #121712;
 }
 

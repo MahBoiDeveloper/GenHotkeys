@@ -1,4 +1,4 @@
-/* Lightweight test theme. Reuses GeneralsZH bitmap backgrounds to avoid duplicating assets. */
+/* Lightweight non-ZH theme. */
 *
 {
     font-family: Calibri;
@@ -8,36 +8,34 @@
 
 LoadFromTheFileWindow, SetUpWindowsWrapper, LoadFromTheGameWindow, SettingsWindow, SelectProfileWindow, QWidget#pSettingsWindow, QDialog
 {
-    border-image: url(Resources/Profiles/GeneralsZH/Theme/StartMenuBackground.webp) 0 0 0 0 stretch stretch;
-    background-color: #101820;
+    background-color: #211019;
 }
 
 EditorWindow
 {
-    border-image: url(Resources/Profiles/GeneralsZH/Theme/EditorBackground.webp) 0 0 0 0 stretch stretch;
-    background-color: #101820;
+    background-color: #211019;
 }
 
 QPushButton, QComboBox
 {
     font-weight: bold;
     color: white;
-    background-color: #174f5f;
-    border: 2px outset #85d7d0;
+    background-color: #5f173b;
+    border: 2px outset #f0a6c2;
     border-radius: 3px;
     padding: 8px;
 }
 
 QPushButton:hover, QComboBox:hover
 {
-    background-color: #1f7a70;
+    background-color: #862456;
     color: #f5e663;
 }
 
 QTreeWidget, QTabWidget, QScrollArea, QStatusBar
 {
     background: rgba(0, 0, 0, 0.7);
-    border: 1px outset #d5f2ef;
+    border: 1px outset #ffd0df;
     border-radius: 3px;
     color: white;
 }
@@ -49,7 +47,7 @@ QTreeWidget::item
 
 QTreeWidget::item:selected, QTreeWidget::item:selected:!active
 {
-    background-color: #1f7a70;
+    background-color: #862456;
     color: white;
 }
 
