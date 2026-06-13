@@ -18,6 +18,7 @@ private: // Data
 public:
     inline static std::unique_ptr<WindowManager> Instance = nullptr;
     EditorWindowWrapper* pHotkeysEditor = nullptr;
+    QString ProfileFolder = StringExt::EmptyString;
 
 private: // Methods
     /// @brief Checks csf file to be compitable with GZH format.

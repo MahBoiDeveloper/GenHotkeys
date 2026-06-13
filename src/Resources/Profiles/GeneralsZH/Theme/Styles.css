@@ -7,13 +7,6 @@
 /* 6. https://stackoverflow.com/questions/9536725/css-multiple-attribute-selectors/9536746#9536746 */
 
 /* Global style setting */
-*
-{
-    font-family: Calibri;
-    font-size: 10pt;
-    color: black;
-}
-
 QComboBox
 {
     width: 70px;
@@ -110,6 +103,16 @@ GreetingWindow QPushButton { font-size: 18pt; }
 QLabel, QRadioButton, QCheckBox { color: white; }
 
 QLineEdit#txtActionName { font-style: italic; }
+
+QPushButton#btnGenerals, QPushButton#btnGeneralsZH
+{
+    margin: 40px;
+}
+
+QPushButton#btnCustomProfile
+{
+    margin: 40px;
+}
 
 QPushButton#btnReview
 {

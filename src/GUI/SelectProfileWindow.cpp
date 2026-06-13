@@ -29,7 +29,8 @@ SelectProfileWindow::SelectProfileWindow(QWidget* parent) : QWidget(parent)
     {
         LOGMSG("Add custom profile " + elem);
         QPushButton* btnCustomProfile = new QPushButton();
-        btnCustomProfile->setObjectName("btn"q + elem);
+        btnCustomProfile->setObjectName(nameof(btnCustomProfile));
+        btnCustomProfile->setProperty("profileName", "btn"q + elem);
         btnCustomProfile->setText(elem);
         connect(btnCustomProfile, &QPushButton::clicked, this, &SelectProfileWindow::BtnCustomProfile_Clicked);
         ltCustomProfiles->addWidget(btnCustomProfile);

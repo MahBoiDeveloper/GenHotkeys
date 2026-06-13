@@ -20,7 +20,8 @@ WindowManager::WindowManager()
     SetTranslator();
 
     qApp->setWindowIcon(QIcon(QPixmap::fromImage(ImageManager::DecodeEditorWebpIcon())));
-    ApplyProfileStyleSheet(PROGRAM_CONSTANTS->GZH_PROFILE_FOLDER);
+    ProfileFolder = PROGRAM_CONSTANTS->GZH_PROFILE_FOLDER;
+    ApplyProfileStyleSheet(ProfileFolder);
 
     LOGMSG("Loading launch window...");
     pStartUpWindow = new SetUpWindowsWrapper();
@@ -95,11 +96,13 @@ QString WindowManager::ReadStyleSheet(const QString& filepath, const QString& na
 
 void WindowManager::ApplyProfileStyleSheet(const QString& profileFolder)
 {
+    ProfileFolder = profileFolder;
+
     QString style = ReadStyleSheet(PROGRAM_CONSTANTS->MAIN_STYLES_FILE, "Main");
     style += "\n";
 
-    const QString profileName = QFileInfo(profileFolder).fileName();
-    const QString profileStylesFile = profileFolder + "/Theme/" + PROGRAM_CONSTANTS->STYLES_FILENAME;
+    const QString profileName = QFileInfo(ProfileFolder).fileName();
+    const QString profileStylesFile = ProfileFolder + "/Theme/" + PROGRAM_CONSTANTS->STYLES_FILENAME;
     style += ReadStyleSheet(profileStylesFile, profileName);
 
     qApp->setStyleSheet(style);
