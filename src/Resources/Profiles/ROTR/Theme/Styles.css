@@ -1,0 +1,57 @@
+/* Lightweight test theme. Reuses GeneralsZH bitmap backgrounds to avoid duplicating assets. */
+*
+{
+    font-family: Calibri;
+    font-size: 10pt;
+    color: white;
+}
+
+LoadFromTheFileWindow, SetUpWindowsWrapper, LoadFromTheGameWindow, SettingsWindow, SelectProfileWindow, QWidget#pSettingsWindow, QDialog
+{
+    border-image: url(Resources/Profiles/GeneralsZH/Theme/StartMenuBackground.webp) 0 0 0 0 stretch stretch;
+    background-color: #121712;
+}
+
+EditorWindow
+{
+    border-image: url(Resources/Profiles/GeneralsZH/Theme/EditorBackground.webp) 0 0 0 0 stretch stretch;
+    background-color: #121712;
+}
+
+QPushButton, QComboBox
+{
+    font-weight: bold;
+    color: white;
+    background-color: #24503b;
+    border: 2px outset #b9d474;
+    border-radius: 3px;
+    padding: 8px;
+}
+
+QPushButton:hover, QComboBox:hover
+{
+    background-color: #386f4d;
+    color: #f4e66d;
+}
+
+QTreeWidget, QTabWidget, QScrollArea, QStatusBar
+{
+    background: rgba(0, 0, 0, 0.72);
+    border: 1px outset #d8e8a3;
+    border-radius: 3px;
+    color: white;
+}
+
+QTreeWidget::item
+{
+    min-height: 40px;
+}
+
+QTreeWidget::item:selected, QTreeWidget::item:selected:!active
+{
+    background-color: #386f4d;
+    color: white;
+}
+
+QScrollArea#Keyboard QPushButton[status="good"] { background-color: #128d2d; }
+QScrollArea#Keyboard QPushButton[status="bad"]  { background-color: #cb0d27; }
