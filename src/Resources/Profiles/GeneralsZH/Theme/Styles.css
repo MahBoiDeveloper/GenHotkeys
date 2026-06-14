@@ -104,14 +104,29 @@ QLabel, QRadioButton, QCheckBox { color: white; }
 
 QLineEdit#txtActionName { font-style: italic; }
 
-QPushButton#btnGenerals, QPushButton#btnGeneralsZH
+SelectProfileWindow QPushButton#btnGenerals,
+SelectProfileWindow QPushButton#btnGeneralsZH
 {
-    margin: 40px;
+    font-size: 18pt;
+    min-width: 230px;
+    max-width: 230px;
+    min-height: 110px;
+    max-height: 110px;
+    margin-top: 2px;
+    margin-right: 40px;
+    margin-bottom: 2px;
+    margin-left: 40px;
 }
 
-QPushButton#btnCustomProfile
+SelectProfileWindow QPushButton#btnCustomProfile
 {
-    margin: 40px;
+    font-size: 16pt;
+    min-height: 64px;
+    max-height: 64px;
+    margin-top: 2px;
+    margin-right: 40px;
+    margin-bottom: 2px;
+    margin-left: 40px;
 }
 
 QPushButton#btnReview
