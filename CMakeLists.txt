@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.15 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.26 FATAL_ERROR)
 
 if (NOT WIN32)
     message(FATAL_ERROR "This program has been specified to compile on Microsoft Windows OS only.")
