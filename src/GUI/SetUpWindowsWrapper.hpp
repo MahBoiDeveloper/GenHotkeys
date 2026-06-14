@@ -3,13 +3,14 @@
 #include "GreetingWindow.hpp"
 #include "LoadFromTheGameWindow.hpp"
 #include "LoadFromTheFileWindow.hpp"
+#include "SelectProfileWindow.hpp"
 #include "SettingsWindow.hpp"
 
 class SetUpWindowsWrapper final : public QStackedWidget
 {
     Q_OBJECT
 private: // Data
-    GreetingWindow*        pGreetingWidget        = nullptr;
+    SelectProfileWindow*   pSelectProfileWindow   = nullptr;
     LoadFromTheGameWindow* pLoadFromTheGameWindow = nullptr;
     LoadFromTheFileWindow* pLoadFromTheFileWindow = nullptr;
     SettingsWindow*        pSettingsWindow        = nullptr;
@@ -19,8 +20,10 @@ private: // Methods
     void AttachConnections();
     /// @brief Disconnects slots and signals.
     void DetachConnections();
-    /// @brief Initialize `GreetingWindow`, `LoadFromTheGameWindow`, `LoadFromTheFileWindow`.
+    /// @brief Initialize `SelectProfileWindow`, `LoadFromTheGameWindow`, `LoadFromTheFileWindow` class objects.
     void AddWidgets();
+    /// @brief Free heap from `SelectProfileWindow`, `LoadFromTheGameWindow`, `LoadFromTheFileWindow` data.
+    void DeleteWidgets();
 public:
     SetUpWindowsWrapper(QWidget* parent = nullptr);
 
@@ -39,4 +42,10 @@ private slots:
     void LoadFromTheFileWindow_AcceptConfiguration();
     /// @brief Returns checked configuration of user preferences.
     void LoadFromTheGameWindow_AcceptConfiguration();
+    /// @brief Handles selection of the Generals profile.
+    void SelectProfileWindow_GProfileSelected();
+    /// @brief Handles selection of the Generals Zero Hour profile.
+    void SelectProfileWindow_GZHProfileSelected();
+    /// @brief Handles selection of a custom profile.
+    void SelectProfileWindow_CustomProfileSelected(const QString& folder);
 };

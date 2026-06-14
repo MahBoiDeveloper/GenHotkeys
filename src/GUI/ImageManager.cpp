@@ -4,6 +4,7 @@
 
 #include "../../libs/libwebp/src/webp/decode.h"
 #include "../Core/Logger.hpp"
+#include "WindowManager.hpp"
 #include "ImageManager.hpp"
 
 QImage ImageManager::DecodeWebpIcon(const QString& iconName)
@@ -12,8 +13,8 @@ QImage ImageManager::DecodeWebpIcon(const QString& iconName)
     const auto it = ImagesCache.constFind(iconName);
     if (it != ImagesCache.constEnd()) return it.value();
 
-    // Find
-    const QFileInfo targetIconFile = FindIconFile(PROGRAM_CONSTANTS->ICONS_FOLDER, iconName);
+    // Search for specific image
+    const QFileInfo targetIconFile = FindIconFile(WINDOW_MANAGER->ProfileFolder + "/" + PROGRAM_CONSTANTS->ICONS_FOLDER_NAME, iconName);
 
     if (targetIconFile.exists())
     {
@@ -74,7 +75,7 @@ QImage ImageManager::DecodeWebpIconPath(const QString& iconPath)
     {
         if (!iconPath.isEmpty())
         {
-            LOGMSG("No icon file [" + iconFile.fileName() + "] was found");
+            LOGMSG("Icon file [" + iconFile.fileName() + "] was not found");
         }
         return DecodeMissingWebpIcon();
     }

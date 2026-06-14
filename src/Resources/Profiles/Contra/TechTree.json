@@ -1,0 +1,208 @@
+{
+  "TechTree": [
+    {
+      "ShortName": "COA",
+      "DisplayName": "ARES PROTOCOL",
+      "DisplayNameDescription": "Heavy weapons Contra test side",
+      "Buildings": [
+        {"Name": "USACommandCenter", "IngameName": "OBJECT:CommandCenter", "KeyboardLayouts": [[{"IconName": "USADozer", "HotkeyString": "CONTROLBAR:ConstructAmericaDozer"}, {"IconName": "USAParticleCannon", "HotkeyString": "CONTROLBAR:ConstructAmericaParticleCannonUplink"}, {"IconName": "Sell", "HotkeyString": "CONTROLBAR:Sell"}]]}
+      ],
+      "Infantry": [
+        {"Name": "USABurton", "IngameName": "OBJECT:ColonelBurton", "KeyboardLayouts": [[{"IconName": "USAKnifeAttack", "HotkeyString": "CONTROLBAR:KnifeAttack"}, {"IconName": "USADetonateCharges", "HotkeyString": "CONTROLBAR:DetonateCharges"}, {"IconName": "Stop", "HotkeyString": "CONTROLBAR:Stop"}]]}
+      ],
+      "Vehicles": [
+        {"Name": "USAPaladinTank", "IngameName": "OBJECT:Paladin", "KeyboardLayouts": [[{"IconName": "AttackMove", "HotkeyString": "CONTROLBAR:AttackMove"}, {"IconName": "Guard", "HotkeyString": "CONTROLBAR:Guard"}, {"IconName": "Stop", "HotkeyString": "CONTROLBAR:Stop"}]]}
+      ],
+      "Aircrafts": [
+        {"Name": "USAAurora", "IngameName": "OBJECT:Aurora", "KeyboardLayouts": [[{"IconName": "AttackMove", "HotkeyString": "CONTROLBAR:AttackMove"}, {"IconName": "Guard", "HotkeyString": "CONTROLBAR:Guard"}, {"IconName": "Stop", "HotkeyString": "CONTROLBAR:Stop"}]]}
+      ]
+    },
+    {
+      "ShortName": "COB",
+      "DisplayName": "ION BUREAU",
+      "DisplayNameDescription": "Precision Contra test side",
+      "Buildings": [
+        {"Name": "USAStrategyCenter", "IngameName": "OBJECT:StrategyCenter", "KeyboardLayouts": [[{"IconName": "USASearchAndDestroy", "HotkeyString": "CONTROLBAR:InitiateBattlePlanSearchAndDestroy"}, {"IconName": "USAIntelligence", "HotkeyString": "CONTROLBAR:CIAIntelligence"}, {"IconName": "Sell", "HotkeyString": "CONTROLBAR:Sell"}]]}
+      ],
+      "Infantry": [
+        {"Name": "USAPathfinder", "IngameName": "OBJECT:Pathfinder", "KeyboardLayouts": [[{"IconName": "AttackMove", "HotkeyString": "CONTROLBAR:AttackMove"}, {"IconName": "Guard", "HotkeyString": "CONTROLBAR:Guard"}, {"IconName": "Stop", "HotkeyString": "CONTROLBAR:Stop"}]]}
+      ],
+      "Vehicles": [
+        {"Name": "USAMicrowave", "IngameName": "OBJECT:Microwave", "KeyboardLayouts": [[{"IconName": "AttackMove", "HotkeyString": "CONTROLBAR:AttackMove"}, {"IconName": "Guard", "HotkeyString": "CONTROLBAR:Guard"}, {"IconName": "Stop", "HotkeyString": "CONTROLBAR:Stop"}]]}
+      ],
+      "Aircrafts": [
+        {"Name": "USAStealthFighter", "IngameName": "OBJECT:StealthFighter", "KeyboardLayouts": [[{"IconName": "AttackMove", "HotkeyString": "CONTROLBAR:AttackMove"}, {"IconName": "Guard", "HotkeyString": "CONTROLBAR:Guard"}, {"IconName": "Stop", "HotkeyString": "CONTROLBAR:Stop"}]]}
+      ]
+    },
+    {
+      "ShortName": "COC",
+      "DisplayName": "NOVA WING",
+      "DisplayNameDescription": "Air strike Contra test side",
+      "Buildings": [
+        {"Name": "USAAirfield", "IngameName": "OBJECT:Airfield", "KeyboardLayouts": [[{"IconName": "USARaptor", "HotkeyString": "CONTROLBAR:ConstructAmericaJetRaptor"}, {"IconName": "USAAurora", "HotkeyString": "CONTROLBAR:ConstructAmericaJetAurora"}, {"IconName": "Sell", "HotkeyString": "CONTROLBAR:Sell"}]]}
+      ],
+      "Infantry": [
+        {"Name": "USARanger", "IngameName": "OBJECT:Ranger", "KeyboardLayouts": [[{"IconName": "USAFlashbangs", "HotkeyString": "CONTROLBAR:FlashBangGrenadeMode"}, {"IconName": "AttackMove", "HotkeyString": "CONTROLBAR:AttackMove"}, {"IconName": "Stop", "HotkeyString": "CONTROLBAR:Stop"}]]}
+      ],
+      "Vehicles": [
+        {"Name": "USAAvenger", "IngameName": "OBJECT:Avenger", "KeyboardLayouts": [[{"IconName": "AttackMove", "HotkeyString": "CONTROLBAR:AttackMove"}, {"IconName": "Guard", "HotkeyString": "CONTROLBAR:Guard"}, {"IconName": "Stop", "HotkeyString": "CONTROLBAR:Stop"}]]}
+      ],
+      "Aircrafts": [
+        {"Name": "AIRKingRaptor", "IngameName": "OBJECT:Raptor", "KeyboardLayouts": [[{"IconName": "AirGuard", "HotkeyString": "CONTROLBAR:GuardFlyingUnitsOnly"}, {"IconName": "AttackMove", "HotkeyString": "CONTROLBAR:AttackMove"}, {"IconName": "Stop", "HotkeyString": "CONTROLBAR:Stop"}]]}
+      ]
+    },
+    {
+      "ShortName": "COD",
+      "DisplayName": "SHIELD ARRAY",
+      "DisplayNameDescription": "Defensive Contra test side",
+      "Buildings": [
+        {"Name": "USAPatriot", "IngameName": "OBJECT:PatriotBattery", "KeyboardLayouts": [[{"IconName": "Stop", "HotkeyString": "CONTROLBAR:Stop"}, {"IconName": "Sell", "HotkeyString": "CONTROLBAR:Sell"}]]}
+      ],
+      "Infantry": [
+        {"Name": "USAMissileDefender", "IngameName": "OBJECT:MissileTeam", "KeyboardLayouts": [[{"IconName": "USALaserLock", "HotkeyString": "CONTROLBAR:LaserMissileAttack"}, {"IconName": "AttackMove", "HotkeyString": "CONTROLBAR:AttackMove"}, {"IconName": "Stop", "HotkeyString": "CONTROLBAR:Stop"}]]}
+      ],
+      "Vehicles": [
+        {"Name": "USAHumvee", "IngameName": "OBJECT:Humvee", "KeyboardLayouts": [[{"IconName": "USABattleDrone", "HotkeyString": "CONTROLBAR:ConstructAmericaVehicleBattleDrone"}, {"IconName": "AttackMove", "HotkeyString": "CONTROLBAR:AttackMove"}, {"IconName": "Stop", "HotkeyString": "CONTROLBAR:Stop"}]]}
+      ],
+      "Aircrafts": [
+        {"Name": "USAComanche", "IngameName": "OBJECT:Comanche", "KeyboardLayouts": [[{"IconName": "USAFireRocketPods", "HotkeyString": "CONTROLBAR:FireRocketPods"}, {"IconName": "AttackMove", "HotkeyString": "CONTROLBAR:AttackMove"}, {"IconName": "Stop", "HotkeyString": "CONTROLBAR:Stop"}]]}
+      ]
+    },
+    {
+      "ShortName": "COE",
+      "DisplayName": "RED FORGE",
+      "DisplayNameDescription": "Industrial Contra test side",
+      "Buildings": [
+        {"Name": "PRCWarFactory", "IngameName": "OBJECT:WarFactory", "KeyboardLayouts": [[{"IconName": "PRCBattlemaster", "HotkeyString": "CONTROLBAR:ConstructGLATankBattleMaster"}, {"IconName": "PRCNukeCannon", "HotkeyString": "CONTROLBAR:ConstructChinaVehicleNukeLauncher"}, {"IconName": "Sell", "HotkeyString": "CONTROLBAR:Sell"}]]}
+      ],
+      "Infantry": [
+        {"Name": "PRCTankHunter", "IngameName": "OBJECT:TANKHUNTER", "KeyboardLayouts": [[{"IconName": "PRCTNTAttack", "HotkeyString": "CONTROLBAR:TNTAttack"}, {"IconName": "AttackMove", "HotkeyString": "CONTROLBAR:AttackMove"}, {"IconName": "Stop", "HotkeyString": "CONTROLBAR:Stop"}]]}
+      ],
+      "Vehicles": [
+        {"Name": "PRCOverlordTank", "IngameName": "OBJECT:Overlord", "KeyboardLayouts": [[{"IconName": "PRCOverlordGatlingCannon", "HotkeyString": "CONTROLBAR:UpgradeChinaOverlordGattlingCannon"}, {"IconName": "AttackMove", "HotkeyString": "CONTROLBAR:AttackMove"}, {"IconName": "Stop", "HotkeyString": "CONTROLBAR:Stop"}]]}
+      ],
+      "Aircrafts": [
+        {"Name": "PRCMIG", "IngameName": "OBJECT:MIG", "KeyboardLayouts": [[{"IconName": "AirGuard", "HotkeyString": "CONTROLBAR:GuardFlyingUnitsOnly"}, {"IconName": "AttackMove", "HotkeyString": "CONTROLBAR:AttackMove"}, {"IconName": "Stop", "HotkeyString": "CONTROLBAR:Stop"}]]}
+      ]
+    },
+    {
+      "ShortName": "COF",
+      "DisplayName": "FIREWALL CELL",
+      "DisplayNameDescription": "Area denial Contra test side",
+      "Buildings": [
+        {"Name": "PRCBunker", "IngameName": "OBJECT:Bunker", "KeyboardLayouts": [[{"IconName": "Evacuate", "HotkeyString": "CONTROLBAR:Evacuate"}, {"IconName": "Sell", "HotkeyString": "CONTROLBAR:Sell"}]]}
+      ],
+      "Infantry": [
+        {"Name": "PRCRedGuard", "IngameName": "OBJECT:Redguard", "KeyboardLayouts": [[{"IconName": "CaptureBuilding", "HotkeyString": "CONTROLBAR:CaptureBuilding"}, {"IconName": "AttackMove", "HotkeyString": "CONTROLBAR:AttackMove"}, {"IconName": "Stop", "HotkeyString": "CONTROLBAR:Stop"}]]}
+      ],
+      "Vehicles": [
+        {"Name": "PRCDragonTank", "IngameName": "OBJECT:Dragon", "KeyboardLayouts": [[{"IconName": "PRCFireWall", "HotkeyString": "CONTROLBAR:FireWall"}, {"IconName": "AttackMove", "HotkeyString": "CONTROLBAR:AttackMove"}, {"IconName": "Stop", "HotkeyString": "CONTROLBAR:Stop"}]]}
+      ],
+      "Aircrafts": [
+        {"Name": "PRCHelix", "IngameName": "OBJECT:Helix", "KeyboardLayouts": [[{"IconName": "PRCDropNapalmBomb", "HotkeyString": "CONTROLBAR:DropNapalmBomb"}, {"IconName": "AttackMove", "HotkeyString": "CONTROLBAR:AttackMove"}, {"IconName": "Stop", "HotkeyString": "CONTROLBAR:Stop"}]]}
+      ]
+    },
+    {
+      "ShortName": "COG",
+      "DisplayName": "SIEGE GROUP",
+      "DisplayNameDescription": "Artillery Contra test side",
+      "Buildings": [
+        {"Name": "PRCCommandCenter", "IngameName": "OBJECT:CommandCenter", "KeyboardLayouts": [[{"IconName": "PRCArtilleryBarrage", "HotkeyString": "CONTROLBAR:ArtilleryBarrage"}, {"IconName": "PRCDozer", "HotkeyString": "CONTROLBAR:ConstructChinaDozer"}, {"IconName": "Sell", "HotkeyString": "CONTROLBAR:Sell"}]]}
+      ],
+      "Infantry": [
+        {"Name": "INFMiniGunner", "IngameName": "OBJECT:Redguard", "KeyboardLayouts": [[{"IconName": "AttackMove", "HotkeyString": "CONTROLBAR:AttackMove"}, {"IconName": "Guard", "HotkeyString": "CONTROLBAR:Guard"}, {"IconName": "Stop", "HotkeyString": "CONTROLBAR:Stop"}]]}
+      ],
+      "Vehicles": [
+        {"Name": "PRCInfernoCannon", "IngameName": "OBJECT:InfernoCannon", "KeyboardLayouts": [[{"IconName": "AttackMove", "HotkeyString": "CONTROLBAR:AttackMove"}, {"IconName": "Guard", "HotkeyString": "CONTROLBAR:Guard"}, {"IconName": "Stop", "HotkeyString": "CONTROLBAR:Stop"}]]}
+      ],
+      "Aircrafts": [
+        {"Name": "PRCMIG", "IngameName": "OBJECT:MIG", "KeyboardLayouts": [[{"IconName": "AirGuard", "HotkeyString": "CONTROLBAR:GuardFlyingUnitsOnly"}, {"IconName": "AttackMove", "HotkeyString": "CONTROLBAR:AttackMove"}, {"IconName": "Stop", "HotkeyString": "CONTROLBAR:Stop"}]]}
+      ]
+    },
+    {
+      "ShortName": "COH",
+      "DisplayName": "REACTOR GUARD",
+      "DisplayNameDescription": "Power economy Contra test side",
+      "Buildings": [
+        {"Name": "PRCNuclearReactor", "IngameName": "OBJECT:NuclearReactor", "KeyboardLayouts": [[{"IconName": "PRCOvercharge", "HotkeyString": "CONTROLBAR:Overcharge"}, {"IconName": "Sell", "HotkeyString": "CONTROLBAR:Sell"}]]}
+      ],
+      "Infantry": [
+        {"Name": "PRCHacker", "IngameName": "OBJECT:Hacker", "KeyboardLayouts": [[{"IconName": "PRCHackInternet", "HotkeyString": "CONTROLBAR:InternetHack"}, {"IconName": "Guard", "HotkeyString": "CONTROLBAR:Guard"}, {"IconName": "Stop", "HotkeyString": "CONTROLBAR:Stop"}]]}
+      ],
+      "Vehicles": [
+        {"Name": "PRCGattlingTank", "IngameName": "OBJECT:GattlingTank", "KeyboardLayouts": [[{"IconName": "AttackMove", "HotkeyString": "CONTROLBAR:AttackMove"}, {"IconName": "Guard", "HotkeyString": "CONTROLBAR:Guard"}, {"IconName": "Stop", "HotkeyString": "CONTROLBAR:Stop"}]]}
+      ],
+      "Aircrafts": [
+        {"Name": "PRCHelix", "IngameName": "OBJECT:Helix", "KeyboardLayouts": [[{"IconName": "PRCHelixSpeakerTower", "HotkeyString": "CONTROLBAR:UpgradeChinaHelixPropagandaTower"}, {"IconName": "AttackMove", "HotkeyString": "CONTROLBAR:AttackMove"}, {"IconName": "Stop", "HotkeyString": "CONTROLBAR:Stop"}]]}
+      ]
+    },
+    {
+      "ShortName": "COI",
+      "DisplayName": "BLACK MARKET",
+      "DisplayNameDescription": "Upgrade economy Contra test side",
+      "Buildings": [
+        {"Name": "GLABlackMarket", "IngameName": "OBJECT:BlackMarket", "KeyboardLayouts": [[{"IconName": "GLAAPBullets", "HotkeyString": "CONTROLBAR:UpgradeGLAAPBullets"}, {"IconName": "GLAJunkRepair", "HotkeyString": "CONTROLBAR:UpgradeGLAJunkRepair"}, {"IconName": "Sell", "HotkeyString": "CONTROLBAR:Sell"}]]}
+      ],
+      "Infantry": [
+        {"Name": "GLAJarmenKell", "IngameName": "OBJECT:JarmenKell", "KeyboardLayouts": [[{"IconName": "GLAPilotKill", "HotkeyString": "CONTROLBAR:SniperAttack"}, {"IconName": "AttackMove", "HotkeyString": "CONTROLBAR:AttackMove"}, {"IconName": "Stop", "HotkeyString": "CONTROLBAR:Stop"}]]}
+      ],
+      "Vehicles": [
+        {"Name": "GLAQuadCannon", "IngameName": "OBJECT:QuadCannon", "KeyboardLayouts": [[{"IconName": "AttackMove", "HotkeyString": "CONTROLBAR:AttackMove"}, {"IconName": "Guard", "HotkeyString": "CONTROLBAR:Guard"}, {"IconName": "Stop", "HotkeyString": "CONTROLBAR:Stop"}]]}
+      ],
+      "Aircrafts": [
+        {"Name": "USAComanche", "IngameName": "OBJECT:Comanche", "KeyboardLayouts": [[{"IconName": "AirGuard", "HotkeyString": "CONTROLBAR:GuardFlyingUnitsOnly"}, {"IconName": "AttackMove", "HotkeyString": "CONTROLBAR:AttackMove"}, {"IconName": "Stop", "HotkeyString": "CONTROLBAR:Stop"}]]}
+      ]
+    },
+    {
+      "ShortName": "COJ",
+      "DisplayName": "SMUGGLER LINE",
+      "DisplayNameDescription": "Fast transport Contra test side",
+      "Buildings": [
+        {"Name": "GLAArmsDealer", "IngameName": "OBJECT:ArmsDealer", "KeyboardLayouts": [[{"IconName": "GLATechnical", "HotkeyString": "CONTROLBAR:ConstructGLAVehicleTechnical"}, {"IconName": "GLACombatBike", "HotkeyString": "CONTROLBAR:ConstructGLAVehicleCombatBike"}, {"IconName": "Sell", "HotkeyString": "CONTROLBAR:Sell"}]]}
+      ],
+      "Infantry": [
+        {"Name": "GLARebel", "IngameName": "OBJECT:Rebel", "KeyboardLayouts": [[{"IconName": "CaptureBuilding", "HotkeyString": "CONTROLBAR:CaptureBuilding"}, {"IconName": "AttackMove", "HotkeyString": "CONTROLBAR:AttackMove"}, {"IconName": "Stop", "HotkeyString": "CONTROLBAR:Stop"}]]}
+      ],
+      "Vehicles": [
+        {"Name": "GLATechnical", "IngameName": "OBJECT:Technical", "KeyboardLayouts": [[{"IconName": "Evacuate", "HotkeyString": "CONTROLBAR:Evacuate"}, {"IconName": "AttackMove", "HotkeyString": "CONTROLBAR:AttackMove"}, {"IconName": "Stop", "HotkeyString": "CONTROLBAR:Stop"}]]}
+      ],
+      "Aircrafts": [
+        {"Name": "PRCHelix", "IngameName": "OBJECT:Helix", "KeyboardLayouts": [[{"IconName": "Evacuate", "HotkeyString": "CONTROLBAR:Evacuate"}, {"IconName": "AttackMove", "HotkeyString": "CONTROLBAR:AttackMove"}, {"IconName": "Stop", "HotkeyString": "CONTROLBAR:Stop"}]]}
+      ]
+    },
+    {
+      "ShortName": "COK",
+      "DisplayName": "DEMOLITION LAB",
+      "DisplayNameDescription": "Explosive Contra test side",
+      "Buildings": [
+        {"Name": "GLADemoTrap", "IngameName": "OBJECT:DemoTrap", "KeyboardLayouts": [[{"IconName": "Sell", "HotkeyString": "CONTROLBAR:Sell"}]]}
+      ],
+      "Infantry": [
+        {"Name": "GLATerrorist", "IngameName": "OBJECT:Terrorist", "KeyboardLayouts": [[{"IconName": "DMLSuicide", "HotkeyString": "CONTROLBAR:SuicideAttack"}, {"IconName": "AttackMove", "HotkeyString": "CONTROLBAR:AttackMove"}, {"IconName": "Stop", "HotkeyString": "CONTROLBAR:Stop"}]]}
+      ],
+      "Vehicles": [
+        {"Name": "GLABombTruck", "IngameName": "OBJECT:BombTruck", "KeyboardLayouts": [[{"IconName": "GLACarBomb", "HotkeyString": "CONTROLBAR:DetonateBombTruck"}, {"IconName": "AttackMove", "HotkeyString": "CONTROLBAR:AttackMove"}, {"IconName": "Stop", "HotkeyString": "CONTROLBAR:Stop"}]]}
+      ],
+      "Aircrafts": [
+        {"Name": "USAStealthFighter", "IngameName": "OBJECT:StealthFighter", "KeyboardLayouts": [[{"IconName": "AttackMove", "HotkeyString": "CONTROLBAR:AttackMove"}, {"IconName": "Guard", "HotkeyString": "CONTROLBAR:Guard"}, {"IconName": "Stop", "HotkeyString": "CONTROLBAR:Stop"}]]}
+      ]
+    },
+    {
+      "ShortName": "COL",
+      "DisplayName": "TOXIN CELL",
+      "DisplayNameDescription": "Contamination Contra test side",
+      "Buildings": [
+        {"Name": "GLAScudStorm", "IngameName": "OBJECT:SCUDStorm", "KeyboardLayouts": [[{"IconName": "GLAScudStormLaunch", "HotkeyString": "CONTROLBAR:ScudStorm"}, {"IconName": "Sell", "HotkeyString": "CONTROLBAR:Sell"}]]}
+      ],
+      "Infantry": [
+        {"Name": "TOXRebel", "IngameName": "OBJECT:Rebel", "KeyboardLayouts": [[{"IconName": "CaptureBuilding", "HotkeyString": "CONTROLBAR:CaptureBuilding"}, {"IconName": "AttackMove", "HotkeyString": "CONTROLBAR:AttackMove"}, {"IconName": "Stop", "HotkeyString": "CONTROLBAR:Stop"}]]}
+      ],
+      "Vehicles": [
+        {"Name": "GLAToxinTractor", "IngameName": "OBJECT:ToxinTruck", "KeyboardLayouts": [[{"IconName": "GLAContaminate", "HotkeyString": "CONTROLBAR:Contaminate"}, {"IconName": "AttackMove", "HotkeyString": "CONTROLBAR:AttackMove"}, {"IconName": "Stop", "HotkeyString": "CONTROLBAR:Stop"}]]}
+      ],
+      "Aircrafts": [
+        {"Name": "USAComanche", "IngameName": "OBJECT:Comanche", "KeyboardLayouts": [[{"IconName": "AirGuard", "HotkeyString": "CONTROLBAR:GuardFlyingUnitsOnly"}, {"IconName": "AttackMove", "HotkeyString": "CONTROLBAR:AttackMove"}, {"IconName": "Stop", "HotkeyString": "CONTROLBAR:Stop"}]]}
+      ]
+    }
+  ]
+}

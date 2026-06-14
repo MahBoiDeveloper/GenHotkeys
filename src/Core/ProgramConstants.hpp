@@ -35,18 +35,28 @@ public: // Immutable data
     // Colors
     const QString LINK_COLOR = "#baff0c";
 
-    // Folders
+    // General strings
+    const QString STYLES_FILENAME    = "Styles.css";
+    const QString TECH_TREE_FILENAME = "TechTree.json";
+    const QString G_FOLDER_NAME      = "Generals";
+    const QString GZH_FOLDER_NAME    = "GeneralsZH";
+    const QString ICONS_FOLDER_NAME  = "Icons";
+
+    // General editor folders
+    const QString QT_ICONS_FOLDER         = ":/icons";
     const QString RESOURCE_FOLDER         = "Resources";
     const QString BINARIES_FOLDER         = RESOURCE_FOLDER + "\\Binaries";
     const QString TRANSLATIONS_FOLDER     = RESOURCE_FOLDER + "/Translations";
-    const QString ICONS_FOLDER            = RESOURCE_FOLDER + "/Icons";
-    const QString THEME_FOLDER            = RESOURCE_FOLDER + "/Theme";
-    const QString QT_ICONS_FOLDER         = ":/icons";
-    
-    // Resource files
-    const QString TECH_TREE_FILE          = RESOURCE_FOLDER + "/TechTree.json";
+
+    // Profile folders
+    const QString PROFILES_FOLDER         = RESOURCE_FOLDER    + "/Profiles";
+    const QString G_PROFILE_FOLDER        = PROFILES_FOLDER    + "/" + G_FOLDER_NAME;
+    const QString GZH_PROFILE_FOLDER      = PROFILES_FOLDER    + "/" + GZH_FOLDER_NAME;
+    const QString MAIN_STYLES_FILE        = PROFILES_FOLDER    + "/" + STYLES_FILENAME;
+
+    // Profile unrelated resource files
     const QString SETTINGS_FILE           = RESOURCE_FOLDER + "/Settings.json";
-    const QString STYLES_SHEET_FILE       = THEME_FOLDER    + "/Styles.css";
+    const QString GLOBAL_STYLES_FILE      = RESOURCE_FOLDER + STYLES_FILENAME;
 
     // Build-in files
     const QString MISSING_ICON_FILE       = QT_ICONS_FOLDER + "/NoImageSmall.webp";
@@ -101,7 +111,7 @@ public: // Immutable data
     const QString NON_ASCII_HOTKEY_ERROR_DESCRIPTION = QObject::tr("You have assign as hotkey a non-ASCII character \"%1\".\nMake sure that you are using ASCII only symbols.");
     const QString FORBIDDEN_HOTKEY_ERROR_DESCRIPTION = QObject::tr("You have assign as hotkey a forbidden character \"%1\".\nMake sure that you are using only allowed symbols.");
 
-    // Other string constants
+    // CSF string constants
     const QString HOTKEY_CSF_CATEGORY  = "CONTROLBAR";
     const QString OBJECT_CSF_CATEGORY  = "OBJECT";
     const QString BIG_ARCHIVE_CSF_PATH = "Data\\English\\generals.csf";
@@ -159,4 +169,6 @@ public: // Methods
     void InitializeFileSettings();
     /// @brief Parse `*.qm` files in the `Resources\Translations` folder.
     void InitializeTranslations();
+    /// @brief Parse folders in `Resources\Profiles` folder.
+    void InitializeProfiles();
 };
