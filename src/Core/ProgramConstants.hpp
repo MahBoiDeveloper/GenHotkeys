@@ -40,6 +40,7 @@ public: // Immutable data
     const QString TECH_TREE_FILENAME = "TechTree.json";
     const QString G_FOLDER_NAME      = "Generals";
     const QString GZH_FOLDER_NAME    = "GeneralsZH";
+    const QString ICONS_FOLDER_NAME  = "Icons";
 
     // General editor folders
     const QString QT_ICONS_FOLDER         = ":/icons";
@@ -51,8 +52,6 @@ public: // Immutable data
     const QString PROFILES_FOLDER         = RESOURCE_FOLDER    + "/Profiles";
     const QString G_PROFILE_FOLDER        = PROFILES_FOLDER    + "/" + G_FOLDER_NAME;
     const QString GZH_PROFILE_FOLDER      = PROFILES_FOLDER    + "/" + GZH_FOLDER_NAME;
-    const QString ICONS_FOLDER            = GZH_PROFILE_FOLDER + "/Icons";
-    const QString THEME_FOLDER            = GZH_PROFILE_FOLDER + "/Theme";
     const QString MAIN_STYLES_FILE        = PROFILES_FOLDER    + "/" + STYLES_FILENAME;
 
     // Profile unrelated resource files
