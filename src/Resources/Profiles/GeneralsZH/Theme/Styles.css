@@ -181,8 +181,8 @@ EditorWindow QPushButton:pressed         { background-color: #3543e7; color: whi
 EditorWindow QPushButton:pressed:hover   { background-color: #3543e7; color: #baff0c; }
 
 QPushButton[faction="GLA"]               { background-color: #185a22; border-color: #b1ffbf; }
-QPushButton[faction="GLA"]:pressed       { background-color: #427b32; /*color: black;*/ }
 QPushButton[faction="GLA"]:hover         { background-color: #427b32; color: #c9c9c9; }
+QPushButton[faction="GLA"]:pressed       { background-color: #427b32; /*color: black;*/ }
 QPushButton[faction="GLA"]:pressed:hover { background-color: #427b32; color: #c9c9c9; }
 
 QPushButton[faction="PRC"]               { background-color: #5a1f18; border-color: #ffbbb1; }
