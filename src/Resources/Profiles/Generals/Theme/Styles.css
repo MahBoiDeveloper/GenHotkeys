@@ -132,14 +132,14 @@ QPushButton#btnOk
 /* Start widgets and SettingsWindow style settings */
 LoadFromTheFileWindow, SetUpWindowsWrapper, LoadFromTheGameWindow, SettingsWindow, QWidget#pSettingsWindow
 {
-    border-image: url(Resources/Profiles/Generals/Theme/StartMenuBackground.webp) 0 0 0 0 stretch stretch;
+    border-image: url(Resources/Profiles/Generals/Theme/StartMenuBackground.png) 0 0 0 0 stretch stretch;
     background-color: black;
 }
 
 /* Editor window style settings */
 EditorWindow
 {
-    border-image: url(Resources/Profiles/Generals/Theme/EditorBackground.webp) 0 0 0 0 stretch stretch;
+    border-image: url(Resources/Profiles/Generals/Theme/EditorBackground.png) 0 0 0 0 stretch stretch;
     background-color: black;
 }
 
