@@ -147,27 +147,15 @@
     )
 
 # Copying Resource folder with subfolders, configs and files
-    file(
-        COPY "${PROJECT_RESOURCE_FOLDER}"
-        DESTINATION ${PROJECT_DESTINATION_RESOURCES_FOLDER}/..
+    # https://discourse.cmake.org/t/copying-files-with-destination-folder-depending-on-build-config/10686
+    add_custom_target(SyncResourceDir
+	    COMMAND ${CMAKE_COMMAND} -E copy_directory_if_different 
+            "${PROJECT_RESOURCE_FOLDER}"
+            "${PROJECT_DESTINATION_RESOURCES_FOLDER}"
+        COMMENT "Synchronize resources directories"
     )
 
-# Managing additional source files
-    # Declare json files
-    set(
-        ADDITIONAL_RESOURCES
-        "${PROJECT_RESOURCE_FOLDER}/TechTree.json"
-        "${PROJECT_RESOURCE_FOLDER}/Settings.json"
-    )
-
-    # Copy json files if file updates
-    foreach(CURRENT_FILE ${ADDITIONAL_RESOURCES})
-        configure_file(
-            ${CURRENT_FILE}
-            ${PROJECT_DESTINATION_RESOURCES_FOLDER}
-            COPYONLY
-        )
-    endforeach()
+    add_dependencies(${MAIN_TARGET_NAME} SyncResourceDir)
 
 # Qt libs linking aka copying dependecies to the standalone release version of the project
     # Find the qt libs deploy program

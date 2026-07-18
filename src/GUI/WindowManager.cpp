@@ -1,3 +1,4 @@
+#include <QFile>
 #include <QFileInfo>
 #include <QMessageBox>
 #include <QApplication>
@@ -15,23 +16,12 @@
 #include "WindowManager.hpp"
 
 WindowManager::WindowManager()
-{    
+{
     SetTranslator();
 
     qApp->setWindowIcon(QIcon(QPixmap::fromImage(ImageManager::DecodeEditorWebpIcon())));
-    
-    LOGMSG("Loading \"" + PROGRAM_CONSTANTS->STYLES_SHEET_FILE + "\"...");
-    QFile css{PROGRAM_CONSTANTS->STYLES_SHEET_FILE};
-    if (css.open(QIODevice::ReadOnly))
-    {
-        qApp->setStyleSheet(css.readAll());
-        css.close();
-        LOGMSG("Styles sheet has been loaded");
-    }
-    else
-    {
-        LOGMSG("Unable to read the style file");
-    }
+    ProfileFolder = PROGRAM_CONSTANTS->GZH_PROFILE_FOLDER;
+    ApplyProfileStyleSheet(ProfileFolder);
 
     LOGMSG("Loading launch window...");
     pStartUpWindow = new SetUpWindowsWrapper();
@@ -89,6 +79,40 @@ bool WindowManager::InitializeCSFParser()
     return true;
 }
 
+QString WindowManager::ReadStyleSheet(const QString& filepath, const QString& name) const
+{
+    LOGMSG("Loading \"" + filepath + "\"...");
+
+    QFile css(filepath);
+    if (css.open(QIODevice::ReadOnly))
+    {
+        LOGMSG(name + " stylesheet has been loaded");
+        return QString::fromUtf8(css.readAll());
+    }
+
+    LOGMSG("Unable to read the " + name + " stylesheet");
+    return StringExt::EmptyString;
+}
+
+void WindowManager::ApplyProfileStyleSheet(const QString& profileFolder)
+{
+    ProfileFolder = profileFolder;
+
+    QString style = ReadStyleSheet(PROGRAM_CONSTANTS->MAIN_STYLES_FILE, "Main");
+    style += "\n";
+
+    const QString profileName = QFileInfo(ProfileFolder).fileName();
+    const QString profileStylesFile = ProfileFolder + "/Theme/" + PROGRAM_CONSTANTS->STYLES_FILENAME;
+    style += ReadStyleSheet(profileStylesFile, profileName);
+
+    qApp->setStyleSheet(style);
+}
+
+void WindowManager::ApplyDefaultProfileStyleSheet()
+{
+    ApplyProfileStyleSheet(PROGRAM_CONSTANTS->GZH_PROFILE_FOLDER);
+}
+
 void WindowManager::StartUpWindow_AcceptConfiguration()
 {
     // 2nd init protection 
@@ -122,7 +146,10 @@ void WindowManager::SetTranslator()
     pAppTranslator = new QTranslator();
     pAppTranslator->load(lngShortName, PROGRAM_CONSTANTS->TRANSLATIONS_FOLDER);
     qApp->installTranslator(pAppTranslator);
-    FACTIONS_MANAGER->UpdateFactionNames();
+    if (FACTIONS_MANAGER != nullptr)
+    {
+        FACTIONS_MANAGER->UpdateFactionNames();
+    }
 }
 
 void WindowManager::Show()                               { pStartUpWindow->show(); }
@@ -135,6 +162,45 @@ void WindowManager::EditorWindow_NewHotkeyFileSelected()
     pHotkeysEditor = nullptr;
     InitializeCSFParser();
     StartUpWindow_AcceptConfiguration();
+}
+
+void WindowManager::StartUpWindow_GProfileSelected()
+{
+    if (FACTIONS_MANAGER != nullptr)
+    {
+        FACTIONS_MANAGER.release();
+    }
+
+    ApplyProfileStyleSheet(PROGRAM_CONSTANTS->G_PROFILE_FOLDER);
+
+    FACTIONS_MANAGER = std::make_unique<FactionManager>(PROGRAM_CONSTANTS->G_PROFILE_FOLDER
+                                                        + "/" + PROGRAM_CONSTANTS->TECH_TREE_FILENAME);
+}
+
+void WindowManager::StartUpWindow_GZHProfileSelected()
+{
+    if (FACTIONS_MANAGER != nullptr)
+    {
+        FACTIONS_MANAGER.release();
+    }
+
+    ApplyProfileStyleSheet(PROGRAM_CONSTANTS->GZH_PROFILE_FOLDER);
+
+    FACTIONS_MANAGER = std::make_unique<FactionManager>(PROGRAM_CONSTANTS->GZH_PROFILE_FOLDER
+                                                        + "/" + PROGRAM_CONSTANTS->TECH_TREE_FILENAME);
+}
+
+void WindowManager::StartUpWindow_CustomProfileSelected(const QString& folder)
+{
+    if (FACTIONS_MANAGER != nullptr)
+    {
+        FACTIONS_MANAGER.release();
+    }
+    
+    const QString profileFolder = PROGRAM_CONSTANTS->PROFILES_FOLDER + "/" + folder;
+    ApplyProfileStyleSheet(profileFolder);
+    
+    FACTIONS_MANAGER = std::make_unique<FactionManager>(profileFolder + "/" + PROGRAM_CONSTANTS->TECH_TREE_FILENAME);
 }
 
 WindowManager::~WindowManager()

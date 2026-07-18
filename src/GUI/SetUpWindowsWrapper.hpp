@@ -1,17 +1,15 @@
 #pragma once
 #include <QStackedWidget>
-#include "GreetingWindow.hpp"
-#include "LoadFromTheGameWindow.hpp"
-#include "LoadFromTheFileWindow.hpp"
+#include "LoadWindow.hpp"
+#include "SelectProfileWindow.hpp"
 #include "SettingsWindow.hpp"
 
 class SetUpWindowsWrapper final : public QStackedWidget
 {
     Q_OBJECT
 private: // Data
-    GreetingWindow*        pGreetingWidget        = nullptr;
-    LoadFromTheGameWindow* pLoadFromTheGameWindow = nullptr;
-    LoadFromTheFileWindow* pLoadFromTheFileWindow = nullptr;
+    SelectProfileWindow*   pSelectProfileWindow   = nullptr;
+    LoadWindow* pLoadWindow = nullptr;
     SettingsWindow*        pSettingsWindow        = nullptr;
 
 private: // Methods
@@ -19,24 +17,30 @@ private: // Methods
     void AttachConnections();
     /// @brief Disconnects slots and signals.
     void DetachConnections();
-    /// @brief Initialize `GreetingWindow`, `LoadFromTheGameWindow`, `LoadFromTheFileWindow`.
+    /// @brief Initialize `SelectProfileWindow`, `LoadFromTheGameWindow`, `LoadWindow` class objects.
     void AddWidgets();
+    /// @brief Free heap from `SelectProfileWindow`, `LoadFromTheGameWindow`, `LoadWindow` data.
+    void DeleteWidgets();
 public:
     SetUpWindowsWrapper(QWidget* parent = nullptr);
 
 private slots:
-    /// @brief Show `GreetingWindow`, if button `Back` has been clicked.
+    /// @brief Show `SeelectProfileWindow`, if button `Back` has been clicked.
     void BtnBack_Clicked();
     /// @brief Change app language.
     void SettingsWindow_LanguageChanged();
     /// @brief Show `SettingsWindow` if button `btnSettings` has been clicked.
-    void BtnSettings_Clicked();
+    void SelectProfileWindow_SettingsClicked();
     /// @brief Show window to load hotkeys information from .csf file.
     void BtnLoadFromFile_Clicked();
-    /// @brief Show window to load hotkeys information from the game.
-    void BtnLoadFromGame_Clicked();
     /// @brief Returns checked configuration of user preferences.
-    void LoadFromTheFileWindow_AcceptConfiguration();
+    void LoadWindow_LoadFromTheFile();
     /// @brief Returns checked configuration of user preferences.
-    void LoadFromTheGameWindow_AcceptConfiguration();
+    void LoadWindow_LoadFromTheGame();
+    /// @brief Handles selection of the Generals profile.
+    void SelectProfileWindow_GProfileSelected();
+    /// @brief Handles selection of the Generals Zero Hour profile.
+    void SelectProfileWindow_GZHProfileSelected();
+    /// @brief Handles selection of a custom profile.
+    void SelectProfileWindow_CustomProfileSelected(const QString& folder);
 };

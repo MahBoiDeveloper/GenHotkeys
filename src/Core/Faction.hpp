@@ -29,7 +29,8 @@ private: // Data
     QString displayNameDescription;
     QMap<GameObject, GameObjectTypes> techTree;
 public:
-    inline static const int BASIC_FACTION_COUNT = 12;
+    inline static constexpr int MINIMAL_FACTION_COUNT = 3;  // 3 factions are a bare minimum set upped by vanilla
+    inline static constexpr int MAXIMUM_FACTION_COUNT = 15; // 15 factions are a known game maximum set upped by ZH
 
 private: // Methods
     QMap<GameObject, GameObjectTypes> ParseJsonObject(const QJsonObject& obj);

@@ -7,6 +7,7 @@
 #include <QApplication>
 #include <QMessageBox>
 #include <QDebug>
+#include <QDir>
 
 // Project headers
 #include "GUI/WindowManager.hpp"
@@ -38,6 +39,7 @@ int main(int argc, const char** argv)
 
     QString workingDirectory = QString::fromStdWString(filesystem::current_path().c_str());
     
+    // Change directory if user started the real executable instead of proxy
     if (workingDirectory.indexOf(PROGRAM_CONSTANTS->BINARIES_FOLDER) != -1)
     {
         LOGMSG("Program started from Resources\\Binaries folder. Redirect working directory to the ..\\..\\");
@@ -46,9 +48,16 @@ int main(int argc, const char** argv)
         filesystem::current_path(workingDirectory.toStdWString());
     }
 
+    // Throw an error if there is no Translations folder in Resources
+    if (!filesystem::exists(PROGRAM_CONSTANTS->TRANSLATIONS_FOLDER.toStdString().c_str()))
+        return ShowErrorMessage(PROGRAM_CONSTANTS->TRANSLATIONS_NO_FOUND);
+
+    // Throw an error if there is no Settings.json file in Resources
     if (!filesystem::exists(PROGRAM_CONSTANTS->SETTINGS_FILE.toStdString().c_str()))
         return ShowErrorMessage(PROGRAM_CONSTANTS->SETTINGS_NO_FOUND);
 
+    // TODO: Make it profile related
+    /*
     if (!filesystem::exists(PROGRAM_CONSTANTS->TECH_TREE_FILE.toStdString().c_str()))
         return ShowErrorMessage(PROGRAM_CONSTANTS->TECH_TREE_NO_FOUND);
 
@@ -57,12 +66,11 @@ int main(int argc, const char** argv)
 
     if (!filesystem::exists(PROGRAM_CONSTANTS->THEME_FOLDER.toStdString().c_str()))
         return ShowErrorMessage(PROGRAM_CONSTANTS->THEME_FOLDER_NO_FOUND);
-
-    if (!filesystem::exists(PROGRAM_CONSTANTS->TRANSLATIONS_FOLDER.toStdString().c_str()))
-        return ShowErrorMessage(PROGRAM_CONSTANTS->TRANSLATIONS_NO_FOUND);
+    */
 
     PROGRAM_CONSTANTS->InitializeTranslations();
     PROGRAM_CONSTANTS->InitializeFileSettings();
+    PROGRAM_CONSTANTS->InitializeProfiles();
 
     // Show console, that by default is hiding by Logger class
     if (PROGRAM_CONSTANTS->pSettingsFile->IsConsoleEnabled()) 
@@ -75,9 +83,6 @@ int main(int argc, const char** argv)
     // Enable Discord RPC
     if (PROGRAM_CONSTANTS->pSettingsFile->IsDiscordRPCEnabled())
         DISCORD_MANAGER->Initialize();
-
-    // Initialize TechTree.json parsing
-    FACTIONS_MANAGER = make_unique<FactionManager>();
 
     // Define logger as the singleton class, that could be used anywhere in the project
     WINDOW_MANAGER = make_unique<WindowManager>();

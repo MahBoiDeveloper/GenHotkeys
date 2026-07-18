@@ -31,3 +31,8 @@ void ProgramConstants::InitializeTranslations()
         Languages.insert(i, {file.completeBaseName().toLower(), Windows::Locale::LanguageName(file.completeBaseName().toLower())});
     }
 }
+
+void ProgramConstants::InitializeProfiles()
+{
+
+}

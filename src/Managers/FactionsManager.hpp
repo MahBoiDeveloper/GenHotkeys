@@ -9,7 +9,7 @@
 class FactionManager final
 {
 private: // Data
-    const JSONFile TECH_TREE_SOURCE{PROGRAM_CONSTANTS->TECH_TREE_FILE};
+    JSONFile TechTreeSource;
     QVector<Faction> vFactions;
 public:
     inline static std::unique_ptr<FactionManager> Instance = nullptr;
@@ -17,8 +17,8 @@ public:
 private: // Methods
     void Parse();
 public:
-    /// @brief Default constructor.
-    explicit FactionManager();
+    /// @brief Parse `TechTree.json` from the specific path as the game tech tree.
+    explicit FactionManager(const QString techtreejson);
     /// @brief Return count of parsed factions.
     int Count();
     /// @brief Return faction by its index in container.
