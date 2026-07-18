@@ -117,9 +117,9 @@ public: // Immutable data
     const QString BIG_ARCHIVE_CSF_PATH = "Data\\English\\generals.csf";
 
     // Constant containers
-    const QVector<QString> GLA_SHORT_NAMES = {"GLA", "TOX", "STL", "DML"};
-    const QVector<QString> USA_SHORT_NAMES = {"USA", "SWG", "AIR", "LSR"};
-    const QVector<QString> PRC_SHORT_NAMES = {"PRC", "TNK", "INF", "NUK"};
+    const QVector<QString> GLA_SHORT_NAMES = {"GLA", "TOX", "STL", "DML", "DTS"};
+    const QVector<QString> USA_SHORT_NAMES = {"USA", "SWG", "AIR", "LSR", "IRS"};
+    const QVector<QString> PRC_SHORT_NAMES = {"PRC", "TNK", "INF", "NUK", "LNG"};
 
     const QSet<Qt::Key> DEFAULT_ALLOWED_KEYS =
     {
