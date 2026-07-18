@@ -278,7 +278,7 @@ QScrollBar::add-page, QScrollBar::sub-page
 
 QDialog
 {
-    border-image: url(Resources/Profiles/Generals/Theme/StartMenuBackground.webp) 0 0 0 0 stretch stretch;
+    border-image: url(Resources/Profiles/Generals/Theme/StartMenuBackground.png) 0 0 0 0 stretch stretch;
     background-color: black;
 }
 
