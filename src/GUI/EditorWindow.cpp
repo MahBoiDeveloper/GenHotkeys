@@ -87,6 +87,18 @@ EditorWindow::EditorWindow(QWidget* parent)
     ltFactionsGLA->setObjectName(nameof(ltFactionsGLA));
     ltSubfactionsGLA->setObjectName(nameof(ltSubfactionsGLA));
 
+    #define ADD_TO_LAYOUT(x) \
+    { \
+        if (PROGRAM_CONSTANTS->x##_SHORT_NAMES.contains(shortName)) \
+        { \
+            factionButton->setProperty("faction", QString(#x)); \
+            if (shortName == QString(#x)) \
+                ltFactions##x->addWidget(factionButton); \
+            else \
+                ltSubfactions##x->addWidget(factionButton); \
+        } \
+    }
+
     for (int i = 0; i < FACTIONS_MANAGER->Count(); ++i)
     {
         const Faction& currFaction = FACTIONS_MANAGER->FindByIndex(i);
@@ -96,35 +108,9 @@ EditorWindow::EditorWindow(QWidget* parent)
 
         QString shortName = currFaction.GetShortName();
 
-        if (PROGRAM_CONSTANTS->USA_SHORT_NAMES.contains(shortName))
-        {
-            factionButton->setProperty("faction", "USA");
-
-            if (shortName == "USA"q)
-                ltFactionsUSA->addWidget(factionButton);
-            else
-                ltSubfactionsUSA->addWidget(factionButton);
-        }
-
-        if (PROGRAM_CONSTANTS->PRC_SHORT_NAMES.contains(shortName))
-        {
-            factionButton->setProperty("faction", "PRC");
-
-            if (shortName == "PRC"q)
-                ltFactionsPRC->addWidget(factionButton);
-            else
-                ltSubfactionsPRC->addWidget(factionButton);
-        }
-
-        if (PROGRAM_CONSTANTS->GLA_SHORT_NAMES.contains(shortName))
-        {
-            factionButton->setProperty("faction", "GLA");
-
-            if (shortName == "GLA"q)
-                ltFactionsGLA->addWidget(factionButton);
-            else
-                ltSubfactionsGLA->addWidget(factionButton);
-        }
+        ADD_TO_LAYOUT(USA);
+        ADD_TO_LAYOUT(PRC);
+        ADD_TO_LAYOUT(GLA);
 
         connect(factionButton, &QPushButton::pressed, this, [=, this]()
         {
@@ -134,20 +120,21 @@ EditorWindow::EditorWindow(QWidget* parent)
         pFactionsButtonsGroup->addButton(factionButton);
     }
     
-    if (!ltSubfactionsUSA->count())
-        ltSubfactionsUSA->deleteLater();
-    else
-        ltFactionsUSA->addLayout(ltSubfactionsUSA);
-    
-    if (!ltSubfactionsPRC->count())
-        ltSubfactionsPRC->deleteLater();
-    else
-        ltFactionsPRC->addLayout(ltSubfactionsPRC);
-    
-    if (!ltSubfactionsGLA->count())
-        ltSubfactionsGLA->deleteLater();
-    else
-        ltFactionsGLA->addLayout(ltSubfactionsGLA);
+    #undef ADD_TO_LAYOUT
+
+    #define RM_IF_EMPTY(x) \
+    { \
+        if (!ltSubfactions##x->count()) \
+            ltSubfactions##x->deleteLater(); \
+        else \
+            ltFactions##x->addLayout(ltSubfactions##x); \
+    }
+
+    RM_IF_EMPTY(USA);
+    RM_IF_EMPTY(PRC);
+    RM_IF_EMPTY(GLA);
+
+    #undef RM_IF_EMPTY
 
     ltFactions->addLayout(ltFactionsUSA);
     ltFactions->addLayout(ltFactionsPRC);
