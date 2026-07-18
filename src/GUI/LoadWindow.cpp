@@ -82,7 +82,7 @@ LoadWindow::LoadWindow(QWidget* parent) : QWidget(parent)
 
 void LoadWindow::lneFilePath_textChanged()
 {
-    QLineEdit* le = qobject_cast<QLineEdit*>(sender());
+    auto* le = qobject_cast<QLineEdit*>(sender());
     QString tmp = le->text();
     
     if (tmp.startsWith("file:///"))
