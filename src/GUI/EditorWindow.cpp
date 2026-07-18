@@ -8,14 +8,15 @@
 #include <QComboBox>
 #include <QFileDialog>
 
+#include "../Extensions/ExceptionExt.hpp"
 #include "../Extensions/BoolExt.hpp"
 #include "../Extensions/L10NExt.hpp"
-#include "../Windows/Registry.hpp"
-#include "../Windows/Locale.hpp"
-#include "../Parsers/CSFParser.hpp"
 #include "../Core/Logger.hpp"
 #include "../Core/Convert.hpp"
+#include "../Parsers/CSFParser.hpp"
 #include "../Managers/FactionsManager.hpp"
+#include "../Windows/Registry.hpp"
+#include "../Windows/Locale.hpp"
 #include "../Info.hpp"
 
 #include "ImageManager.hpp"
@@ -58,58 +59,87 @@ EditorWindow::EditorWindow(QWidget* parent)
     int factonsCount = FACTIONS_MANAGER->Count();
     size_t language = PROGRAM_CONSTANTS->pSettingsFile->GetLanguage();
 
-    if (factonsCount == Faction::BASIC_FACTION_COUNT)
-    {
-        ltFactions = new QHBoxLayout();
-        ltFactions->setObjectName(nameof(ltFactions));
+    ltFactions = new QHBoxLayout();
+    ltFactions->setObjectName(nameof(ltFactions));
 
-        // Only 3 blocks with factions and subfactions. 4 in each block and 12 in total
-        for (int sectionIndex = 0; sectionIndex < Faction::BASIC_FACTION_COUNT; sectionIndex += 4)
+    if (factonsCount > Faction::MAXIMUM_FACTION_COUNT)
+    {
+        throw ExceptionExt("Unable to parse more than " + ToQString(Faction::MAXIMUM_FACTION_COUNT) + " factions. Found factions : " + factonsCount);
+    }
+
+    if (factonsCount < Faction::MINIMAL_FACTION_COUNT)
+    {
+        throw ExceptionExt("Unable to parse less than " + ToQString(Faction::MINIMAL_FACTION_COUNT) + " factions. Found factions : " + factonsCount);
+    }
+
+    QVBoxLayout* ltFactionsUSA    = new QVBoxLayout();
+    QHBoxLayout* ltSubfactionsUSA = new QHBoxLayout();
+    ltFactionsUSA->setObjectName(nameof(ltFactionsUSA));
+    ltSubfactionsUSA->setObjectName(nameof(ltSubfactionsUSA));
+
+    QVBoxLayout* ltFactionsPRC    = new QVBoxLayout();
+    QHBoxLayout* ltSubfactionsPRC = new QHBoxLayout();
+    ltFactionsPRC->setObjectName(nameof(ltFactionsPRC));
+    ltSubfactionsPRC->setObjectName(nameof(ltSubfactionsPRC));
+
+    QVBoxLayout* ltFactionsGLA    = new QVBoxLayout();
+    QHBoxLayout* ltSubfactionsGLA = new QHBoxLayout();
+    ltFactionsGLA->setObjectName(nameof(ltFactionsGLA));
+    ltSubfactionsGLA->setObjectName(nameof(ltSubfactionsGLA));
+
+    for (int i = 0; i < FACTIONS_MANAGER->Count(); ++i)
+    {
+        const Faction& currFaction = FACTIONS_MANAGER->FindByIndex(i);
+
+        QPushButton* factionButton = new QPushButton(currFaction.GetDisplayName());
+        factionButton->setToolTip(currFaction.GetDisplayNameDescription());
+
+        QString shortName = currFaction.GetShortName();
+
+        if (PROGRAM_CONSTANTS->USA_SHORT_NAMES.contains(shortName))
         {
-            QVBoxLayout* ltCurrentFaction    = new QVBoxLayout();
-            QHBoxLayout* ltCurrentSubfaction = new QHBoxLayout();
-            ltCurrentFaction->setObjectName(nameof(ltCurrentFaction));
-            ltCurrentSubfaction->setObjectName(nameof(ltCurrentSubfaction));
+            factionButton->setProperty("faction", "USA");
 
-            for (int i = 0; i < 4; ++i)
-            {
-                const Faction currFaction = FACTIONS_MANAGER->FindByIndex(sectionIndex + i);
-
-                QPushButton* factionButton = new QPushButton{currFaction.GetDisplayName()};
-                factionButton->setToolTip(currFaction.GetDisplayNameDescription());
-
-                auto shortName = currFaction.GetShortName();
-
-                if (PROGRAM_CONSTANTS->USA_SHORT_NAMES.contains(shortName))
-                    factionButton->setProperty("faction", "USA");
-
-                if (PROGRAM_CONSTANTS->PRC_SHORT_NAMES.contains(shortName))
-                    factionButton->setProperty("faction", "PRC");
-
-                if (PROGRAM_CONSTANTS->GLA_SHORT_NAMES.contains(shortName))
-                    factionButton->setProperty("faction", "GLA");
-
-                connect(factionButton, &QPushButton::pressed, this, [=, this]()
-                {
-                    SetGameObjectList(shortName);
-                });
-
-                pFactionsButtonsGroup->addButton(factionButton);
-
-                if (i == 0) // main faction
-                    ltCurrentFaction->addWidget(factionButton);
-                else        // subfactions
-                    ltCurrentSubfaction->addWidget(factionButton);
-            }
-
-            ltCurrentFaction->addLayout(ltCurrentSubfaction);
-            ltFactions->addLayout(ltCurrentFaction);
+            if (shortName == "USA"q)
+                ltFactionsUSA->addWidget(factionButton);
+            else
+                ltSubfactionsUSA->addWidget(factionButton);
         }
+
+        if (PROGRAM_CONSTANTS->PRC_SHORT_NAMES.contains(shortName))
+        {
+            factionButton->setProperty("faction", "PRC");
+
+            if (shortName == "PRC"q)
+                ltFactionsPRC->addWidget(factionButton);
+            else
+                ltSubfactionsPRC->addWidget(factionButton);
+        }
+
+        if (PROGRAM_CONSTANTS->GLA_SHORT_NAMES.contains(shortName))
+        {
+            factionButton->setProperty("faction", "GLA");
+
+            if (shortName == "GLA"q)
+                ltFactionsGLA->addWidget(factionButton);
+            else
+                ltSubfactionsGLA->addWidget(factionButton);
+        }
+
+        connect(factionButton, &QPushButton::pressed, this, [=, this]()
+        {
+            SetGameObjectList(shortName);
+        });
+
+        pFactionsButtonsGroup->addButton(factionButton);
     }
-    else
-    {
-        LOGMSG("Unable to parse more than 12 factions. Found factions : " + factonsCount);
-    }
+
+    ltFactionsUSA->addLayout(ltSubfactionsUSA);
+    ltFactionsPRC->addLayout(ltSubfactionsPRC);
+    ltFactionsGLA->addLayout(ltSubfactionsGLA);
+    ltFactions->addLayout(ltFactionsUSA);
+    ltFactions->addLayout(ltFactionsPRC);
+    ltFactions->addLayout(ltFactionsGLA);
 
     connect(pFactionsButtonsGroup, &QButtonGroup::idClicked, this, [=, this](int id)
     {
@@ -136,7 +166,7 @@ EditorWindow::EditorWindow(QWidget* parent)
     QHBoxLayout* pKeyboardThirdLine;
     QVBoxLayout* pKeyboardLines = new QVBoxLayout();
     
-    QPushButton* btnEmptyButton= new QPushButton();
+    QPushButton* btnEmptyButton = new QPushButton();
     btnEmptyButton->setProperty("key", "null");
     btnEmptyButton->setFixedWidth(PROGRAM_CONSTANTS->EMPTY_KEY_WIDTH);
 

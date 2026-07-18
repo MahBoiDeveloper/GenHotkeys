@@ -2,11 +2,13 @@
 #include "../Core/Logger.hpp"
 #include "FactionsManager.hpp"
 
+using namespace StringExt;
+
 FactionManager::FactionManager(const QString techtreejson)
 {
     TechTreeSource = JSONFile(techtreejson);
 
-    vFactions.reserve(12);
+    vFactions.reserve(Faction::MAXIMUM_FACTION_COUNT);
 
     for(const auto& elem : TechTreeSource.Query("$.TechTree").toArray())
     {
