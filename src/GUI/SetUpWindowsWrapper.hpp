@@ -34,9 +34,9 @@ private slots:
     /// @brief Show window to load hotkeys information from .csf file.
     void BtnLoadFromFile_Clicked();
     /// @brief Returns checked configuration of user preferences.
-    void LoadFromTheFileWindow_AcceptConfiguration();
+    void LoadWindow_LoadFromTheFile();
     /// @brief Returns checked configuration of user preferences.
-    void LoadFromTheGameWindow_AcceptConfiguration();
+    void LoadWindow_LoadFromTheGame();
     /// @brief Handles selection of the Generals profile.
     void SelectProfileWindow_GProfileSelected();
     /// @brief Handles selection of the Generals Zero Hour profile.

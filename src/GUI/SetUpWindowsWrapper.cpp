@@ -35,9 +35,9 @@ void SetUpWindowsWrapper::AttachConnections()
     connect(pLoadFromTheFileWindow, &LoadFromTheFileWindow::btnBackClicked,
             this,                   &SetUpWindowsWrapper::BtnBack_Clicked);
     connect(pLoadFromTheFileWindow, &LoadFromTheFileWindow::btnStartClicked,
-            this,                   &SetUpWindowsWrapper::LoadFromTheFileWindow_AcceptConfiguration);
+            this,                   &SetUpWindowsWrapper::LoadWindow_LoadFromTheFile);
     connect(pLoadFromTheFileWindow, &LoadFromTheFileWindow::btnFromGameClicked,
-            this,                   &SetUpWindowsWrapper::LoadFromTheGameWindow_AcceptConfiguration);
+            this,                   &SetUpWindowsWrapper::LoadWindow_LoadFromTheGame);
 
     connect(pSettingsWindow,        &SettingsWindow::languageChanged,
             this,                   &SetUpWindowsWrapper::SettingsWindow_LanguageChanged);
@@ -57,9 +57,9 @@ void SetUpWindowsWrapper::DetachConnections()
     disconnect(pLoadFromTheFileWindow, &LoadFromTheFileWindow::btnBackClicked,
                this,                   &SetUpWindowsWrapper::BtnBack_Clicked);
     disconnect(pLoadFromTheFileWindow, &LoadFromTheFileWindow::btnStartClicked,
-               this,                   &SetUpWindowsWrapper::LoadFromTheFileWindow_AcceptConfiguration);
+               this,                   &SetUpWindowsWrapper::LoadWindow_LoadFromTheFile);
     disconnect(pLoadFromTheFileWindow, &LoadFromTheFileWindow::btnFromGameClicked,
-               this,                   &SetUpWindowsWrapper::LoadFromTheGameWindow_AcceptConfiguration);
+               this,                   &SetUpWindowsWrapper::LoadWindow_LoadFromTheGame);
 
     disconnect(pSettingsWindow,        &SettingsWindow::languageChanged,
                this,                   &SetUpWindowsWrapper::SettingsWindow_LanguageChanged);
@@ -112,7 +112,7 @@ void SetUpWindowsWrapper::SelectProfileWindow_GProfileSelected()                
 void SetUpWindowsWrapper::SelectProfileWindow_GZHProfileSelected()                         { WINDOW_MANAGER->StartUpWindow_GZHProfileSelected(); BtnLoadFromFile_Clicked(); }
 void SetUpWindowsWrapper::SelectProfileWindow_CustomProfileSelected(const QString& folder) { WINDOW_MANAGER->StartUpWindow_CustomProfileSelected(folder); BtnLoadFromFile_Clicked(); }
 
-void SetUpWindowsWrapper::LoadFromTheGameWindow_AcceptConfiguration()
+void SetUpWindowsWrapper::LoadWindow_LoadFromTheGame()
 {
     const QString gamePath = WINDOW_MANAGER->ProfileFolder.split('/')[2] == PROGRAM_CONSTANTS->G_FOLDER_NAME
         ? QString::fromStdWString(Windows::Registry::GetPathToGame(Windows::Registry::Games::Generals))
@@ -157,7 +157,7 @@ void SetUpWindowsWrapper::LoadFromTheGameWindow_AcceptConfiguration()
     WINDOW_MANAGER->StartUpWindow_AcceptConfiguration();
 }
 
-void SetUpWindowsWrapper::LoadFromTheFileWindow_AcceptConfiguration() 
+void SetUpWindowsWrapper::LoadWindow_LoadFromTheFile() 
 {
     WINDOW_MANAGER->SetCSFFilePath(pLoadFromTheFileWindow->findChild<QLineEdit*>("lneFilePath", Qt::FindChildrenRecursively)->text());
     WINDOW_MANAGER->StartUpWindow_AcceptConfiguration();
