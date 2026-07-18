@@ -1,6 +1,6 @@
 #pragma once
 #include <QStackedWidget>
-#include "LoadFromTheFileWindow.hpp"
+#include "LoadWindow.hpp"
 #include "SelectProfileWindow.hpp"
 #include "SettingsWindow.hpp"
 
@@ -9,7 +9,7 @@ class SetUpWindowsWrapper final : public QStackedWidget
     Q_OBJECT
 private: // Data
     SelectProfileWindow*   pSelectProfileWindow   = nullptr;
-    LoadFromTheFileWindow* pLoadFromTheFileWindow = nullptr;
+    LoadWindow* pLoadWindow = nullptr;
     SettingsWindow*        pSettingsWindow        = nullptr;
 
 private: // Methods
@@ -17,9 +17,9 @@ private: // Methods
     void AttachConnections();
     /// @brief Disconnects slots and signals.
     void DetachConnections();
-    /// @brief Initialize `SelectProfileWindow`, `LoadFromTheGameWindow`, `LoadFromTheFileWindow` class objects.
+    /// @brief Initialize `SelectProfileWindow`, `LoadFromTheGameWindow`, `LoadWindow` class objects.
     void AddWidgets();
-    /// @brief Free heap from `SelectProfileWindow`, `LoadFromTheGameWindow`, `LoadFromTheFileWindow` data.
+    /// @brief Free heap from `SelectProfileWindow`, `LoadFromTheGameWindow`, `LoadWindow` data.
     void DeleteWidgets();
 public:
     SetUpWindowsWrapper(QWidget* parent = nullptr);

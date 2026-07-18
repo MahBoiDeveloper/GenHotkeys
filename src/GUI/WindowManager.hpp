@@ -36,11 +36,11 @@ public:
     void SetTranslator();
     /// @brief Applies default startup theme.
     void ApplyDefaultProfileStyleSheet();
-    /// @brief Set CSF file path. Uses if in `LoadFromTheFileWindow` file has been set.
+    /// @brief Set CSF file path. Uses if in `LoadWindow` file has been set.
     void SetCSFFilePath(const QString& filepath);
     /// @brief Reinitialize CSF parser and editor window when new CSF/BIG file has been selected.
     void EditorWindow_NewHotkeyFileSelected();
-    /// @brief Return CSF file path. Uses if in `LoadFromTheFileWindow` file has been set.
+    /// @brief Return CSF file path. Uses if in `LoadWindow` file has been set.
     void StartUpWindow_AcceptConfiguration();
     /// @brief Initialize TechTree.json parsing by Generals profile.
     void StartUpWindow_GProfileSelected();

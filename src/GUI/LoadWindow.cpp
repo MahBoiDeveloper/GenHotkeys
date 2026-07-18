@@ -10,7 +10,7 @@
 #include "../Extensions/StringExt.hpp"
 #include "LoadWindow.hpp"
 
-LoadFromTheFileWindow::LoadFromTheFileWindow(QWidget* parent) : QWidget(parent)
+LoadWindow::LoadWindow(QWidget* parent) : QWidget(parent)
 {
     const int    SPACING         = 10;
     const int    BUTTON_WIDTH    = 80;
@@ -43,7 +43,7 @@ LoadFromTheFileWindow::LoadFromTheFileWindow(QWidget* parent) : QWidget(parent)
     QLineEdit* lneFilePath = new QLineEdit();
     lneFilePath->setObjectName(nameof(lneFilePath));
     lneFilePath->setMaximumWidth(700);
-    connect(lneFilePath, &QLineEdit::textChanged, this, &LoadFromTheFileWindow::lneFilePath_textChanged);
+    connect(lneFilePath, &QLineEdit::textChanged, this, &LoadWindow::lneFilePath_textChanged);
 
     QFont font(lneFilePath->font());
     font.setPointSize(font.pointSize()-2); // reduce standart font size
@@ -80,7 +80,7 @@ LoadFromTheFileWindow::LoadFromTheFileWindow(QWidget* parent) : QWidget(parent)
     setLayout(ltMain);
 }
 
-void LoadFromTheFileWindow::lneFilePath_textChanged()
+void LoadWindow::lneFilePath_textChanged()
 {
     QLineEdit* le = qobject_cast<QLineEdit*>(sender());
     QString tmp = le->text();

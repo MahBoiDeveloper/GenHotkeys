@@ -1,11 +1,11 @@
 #pragma once
 #include <QWidget>
 
-class LoadFromTheFileWindow : public QWidget
+class LoadWindow : public QWidget
 {
     Q_OBJECT
 public: // Methods
-    LoadFromTheFileWindow(QWidget *parent = nullptr);
+    LoadWindow(QWidget *parent = nullptr);
 signals:
     void btnBackClicked();
     void btnStartClicked();

@@ -130,7 +130,7 @@ QPushButton#btnOk
 }
 
 /* Start widgets and SettingsWindow style settings */
-LoadFromTheFileWindow, SetUpWindowsWrapper, LoadFromTheGameWindow, SettingsWindow, QWidget#pSettingsWindow
+LoadWindow, SetUpWindowsWrapper, LoadFromTheGameWindow, SettingsWindow, QWidget#pSettingsWindow
 {
     border-image: url(Resources/Profiles/Generals/Theme/StartMenuBackground.png) 0 0 0 0 stretch stretch;
     background-color: black;

@@ -6,7 +6,7 @@
     color: white;
 }
 
-LoadFromTheFileWindow, SetUpWindowsWrapper, LoadFromTheGameWindow, SettingsWindow, SelectProfileWindow, QWidget#pSettingsWindow, QDialog
+LoadWindow, SetUpWindowsWrapper, LoadFromTheGameWindow, SettingsWindow, SelectProfileWindow, QWidget#pSettingsWindow, QDialog
 {
     background-color: #121712;
 }

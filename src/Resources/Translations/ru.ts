@@ -164,44 +164,6 @@
     </message>
 </context>
 <context>
-    <name>LoadFromTheFileWindow</name>
-    <message>
-        <location filename="../../GUI/LoadFromTheFileWindow.cpp" line="19"/>
-        <source>START</source>
-        <translation>НАЧАТЬ</translation>
-    </message>
-    <message>
-        <location filename="../../GUI/LoadFromTheFileWindow.cpp" line="20"/>
-        <source>BACK</source>
-        <translation>НАЗАД</translation>
-    </message>
-    <message>
-        <location filename="../../GUI/LoadFromTheFileWindow.cpp" line="21"/>
-        <source>FROM THE GAME</source>
-        <translation>ИЗ ИГРЫ</translation>
-    </message>
-    <message>
-        <location filename="../../GUI/LoadFromTheFileWindow.cpp" line="22"/>
-        <source>Select .csf or .big file:</source>
-        <translation>Выберите .csf или .big файл:</translation>
-    </message>
-    <message>
-        <location filename="../../GUI/LoadFromTheFileWindow.cpp" line="55"/>
-        <source>Binary files</source>
-        <translation>Двоичные файлы</translation>
-    </message>
-    <message>
-        <location filename="../../GUI/LoadFromTheFileWindow.cpp" line="56"/>
-        <source>Any files</source>
-        <translation>Все файлы</translation>
-    </message>
-    <message>
-        <location filename="../../GUI/LoadFromTheFileWindow.cpp" line="59"/>
-        <source>REVIEW</source>
-        <translation>ОБЗОР</translation>
-    </message>
-</context>
-<context>
     <name>LoadFromTheGameWindow</name>
     <message>
         <source>START</source>
@@ -210,6 +172,44 @@
     <message>
         <source>BACK</source>
         <translation type="vanished">НАЗАД</translation>
+    </message>
+</context>
+<context>
+    <name>LoadWindow</name>
+    <message>
+        <location filename="../../GUI/LoadWindow.cpp" line="19"/>
+        <source>START</source>
+        <translation>НАЧАТЬ</translation>
+    </message>
+    <message>
+        <location filename="../../GUI/LoadWindow.cpp" line="20"/>
+        <source>BACK</source>
+        <translation>НАЗАД</translation>
+    </message>
+    <message>
+        <location filename="../../GUI/LoadWindow.cpp" line="21"/>
+        <source>FROM THE GAME</source>
+        <translation>ИЗ ИГРЫ</translation>
+    </message>
+    <message>
+        <location filename="../../GUI/LoadWindow.cpp" line="22"/>
+        <source>Select .csf or .big file:</source>
+        <translation>Выберите .csf или .big файл:</translation>
+    </message>
+    <message>
+        <location filename="../../GUI/LoadWindow.cpp" line="55"/>
+        <source>Binary files</source>
+        <translation>Двоичные файлы</translation>
+    </message>
+    <message>
+        <location filename="../../GUI/LoadWindow.cpp" line="56"/>
+        <source>Any files</source>
+        <translation>Все файлы</translation>
+    </message>
+    <message>
+        <location filename="../../GUI/LoadWindow.cpp" line="59"/>
+        <source>REVIEW</source>
+        <translation>ОБЗОР</translation>
     </message>
 </context>
 <context>
