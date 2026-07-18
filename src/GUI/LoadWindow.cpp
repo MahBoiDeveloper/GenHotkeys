@@ -8,7 +8,7 @@
 #include <QLabel>
 
 #include "../Extensions/StringExt.hpp"
-#include "LoadFromTheFileWindow.hpp"
+#include "LoadWindow.hpp"
 
 LoadFromTheFileWindow::LoadFromTheFileWindow(QWidget* parent) : QWidget(parent)
 {
