@@ -9,4 +9,7 @@ public: // Methods
 signals:
     void btnBackClicked();
     void btnStartClicked();
+    void btnFromGameClicked();
+private slots:
+    void lneFilePath_textChanged();
 };

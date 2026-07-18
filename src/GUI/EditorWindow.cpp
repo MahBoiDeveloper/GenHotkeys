@@ -590,10 +590,15 @@ void EditorWindow::ActSave_Triggered()
     
     if (CSF_PARSER->Path.ends_with(L".big") || CSF_PARSER->Path.ends_with(L".BIG"))
     {
-        CSF_PARSER->Path = (QString::fromStdWString(
-                                Windows::Registry::GetPathToGame(
-                                    Windows::Registry::Games::GeneralsZeroHour)) 
-                            + "Data\\English\\generals.csf"q).toStdWString();
+        CSF_PARSER->Path =
+        (
+            (
+                WINDOW_MANAGER->ProfileFolder.split('/')[2] == PROGRAM_CONSTANTS->G_FOLDER_NAME
+                    ? QString::fromStdWString(Windows::Registry::GetPathToGame(Windows::Registry::Games::Generals))
+                    : QString::fromStdWString(Windows::Registry::GetPathToGame(Windows::Registry::Games::GeneralsZeroHour))
+            )
+            + "Data\\English\\generals.csf"q
+        ).toStdWString();
     }
 
     CSF_PARSER->Save();

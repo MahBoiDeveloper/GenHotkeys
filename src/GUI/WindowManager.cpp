@@ -203,7 +203,6 @@ void WindowManager::StartUpWindow_CustomProfileSelected(const QString& folder)
     FACTIONS_MANAGER = std::make_unique<FactionManager>(profileFolder + "/" + PROGRAM_CONSTANTS->TECH_TREE_FILENAME);
 }
 
-
 WindowManager::~WindowManager()
 {
     if (pHotkeysEditor != nullptr) pHotkeysEditor->deleteLater();

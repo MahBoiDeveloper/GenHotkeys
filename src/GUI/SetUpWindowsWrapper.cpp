@@ -8,7 +8,6 @@
 #include "../Core/Logger.hpp"
 #include "ImageManager.hpp"
 #include "WindowManager.hpp"
-#include "LoadFromTheGameWindow.hpp"
 #include "SetUpWindowsWrapper.hpp"
 
 SetUpWindowsWrapper::SetUpWindowsWrapper(QWidget* parent) : QStackedWidget(parent)
@@ -37,10 +36,7 @@ void SetUpWindowsWrapper::AttachConnections()
             this,                   &SetUpWindowsWrapper::BtnBack_Clicked);
     connect(pLoadFromTheFileWindow, &LoadFromTheFileWindow::btnStartClicked,
             this,                   &SetUpWindowsWrapper::LoadFromTheFileWindow_AcceptConfiguration);
-
-    connect(pLoadFromTheGameWindow, &LoadFromTheGameWindow::btnBackClicked,
-            this,                   &SetUpWindowsWrapper::BtnBack_Clicked);
-    connect(pLoadFromTheGameWindow, &LoadFromTheGameWindow::btnStartClicked,
+    connect(pLoadFromTheFileWindow, &LoadFromTheFileWindow::btnFromGameClicked,
             this,                   &SetUpWindowsWrapper::LoadFromTheGameWindow_AcceptConfiguration);
 
     connect(pSettingsWindow,        &SettingsWindow::languageChanged,
@@ -62,10 +58,7 @@ void SetUpWindowsWrapper::DetachConnections()
                this,                   &SetUpWindowsWrapper::BtnBack_Clicked);
     disconnect(pLoadFromTheFileWindow, &LoadFromTheFileWindow::btnStartClicked,
                this,                   &SetUpWindowsWrapper::LoadFromTheFileWindow_AcceptConfiguration);
-
-    disconnect(pLoadFromTheGameWindow, &LoadFromTheGameWindow::btnBackClicked,
-               this,                   &SetUpWindowsWrapper::BtnBack_Clicked);
-    disconnect(pLoadFromTheGameWindow, &LoadFromTheGameWindow::btnStartClicked,
+    disconnect(pLoadFromTheFileWindow, &LoadFromTheFileWindow::btnFromGameClicked,
                this,                   &SetUpWindowsWrapper::LoadFromTheGameWindow_AcceptConfiguration);
 
     disconnect(pSettingsWindow,        &SettingsWindow::languageChanged,
@@ -77,17 +70,14 @@ void SetUpWindowsWrapper::DetachConnections()
 void SetUpWindowsWrapper::AddWidgets()
 {
     pSelectProfileWindow   = new SelectProfileWindow();
-    pLoadFromTheGameWindow = new LoadFromTheGameWindow();
     pLoadFromTheFileWindow = new LoadFromTheFileWindow();
     pSettingsWindow        = new SettingsWindow();
 
     pSelectProfileWindow->setFixedSize(size());
-    pLoadFromTheGameWindow->setFixedSize(size());
     pLoadFromTheFileWindow->setFixedSize(size());
     pSettingsWindow->setFixedSize(size());
 
     addWidget(pSelectProfileWindow);
-    addWidget(pLoadFromTheGameWindow);
     addWidget(pLoadFromTheFileWindow);
     addWidget(pSettingsWindow);
 }
@@ -95,7 +85,6 @@ void SetUpWindowsWrapper::AddWidgets()
 void SetUpWindowsWrapper::DeleteWidgets()
 {
     pSelectProfileWindow->deleteLater();
-    pLoadFromTheGameWindow->deleteLater();
     pLoadFromTheFileWindow->deleteLater();
     pSettingsWindow->deleteLater();
 }
@@ -111,7 +100,6 @@ void SetUpWindowsWrapper::SettingsWindow_LanguageChanged()
 }
 
 void SetUpWindowsWrapper::BtnLoadFromFile_Clicked() { setCurrentWidget(pLoadFromTheFileWindow); }
-void SetUpWindowsWrapper::BtnLoadFromGame_Clicked() { setCurrentWidget(pLoadFromTheGameWindow); }
 void SetUpWindowsWrapper::BtnSettings_Clicked()     { setCurrentWidget(pSettingsWindow); }
 void SetUpWindowsWrapper::BtnBack_Clicked()
 {
@@ -126,7 +114,10 @@ void SetUpWindowsWrapper::SelectProfileWindow_CustomProfileSelected(const QStrin
 
 void SetUpWindowsWrapper::LoadFromTheGameWindow_AcceptConfiguration()
 {
-    const QString gamePath = QString::fromStdWString(Windows::Registry::GetPathToGame(Windows::Registry::Games::GeneralsZeroHour));
+    const QString gamePath = WINDOW_MANAGER->ProfileFolder.split('/')[2] == PROGRAM_CONSTANTS->G_FOLDER_NAME
+        ? QString::fromStdWString(Windows::Registry::GetPathToGame(Windows::Registry::Games::Generals))
+        : QString::fromStdWString(Windows::Registry::GetPathToGame(Windows::Registry::Games::GeneralsZeroHour));
+    
     const QString pathDataEngGenCsf = gamePath + "Data\\English\\generals.csf";
 
     if (QFile::exists(pathDataEngGenCsf))

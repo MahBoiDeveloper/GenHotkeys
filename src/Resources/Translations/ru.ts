@@ -6,7 +6,7 @@
     <message>
         <location filename="../../GUI/ActionHotkeyWidget.cpp" line="43"/>
         <source>Edit source text</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменить исходный текст</translation>
     </message>
     <message>
         <location filename="../../GUI/ActionHotkeyWidget.cpp" line="198"/>
@@ -118,32 +118,32 @@
         <translation type="vanished">Поддержать разработку:</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="602"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="607"/>
         <source>Changes has been saved to the file:</source>
         <translation>Изменения были сохранены в файл:</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="618"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="623"/>
         <source>Saved as:</source>
         <translation>Сохранено как:</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="650"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="655"/>
         <source>Opening selected file</source>
         <translation>Открываем выбранный файл</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="656"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="661"/>
         <source>Changing editor language</source>
         <translation>Изменяем язык редактора</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="627"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="632"/>
         <source>Binary files</source>
         <translation>Двоичные файлы</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="628"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="633"/>
         <source>Any files</source>
         <translation>Все файлы</translation>
     </message>
@@ -151,51 +151,52 @@
 <context>
     <name>GreetingWindow</name>
     <message>
-        <location filename="../../GUI/GreetingWindow.cpp" line="23"/>
-        <location filename="../../GUI/GreetingWindow.cpp" line="28"/>
         <source>LOAD FROM</source>
-        <translation>ЗАГРУЗИТЬ</translation>
+        <translation type="vanished">ЗАГРУЗИТЬ</translation>
     </message>
     <message>
-        <location filename="../../GUI/GreetingWindow.cpp" line="23"/>
         <source>THE GAME</source>
-        <translation>ИЗ ИГРЫ</translation>
+        <translation type="vanished">ИЗ ИГРЫ</translation>
     </message>
     <message>
-        <location filename="../../GUI/GreetingWindow.cpp" line="28"/>
         <source>THE FILE</source>
-        <translation>ИЗ ФАЙЛА</translation>
+        <translation type="vanished">ИЗ ФАЙЛА</translation>
     </message>
 </context>
 <context>
     <name>LoadFromTheFileWindow</name>
     <message>
-        <location filename="../../GUI/LoadFromTheFileWindow.cpp" line="16"/>
+        <location filename="../../GUI/LoadFromTheFileWindow.cpp" line="19"/>
         <source>START</source>
         <translation>НАЧАТЬ</translation>
     </message>
     <message>
-        <location filename="../../GUI/LoadFromTheFileWindow.cpp" line="17"/>
+        <location filename="../../GUI/LoadFromTheFileWindow.cpp" line="20"/>
         <source>BACK</source>
         <translation>НАЗАД</translation>
     </message>
     <message>
-        <location filename="../../GUI/LoadFromTheFileWindow.cpp" line="20"/>
+        <location filename="../../GUI/LoadFromTheFileWindow.cpp" line="21"/>
+        <source>FROM THE GAME</source>
+        <translation>ИЗ ИГРЫ</translation>
+    </message>
+    <message>
+        <location filename="../../GUI/LoadFromTheFileWindow.cpp" line="22"/>
         <source>Select .csf or .big file:</source>
         <translation>Выберите .csf или .big файл:</translation>
     </message>
     <message>
-        <location filename="../../GUI/LoadFromTheFileWindow.cpp" line="67"/>
+        <location filename="../../GUI/LoadFromTheFileWindow.cpp" line="55"/>
         <source>Binary files</source>
         <translation>Двоичные файлы</translation>
     </message>
     <message>
-        <location filename="../../GUI/LoadFromTheFileWindow.cpp" line="68"/>
+        <location filename="../../GUI/LoadFromTheFileWindow.cpp" line="56"/>
         <source>Any files</source>
         <translation>Все файлы</translation>
     </message>
     <message>
-        <location filename="../../GUI/LoadFromTheFileWindow.cpp" line="71"/>
+        <location filename="../../GUI/LoadFromTheFileWindow.cpp" line="59"/>
         <source>REVIEW</source>
         <translation>ОБЗОР</translation>
     </message>
@@ -203,14 +204,12 @@
 <context>
     <name>LoadFromTheGameWindow</name>
     <message>
-        <location filename="../../GUI/LoadFromTheGameWindow.cpp" line="16"/>
         <source>START</source>
-        <translation>НАЧАТЬ</translation>
+        <translation type="vanished">НАЧАТЬ</translation>
     </message>
     <message>
-        <location filename="../../GUI/LoadFromTheGameWindow.cpp" line="17"/>
         <source>BACK</source>
-        <translation>НАЗАД</translation>
+        <translation type="vanished">НАЗАД</translation>
     </message>
 </context>
 <context>
@@ -257,7 +256,7 @@
     <message>
         <location filename="../../Core/ProgramConstants.hpp" line="110"/>
         <source>Erroneous assignment</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка назначения</translation>
     </message>
     <message>
         <location filename="../../Core/ProgramConstants.hpp" line="148"/>
@@ -388,13 +387,15 @@
         <location filename="../../Core/ProgramConstants.hpp" line="111"/>
         <source>You have assign as hotkey a non-ASCII character &quot;%1&quot;.
 Make sure that you are using ASCII only symbols.</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы назначили не ASCII символ &quot;%1&quot; как горячую клавишу.
+Убедитесь, что вы используете только ASCII символы.</translation>
     </message>
     <message>
         <location filename="../../Core/ProgramConstants.hpp" line="112"/>
         <source>You have assign as hotkey a forbidden character &quot;%1&quot;.
 Make sure that you are using only allowed symbols.</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы назначили запрещённый символ &quot;%1&quot; как горячую клавишу.
+Убедитесь, что вы используете только разрешённые символы.</translation>
     </message>
     <message>
         <location filename="../../Core/ProgramConstants.hpp" line="141"/>

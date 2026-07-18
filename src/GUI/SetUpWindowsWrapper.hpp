@@ -1,7 +1,5 @@
 #pragma once
 #include <QStackedWidget>
-#include "GreetingWindow.hpp"
-#include "LoadFromTheGameWindow.hpp"
 #include "LoadFromTheFileWindow.hpp"
 #include "SelectProfileWindow.hpp"
 #include "SettingsWindow.hpp"
@@ -11,7 +9,6 @@ class SetUpWindowsWrapper final : public QStackedWidget
     Q_OBJECT
 private: // Data
     SelectProfileWindow*   pSelectProfileWindow   = nullptr;
-    LoadFromTheGameWindow* pLoadFromTheGameWindow = nullptr;
     LoadFromTheFileWindow* pLoadFromTheFileWindow = nullptr;
     SettingsWindow*        pSettingsWindow        = nullptr;
 
@@ -36,8 +33,6 @@ private slots:
     void BtnSettings_Clicked();
     /// @brief Show window to load hotkeys information from .csf file.
     void BtnLoadFromFile_Clicked();
-    /// @brief Show window to load hotkeys information from the game.
-    void BtnLoadFromGame_Clicked();
     /// @brief Returns checked configuration of user preferences.
     void LoadFromTheFileWindow_AcceptConfiguration();
     /// @brief Returns checked configuration of user preferences.
