@@ -93,9 +93,8 @@
         <translation>Раскладка %1</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="510"/>
         <source>&lt;p&gt;Authors: %1&lt;br&gt;Version: %2&lt;br&gt;&lt;br&gt;Program licensed with %3&lt;br&gt;&lt;br&gt;GitHub repository:&lt;br&gt;%4&lt;br&gt;&lt;br&gt;Support development:&lt;br&gt;%5&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Авторы: %1&lt;br&gt;Версия: %2&lt;br&gt;&lt;br&gt;Программа лицензирована под %3&lt;br&gt;&lt;br&gt;Репозиторий на GitHub:&lt;br&gt;%4&lt;br&gt;&lt;br&gt;Поддержать разработку:&lt;br&gt;%5&lt;/p&gt;</translation>
+        <translation type="vanished">&lt;p&gt;Авторы: %1&lt;br&gt;Версия: %2&lt;br&gt;&lt;br&gt;Программа лицензирована под %3&lt;br&gt;&lt;br&gt;Репозиторий на GitHub:&lt;br&gt;%4&lt;br&gt;&lt;br&gt;Поддержать разработку:&lt;br&gt;%5&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Authors: </source>
@@ -141,6 +140,11 @@
         <location filename="../../GUI/EditorWindow.cpp" line="632"/>
         <source>Binary files</source>
         <translation>Двоичные файлы</translation>
+    </message>
+    <message>
+        <location filename="../../GUI/EditorWindow.cpp" line="510"/>
+        <source>&lt;p&gt;Authors: %1&lt;br&gt;Version: %2&lt;br&gt;Commit: %3&lt;br&gt;&lt;br&gt;Program licensed with %4&lt;br&gt;&lt;br&gt;GitHub repository:&lt;br&gt;%5&lt;br&gt;&lt;br&gt;Support development:&lt;br&gt;%6&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../GUI/EditorWindow.cpp" line="633"/>

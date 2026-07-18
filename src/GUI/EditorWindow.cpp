@@ -507,15 +507,15 @@ void EditorWindow::ActAbout_Triggered()
         
     QLabel* lblAboutText = new QLabel
     {
-        tr("<p>Authors: %1<br>Version: %2<br><br>Program licensed with %3<br><br>GitHub repository:<br>%4<br><br>Support development:<br>%5</p>")
+        tr("<p>Authors: %1<br>Version: %2<br>Commit: %3<br><br>Program licensed with %4<br><br>GitHub repository:<br>%5<br><br>Support development:<br>%6</p>")
             .arg(AUTHORS)
             .arg(VERSION)
-            .arg("<a style=\"color: CLR;\" href=\"https://github.com/MahBoiDeveloper/GZHHotkeysEditor/blob/main/LICENSE\">GNU GPL v3</a>"q
-                .replace("CLR", PROGRAM_CONSTANTS->LINK_COLOR))
-            .arg("<a style=\"color: CLR;\" href=\"https://github.com/MahBoiDeveloper/GZHHotkeysEditor\">github.com/MahBoiDeveloper/GZHHotkeysEditor</a>"q
-                .replace("CLR", PROGRAM_CONSTANTS->LINK_COLOR))
-            .arg("<a style=\"color: CLR;\" href=\"https://boosty.to/mah_boi\">boosty.to/mah_boi</a></p>"q
-                .replace("CLR", PROGRAM_CONSTANTS->LINK_COLOR))
+            .arg("<a style=\"color: CLR;\" href=\"https://github.com/MahBoiDeveloper/GenHotkeys/commit/COMMIT\">COMMIT</a>"q)
+            .arg("<a style=\"color: CLR;\" href=\"https://github.com/MahBoiDeveloper/GZHHotkeysEditor/blob/main/LICENSE\">GNU GPL v3</a>"q)
+            .arg("<a style=\"color: CLR;\" href=\"https://github.com/MahBoiDeveloper/GZHHotkeysEditor\">github.com/MahBoiDeveloper/GZHHotkeysEditor</a>"q)
+            .arg("<a style=\"color: CLR;\" href=\"https://boosty.to/mah_boi\">boosty.to/mah_boi</a></p>"q)
+            .replace("COMMIT", GIT_COMMIT_HASH)
+            .replace("CLR", PROGRAM_CONSTANTS->LINK_COLOR)
     };
     lblAboutText->setObjectName("left");
     lblAboutText->setTextFormat(Qt::RichText);
