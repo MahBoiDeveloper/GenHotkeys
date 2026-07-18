@@ -8,16 +8,24 @@ using namespace StringExt;
 
 SelectProfileWindow::SelectProfileWindow(QWidget* parent) : QWidget(parent)
 {
-    ltMain           = new QHBoxLayout();
+    ltMain           = new QVBoxLayout();
+    ltProfiles       = new QHBoxLayout();
     ltGameProfiles   = new QVBoxLayout();
     ltCustomProfiles = new QVBoxLayout();
     btnGenerals      = new QPushButton(tr(PROGRAM_CONSTANTS->G_FOLDER_NAME.toStdString().c_str()));
     btnGeneralsZH    = new QPushButton(tr(PROGRAM_CONSTANTS->GZH_FOLDER_NAME.toStdString().c_str()));
+    btnSettings      = new QPushButton();
 
     btnGenerals->setObjectName(nameof(btnGenerals));
     connect(btnGenerals, &QPushButton::clicked, this, &SelectProfileWindow::BtnGenerals_Clicked);
     btnGeneralsZH->setObjectName(nameof(btnGeneralsZH));
     connect(btnGeneralsZH, &QPushButton::clicked, this, &SelectProfileWindow::BtnGeneralsZH_Clicked);
+    QPixmap pxmSettings = QPixmap(PROGRAM_CONSTANTS->GEARS_ICON_FILE);
+    btnSettings->setObjectName(nameof(btnSettings));
+    btnSettings->setIcon(pxmSettings);
+    btnSettings->setIconSize(pxmSettings.size());
+    btnSettings->setFixedSize(pxmSettings.size());
+    connect(btnSettings, &QPushButton::clicked, this, &SelectProfileWindow::BtnSettings_Clicked);
     ltGameProfiles->addWidget(btnGenerals);
     ltGameProfiles->addWidget(btnGeneralsZH);
 
@@ -36,12 +44,17 @@ SelectProfileWindow::SelectProfileWindow(QWidget* parent) : QWidget(parent)
         ltCustomProfiles->addWidget(btnCustomProfile);
     }
 
-    ltMain->addLayout(ltGameProfiles);
-    ltMain->addLayout(ltCustomProfiles);
+    ltProfiles->addLayout(ltGameProfiles);
+    ltProfiles->addLayout(ltCustomProfiles);
+
+    ltMain->setAlignment(Qt::AlignmentFlag::AlignHCenter);
+    ltMain->addLayout(ltProfiles);
+    ltMain->addWidget(btnSettings, 0, Qt::AlignmentFlag::AlignHCenter);
 
     setLayout(ltMain);
 }
 
+void SelectProfileWindow::BtnSettings_Clicked()   { emit settingsClicked(); }
 void SelectProfileWindow::BtnGenerals_Clicked()   { emit gProfileSelected(); }
 void SelectProfileWindow::BtnGeneralsZH_Clicked() { emit gzhProfileSelected(); }
 void SelectProfileWindow::BtnCustomProfile_Clicked()

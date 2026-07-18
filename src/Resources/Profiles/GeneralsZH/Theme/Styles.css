@@ -7,6 +7,8 @@
 /* 6. https://stackoverflow.com/questions/9536725/css-multiple-attribute-selectors/9536746#9536746 */
 
 /* Global style setting */
+QLabel, QRadioButton, QCheckBox { color: white; }
+
 QComboBox
 {
     width: 70px;
@@ -92,18 +94,7 @@ QPushButton:hover
     color: #baff0c;
 }
 
-GreetingWindow QPushButton#btnSettings
-{
-    border-color: transparent;
-    background-color: transparent;
-}
-
-GreetingWindow QPushButton { font-size: 18pt; }
-
-QLabel, QRadioButton, QCheckBox { color: white; }
-
-QLineEdit#txtActionName { font-style: italic; }
-
+/* SelectProfileWindow */
 SelectProfileWindow QPushButton#btnGenerals,
 SelectProfileWindow QPushButton#btnGeneralsZH
 {
@@ -112,10 +103,10 @@ SelectProfileWindow QPushButton#btnGeneralsZH
     max-width: 230px;
     min-height: 110px;
     max-height: 110px;
-    margin-top: 2px;
+    /* margin-top: 2px;
     margin-right: 40px;
     margin-bottom: 2px;
-    margin-left: 40px;
+    margin-left: 40px; */
 }
 
 SelectProfileWindow QPushButton#btnCustomProfile
@@ -123,11 +114,20 @@ SelectProfileWindow QPushButton#btnCustomProfile
     font-size: 16pt;
     min-height: 64px;
     max-height: 64px;
-    margin-top: 2px;
+    /* margin-top: 2px;
     margin-right: 40px;
     margin-bottom: 2px;
-    margin-left: 40px;
+    margin-left: 40px; */
 }
+
+SelectProfileWindow QPushButton#btnSettings
+{
+    border-color: transparent;
+    background-color: transparent;
+}
+
+/* LoadWindow */
+QLineEdit#txtActionName { font-style: italic; }
 
 QPushButton#btnReview
 {
@@ -148,7 +148,7 @@ QPushButton#btnOk
 }
 
 /* Start widgets and SettingsWindow style settings */
-LoadWindow, SetUpWindowsWrapper, LoadFromTheGameWindow, SettingsWindow, SelectProfileWindow, QWidget#pSettingsWindow
+SetUpWindowsWrapper, SelectProfileWindow, LoadWindow, SettingsWindow, QWidget#pSettingsWindow
 {
     border-image: url(Resources/Profiles/GeneralsZH/Theme/StartMenuBackground.webp) 0 0 0 0 stretch stretch;
     background-color: black;

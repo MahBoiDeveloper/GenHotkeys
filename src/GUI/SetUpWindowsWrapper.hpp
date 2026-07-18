@@ -25,12 +25,12 @@ public:
     SetUpWindowsWrapper(QWidget* parent = nullptr);
 
 private slots:
-    /// @brief Show `GreetingWindow`, if button `Back` has been clicked.
+    /// @brief Show `SeelectProfileWindow`, if button `Back` has been clicked.
     void BtnBack_Clicked();
     /// @brief Change app language.
     void SettingsWindow_LanguageChanged();
     /// @brief Show `SettingsWindow` if button `btnSettings` has been clicked.
-    void BtnSettings_Clicked();
+    void SelectProfileWindow_SettingsClicked();
     /// @brief Show window to load hotkeys information from .csf file.
     void BtnLoadFromFile_Clicked();
     /// @brief Returns checked configuration of user preferences.
