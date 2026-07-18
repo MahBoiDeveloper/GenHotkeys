@@ -64,12 +64,12 @@ EditorWindow::EditorWindow(QWidget* parent)
 
     if (factonsCount > Faction::MAXIMUM_FACTION_COUNT)
     {
-        throw ExceptionExt("Unable to parse more than " + ToQString(Faction::MAXIMUM_FACTION_COUNT) + " factions. Found factions : " + factonsCount);
+        throw ExceptionExt("Unable to parse more than " + ToQString(Faction::MAXIMUM_FACTION_COUNT) + " factions. Found factions: " + factonsCount);
     }
 
     if (factonsCount < Faction::MINIMAL_FACTION_COUNT)
     {
-        throw ExceptionExt("Unable to parse less than " + ToQString(Faction::MINIMAL_FACTION_COUNT) + " factions. Found factions : " + factonsCount);
+        throw ExceptionExt("Unable to parse less than " + ToQString(Faction::MINIMAL_FACTION_COUNT) + " factions. Found factions: " + factonsCount);
     }
 
     QVBoxLayout* ltFactionsUSA    = new QVBoxLayout();
@@ -133,10 +133,22 @@ EditorWindow::EditorWindow(QWidget* parent)
 
         pFactionsButtonsGroup->addButton(factionButton);
     }
+    
+    if (!ltSubfactionsUSA->count())
+        ltSubfactionsUSA->deleteLater();
+    else
+        ltFactionsUSA->addLayout(ltSubfactionsUSA);
+    
+    if (!ltSubfactionsPRC->count())
+        ltSubfactionsPRC->deleteLater();
+    else
+        ltFactionsPRC->addLayout(ltSubfactionsPRC);
+    
+    if (!ltSubfactionsGLA->count())
+        ltSubfactionsGLA->deleteLater();
+    else
+        ltFactionsGLA->addLayout(ltSubfactionsGLA);
 
-    ltFactionsUSA->addLayout(ltSubfactionsUSA);
-    ltFactionsPRC->addLayout(ltSubfactionsPRC);
-    ltFactionsGLA->addLayout(ltSubfactionsGLA);
     ltFactions->addLayout(ltFactionsUSA);
     ltFactions->addLayout(ltFactionsPRC);
     ltFactions->addLayout(ltFactionsGLA);
