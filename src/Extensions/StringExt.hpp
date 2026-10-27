@@ -94,12 +94,12 @@ namespace StringExt
     // Doesn't work due to attempt of redefinition pointers mathematic.
     // template<IsCString S, IsCString T> inline QString operator+ (const S& str1, const T& str2) { return EmptyString; }
 
-    template<IsString S,  IsString T>  inline constexpr QString operator+ (const S& str1, const T& str2)   { return ToQString(str1).append(ToQString(str2)); }
-    template<IsString S,  IsInteger N> inline constexpr QString operator+ (const S& str,  const N& num)    { return ToQString(str).append(QString::number(num)); }
+    template<IsString  S, IsString T>  inline constexpr QString operator+ (const S& str1, const T& str2)   { return ToQString(str1).append(ToQString(str2)); }
+    template<IsString  S, IsInteger N> inline constexpr QString operator+ (const S& str,  const N& num)    { return ToQString(str).append(QString::number(num)); }
     template<IsInteger N, IsString S>  inline constexpr QString operator+ (const N& num,  const S& str)    { return QString::number(num).append(ToQString(str)); }
-    template<IsString S,  IsSymbol C>  inline constexpr QString operator+ (const S& str,  const C& ch)     { return ToQString(str).append(ToQString(ch)); }
-    template<IsSymbol C,  IsString S>  inline constexpr QString operator+ (const C& ch,   const S& str)    { return ToQString(ch).append(ToQString(str)); }
-    template<IsString S>               inline constexpr QString operator+ (const S& str, const bool& flag) { return ToQString(str).append(flag ? "true" : "false"); }
+    template<IsString  S, IsSymbol C>  inline constexpr QString operator+ (const S& str,  const C& ch)     { return ToQString(str).append(ToQString(ch)); }
+    template<IsSymbol  C, IsString S>  inline constexpr QString operator+ (const C& ch,   const S& str)    { return ToQString(ch).append(ToQString(str)); }
+    template<IsString  S>              inline constexpr QString operator+ (const S& str, const bool& flag) { return ToQString(str).append(flag ? "true" : "false"); }
 
     // Ingores ""q instead of ""_q. Thank you C++ committee for another useless warning.
     #pragma GCC diagnostic push
