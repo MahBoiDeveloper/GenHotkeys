@@ -15,7 +15,7 @@ jobs:
     steps:
       # Cloning all repository recursively
       - name: Get Sources
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           submodules: true
 
@@ -65,7 +65,7 @@ jobs:
 
       # Upload artifact to the GitHub
       - name: Upload Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
            # ${{github.sha}} - commit long hash name
            name: GenHotkeys-${{github.sha}}
