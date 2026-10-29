@@ -25,6 +25,7 @@
 
     # Define GUI target
     add_library(${TARGET_NAME} OBJECT)
+    target_link_libraries(${TARGET_NAME} PRIVATE GenHotkeysInfo)
 
     # Define a list of all GUI sources
     file(

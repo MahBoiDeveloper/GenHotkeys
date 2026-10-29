@@ -43,6 +43,7 @@
     
     # Define editor executable
     add_executable(${MAIN_TARGET_NAME})
+    target_link_libraries(${MAIN_TARGET_NAME} PRIVATE GenHotkeysInfo)
 
     # Define Steam API headers
     file(
@@ -148,6 +149,7 @@
         "MainStarter.cpp"
         "${PROJECT_RESOURCE_FOLDER}/QtSources/StarterDescription.rc"
     )
+    target_link_libraries(${STARTER_TARGET_NAME} PRIVATE GenHotkeysInfo)
 
     # Define output directory and file name
     set_target_properties(
