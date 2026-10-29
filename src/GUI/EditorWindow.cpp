@@ -17,8 +17,8 @@
 #include "../Managers/FactionsManager.hpp"
 #include "../Windows/Registry.hpp"
 #include "../Windows/Locale.hpp"
-#include "../Info.hpp"
 
+#include "Info.hpp"
 #include "ImageManager.hpp"
 #include "WindowManager.hpp"
 #include "SettingsWindow.hpp"

@@ -6,7 +6,7 @@
 #include <QDebug>
 
 #include "../Windows/Registry.hpp"
-#include "../Info.hpp"
+#include "Info.hpp"
 #include "Logger.hpp"
 
 using namespace std;
