@@ -8,7 +8,7 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Shared application metadata. CMake regenerates the C++/RC headers from this.
-set(GENHOTKEYS_VERSION          "0.7.0")                                   # App version
+set(GENHOTKEYS_VERSION          "0.7.1")                                   # App version
 set(GENHOTKEYS_VERSION_REVISION 0)                                         # Fourth component of the Windows file version.
 set(GENHOTKEYS_VERSION_STAGE    "Beta")                                    # Leave empty for a stable release.
 set(GENHOTKEYS_AUTHORS          "mah_boi, nikitvs")                        # Authors
