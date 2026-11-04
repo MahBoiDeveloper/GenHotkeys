@@ -19,7 +19,7 @@ WindowManager::WindowManager()
 {
     SetTranslator();
 
-    qApp->setWindowIcon(QIcon(QPixmap::fromImage(ImageManager::DecodeEditorWebpIcon())));
+    qApp->setWindowIcon(QIcon(QPixmap::fromImage(ImageManager::LoadEditorIcon())));
     ProfileFolder = PROGRAM_CONSTANTS->GZH_PROFILE_FOLDER;
     ApplyProfileStyleSheet(ProfileFolder);
 

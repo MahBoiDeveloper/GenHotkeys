@@ -288,7 +288,7 @@ void EditorWindow::SetGameObjectList(const QString& factionShortName)
         {
             QTreeWidgetItem* currentNewEntityItem = new QTreeWidgetItem();
             currentNewEntityItem->setText(0, CSF_PARSER->GetStringValue(go.ingameName));
-            currentNewEntityItem->setIcon(0, QPixmap::fromImage(ImageManager::DecodeWebpIcon(go.iconName)));
+            currentNewEntityItem->setIcon(0, QPixmap::fromImage(ImageManager::LoadIcon(go.iconName)));
             currentNewEntityItem->setData(0, Qt::UserRole, QVariant::fromValue(QPair{factionShortName, go.iconName}));
             newTopEntityItem->addChild(currentNewEntityItem);
         }
@@ -524,7 +524,7 @@ void EditorWindow::ActAbout_Triggered()
     lblContent->addWidget(lblAboutText, 0, 0);
     
     QLabel* lblEditorIcon = new QLabel();
-    lblEditorIcon->setPixmap(QPixmap::fromImage(ImageManager::DecodeBigEditorWebpIcon()));
+    lblEditorIcon->setPixmap(QPixmap::fromImage(ImageManager::LoadBigEditorIcon()));
     lblEditorIcon->setObjectName("right");
     lblContent->addWidget(lblEditorIcon, 0, 1);
 

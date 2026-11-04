@@ -1,40 +1,40 @@
 #include <QDir>
-#include <QImage>
-#include <QPixmap>
+#include <QImageReader>
+#include <QStringList>
 
-#include "../../libs/libwebp/src/webp/decode.h"
 #include "../Core/Logger.hpp"
 #include "WindowManager.hpp"
 #include "ImageManager.hpp"
 
-QImage ImageManager::DecodeWebpIcon(const QString& iconName)
+const auto ICON_EXTENSIONS = QImageReader::supportedImageFormats();
+
+QImage ImageManager::LoadIcon(const QString& iconName)
 {
-    // If it there, get the image from cache
-    const auto it = ImagesCache.constFind(iconName);
+    const QString iconsDirectory = QDir{WINDOW_MANAGER->ProfileFolder + "/" + PROGRAM_CONSTANTS->ICONS_FOLDER_NAME}.absolutePath();
+    const auto cacheKey = qMakePair(iconsDirectory, iconName);
+    const auto it = ImagesCache.constFind(cacheKey);
     if (it != ImagesCache.constEnd()) return it.value();
 
-    // Search for specific image
-    const QFileInfo targetIconFile = FindIconFile(WINDOW_MANAGER->ProfileFolder + "/" + PROGRAM_CONSTANTS->ICONS_FOLDER_NAME, iconName);
+    const QFileInfo targetIconFile = FindIconFile(iconsDirectory, iconName);
+    QImage image;
 
     if (targetIconFile.exists())
     {
-        // Get the image
-        const QImage targetImage = DecodeWebpIconPath(targetIconFile.absoluteFilePath());
-        // Save the image in the cache
-        ImagesCache.insert(iconName, targetImage);
-        // Return the image
-        return targetImage;
+        image = LoadImageFromPath(targetIconFile.absoluteFilePath());
     }
     else
     {
-        return DecodeMissingWebpIcon();
+        LOGMSG("Icon \"" + iconName + "\" was not found in \"" + iconsDirectory + "\"");
     }
+
+    if (image.isNull()) image = LoadMissingIcon();
+    ImagesCache.insert(cacheKey, image);
+    return image;
 }
 
-QImage ImageManager::DecodeMissingWebpIcon()   { return DecodeWebpIconPath(PROGRAM_CONSTANTS->MISSING_ICON_FILE); }
-QImage ImageManager::DecodeEditorWebpIcon()    { return DecodeWebpIconPath(PROGRAM_CONSTANTS->EDITOR_ICON_FILE); }
-QImage ImageManager::DecodeBigEditorWebpIcon() { return DecodeWebpIconPath(PROGRAM_CONSTANTS->EDITOR_BIG_ICON_FILE); }
-
+QImage ImageManager::LoadMissingIcon()   { return LoadImageFromPath(PROGRAM_CONSTANTS->MISSING_ICON_FILE); }
+QImage ImageManager::LoadEditorIcon()    { return LoadImageFromPath(PROGRAM_CONSTANTS->EDITOR_ICON_FILE); }
+QImage ImageManager::LoadBigEditorIcon() { return LoadImageFromPath(PROGRAM_CONSTANTS->EDITOR_BIG_ICON_FILE); }
 QPixmap ImageManager::GetGameObjectTypePixmap(GameObjectTypes entityType)
 {
     return QPixmap{PROGRAM_CONSTANTS->QT_ICONS_FOLDER + "/" + PROGRAM_CONSTANTS->INGAME_ENTITIES_STRINGS.value(entityType) + ".webp"};
@@ -42,53 +42,43 @@ QPixmap ImageManager::GetGameObjectTypePixmap(GameObjectTypes entityType)
 
 QFileInfo ImageManager::FindIconFile(const QString& pathToIconsDir, const QString& fileBaseName)
 {
-    // Find all files and dirs in current directory
-    QFileInfoList fileInfoList = QDir{pathToIconsDir}.entryInfoList(QDir::Filter::Files |
-                                                                    QDir::Filter::Dirs  |
-                                                                    QDir::Filter::NoDotAndDotDot);
+    if (fileBaseName.isEmpty()) return QFileInfo{};
 
-    for (const auto & fileInfo : fileInfoList)
+    const QFileInfoList fileInfoList = QDir{pathToIconsDir}.entryInfoList(QDir::Files | QDir::Dirs | QDir::NoDotAndDotDot,
+                                                                        QDir::Name | QDir::IgnoreCase);
+    QFileInfo bestMatch;
+    int bestPriority = ICON_EXTENSIONS.size();
+
+    for (const auto& fileInfo : fileInfoList)
     {
-        // if dir -> recursive find
-        if (fileInfo.isDir())
-        {
-            QFileInfo foundFile = FindIconFile(fileInfo.absoluteFilePath(), fileBaseName);
+        const QFileInfo candidate = fileInfo.isDir()
+            ? FindIconFile(fileInfo.absoluteFilePath(), fileBaseName)
+            : fileInfo;
 
-            // Return if it's a complete match
-            if (foundFile.baseName() == fileBaseName) return foundFile;
-        }
-        // else if it is a matching file -> return it
-        else
+        if (!candidate.isFile() || candidate.completeBaseName() != fileBaseName) continue;
+
+        const int priority = ICON_EXTENSIONS.indexOf(candidate.suffix().toLower().toLocal8Bit());
+        if (priority >= 0 && priority < bestPriority)
         {
-            if (fileInfo.baseName() == fileBaseName) return fileInfo;
+            bestMatch = candidate;
+            bestPriority = priority;
+            if (priority == 0) break;
         }
     }
 
-    return QFileInfo{};
+    return bestMatch;
 }
 
-QImage ImageManager::DecodeWebpIconPath(const QString& iconPath)
+QImage ImageManager::LoadImageFromPath(const QString& iconPath)
 {
-    QFile iconFile(iconPath);
+    QImageReader reader(iconPath);
+    reader.setAutoTransform(true);
+    const QImage image = reader.read();
 
-    if(iconPath.isEmpty() || !iconFile.open(QIODevice::ReadOnly))
+    if (image.isNull())
     {
-        if (!iconPath.isEmpty())
-        {
-            LOGMSG("Icon file [" + iconFile.fileName() + "] was not found");
-        }
-        return DecodeMissingWebpIcon();
+        LOGMSG("Unable to load icon [" + iconPath + "]: " + reader.errorString());
     }
 
-    return DecodeImageFromData(iconFile.readAll());
-}
-
-QImage ImageManager::DecodeImageFromData(const QByteArray& iconData)
-{
-    int width, height;
-    uint8_t* decodedImage = WebPDecodeRGBA(reinterpret_cast<const uint8_t*>(iconData.constData()), // amogus
-                                           iconData.size(),
-                                           &width,
-                                           &height);
-    return QImage{decodedImage, width, height, QImage::Format_RGBA8888};
+    return image;
 }

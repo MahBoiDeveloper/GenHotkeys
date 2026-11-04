@@ -1,31 +1,30 @@
 #pragma once
 #include <QFileInfo>
+#include <QImage>
+#include <QPixmap>
 #include "../Core/ProgramConstants.hpp"
 
 class ImageManager
 {
 private: // Data
-    inline static QMap<QString, QImage> ImagesCache;
-public:
+    inline static QMap<QPair<QString, QString>, QImage> ImagesCache;
 
 private: // Methods
-    /// @brief Search recursively icons in folders.
+    /// @brief Find an icon recursively, preferring WEBP, PNG, JPG, then JPEG.
     static QFileInfo FindIconFile(const QString& pathToIconsDir, const QString& fileBaseName);
-    /// @brief Decode WEBP image from path to the icon.
-    static QImage    DecodeWebpIconPath(const QString& iconPath);
-    /// @brief Decode WEBP image from byte array.
-    static QImage    DecodeImageFromData(const QByteArray& iconData);
+    /// @brief Read an image, returning a null image on failure.
+    static QImage LoadImageFromPath(const QString& iconPath);
 public:
     ImageManager() = delete;
 
-    /// @brief Decode WEBP image icon name.
-    static QImage  DecodeWebpIcon(const QString& iconName);
-    /// @brief Get image if needed file cannot be found.
-    static QImage  DecodeMissingWebpIcon();
-    /// @brief Return image of the main executable WEBP icon.
-    static QImage  DecodeEditorWebpIcon();
-    /// @brief Return project's official WEBP image.
-    static QImage  DecodeBigEditorWebpIcon();
+    /// @brief Load a WEBP, PNG, JPG and other supported by Qt profile icon by name without extension.
+    static QImage  LoadIcon(const QString& iconName);
+    /// @brief Get the placeholder for missing or unreadable icons.
+    static QImage  LoadMissingIcon();
+    /// @brief Return the main executable icon.
+    static QImage  LoadEditorIcon();
+    /// @brief Return the project's official image.
+    static QImage  LoadBigEditorIcon();
     /// @brief Return pixel map by object type.
     static QPixmap GetGameObjectTypePixmap(GameObjectTypes goType);
 };

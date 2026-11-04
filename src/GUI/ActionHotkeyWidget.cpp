@@ -29,8 +29,8 @@ ActionHotkeyWidget::ActionHotkeyWidget(const QString& csfString,
     btnHotkey.setText(hotkey);
     btnHotkey.setObjectName(nameof(btnHotkey));
     btnHotkey.setProperty("unique", false);
-    btnHotkey.setMinimumSize(ImageManager::DecodeMissingWebpIcon().size().width() + DEFAULT_HOTKEY_BUTTON_WIDTH,
-                             ImageManager::DecodeMissingWebpIcon().size().height());
+    btnHotkey.setMinimumSize(ImageManager::LoadMissingIcon().size().width() + DEFAULT_HOTKEY_BUTTON_WIDTH,
+                             ImageManager::LoadMissingIcon().size().height());
 
     connect(&btnHotkey, &QPushButton::pressed, this, &ActionHotkeyWidget::BtnHotkey_Clicked);
 
@@ -38,7 +38,7 @@ ActionHotkeyWidget::ActionHotkeyWidget(const QString& csfString,
     signalTimer.setSingleShot(true);
     connect(&signalTimer, &QTimer::timeout, this, &ActionHotkeyWidget::RepeatButtonTimerSignal);
 
-    lblImage.setPixmap(QPixmap::fromImage(ImageManager::DecodeWebpIcon(iconName)));
+    lblImage.setPixmap(QPixmap::fromImage(ImageManager::LoadIcon(iconName)));
 
     QAction *actEdit = new QAction(tr("Edit source text"), this);
     actEdit->setShortcut(Qt::Key_F2);
