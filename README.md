@@ -30,7 +30,6 @@ GenHotkeys is a tool for editing C&C: Generals and C&C: Generals — Zero Hour h
 * [TitoWWN](https://vk.com/artcandc20) — missing and editor icon author
 * [DESolatorTrooper](https://www.moddb.com/members/deso3latortro0per/addons) — background edits
 ### Others
-* [WebM Project](https://github.com/webmproject) — [webp library](https://github.com/webmproject/libwebp) (WebM Project License)
 * [rlabrecque](https://github.com/rlabrecque) — mirroring [SteamworksSDK](https://partner.steamgames.com/doc/sdk) to [GitHub](https://github.com/rlabrecque/SteamworksSDK)
 * [Discord](https://github.com/discord) — example of [Discord RPC](https://github.com/discord/discord-rpc) implementation
 
