@@ -26,6 +26,7 @@ using namespace StringExt;
             QString qstr;
             vector<GINIKey> buffKeys;
             uint32_t fileLineIndex = 0;
+            size_t sectionIndex = 0;
 
             while(getline(file, buff))
             {
@@ -44,54 +45,84 @@ using namespace StringExt;
                 // If string after trimming is empty, then skip this string.
                 if (qstr.isEmpty()) continue;
 
-                int equalSignIndex = qstr.indexOf('=');
-                
-                switch (equalSignIndex)
+                // The game uses spaces, tabs and '=' as token separators.
+                int keyEndIndex = 0;
+                while (keyEndIndex < qstr.size() && qstr[keyEndIndex] != ' ' &&
+                       qstr[keyEndIndex] != '\t' && qstr[keyEndIndex] != '=')
+                    keyEndIndex++;
+
+                buffKeyName = qstr.left(keyEndIndex).toStdString();
+
+                if (qstr.left(keyEndIndex).toUpper() == "END")
                 {
-                    case -1: // Read line may be a begin or end of section
+                    if (buffSectionName == "")
+                        throw ExceptionExt("Unexpected \"END\" of section in [" + buff + "] at line " + QString::number(fileLineIndex).toStdString());
 
-                        // If line equals END and section name doesn't set, then throw exception
-                        if ((qstr.toUpper() == "END") && (buffSectionName == ""))
-                            throw ExceptionExt(string("Unexpected \"END\" of section in [") + buff + 
-                                            string("] at line ") + 
-                                            QString::number(fileLineIndex).toStdString());
-
-                        // If line doesn't equal END, then it is a section name
-                        if (qstr.toUpper() != "END")
-                        {
-                            buffSectionName = qstr.toStdString();
-                            continue;
-                        }
-
-                        // If line equals END and section name has been set, then write data into class and clear buffers
-                        if ((qstr.toUpper() == "END") && (buffSectionName != ""))
-                        {
-                            // Write data to class
-                            Sections.push_back({buffSectionName, buffKeys});
-
-                            // Clear buffer variables
-                            buffSectionName = buffKeyName = buffKeyValue = "";
-                            buffKeys.erase(buffKeys.cbegin(), buffKeys.cend());
-
-                            continue;
-                        }
-
-                        break;
-
-                    case 0: // Error due to only equal sign in line
-                        throw ExceptionExt("Unexpected \"=\" sign in [" + buff + "] at line " + QString::number(fileLineIndex).toStdString());
-                        break;
-                
-                    default: // Read line is a value
-                        auto tmp = qstr.split('=');
-                        buffKeyName  = tmp[0].trimmed().toStdString();
-                        buffKeyValue = tmp[1].trimmed().toStdString();
-                        buffKeys.push_back({buffKeyName, buffKeyValue});
-                        break;
+                    // Write data to class and clear buffer variables.
+                    if (sectionIndex == Sections.size())
+                        Sections.push_back({buffSectionName, buffKeys});
+                    else
+                        Sections[sectionIndex].Keys = buffKeys;
+                    buffSectionName = buffKeyName = buffKeyValue = "";
+                    buffKeys.erase(buffKeys.cbegin(), buffKeys.cend());
+                    continue;
                 }
+
+                if (keyEndIndex == 0)
+                    throw ExceptionExt("Unexpected \"=\" sign in [" + buff + "] at line " + QString::number(fileLineIndex).toStdString());
+
+                if (buffSectionName == "")
+                {
+                    if (qstr.indexOf('=') != -1)
+                        throw ExceptionExt("Unexpected key outside of section in [" + buff + "] at line " + QString::number(fileLineIndex).toStdString());
+
+                    buffSectionName = qstr.simplified().toStdString();
+
+                    // Repeated blocks update the same record in CommandMap.ini.
+                    for (sectionIndex = 0; sectionIndex < Sections.size(); sectionIndex++)
+                        if (Sections[sectionIndex].Name == buffSectionName)
+                        {
+                            buffKeys = Sections[sectionIndex].Keys;
+                            break;
+                        }
+
+                    continue;
+                }
+
+                // A second block of the same type must not replace an unclosed block.
+                if (buffKeyName == QString::fromStdString(buffSectionName).section(' ', 0, 0).toStdString())
+                    throw ExceptionExt("Missing \"END\" of section [" + buffSectionName + "] before [" + buff + "] at line " + QString::number(fileLineIndex).toStdString());
+
+                int keyValueIndex = keyEndIndex;
+                while (keyValueIndex < qstr.size() && (qstr[keyValueIndex] == ' ' ||
+                       qstr[keyValueIndex] == '\t' || qstr[keyValueIndex] == '='))
+                    keyValueIndex++;
+
+                if (keyValueIndex == qstr.size())
+                    throw ExceptionExt("Missing value in [" + buff + "] at line " + QString::number(fileLineIndex).toStdString());
+
+                buffKeyValue = qstr.mid(keyValueIndex).trimmed().toStdString();
+
+                bool keyFound = false;
+                for (auto& key : buffKeys)
+                    if (key.Name == buffKeyName)
+                    {
+                        key.Value = buffKeyValue;
+                        keyFound = true;
+                        break;
+                    }
+
+                if (!keyFound)
+                    buffKeys.push_back({buffKeyName, buffKeyValue});
             }
 
-            LOGMSG( "File \"" + Path + "\" has been parsed; Sections count: " + GINIParser::Instance->Sections.size());
+            if (file.bad() || !file.eof())
+                throw ExceptionExt("Unable to read file \"" + Path + "\" at line " + QString::number(fileLineIndex).toStdString());
+
+            if (buffSectionName != "")
+                throw ExceptionExt("Missing \"END\" of section [" + buffSectionName + "] at line " + QString::number(fileLineIndex).toStdString());
+
+            LOGMSG( "File \"" + Path + "\" has been parsed; Sections count: " + Sections.size());
         }
         else
         {
@@ -103,9 +134,14 @@ using namespace StringExt;
 
     void GINIParser::Save()
     {
-        ofstream file(Path, ios::out);
+        Save(Path);
+    }
 
-        LOGMSG("Attempt to write file \"" + Path + "\"...");
+    void GINIParser::Save(const string& strFileSample)
+    {
+        ofstream file(strFileSample, ios::out);
+
+        LOGMSG("Attempt to write file \"" + strFileSample + "\"...");
 
         if (file.is_open())
         {
@@ -119,20 +155,16 @@ using namespace StringExt;
                 file << "End" << endl;
             }
 
-            LOGMSG("File \"" + Path + "\" has been saved.");
+            file.close();
+            if (file.fail())
+                throw ExceptionExt("Unable to finish writing file \"" + strFileSample + "\"");
+
+            LOGMSG("File \"" + strFileSample + "\" has been saved.");
         }
         else
         {
-            throw ExceptionExt("Unable write settings to file \"" + Path + "\"; make sure program have right to write into folder and into file.");
+            throw ExceptionExt("Unable write settings to file \"" + strFileSample + "\"; make sure program have right to write into folder and into file.");
         }
-    }
-
-    void GINIParser::Save(const string& strFileSample)
-    {
-        string tmp = Path;
-        Path = strFileSample;
-        Save();
-        Path = tmp;
     }
 
     void GINIParser::Save(const char* strFileSample)
