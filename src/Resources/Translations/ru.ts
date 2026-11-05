@@ -27,22 +27,22 @@
 <context>
     <name>EditorWindow</name>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="216"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="220"/>
         <source>File</source>
         <translation>Файл</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="217"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="221"/>
         <source>Open</source>
         <translation>Открыть</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="218"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="222"/>
         <source>Save</source>
         <translation>Сохранить</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="219"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="223"/>
         <source>Save As...</source>
         <translation>Сохранить как...</translation>
     </message>
@@ -51,44 +51,54 @@
         <translation type="vanished">Дополнительно</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="220"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="224"/>
         <source>Close</source>
         <translation>Закрыть</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="238"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="243"/>
         <source>View</source>
         <translation>Вид</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="239"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="244"/>
         <source>Status Bar</source>
         <translation>Строка состояния</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="240"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="245"/>
         <source>Enable</source>
         <translation>Включить</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="241"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="246"/>
         <source>Disable</source>
         <translation>Отключить</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="251"/>
-        <location filename="../../GUI/EditorWindow.cpp" line="571"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="257"/>
+        <source>Actions</source>
+        <translation>Действия</translation>
+    </message>
+    <message>
+        <location filename="../../GUI/EditorWindow.cpp" line="258"/>
+        <source>Run Game</source>
+        <translation>Запустить игру</translation>
+    </message>
+    <message>
+        <location filename="../../GUI/EditorWindow.cpp" line="265"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="586"/>
         <source>Settings</source>
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="255"/>
-        <location filename="../../GUI/EditorWindow.cpp" line="532"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="270"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="547"/>
         <source>About</source>
         <translation>О программе</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="392"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="407"/>
         <source>Layout %1</source>
         <translation>Раскладка %1</translation>
     </message>
@@ -117,37 +127,42 @@
         <translation type="vanished">Поддержать разработку:</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="607"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="622"/>
         <source>Changes has been saved to the file:</source>
         <translation>Изменения были сохранены в файл:</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="623"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="638"/>
         <source>Saved as:</source>
         <translation>Сохранено как:</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="655"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="670"/>
         <source>Opening selected file</source>
         <translation>Открываем выбранный файл</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="661"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="677"/>
+        <source>Opening game via link</source>
+        <translation>Открываем игру по ссылке</translation>
+    </message>
+    <message>
+        <location filename="../../GUI/EditorWindow.cpp" line="685"/>
         <source>Changing editor language</source>
         <translation>Изменяем язык редактора</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="632"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="647"/>
         <source>Binary files</source>
         <translation>Двоичные файлы</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="510"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="525"/>
         <source>&lt;p&gt;Authors: %1&lt;br&gt;Version: %2&lt;br&gt;Commit: %3&lt;br&gt;&lt;br&gt;Program licensed with %4&lt;br&gt;&lt;br&gt;GitHub repository:&lt;br&gt;%5&lt;br&gt;&lt;br&gt;Support development:&lt;br&gt;%6&lt;/p&gt;</source>
         <translation>&lt;p&gt;Авторы: %1&lt;br&gt;Версия: %2&lt;br&gt;Коммит: %3&lt;br&gt;&lt;br&gt;Программа лицензирована под %4&lt;br&gt;&lt;br&gt;Репозиторий на GitHub:&lt;br&gt;%5&lt;br&gt;&lt;br&gt;Поддержать разработку:&lt;br&gt;%6&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="633"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="648"/>
         <source>Any files</source>
         <translation>Все файлы</translation>
     </message>

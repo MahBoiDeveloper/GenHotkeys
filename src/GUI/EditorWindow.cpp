@@ -1,3 +1,5 @@
+#include <windows.h>
+
 #include <QApplication>
 #include <QMenuBar>
 #include <QHeaderView>
@@ -15,6 +17,7 @@
 #include "../Core/Convert.hpp"
 #include "../Parsers/CSFParser.hpp"
 #include "../Managers/FactionsManager.hpp"
+#include "../Managers/SteamManager.hpp"
 #include "../Windows/Registry.hpp"
 #include "../Windows/Locale.hpp"
 
@@ -213,11 +216,12 @@ EditorWindow::EditorWindow(QWidget* parent)
 
 void EditorWindow::ConfigureMenu()
 {
-    QMenu* mnFileOptions = new QMenu(tr("File"));
-    QAction* actOpen     = new QAction(tr("Open"));
-    QAction* actSave     = new QAction(tr("Save"));
-    QAction* actSaveAs   = new QAction(tr("Save As..."));
-    QAction* actClose    = new QAction(tr("Close"));
+    // File
+    QMenu*   mnFileOptions = new QMenu(tr("File"));
+    QAction* actOpen       = new QAction(tr("Open"));
+    QAction* actSave       = new QAction(tr("Save"));
+    QAction* actSaveAs     = new QAction(tr("Save As..."));
+    QAction* actClose      = new QAction(tr("Close"));
 
     actOpen->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_O));
     actSave->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_S));
@@ -230,14 +234,15 @@ void EditorWindow::ConfigureMenu()
     mnFileOptions->addAction(actClose);
     menuBar()->addMenu(mnFileOptions);
 
-    connect(actOpen, &QAction::triggered, this, &EditorWindow::ActOpen_Triggered);
-    connect(actSave, &QAction::triggered, this, &EditorWindow::ActSave_Triggered);
+    connect(actOpen,   &QAction::triggered, this, &EditorWindow::ActOpen_Triggered);
+    connect(actSave,   &QAction::triggered, this, &EditorWindow::ActSave_Triggered);
     connect(actSaveAs, &QAction::triggered, this, &EditorWindow::ActSaveAs_Triggered);
-    connect(actClose, &QAction::triggered, this, &EditorWindow::ActClose_Triggered);
+    connect(actClose,  &QAction::triggered, this, &EditorWindow::ActClose_Triggered);
 
-    QMenu* mnViewOptions = new QMenu(tr("View"));
-    QMenu* mnStatusBarChecbox = new QMenu(tr("Status Bar"));
-    QAction* actEnableStatusBar = new QAction(tr("Enable"));
+    // View
+    QMenu*   mnViewOptions       = new QMenu(tr("View"));
+    QMenu*   mnStatusBarChecbox  = new QMenu(tr("Status Bar"));
+    QAction* actEnableStatusBar  = new QAction(tr("Enable"));
     QAction* actDisableStatusBar = new QAction(tr("Disable"));
     actDisableStatusBar->setProperty("selected", !PROGRAM_CONSTANTS->pSettingsFile->IsStatusBarEnabled());
     mnStatusBarChecbox->addAction(actEnableStatusBar);
@@ -248,13 +253,23 @@ void EditorWindow::ConfigureMenu()
     connect(actEnableStatusBar,  &QAction::triggered, this, &EditorWindow::ActEnableStatusBar_Triggered);
     connect(actDisableStatusBar, &QAction::triggered, this, &EditorWindow::ActDisableStatusBar_Triggered);
    
-    QAction* actSettings = new QAction(tr("Settings"));
-    connect(actSettings, &QAction::triggered, this, &EditorWindow::ActSettings_Triggered);
-    menuBar()->addAction(actSettings);
+    // Actions
+    QMenu*   mnActions  = new QMenu(tr("Actions"));
+    QAction* actRunGame = new QAction(tr("Run Game"));
+    mnActions->addAction(actRunGame);
+    menuBar()->addMenu(mnActions);
 
+    connect(actRunGame, &QAction::triggered, this, &EditorWindow::ActRunGame_Triggered);
+
+    // Settings
+    QAction* actSettings = new QAction(tr("Settings"));
+    menuBar()->addAction(actSettings);
+    connect(actSettings, &QAction::triggered, this, &EditorWindow::ActSettings_Triggered);
+
+    // About    
     QAction* actAbout = new QAction(tr("About"));
-    connect(actAbout, &QAction::triggered, this, &EditorWindow::ActAbout_Triggered);
     menuBar()->addAction(actAbout);
+    connect(actAbout, &QAction::triggered, this, &EditorWindow::ActAbout_Triggered);
 }
 
 void EditorWindow::SetGameObjectList(const QString& factionShortName)
@@ -288,7 +303,7 @@ void EditorWindow::SetGameObjectList(const QString& factionShortName)
         {
             QTreeWidgetItem* currentNewEntityItem = new QTreeWidgetItem();
             currentNewEntityItem->setText(0, CSF_PARSER->GetStringValue(go.ingameName));
-            currentNewEntityItem->setIcon(0, QPixmap::fromImage(ImageManager::LoadIcon(go.iconName)));
+            currentNewEntityItem->setIcon(0, QPixmap::fromImage(ImageManager::LoadActionIcon(go.iconName)));
             currentNewEntityItem->setData(0, Qt::UserRole, QVariant::fromValue(QPair{factionShortName, go.iconName}));
             newTopEntityItem->addChild(currentNewEntityItem);
         }
@@ -653,6 +668,15 @@ void EditorWindow::ActOpen_NewHotkeyFileSelected(const QString& filepath)
     LOGMSG("Selected file: " + filepath);
     emit newHotkeyFileSelected(filepath);
     pStatusBar->showMessage(tr("Opening selected file"), STATUS_BAR_TIMEOUT);
+}
+
+void EditorWindow::ActRunGame_Triggered() 
+{
+    QString cmd = "steam://rungameid/"q + STEAM_MANAGER->GetAppID();
+    LOGMSG("Opening game via link " + cmd);
+    pStatusBar->showMessage(tr("Opening game via link") + " " + cmd, STATUS_BAR_TIMEOUT);
+    auto status = ShellExecuteW(nullptr, L"open", cmd.toStdWString().c_str(), nullptr, nullptr, SW_SHOWNORMAL);
+    LOGMSG("Returned status: " + reinterpret_cast<size_t>(status));
 }
 
 void EditorWindow::SettingsWindow_LanguageChanged()

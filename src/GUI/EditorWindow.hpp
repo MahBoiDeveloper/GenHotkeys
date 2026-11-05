@@ -75,6 +75,7 @@ private slots:
     void ActClose_Triggered();
     void ActEnableStatusBar_Triggered();
     void ActDisableStatusBar_Triggered();
+    void ActRunGame_Triggered();
 
     void ActOpen_NewHotkeyFileSelected(const QString& filepath);
     void ActSaveAs_SaveToSelectedFile(const QString& filepath);

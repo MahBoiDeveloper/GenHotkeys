@@ -5,10 +5,13 @@
 #include "../Extensions/ExceptionExt.hpp"
 #include "../Parsers/CSFParser.hpp"
 #include "../Windows/Registry.hpp"
+#include "../Managers/SteamManager.hpp"
 #include "../Core/Logger.hpp"
 #include "ImageManager.hpp"
 #include "WindowManager.hpp"
 #include "SetUpWindowsWrapper.hpp"
+
+using namespace StringExt;
 
 SetUpWindowsWrapper::SetUpWindowsWrapper(QWidget* parent) : QStackedWidget(parent)
 {
@@ -110,9 +113,25 @@ void SetUpWindowsWrapper::BtnBack_Clicked()
     WINDOW_MANAGER->ApplyDefaultProfileStyleSheet();
 }
 
-void SetUpWindowsWrapper::SelectProfileWindow_GProfileSelected()                           { WINDOW_MANAGER->StartUpWindow_GProfileSelected(); BtnLoadFromFile_Clicked(); }
-void SetUpWindowsWrapper::SelectProfileWindow_GZHProfileSelected()                         { WINDOW_MANAGER->StartUpWindow_GZHProfileSelected(); BtnLoadFromFile_Clicked(); }
-void SetUpWindowsWrapper::SelectProfileWindow_CustomProfileSelected(const QString& folder) { WINDOW_MANAGER->StartUpWindow_CustomProfileSelected(folder); BtnLoadFromFile_Clicked(); }
+void SetUpWindowsWrapper::SelectProfileWindow_GProfileSelected()                           
+{
+    WINDOW_MANAGER->StartUpWindow_GProfileSelected();
+    BtnLoadFromFile_Clicked();
+    STEAM_MANAGER->SetAppID(ToQString(PROGRAM_CONSTANTS->GENERALS_STEAM_APP_ID));
+}
+
+void SetUpWindowsWrapper::SelectProfileWindow_GZHProfileSelected()                         
+{
+    WINDOW_MANAGER->StartUpWindow_GZHProfileSelected();
+    BtnLoadFromFile_Clicked();
+    STEAM_MANAGER->SetAppID(ToQString(PROGRAM_CONSTANTS->ZH_STEAM_APP_ID));
+}
+
+void SetUpWindowsWrapper::SelectProfileWindow_CustomProfileSelected(const QString& folder) 
+{
+    WINDOW_MANAGER->StartUpWindow_CustomProfileSelected(folder); BtnLoadFromFile_Clicked();
+}
+
 
 void SetUpWindowsWrapper::LoadWindow_LoadFromTheGame()
 {
