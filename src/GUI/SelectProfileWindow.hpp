@@ -10,7 +10,7 @@ class SelectProfileWindow : public QWidget
 private: // Data
     QVBoxLayout* ltMain           = nullptr;
     QHBoxLayout* ltProfiles       = nullptr;
-    QVBoxLayout* ltGameProfiles   = nullptr;
+    QLayout*     ltGameProfiles   = nullptr;
     QVBoxLayout* ltCustomProfiles = nullptr;
     QPushButton* btnGenerals      = nullptr;
     QPushButton* btnGeneralsZH    = nullptr;

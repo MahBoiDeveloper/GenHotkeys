@@ -16,19 +16,6 @@ SelectProfileWindow::SelectProfileWindow(QWidget* parent) : QWidget(parent)
     btnGeneralsZH    = new QPushButton(tr(PROGRAM_CONSTANTS->GZH_FOLDER_NAME.toStdString().c_str()));
     btnSettings      = new QPushButton();
 
-    btnGenerals->setObjectName(nameof(btnGenerals));
-    connect(btnGenerals, &QPushButton::clicked, this, &SelectProfileWindow::BtnGenerals_Clicked);
-    btnGeneralsZH->setObjectName(nameof(btnGeneralsZH));
-    connect(btnGeneralsZH, &QPushButton::clicked, this, &SelectProfileWindow::BtnGeneralsZH_Clicked);
-    QPixmap pxmSettings = QPixmap(PROGRAM_CONSTANTS->GEARS_ICON_FILE);
-    btnSettings->setObjectName(nameof(btnSettings));
-    btnSettings->setIcon(pxmSettings);
-    btnSettings->setIconSize(pxmSettings.size());
-    btnSettings->setFixedSize(pxmSettings.size());
-    connect(btnSettings, &QPushButton::clicked, this, &SelectProfileWindow::BtnSettings_Clicked);
-    ltGameProfiles->addWidget(btnGenerals);
-    ltGameProfiles->addWidget(btnGeneralsZH);
-
     QDir profilesDir(PROGRAM_CONSTANTS->PROFILES_FOLDER);
     auto list = profilesDir.entryList(QDir::Filter::Dirs | QDir::Filter::NoDotAndDotDot, QDir::SortFlag::Name);
     list.removeOne(PROGRAM_CONSTANTS->G_FOLDER_NAME);
@@ -43,6 +30,26 @@ SelectProfileWindow::SelectProfileWindow(QWidget* parent) : QWidget(parent)
         connect(btnCustomProfile, &QPushButton::clicked, this, &SelectProfileWindow::BtnCustomProfile_Clicked);
         ltCustomProfiles->addWidget(btnCustomProfile);
     }
+
+    btnGenerals->setObjectName(nameof(btnGenerals));
+    connect(btnGenerals, &QPushButton::clicked, this, &SelectProfileWindow::BtnGenerals_Clicked);
+    btnGeneralsZH->setObjectName(nameof(btnGeneralsZH));
+    connect(btnGeneralsZH, &QPushButton::clicked, this, &SelectProfileWindow::BtnGeneralsZH_Clicked);
+    QPixmap pxmSettings = QPixmap(PROGRAM_CONSTANTS->GEARS_ICON_FILE);
+    btnSettings->setObjectName(nameof(btnSettings));
+    btnSettings->setIcon(pxmSettings);
+    btnSettings->setIconSize(pxmSettings.size());
+    btnSettings->setFixedSize(pxmSettings.size());
+    connect(btnSettings, &QPushButton::clicked, this, &SelectProfileWindow::BtnSettings_Clicked);
+    
+    if (ltCustomProfiles->count() == 0)
+    {
+        ltGameProfiles->deleteLater();
+        ltGameProfiles = new QHBoxLayout();
+    }
+    
+    ltGameProfiles->addWidget(btnGenerals);
+    ltGameProfiles->addWidget(btnGeneralsZH);
 
     ltProfiles->addLayout(ltGameProfiles);
     ltProfiles->addLayout(ltCustomProfiles);
