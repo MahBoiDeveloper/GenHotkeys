@@ -38,7 +38,7 @@ ActionHotkeyWidget::ActionHotkeyWidget(const QString& csfString,
     signalTimer.setSingleShot(true);
     connect(&signalTimer, &QTimer::timeout, this, &ActionHotkeyWidget::RepeatButtonTimerSignal);
 
-    lblImage.setPixmap(QPixmap::fromImage(ImageManager::LoadIcon(iconName)));
+    lblImage.setPixmap(QPixmap::fromImage(ImageManager::LoadActionIcon(iconName)));
 
     QAction *actEdit = new QAction(tr("Edit source text"), this);
     actEdit->setShortcut(Qt::Key_F2);

@@ -8,7 +8,7 @@
 
 const auto ICON_EXTENSIONS = QImageReader::supportedImageFormats();
 
-QImage ImageManager::LoadIcon(const QString& iconName)
+QImage ImageManager::LoadActionIcon(const QString& iconName)
 {
     const QString iconsDirectory = QDir{WINDOW_MANAGER->ProfileFolder + "/" + PROGRAM_CONSTANTS->ICONS_FOLDER_NAME}.absolutePath();
     const auto cacheKey = qMakePair(iconsDirectory, iconName);

@@ -18,7 +18,7 @@ public:
     ImageManager() = delete;
 
     /// @brief Load a WEBP, PNG, JPG and other supported by Qt profile icon by name without extension.
-    static QImage  LoadIcon(const QString& iconName);
+    static QImage  LoadActionIcon(const QString& iconName);
     /// @brief Get the placeholder for missing or unreadable icons.
     static QImage  LoadMissingIcon();
     /// @brief Return the main executable icon.
