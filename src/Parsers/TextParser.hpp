@@ -50,6 +50,20 @@ namespace TextParser
         return text;
     }
 
-    /// @brief Delete all text by regular expression \[&[A-Z]\].
-    inline QString GetClearActionName(QString strName) { return strName.remove(QRegExp{"((\\[|\\()&([A-Z]|[a-z])(\\]|\\)))|&"}).trimmed(); }
+    /// @brief Remove hotkey markers and standalone hotkey islands from an action name.
+    inline QString GetClearActionName(QString strName) { return strName.remove(QRegExp{"\\[&.\\]|\\(&.\\)|&"}).trimmed(); }
+
+    /// @brief Move an existing hotkey to a single [&H] prefix, preserving the action name.
+    inline QString ExtractHotkey(const QString& text)
+    {
+        const int markerIndex = text.indexOf('&');
+        if (markerIndex < 0 || markerIndex + 1 >= text.size())
+            return text;
+
+        const QChar hotkey = text.at(markerIndex + 1).toUpper();
+        if (hotkey.isSpace() || hotkey.isNull() || hotkey == '&')
+            return text;
+
+        return SetHotkey(GetClearActionName(text), hotkey);
+    }
 }

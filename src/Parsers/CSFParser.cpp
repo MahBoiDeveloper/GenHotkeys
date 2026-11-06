@@ -5,6 +5,7 @@
 #include "../Extensions/L10NExt.hpp"
 #include "../Core/Logger.hpp"
 #include "../Core/Convert.hpp"
+#include "TextParser.hpp"
 #include "CSFParser.hpp"
 
 using namespace std;
@@ -393,6 +394,16 @@ using namespace StringExt;
     {
         for (const auto& elem : lstChanges)
             SetStringValue(elem);
+    }
+
+    void CSFParser::ExtractHotkeys(const QString& strCategoryName)
+    {
+        const QString categoryPrefix = strCategoryName + ":";
+        for (auto& compiledString : Table)
+        {
+            if (compiledString.Name.startsWith(categoryPrefix, Qt::CaseInsensitive))
+                compiledString.Value = TextParser::ExtractHotkey(compiledString.Value);
+        }
     }
 #pragma endregion
 

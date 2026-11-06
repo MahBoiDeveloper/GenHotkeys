@@ -706,6 +706,14 @@ void EditorWindow::ActExtractHotkey_Triggered()
         return;
 
     pStatusBar->showMessage(tr("Applying hotkey extraction..."), STATUS_BAR_TIMEOUT);
+
+    CSF_PARSER->ExtractHotkeys(PROGRAM_CONSTANTS->HOTKEY_CSF_CATEGORY);
+    ActSave_Triggered();
+
+    const int currentLayout = pHotkeysPanelsWidget != nullptr ? pHotkeysPanelsWidget->currentIndex() : 0;
+    SetHotkeysPanels();
+    if (pHotkeysPanelsWidget != nullptr)
+        pHotkeysPanelsWidget->setCurrentIndex(currentLayout);
 }
 
 void EditorWindow::SettingsWindow_LanguageChanged()

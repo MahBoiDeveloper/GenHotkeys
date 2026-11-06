@@ -191,7 +191,7 @@ Are you sure to apply this action?</source>
         <translation>Извлекаем горячие клавиши...</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="714"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="722"/>
         <source>Changing editor language</source>
         <translation>Изменяем язык редактора</translation>
     </message>

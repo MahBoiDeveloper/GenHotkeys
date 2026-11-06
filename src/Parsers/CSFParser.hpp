@@ -123,6 +123,8 @@ public:
     void SetStringValue(const CompiledString& stString);
     /// @brief Searchs any match for string names and rewriting its values.
     void SetStringsValue(const std::list<CompiledString>& lstChanges);
+    /// @brief Move hotkeys to [&H] prefixes for every string in the specified category.
+    void ExtractHotkeys(const QString& strCategoryName);
 
     /// @brief Checks if string exist by name match.
     const bool ExistString(const QString& value)       const;
