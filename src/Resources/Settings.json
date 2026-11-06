@@ -3,7 +3,7 @@
     "StatusBar"           : true,
     "DiscordRPC"          : true,
     "ForceSystemLanguage" : true,
-    "SteamAPI"            : true,
+    "SteamAPI"            : false,
     "Language"            : "en",
 
     "AllowedHotkeys" :
