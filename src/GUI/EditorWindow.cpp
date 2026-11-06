@@ -1,6 +1,7 @@
 #include <windows.h>
 
 #include <QApplication>
+#include <QAbstractButton>
 #include <QMenuBar>
 #include <QHeaderView>
 #include <QCoreApplication>
@@ -9,6 +10,7 @@
 #include <QVBoxLayout>
 #include <QComboBox>
 #include <QFileDialog>
+#include <QMessageBox>
 
 #include "../Extensions/ExceptionExt.hpp"
 #include "../Extensions/BoolExt.hpp"
@@ -254,12 +256,18 @@ void EditorWindow::ConfigureMenu()
     connect(actDisableStatusBar, &QAction::triggered, this, &EditorWindow::ActDisableStatusBar_Triggered);
    
     // Actions
-    QMenu*   mnActions  = new QMenu(tr("Actions"));
-    QAction* actRunGame = new QAction(tr("Run Game"));
+    QMenu*   mnActions        = new QMenu(tr("Actions"));
+    QAction* actRunGame       = new QAction(tr("Run Game"));
+    QAction* actExtractHotkey = new QAction(tr("Exctract Hotkey"));
+    actRunGame->setToolTip(tr("Run game in Steam"));
+    actExtractHotkey->setToolTip(tr("Move hotkey to its \"island\" before object/action name"));
+    mnActions->setToolTipsVisible(true);
     mnActions->addAction(actRunGame);
+    mnActions->addAction(actExtractHotkey);
     menuBar()->addMenu(mnActions);
 
-    connect(actRunGame, &QAction::triggered, this, &EditorWindow::ActRunGame_Triggered);
+    connect(actRunGame,       &QAction::triggered, this, &EditorWindow::ActRunGame_Triggered);
+    connect(actExtractHotkey, &QAction::triggered, this, &EditorWindow::ActExtractHotkey_Triggered);
 
     // Settings
     QAction* actSettings = new QAction(tr("Settings"));
@@ -677,6 +685,27 @@ void EditorWindow::ActRunGame_Triggered()
     pStatusBar->showMessage(tr("Opening game via link") + " " + cmd, STATUS_BAR_TIMEOUT);
     auto status = ShellExecuteW(nullptr, L"open", cmd.toStdWString().c_str(), nullptr, nullptr, SW_SHOWNORMAL);
     LOGMSG("Returned status: " + reinterpret_cast<size_t>(status));
+}
+
+void EditorWindow::ActExtractHotkey_Triggered()
+{
+    QMessageBox confirmationDialog(
+        QMessageBox::Warning,
+        tr("Warning"),
+        tr("Extract hotkeys may take a long time.\n\nAre you sure to apply this action?"),
+        QMessageBox::Ok | QMessageBox::Cancel,
+        this);
+    confirmationDialog.setDefaultButton(QMessageBox::Cancel);
+    confirmationDialog.button(QMessageBox::Ok)->setText(tr("OK"));
+    confirmationDialog.button(QMessageBox::Cancel)->setText(tr("Cancel"));
+    confirmationDialog.findChild<QDialogButtonBox*>()->setCenterButtons(true);
+
+    const auto confirmation = confirmationDialog.exec();
+
+    if (confirmation != QMessageBox::Ok)
+        return;
+
+    pStatusBar->showMessage(tr("Applying hotkey extraction..."), STATUS_BAR_TIMEOUT);
 }
 
 void EditorWindow::SettingsWindow_LanguageChanged()
