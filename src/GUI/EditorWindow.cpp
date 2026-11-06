@@ -698,26 +698,6 @@ void EditorWindow::ShowStatusMessage(const QString& message)
     pStatusBar->showMessage(message, STATUS_BAR_TIMEOUT);
 }
 
-bool EditorWindow::eventFilter(QObject* watched, QEvent* event)
-{
-    if ((watched == pStatusBar || watched == pStatusBarHistory || watched == pStatusBarHistory->viewport())
-        && event->type() == QEvent::MouseButtonDblClick
-        && static_cast<QMouseEvent*>(event)->button() == Qt::LeftButton
-        && pStatusBar->isEnabled() && !pStatusBar->isHidden())
-    {
-        const bool expand = pEditorPages->currentIndex() == 0;
-        pEditorPages->setCurrentIndex(expand ? 1 : 0);
-        if (expand)
-        {
-            pStatusBarHistory->setPlainText(statusMessages.join('\n'));
-            auto* scrollBar = pStatusBarHistory->verticalScrollBar();
-            scrollBar->setValue(scrollBar->maximum());
-        }
-        return true;
-    }
-    return QMainWindow::eventFilter(watched, event);
-}
-
 void EditorWindow::ActEnableStatusBar_Triggered() { UpdateStatusBar(Qt::CheckState::Checked); }
 
 void EditorWindow::ActDisableStatusBar_Triggered() { UpdateStatusBar(Qt::CheckState::Unchecked); }
@@ -804,3 +784,23 @@ bool EditorWindow::ConfirmClose()
 }
 
 #pragma endregion
+
+bool EditorWindow::eventFilter(QObject* watched, QEvent* event)
+{
+    if ((watched == pStatusBar || watched == pStatusBarHistory || watched == pStatusBarHistory->viewport())
+        && event->type() == QEvent::MouseButtonDblClick
+        && static_cast<QMouseEvent*>(event)->button() == Qt::LeftButton
+        && pStatusBar->isEnabled() && !pStatusBar->isHidden())
+    {
+        const bool expand = pEditorPages->currentIndex() == 0;
+        pEditorPages->setCurrentIndex(expand ? 1 : 0);
+        if (expand)
+        {
+            pStatusBarHistory->setPlainText(statusMessages.join('\n'));
+            auto* scrollBar = pStatusBarHistory->verticalScrollBar();
+            scrollBar->setValue(scrollBar->maximum());
+        }
+        return true;
+    }
+    return QMainWindow::eventFilter(watched, event);
+}
