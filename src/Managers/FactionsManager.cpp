@@ -14,6 +14,8 @@ FactionManager::FactionManager(const QString techtreejson)
     {
         vFactions.push_back(Faction{elem.toObject()});
     }
+
+    UpdateFactionNames();
 }
 
 int FactionManager::Count() { return vFactions.size(); }
