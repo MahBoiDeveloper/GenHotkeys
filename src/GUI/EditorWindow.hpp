@@ -77,6 +77,8 @@ private:
 private slots:
     void KeyboardWindow_Update(int id = 0);
     
+    void ClosingWindow();
+
     void ActAbout_Triggered();
     void ActSettings_Triggered();
     void ActSave_Triggered();

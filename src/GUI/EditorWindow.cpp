@@ -227,7 +227,10 @@ EditorWindow::EditorWindow(QWidget* parent)
 
     // Set start faction
     const auto firstFactionButton = pFactionsButtonsGroup->button(BUTTONS_GROUP_START_ID);
-    if (firstFactionButton != nullptr) firstFactionButton->click();
+    if (firstFactionButton != nullptr)
+        firstFactionButton->click();
+
+    connect(this, &QMainWindow::close, this, &EditorWindow::ClosingWindow);
 }
 
 void EditorWindow::ConfigureMenu()
@@ -642,6 +645,8 @@ void EditorWindow::ActSave_Triggered()
     LOGMSG("Changes has been saved");
 
     ShowStatusMessage(tr("Changes has been saved to the file:") + " " + CSF_PARSER->Path);
+
+    WINDOW_MANAGER->pHotkeysEditor->hasDataChanged = false;
 }
 
 void EditorWindow::ActSaveAs_Triggered()
@@ -652,6 +657,8 @@ void EditorWindow::ActSaveAs_Triggered()
     fdSelectFileWindow->setAcceptMode(QFileDialog::AcceptMode::AcceptSave);
     fdSelectFileWindow->setDefaultSuffix("csf");
     fdSelectFileWindow->exec();
+
+    WINDOW_MANAGER->pHotkeysEditor->hasDataChanged = false;
 }
 
 void EditorWindow::ActSaveAs_SaveToSelectedFile(const QString& filepath)
@@ -766,6 +773,36 @@ void EditorWindow::SettingsWindow_LanguageChanged()
     this->pSettingsWindow->close();
     ShowStatusMessage(tr("Changing editor language"));
     emit languageChanged();
+}
+
+void EditorWindow::ClosingWindow()
+{
+    if (WINDOW_MANAGER->pHotkeysEditor->hasDataChanged)
+    {
+        QMessageBox confirmationDialog(
+            QMessageBox::Warning,
+            tr("Warning"),
+            tr("Are you want to save changes before quit?"),
+            QMessageBox::Ok | QMessageBox::Cancel,
+            this);
+        confirmationDialog.setDefaultButton(QMessageBox::Cancel);
+        confirmationDialog.button(QMessageBox::Default)->setText(tr("Save"));
+        confirmationDialog.button(QMessageBox::Ok)->setText(tr("Don't Save"));
+        confirmationDialog.button(QMessageBox::Cancel)->setText(tr("Cancel"));
+        confirmationDialog.findChild<QDialogButtonBox*>()->setCenterButtons(true);
+
+        const auto confirmation = confirmationDialog.exec();
+
+        if (confirmation == QMessageBox::Cancel)
+            return;
+
+        if (confirmation == QMessageBox::Default)
+        {
+            ActSave_Triggered();   
+        }
+    }
+
+    close();
 }
 
 #pragma endregion

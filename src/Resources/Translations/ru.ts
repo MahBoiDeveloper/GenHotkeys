@@ -27,22 +27,23 @@
 <context>
     <name>EditorWindow</name>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="236"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="239"/>
         <source>File</source>
         <translation>Файл</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="237"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="240"/>
         <source>Open</source>
         <translation>Открыть</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="238"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="241"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="789"/>
         <source>Save</source>
         <translation>Сохранить</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="239"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="242"/>
         <source>Save As...</source>
         <translation>Сохранить как...</translation>
     </message>
@@ -51,80 +52,85 @@
         <translation type="vanished">Дополнительно</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="240"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="243"/>
         <source>Close</source>
         <translation>Закрыть</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="259"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="262"/>
         <source>View</source>
         <translation>Вид</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="260"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="263"/>
         <source>Status Bar</source>
         <translation>Строка состояния</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="261"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="264"/>
         <source>Enable</source>
         <translation>Включить</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="262"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="265"/>
         <source>Disable</source>
         <translation>Отключить</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="273"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="276"/>
         <source>Actions</source>
         <translation>Действия</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="274"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="277"/>
         <source>Run Game</source>
         <translation>Запустить игру</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="275"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="278"/>
         <source>Exctract Hotkey</source>
         <translation>Извлечь горячие клавиши</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="276"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="279"/>
         <source>Run game in Steam</source>
         <translation>Запустить игру в Steam</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="277"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="280"/>
         <source>Move hotkey to its &quot;island&quot; before object/action name</source>
         <translation>Сместить горячие клавиши в &quot;островок&quot; перед названием объекта/действия</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="287"/>
-        <location filename="../../GUI/EditorWindow.cpp" line="608"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="290"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="611"/>
         <source>Settings</source>
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="292"/>
-        <location filename="../../GUI/EditorWindow.cpp" line="569"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="295"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="572"/>
         <source>About</source>
         <translation>О программе</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="429"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="432"/>
         <source>Layout %1</source>
         <translation>Раскладка %1</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="740"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="747"/>
         <source>Extract hotkeys may take a long time.
 
 Are you sure to apply this action?</source>
         <translation>Извлечение горячих клавиш может занять много времени.
 
 Вы уверены, что хотите выполнить это действие?</translation>
+    </message>
+    <message>
+        <location filename="../../GUI/EditorWindow.cpp" line="785"/>
+        <source>Are you want to save changes before quit?</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&lt;p&gt;Authors: %1&lt;br&gt;Version: %2&lt;br&gt;&lt;br&gt;Program licensed with %3&lt;br&gt;&lt;br&gt;GitHub repository:&lt;br&gt;%4&lt;br&gt;&lt;br&gt;Support development:&lt;br&gt;%5&lt;/p&gt;</source>
@@ -151,64 +157,90 @@ Are you sure to apply this action?</source>
         <translation type="vanished">Поддержать разработку:</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="644"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="647"/>
         <source>Changes has been saved to the file:</source>
         <translation>Изменения были сохранены в файл:</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="660"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="667"/>
         <source>Saved as:</source>
         <translation>Сохранено как:</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="723"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="730"/>
         <source>Opening selected file</source>
         <translation>Открываем выбранный файл</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="730"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="737"/>
         <source>Opening game via link</source>
         <translation>Открываем игру по ссылке</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="739"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="746"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="784"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="744"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="751"/>
         <source>OK</source>
         <translation>ОК</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="745"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="752"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="791"/>
         <source>Cancel</source>
         <translation>Отмена</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="753"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="760"/>
         <source>Applying hotkey extraction...</source>
         <translation>Извлекаем горячие клавиши...</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="767"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="774"/>
         <source>Changing editor language</source>
         <translation>Изменяем язык редактора</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="669"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="676"/>
         <source>Binary files</source>
         <translation>Двоичные файлы</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="547"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="550"/>
         <source>&lt;p&gt;Authors: %1&lt;br&gt;Version: %2&lt;br&gt;Commit: %3&lt;br&gt;&lt;br&gt;Program licensed with %4&lt;br&gt;&lt;br&gt;GitHub repository:&lt;br&gt;%5&lt;br&gt;&lt;br&gt;Support development:&lt;br&gt;%6&lt;/p&gt;</source>
         <translation>&lt;p&gt;Авторы: %1&lt;br&gt;Версия: %2&lt;br&gt;Коммит: %3&lt;br&gt;&lt;br&gt;Программа лицензирована под %4&lt;br&gt;&lt;br&gt;Репозиторий на GitHub:&lt;br&gt;%5&lt;br&gt;&lt;br&gt;Поддержать разработку:&lt;br&gt;%6&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="670"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="677"/>
         <source>Any files</source>
         <translation>Все файлы</translation>
+    </message>
+    <message>
+        <location filename="../../../build/copy-to-game-check.cpp" line="131"/>
+        <source>Replace</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../build/copy-to-game-check.cpp" line="220"/>
+        <source>Copy To The Game</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../build/copy-to-game-check.cpp" line="221"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="790"/>
+        <source>Don&apos;t Save</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>EditorWindowWrapper</name>
+    <message>
+        <location filename="../../../build/unsaved-changes-check.cpp" line="128"/>
+        <source>Close without saving</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -322,11 +354,14 @@ Are you sure to apply this action?</source>
         <translation>Ошибка назначения</translation>
     </message>
     <message>
+        <location filename="../../../build/faction-language-check.cpp" line="14"/>
+        <location filename="../../../build/faction-localization-regression.cpp" line="61"/>
         <location filename="../../Core/ProgramConstants.hpp" line="148"/>
         <source>USA</source>
         <translation>США</translation>
     </message>
     <message>
+        <location filename="../../../build/faction-language-check.cpp" line="31"/>
         <location filename="../../Core/ProgramConstants.hpp" line="148"/>
         <source>United Stated Of America</source>
         <translation>Соединённые штаты Америки</translation>
