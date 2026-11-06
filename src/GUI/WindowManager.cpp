@@ -24,7 +24,7 @@ WindowManager::WindowManager()
     ApplyProfileStyleSheet(ProfileFolder);
 
     LOGMSG("Loading launch window...");
-    pStartUpWindow = new SetUpWindowsWrapper();
+    pStartUpWindow = new SetUpWindowsSwitcher();
     pStartUpWindow->setWindowTitle(strWindowName);
     LOGMSG("Launch window has been loaded");
 }

@@ -4,13 +4,13 @@
 #include "SelectProfileWindow.hpp"
 #include "SettingsWindow.hpp"
 
-class SetUpWindowsWrapper final : public QStackedWidget
+class SetUpWindowsSwitcher final : public QStackedWidget
 {
     Q_OBJECT
 private: // Data
-    SelectProfileWindow*   pSelectProfileWindow   = nullptr;
-    LoadWindow* pLoadWindow = nullptr;
-    SettingsWindow*        pSettingsWindow        = nullptr;
+    SelectProfileWindow*   pSelectProfileWindow = nullptr;
+    LoadWindow*            pLoadWindow          = nullptr;
+    SettingsWindow*        pSettingsWindow      = nullptr;
 
 private: // Methods
     /// @brief Connects slots and singals.
@@ -22,7 +22,7 @@ private: // Methods
     /// @brief Free heap from `SelectProfileWindow`, `LoadFromTheGameWindow`, `LoadWindow` data.
     void DeleteWidgets();
 public:
-    SetUpWindowsWrapper(QWidget* parent = nullptr);
+    SetUpWindowsSwitcher(QWidget* parent = nullptr);
 
 private slots:
     /// @brief Show `SeelectProfileWindow`, if button `Back` has been clicked.

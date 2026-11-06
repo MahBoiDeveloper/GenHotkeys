@@ -11,10 +11,10 @@
 class WindowManager final
 {
 private: // Data
-    SetUpWindowsWrapper* pStartUpWindow = nullptr;
-    QTranslator*         pAppTranslator = nullptr;
-    QString              strWindowName  = PROGRAM_CONSTANTS->COMMON_TITLE;
-    QString              strCSFFilePath = "";
+    SetUpWindowsSwitcher* pStartUpWindow = nullptr;
+    QTranslator*          pAppTranslator = nullptr;
+    QString               strWindowName  = PROGRAM_CONSTANTS->COMMON_TITLE;
+    QString               strCSFFilePath = "";
 public:
     inline static std::unique_ptr<WindowManager> Instance = nullptr;
     EditorWindowWrapper* pHotkeysEditor = nullptr;

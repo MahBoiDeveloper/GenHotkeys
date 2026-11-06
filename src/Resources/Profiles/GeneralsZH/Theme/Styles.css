@@ -148,7 +148,7 @@ QPushButton#btnOk
 }
 
 /* Start widgets and SettingsWindow style settings */
-SetUpWindowsWrapper, SelectProfileWindow, LoadWindow, SettingsWindow, QWidget#pSettingsWindow
+SetUpWindowsSwitcher, SelectProfileWindow, LoadWindow, SettingsWindow, QWidget#pSettingsWindow
 {
     border-image: url(Resources/Profiles/GeneralsZH/Theme/StartMenuBackground.webp) 0 0 0 0 stretch stretch;
     background-color: black;
