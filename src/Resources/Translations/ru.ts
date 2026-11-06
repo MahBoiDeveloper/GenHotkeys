@@ -512,37 +512,37 @@ Make sure that you are using only allowed symbols.</source>
         <translation>Язык:</translation>
     </message>
     <message>
-        <location filename="../../GUI/SettingsWindow.cpp" line="81"/>
+        <location filename="../../GUI/SettingsWindow.cpp" line="80"/>
         <source>SAVE</source>
         <translation>СОХРАНИТЬ</translation>
     </message>
     <message>
-        <location filename="../../GUI/SettingsWindow.cpp" line="85"/>
+        <location filename="../../GUI/SettingsWindow.cpp" line="84"/>
         <source>RESET ALL</source>
         <translation>СБРОСИТЬ ВСЁ</translation>
     </message>
     <message>
-        <location filename="../../GUI/SettingsWindow.cpp" line="89"/>
+        <location filename="../../GUI/SettingsWindow.cpp" line="88"/>
         <source>BACK</source>
         <translation>НАЗАД</translation>
     </message>
     <message>
-        <location filename="../../GUI/SettingsWindow.cpp" line="136"/>
+        <location filename="../../GUI/SettingsWindow.cpp" line="135"/>
         <source>Setting Apply Confirmation</source>
         <translation>Подтверждение применения настроек</translation>
     </message>
     <message>
-        <location filename="../../GUI/SettingsWindow.cpp" line="137"/>
+        <location filename="../../GUI/SettingsWindow.cpp" line="136"/>
         <source>You have selected settings that require a complete restart of the editor. Do you want to apply new settings and restart editor?</source>
         <translation>Вы выбрали настройки, которые требуют полного перезапуска редактора. Вы желаете применить новые настройки и перезапустить редактор?</translation>
     </message>
     <message>
-        <location filename="../../GUI/SettingsWindow.cpp" line="139"/>
+        <location filename="../../GUI/SettingsWindow.cpp" line="138"/>
         <source>YES</source>
         <translation>ДА</translation>
     </message>
     <message>
-        <location filename="../../GUI/SettingsWindow.cpp" line="140"/>
+        <location filename="../../GUI/SettingsWindow.cpp" line="139"/>
         <source>CANCEL</source>
         <translation>ОТМЕНА</translation>
     </message>

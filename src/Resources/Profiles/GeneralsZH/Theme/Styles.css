@@ -50,8 +50,11 @@ QComboBox::drop-down
 QComboBox::down-arrow { image: url(Resources/QtSources/ScrollArrowDown.webp); }
 QComboBox::up-arrow   { image: url(Resources/QtSources/ScrollArrowUp.webp); }
 
-/* ↓ Doesn't work */
-QComboBox#cmbLanguage { height: 25px; }
+QComboBox#cmbLanguage
+{
+    min-height: 1em;
+    padding: 1px 0px;
+}
 
 QCheckBox::indicator
 {
