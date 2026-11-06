@@ -9,7 +9,7 @@
 #include "../Core/Logger.hpp"
 #include "ImageManager.hpp"
 #include "WindowManager.hpp"
-#include "SetUpWindowsWrapper.hpp"
+#include "SetUpWindowsSwitcher.hpp"
 
 using namespace StringExt;
 

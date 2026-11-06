@@ -3,7 +3,7 @@
 
 #include "../Core/ProgramConstants.hpp"
 
-#include "SetUpWindowsWrapper.hpp"
+#include "SetUpWindowsSwitcher.hpp"
 #include "EditorWindowWrapper.hpp"
 
 #define WINDOW_MANAGER WindowManager::Instance
