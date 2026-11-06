@@ -627,7 +627,7 @@ void EditorWindow::ActSave_Triggered()
     CSF_PARSER->Save();
     LOGMSG("Changes has been saved");
 
-    pStatusBar->showMessage(tr("Changes has been saved to the file:") + " " + CSF_PARSER->Path, STATUS_BAR_TIMEOUT);
+    ShowStatusMessage(tr("Changes has been saved to the file:") + " " + CSF_PARSER->Path);
 }
 
 void EditorWindow::ActSaveAs_Triggered()
@@ -643,7 +643,7 @@ void EditorWindow::ActSaveAs_Triggered()
 void EditorWindow::ActSaveAs_SaveToSelectedFile(const QString& filepath)
 { 
     CSF_PARSER->Save(filepath);
-    pStatusBar->showMessage(tr("Saved as:") + " " + filepath, STATUS_BAR_TIMEOUT);
+    ShowStatusMessage(tr("Saved as:") + " " + filepath);
 }
 
 void EditorWindow::ActOpen_Triggered()
@@ -667,6 +667,16 @@ void EditorWindow::UpdateStatusBar(const Qt::CheckState& state)
     pStatusBar->setHidden(!bState);
 }
 
+void EditorWindow::ShowStatusMessage(const QString& message)
+{
+    const QString historyEntry = QString::number(statusMessages.size() + 1) + ". " + message;
+    statusMessages.append(historyEntry);
+    if (pEditorPages->currentWidget() == pStatusBarHistory)
+        pStatusBarHistory->appendPlainText(historyEntry);
+    pStatusBar->showMessage(message, STATUS_BAR_TIMEOUT);
+}
+
+
 void EditorWindow::ActEnableStatusBar_Triggered() { UpdateStatusBar(Qt::CheckState::Checked); }
 
 void EditorWindow::ActDisableStatusBar_Triggered() { UpdateStatusBar(Qt::CheckState::Unchecked); }
@@ -675,14 +685,14 @@ void EditorWindow::ActOpen_NewHotkeyFileSelected(const QString& filepath)
 {
     LOGMSG("Selected file: " + filepath);
     emit newHotkeyFileSelected(filepath);
-    pStatusBar->showMessage(tr("Opening selected file"), STATUS_BAR_TIMEOUT);
+    ShowStatusMessage(tr("Opening selected file"));
 }
 
 void EditorWindow::ActRunGame_Triggered() 
 {
     QString cmd = "steam://rungameid/"q + STEAM_MANAGER->GetAppID();
     LOGMSG("Opening game via link " + cmd);
-    pStatusBar->showMessage(tr("Opening game via link") + " " + cmd, STATUS_BAR_TIMEOUT);
+    ShowStatusMessage(tr("Opening game via link") + " " + cmd);
     auto status = ShellExecuteW(nullptr, L"open", cmd.toStdWString().c_str(), nullptr, nullptr, SW_SHOWNORMAL);
     LOGMSG("Returned status: " + reinterpret_cast<size_t>(status));
 }
@@ -705,7 +715,7 @@ void EditorWindow::ActExtractHotkey_Triggered()
     if (confirmation != QMessageBox::Ok)
         return;
 
-    pStatusBar->showMessage(tr("Applying hotkey extraction..."), STATUS_BAR_TIMEOUT);
+    ShowStatusMessage(tr("Applying hotkey extraction..."));
 
     CSF_PARSER->ExtractHotkeys(PROGRAM_CONSTANTS->HOTKEY_CSF_CATEGORY);
     ActSave_Triggered();
@@ -719,7 +729,7 @@ void EditorWindow::ActExtractHotkey_Triggered()
 void EditorWindow::SettingsWindow_LanguageChanged()
 {
     this->pSettingsWindow->close();
-    pStatusBar->showMessage(tr("Changing editor language"), STATUS_BAR_TIMEOUT);
+    ShowStatusMessage(tr("Changing editor language"));
     emit languageChanged();
 }
 

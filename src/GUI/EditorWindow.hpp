@@ -63,6 +63,8 @@ private:
     void Save();
     /// @brief Updates status bar after each setting change.
     void UpdateStatusBar(const Qt::CheckState& state);
+    /// @brief Shows a temporary status message and keeps it in the history.
+    void ShowStatusMessage(const QString& message);
 
 private slots:
     void KeyboardWindow_Update(int id = 0);
