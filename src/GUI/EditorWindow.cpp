@@ -9,7 +9,9 @@
 #include <QDialogButtonBox>
 #include <QVBoxLayout>
 #include <QComboBox>
+#include <QDir>
 #include <QFileDialog>
+#include <QFileInfo>
 #include <QMessageBox>
 #include <QMouseEvent>
 #include <QScrollBar>
@@ -275,15 +277,19 @@ void EditorWindow::ConfigureMenu()
     QMenu*   mnActions        = new QMenu(tr("Actions"));
     QAction* actRunGame       = new QAction(tr("Run Game"));
     QAction* actExtractHotkey = new QAction(tr("Exctract Hotkey"));
-    actRunGame->setToolTip(tr("Run game in Steam"));
-    actExtractHotkey->setToolTip(tr("Move hotkey to its \"island\" before object/action name"));
+    QAction* actMoveCSF       = new QAction(tr("Copy To The Game Folder"));
+    actRunGame->setToolTip(tr("Run game in Steam."));
+    actExtractHotkey->setToolTip(tr("Move hotkey to its \"island\" before object/action name."));
+    actMoveCSF->setToolTip(tr("Copy edited *.csf file to the game folder for test."));
     mnActions->setToolTipsVisible(true);
     mnActions->addAction(actRunGame);
     mnActions->addAction(actExtractHotkey);
+    mnActions->addAction(actMoveCSF);
     menuBar()->addMenu(mnActions);
 
     connect(actRunGame,       &QAction::triggered, this, &EditorWindow::ActRunGame_Triggered);
     connect(actExtractHotkey, &QAction::triggered, this, &EditorWindow::ActExtractHotkey_Triggered);
+    connect(actMoveCSF,       &QAction::triggered, this, &EditorWindow::ActCopyCSF_Triggered);
 
     // Settings
     QAction* actSettings = new QAction(tr("Settings"));
@@ -745,6 +751,79 @@ void EditorWindow::ActExtractHotkey_Triggered()
     SetHotkeysPanels();
     if (pHotkeysPanelsWidget != nullptr)
         pHotkeysPanelsWidget->setCurrentIndex(currentLayout);
+}
+
+void EditorWindow::ActCopyCSF_Triggered()
+{
+    if (WINDOW_MANAGER->pHotkeysEditor->hasDataChanged)
+    {
+        QMessageBox notification(
+            QMessageBox::Warning,
+            tr("Warning"),
+            tr("Are you want to save changes before copy current CSF file?"),
+            QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel,
+            this);
+        notification.setDefaultButton(QMessageBox::Cancel);
+        notification.setEscapeButton(QMessageBox::Cancel);
+        notification.button(QMessageBox::Save)->setText(tr("Save"));
+        notification.button(QMessageBox::Discard)->setText(tr("Don't Save"));
+        notification.button(QMessageBox::Cancel)->setText(tr("Cancel"));
+        notification.findChild<QDialogButtonBox*>()->setCenterButtons(true);
+
+        const auto status = notification.exec();
+
+        if (status == QMessageBox::Save)
+            ActSave_Triggered();
+        
+        if (status == QMessageBox::Cancel)
+            return;
+    }
+
+    const QString gamePath = ToQString(Windows::Registry::GetPathToGame(
+        WINDOW_MANAGER->ProfileFolder.split('/').value(2) == PROGRAM_CONSTANTS->G_FOLDER_NAME
+            ? Windows::Registry::Games::Generals
+            : Windows::Registry::Games::GeneralsZeroHour));
+
+    if (gamePath.isEmpty() || !QDir(gamePath).exists())
+    {
+        QMessageBox::critical(this, tr("Error"), tr("Unable to find the game folder inside the registry."));
+        return;
+    }
+
+    QString destination = QDir(gamePath).filePath(QDir::fromNativeSeparators(PROGRAM_CONSTANTS->BIG_ARCHIVE_CSF_PATH));
+    if (QFileInfo(destination).exists())
+    {
+        QMessageBox notification(
+            QMessageBox::Warning,
+            tr("Warning"),
+            destination + " " + tr("exists.\n\nAre you sure to rewrite it?"),
+            QMessageBox::Ok | QMessageBox::Cancel,
+            this);
+        notification.setDefaultButton(QMessageBox::Cancel);
+        notification.setEscapeButton(QMessageBox::Cancel);
+        notification.button(QMessageBox::Ok)->setText(tr("Yes"));
+        notification.button(QMessageBox::Cancel)->setText(tr("No"));
+        notification.findChild<QDialogButtonBox*>()->setCenterButtons(true);
+
+        const auto status = notification.exec();
+        
+        if (status == QMessageBox::Cancel)
+            return;
+    }
+
+    if (!destination.compare(ToQString(CSF_PARSER->Path), Qt::CaseInsensitive))
+    {
+        LOGMSG("CSF copy stopped because user copy the file from " + PROGRAM_CONSTANTS->BIG_ARCHIVE_CSF_PATH);
+        LOGMSG("CSF_PARSER->Path: " + CSF_PARSER->Path);
+        LOGMSG("destination:      " + destination);
+        ShowStatusMessage(tr("Unable to copy file that have been open from the game folder."));
+        return;
+    }
+
+    QFile(ToQString(CSF_PARSER->Path)).copy(destination);
+
+    LOGMSG("Copied CSF file to " + destination);
+    ShowStatusMessage(tr("Copied CSF file to:") + " " + destination);
 }
 
 void EditorWindow::SettingsWindow_LanguageChanged()
