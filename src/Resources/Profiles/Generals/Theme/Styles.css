@@ -180,7 +180,8 @@ QPushButton[faction="PRC"]:pressed:hover { background-color: #e74135; color: #ba
 /* QPushButton[faction="USA"] already defined as basic non-property */
 /* If you want to change -- copy and edit styles down below */
 
-EditorWindow QTreeWidget, EditorWindow QTabWidget, EditorWindow QScrollArea, EditorWindow QStatusBar
+EditorWindow QTreeWidget, EditorWindow QTabWidget, EditorWindow QScrollArea, EditorWindow QStatusBar,
+EditorWindow QPlainTextEdit#pStatusBarHistory
 {
     background: rgba(0, 0, 0, 0.7);
     border-radius: 3px;
@@ -332,7 +333,7 @@ QScrollArea#Keyboard QPushButton[key="null"]
     border-color: rgba(0, 0, 0, 0);
 }
 
-QStatusBar
+QStatusBar, QPlainTextEdit#pStatusBarHistory
 {
     font-family: Calibri;
     font-weight: bold;

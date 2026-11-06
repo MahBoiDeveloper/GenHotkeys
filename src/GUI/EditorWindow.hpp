@@ -5,6 +5,9 @@
 #include <QButtonGroup>
 #include <QHBoxLayout>
 #include <QStatusBar>
+#include <QPlainTextEdit>
+#include <QStackedWidget>
+#include <QStringList>
 
 #include "../Parsers/JSONFile.hpp"
 #include "ActionHotkeyWidget.hpp"
@@ -31,9 +34,12 @@ private: // Data
     QScrollArea*  pKeyboardWindow       = nullptr;
 
     // Specific windows
-    QDialog*      pAboutDialog          = nullptr;
-    QWidget*      pSettingsWindow       = nullptr;
-    QStatusBar*   pStatusBar            = nullptr;
+    QDialog*        pAboutDialog        = nullptr;
+    QWidget*        pSettingsWindow     = nullptr;
+    QStatusBar*     pStatusBar          = nullptr;
+    QPlainTextEdit* pStatusBarHistory   = nullptr;
+    QStackedWidget* pEditorPages        = nullptr;
+    QStringList     statusMessages;
 
     // Current possible hotkeys layout
     QTabWidget*   pHotkeysPanelsWidget  = nullptr;
@@ -65,6 +71,8 @@ private:
     void UpdateStatusBar(const Qt::CheckState& state);
     /// @brief Shows a temporary status message and keeps it in the history.
     void ShowStatusMessage(const QString& message);
+    /// @brief Toggles the status history on a left-button double click.
+    bool eventFilter(QObject* watched, QEvent* event) override;
 
 private slots:
     void KeyboardWindow_Update(int id = 0);

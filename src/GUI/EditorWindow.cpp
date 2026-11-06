@@ -11,6 +11,8 @@
 #include <QComboBox>
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QMouseEvent>
+#include <QScrollBar>
 
 #include "../Extensions/ExceptionExt.hpp"
 #include "../Extensions/BoolExt.hpp"
@@ -200,6 +202,13 @@ EditorWindow::EditorWindow(QWidget* parent)
 
     pStatusBar->setSizeGripEnabled(false);
     pStatusBar->setHidden(!PROGRAM_CONSTANTS->pSettingsFile->IsStatusBarEnabled());
+    pStatusBar->installEventFilter(this);
+
+    pStatusBarHistory = new QPlainTextEdit();
+    pStatusBarHistory->setObjectName(nameof(pStatusBarHistory));
+    pStatusBarHistory->setReadOnly(true);
+    pStatusBarHistory->installEventFilter(this);
+    pStatusBarHistory->viewport()->installEventFilter(this);
 
     QVBoxLayout* ltMain = new QVBoxLayout();
     ltMain->addLayout(ltFactions);
@@ -207,9 +216,14 @@ EditorWindow::EditorWindow(QWidget* parent)
     ltMain->addWidget(pStatusBar);
 
     // Main widget
-    QWidget* centralWidget = new QWidget();
-    centralWidget->setLayout(ltMain);
-    setCentralWidget(centralWidget);
+    QWidget* editorContent = new QWidget();
+    editorContent->setLayout(ltMain);
+    pEditorPages = new QStackedWidget();
+    pEditorPages->setContentsMargins(ltMain->contentsMargins());
+    ltMain->setContentsMargins(0, 0, 0, 0);
+    pEditorPages->addWidget(editorContent);
+    pEditorPages->addWidget(pStatusBarHistory);
+    setCentralWidget(pEditorPages);
 
     // Set start faction
     const auto firstFactionButton = pFactionsButtonsGroup->button(BUTTONS_GROUP_START_ID);
@@ -664,6 +678,8 @@ void EditorWindow::UpdateStatusBar(const Qt::CheckState& state)
     bool bState = ToBool(state);
     PROGRAM_CONSTANTS->pSettingsFile->SetStatusBarStatus(state);
     PROGRAM_CONSTANTS->pSettingsFile->Save();
+    if (!bState)
+        pEditorPages->setCurrentIndex(0);
     pStatusBar->setHidden(!bState);
 }
 
@@ -676,6 +692,25 @@ void EditorWindow::ShowStatusMessage(const QString& message)
     pStatusBar->showMessage(message, STATUS_BAR_TIMEOUT);
 }
 
+bool EditorWindow::eventFilter(QObject* watched, QEvent* event)
+{
+    if ((watched == pStatusBar || watched == pStatusBarHistory || watched == pStatusBarHistory->viewport())
+        && event->type() == QEvent::MouseButtonDblClick
+        && static_cast<QMouseEvent*>(event)->button() == Qt::LeftButton
+        && pStatusBar->isEnabled() && !pStatusBar->isHidden())
+    {
+        const bool expand = pEditorPages->currentIndex() == 0;
+        pEditorPages->setCurrentIndex(expand ? 1 : 0);
+        if (expand)
+        {
+            pStatusBarHistory->setPlainText(statusMessages.join('\n'));
+            auto* scrollBar = pStatusBarHistory->verticalScrollBar();
+            scrollBar->setValue(scrollBar->maximum());
+        }
+        return true;
+    }
+    return QMainWindow::eventFilter(watched, event);
+}
 
 void EditorWindow::ActEnableStatusBar_Triggered() { UpdateStatusBar(Qt::CheckState::Checked); }
 
