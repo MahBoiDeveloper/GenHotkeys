@@ -39,7 +39,7 @@ public:
     /// @brief Set CSF file path. Uses if in `LoadWindow` file has been set.
     void SetCSFFilePath(const QString& filepath);
     /// @brief Reinitialize CSF parser and editor window when new CSF/BIG file has been selected.
-    void EditorWindow_NewHotkeyFileSelected();
+    void EditorWindow_NewHotkeyFileSelected(const QString& filepath);
     /// @brief Return CSF file path. Uses if in `LoadWindow` file has been set.
     void StartUpWindow_AcceptConfiguration();
     /// @brief Initialize TechTree.json parsing by Generals profile.

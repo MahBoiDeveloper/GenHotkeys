@@ -1,3 +1,5 @@
+#include <QCloseEvent>
+
 #include "EditorWindowWrapper.hpp"
 #include "WindowManager.hpp"
 
@@ -55,8 +57,15 @@ void EditorWindowWrapper::EditorWindow_LanguageChanged()
 
 void EditorWindowWrapper::EditorWindow_NewHotkeyFileSelected(const QString& filepath)
 {
-    WINDOW_MANAGER->SetCSFFilePath(filepath);
-    WINDOW_MANAGER->EditorWindow_NewHotkeyFileSelected();
+    WINDOW_MANAGER->EditorWindow_NewHotkeyFileSelected(filepath);
+}
+
+void EditorWindowWrapper::closeEvent(QCloseEvent* event)
+{
+    if (pEditorWindow->ConfirmClose())
+        event->accept();
+    else
+        event->ignore();
 }
 
 void EditorWindowWrapper::EditorWindow_CloseEditor() { close(); }

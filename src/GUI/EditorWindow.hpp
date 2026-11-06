@@ -49,6 +49,8 @@ private: // Data
 
 public: // Methods
     EditorWindow(QWidget* parent = nullptr);
+    /// @brief Asks whether unsaved changes should be saved and allows closing.
+    bool ConfirmClose();
 
 private:
     /// @brief Set context menu bar functions and logics.
@@ -76,8 +78,6 @@ private:
 
 private slots:
     void KeyboardWindow_Update(int id = 0);
-    
-    void ClosingWindow();
 
     void ActAbout_Triggered();
     void ActSettings_Triggered();

@@ -19,6 +19,8 @@ private: // Methods
     void AddWidgets();
 public:
     EditorWindowWrapper(QWidget* parent = nullptr);
+protected:
+    void closeEvent(QCloseEvent* event) override;
 public slots:
     void EditorWindow_CloseEditor();
     void EditorWindow_LanguageChanged();

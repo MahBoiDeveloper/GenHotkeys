@@ -230,7 +230,6 @@ EditorWindow::EditorWindow(QWidget* parent)
     if (firstFactionButton != nullptr)
         firstFactionButton->click();
 
-    connect(this, &QMainWindow::close, this, &EditorWindow::ClosingWindow);
 }
 
 void EditorWindow::ConfigureMenu()
@@ -775,7 +774,7 @@ void EditorWindow::SettingsWindow_LanguageChanged()
     emit languageChanged();
 }
 
-void EditorWindow::ClosingWindow()
+bool EditorWindow::ConfirmClose()
 {
     if (WINDOW_MANAGER->pHotkeysEditor->hasDataChanged)
     {
@@ -783,26 +782,25 @@ void EditorWindow::ClosingWindow()
             QMessageBox::Warning,
             tr("Warning"),
             tr("Are you want to save changes before quit?"),
-            QMessageBox::Ok | QMessageBox::Cancel,
+            QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel,
             this);
         confirmationDialog.setDefaultButton(QMessageBox::Cancel);
-        confirmationDialog.button(QMessageBox::Default)->setText(tr("Save"));
-        confirmationDialog.button(QMessageBox::Ok)->setText(tr("Don't Save"));
+        confirmationDialog.setEscapeButton(QMessageBox::Cancel);
+        confirmationDialog.button(QMessageBox::Save)->setText(tr("Save"));
+        confirmationDialog.button(QMessageBox::Discard)->setText(tr("Don't Save"));
         confirmationDialog.button(QMessageBox::Cancel)->setText(tr("Cancel"));
         confirmationDialog.findChild<QDialogButtonBox*>()->setCenterButtons(true);
 
         const auto confirmation = confirmationDialog.exec();
 
-        if (confirmation == QMessageBox::Cancel)
-            return;
-
-        if (confirmation == QMessageBox::Default)
-        {
-            ActSave_Triggered();   
-        }
+        if (confirmation == QMessageBox::Save)
+            ActSave_Triggered();
+        
+        if (confirmation != QMessageBox::Discard)
+            return false;
     }
 
-    close();
+    return true;
 }
 
 #pragma endregion
