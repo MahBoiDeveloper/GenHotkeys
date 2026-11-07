@@ -39,7 +39,7 @@
     <message>
         <location filename="../../GUI/EditorWindow.cpp" line="242"/>
         <location filename="../../GUI/EditorWindow.cpp" line="768"/>
-        <location filename="../../GUI/EditorWindow.cpp" line="849"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="858"/>
         <source>Save</source>
         <translation>Сохранить</translation>
     </message>
@@ -115,12 +115,12 @@ Are you sure to apply this action?</source>
 Вы уверены, что хотите выполнить это действие?</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="819"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="817"/>
         <source>Unable to copy file that have been open from the game folder.</source>
         <translation>Невозможно скопировать файл, который был открыт из папки игры</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="844"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="853"/>
         <source>Are you want to save changes before quit?</source>
         <translation>Вы хотите сохранить изменения перед выходом?</translation>
     </message>
@@ -153,7 +153,7 @@ Are you sure to apply this action?</source>
         <location filename="../../GUI/EditorWindow.cpp" line="731"/>
         <location filename="../../GUI/EditorWindow.cpp" line="762"/>
         <location filename="../../GUI/EditorWindow.cpp" line="798"/>
-        <location filename="../../GUI/EditorWindow.cpp" line="843"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="852"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
@@ -165,7 +165,7 @@ Are you sure to apply this action?</source>
     <message>
         <location filename="../../GUI/EditorWindow.cpp" line="737"/>
         <location filename="../../GUI/EditorWindow.cpp" line="770"/>
-        <location filename="../../GUI/EditorWindow.cpp" line="851"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="860"/>
         <source>Cancel</source>
         <translation>Отмена</translation>
     </message>
@@ -209,12 +209,12 @@ Are you sure to rewrite it?</source>
         <translation>Нет</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="827"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="836"/>
         <source>Copied CSF file to:</source>
         <translation>CSF файл скопирован в:</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="833"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="842"/>
         <source>Changing editor language</source>
         <translation>Изменяем язык редактора</translation>
     </message>
@@ -250,7 +250,7 @@ Are you sure to rewrite it?</source>
     </message>
     <message>
         <location filename="../../GUI/EditorWindow.cpp" line="769"/>
-        <location filename="../../GUI/EditorWindow.cpp" line="850"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="859"/>
         <source>Don&apos;t Save</source>
         <translation>Не сохранять</translation>
     </message>

@@ -811,17 +811,26 @@ void EditorWindow::ActCopyCSF_Triggered()
             return;
     }
 
-    if (!destination.compare(ToQString(CSF_PARSER->Path), Qt::CaseInsensitive))
+    if (!destination.replace("/", "\\").compare(ToQString(CSF_PARSER->Path).replace("/", "\\"), Qt::CaseInsensitive))
     {
         LOGMSG("CSF copy stopped because user copy the file from " + PROGRAM_CONSTANTS->BIG_ARCHIVE_CSF_PATH);
-        LOGMSG("CSF_PARSER->Path: " + CSF_PARSER->Path);
-        LOGMSG("destination:      " + destination);
         ShowStatusMessage(tr("Unable to copy file that have been open from the game folder."));
         return;
     }
 
-    QFile(destination).remove();
-    QFile(ToQString(CSF_PARSER->Path)).copy(destination);
+    LOGMSG("CSF_PARSER->Path: " + CSF_PARSER->Path);
+    LOGMSG("destination:      " + destination);
+
+    QString source = ToQString(CSF_PARSER->Path);
+    if (!QFileInfo(source).suffix().compare("big", Qt::CaseInsensitive))
+    {
+        CSF_PARSER->Save(destination.toStdWString());
+    }
+    else
+    {
+        QFile(destination).remove();
+        QFile(source).copy(destination);
+    }
 
     LOGMSG("Copied CSF file to " + destination);
     ShowStatusMessage(tr("Copied CSF file to:") + " " + destination);
