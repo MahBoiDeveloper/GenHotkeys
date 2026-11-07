@@ -820,6 +820,7 @@ void EditorWindow::ActCopyCSF_Triggered()
         return;
     }
 
+    QFile(destination).remove();
     QFile(ToQString(CSF_PARSER->Path)).copy(destination);
 
     LOGMSG("Copied CSF file to " + destination);

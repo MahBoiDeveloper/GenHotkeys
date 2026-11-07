@@ -39,7 +39,7 @@
     <message>
         <location filename="../../GUI/EditorWindow.cpp" line="242"/>
         <location filename="../../GUI/EditorWindow.cpp" line="768"/>
-        <location filename="../../GUI/EditorWindow.cpp" line="848"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="849"/>
         <source>Save</source>
         <translation>Сохранить</translation>
     </message>
@@ -132,7 +132,7 @@ Are you sure to apply this action?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="843"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="844"/>
         <source>Are you want to save changes before quit?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -189,7 +189,7 @@ Are you sure to apply this action?</source>
         <location filename="../../GUI/EditorWindow.cpp" line="731"/>
         <location filename="../../GUI/EditorWindow.cpp" line="762"/>
         <location filename="../../GUI/EditorWindow.cpp" line="798"/>
-        <location filename="../../GUI/EditorWindow.cpp" line="842"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="843"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
@@ -201,7 +201,7 @@ Are you sure to apply this action?</source>
     <message>
         <location filename="../../GUI/EditorWindow.cpp" line="737"/>
         <location filename="../../GUI/EditorWindow.cpp" line="770"/>
-        <location filename="../../GUI/EditorWindow.cpp" line="850"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="851"/>
         <source>Cancel</source>
         <translation>Отмена</translation>
     </message>
@@ -243,12 +243,12 @@ Are you sure to rewrite it?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="826"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="827"/>
         <source>Copied CSF file to:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="832"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="833"/>
         <source>Changing editor language</source>
         <translation>Изменяем язык редактора</translation>
     </message>
@@ -295,7 +295,7 @@ Are you sure to rewrite it?</source>
     <message>
         <location filename="../../../build/copy-to-game-check.cpp" line="221"/>
         <location filename="../../GUI/EditorWindow.cpp" line="769"/>
-        <location filename="../../GUI/EditorWindow.cpp" line="849"/>
+        <location filename="../../GUI/EditorWindow.cpp" line="850"/>
         <source>Don&apos;t Save</source>
         <translation type="unfinished"></translation>
     </message>
