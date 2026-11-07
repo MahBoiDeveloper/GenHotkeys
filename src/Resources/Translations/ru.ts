@@ -49,10 +49,6 @@
         <translation>Сохранить как...</translation>
     </message>
     <message>
-        <source>Special</source>
-        <translation type="vanished">Дополнительно</translation>
-    </message>
-    <message>
         <location filename="../../GUI/EditorWindow.cpp" line="244"/>
         <source>Close</source>
         <translation>Закрыть</translation>
@@ -93,14 +89,6 @@
         <translation>Извлечь горячие клавиши</translation>
     </message>
     <message>
-        <source>Run game in Steam</source>
-        <translation type="vanished">Запустить игру в Steam</translation>
-    </message>
-    <message>
-        <source>Move hotkey to its &quot;island&quot; before object/action name</source>
-        <translation type="vanished">Сместить горячие клавиши в &quot;островок&quot; перед названием объекта/действия</translation>
-    </message>
-    <message>
         <location filename="../../GUI/EditorWindow.cpp" line="295"/>
         <location filename="../../GUI/EditorWindow.cpp" line="616"/>
         <source>Settings</source>
@@ -129,41 +117,17 @@ Are you sure to apply this action?</source>
     <message>
         <location filename="../../GUI/EditorWindow.cpp" line="819"/>
         <source>Unable to copy file that have been open from the game folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно скопировать файл, который был открыт из папки игры</translation>
     </message>
     <message>
         <location filename="../../GUI/EditorWindow.cpp" line="844"/>
         <source>Are you want to save changes before quit?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Authors: %1&lt;br&gt;Version: %2&lt;br&gt;&lt;br&gt;Program licensed with %3&lt;br&gt;&lt;br&gt;GitHub repository:&lt;br&gt;%4&lt;br&gt;&lt;br&gt;Support development:&lt;br&gt;%5&lt;/p&gt;</source>
-        <translation type="vanished">&lt;p&gt;Авторы: %1&lt;br&gt;Версия: %2&lt;br&gt;&lt;br&gt;Программа лицензирована под %3&lt;br&gt;&lt;br&gt;Репозиторий на GitHub:&lt;br&gt;%4&lt;br&gt;&lt;br&gt;Поддержать разработку:&lt;br&gt;%5&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <source>Authors: </source>
-        <translation type="vanished">Авторы: </translation>
-    </message>
-    <message>
-        <source>Version: </source>
-        <translation type="vanished">Версия: </translation>
-    </message>
-    <message>
-        <source>Program licensed with </source>
-        <translation type="vanished">Программа лицензирована под </translation>
-    </message>
-    <message>
-        <source>GitHub repository:</source>
-        <translation type="vanished">Репозиторий на GitHub:</translation>
-    </message>
-    <message>
-        <source>Support development:</source>
-        <translation type="vanished">Поддержать разработку:</translation>
+        <translation>Вы хотите сохранить изменения перед выходом?</translation>
     </message>
     <message>
         <location filename="../../GUI/EditorWindow.cpp" line="280"/>
         <source>Copy To The Game Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Скопировать в папку игры</translation>
     </message>
     <message>
         <location filename="../../GUI/EditorWindow.cpp" line="652"/>
@@ -213,39 +177,41 @@ Are you sure to apply this action?</source>
     <message>
         <location filename="../../GUI/EditorWindow.cpp" line="763"/>
         <source>Are you want to save changes before copy current CSF file?</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы хотите сохранить изменения в текущем CSF файле?</translation>
     </message>
     <message>
         <location filename="../../GUI/EditorWindow.cpp" line="789"/>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка</translation>
     </message>
     <message>
         <location filename="../../GUI/EditorWindow.cpp" line="789"/>
         <source>Unable to find the game folder inside the registry.</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно найти игру в реестре.</translation>
     </message>
     <message>
         <location filename="../../GUI/EditorWindow.cpp" line="799"/>
         <source>exists.
 
 Are you sure to rewrite it?</source>
-        <translation type="unfinished"></translation>
+        <translation>существует.
+
+Вы хотите перезаписать файл?</translation>
     </message>
     <message>
         <location filename="../../GUI/EditorWindow.cpp" line="804"/>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Да</translation>
     </message>
     <message>
         <location filename="../../GUI/EditorWindow.cpp" line="805"/>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет</translation>
     </message>
     <message>
         <location filename="../../GUI/EditorWindow.cpp" line="827"/>
         <source>Copied CSF file to:</source>
-        <translation type="unfinished"></translation>
+        <translation>CSF файл скопирован в:</translation>
     </message>
     <message>
         <location filename="../../GUI/EditorWindow.cpp" line="833"/>
@@ -260,17 +226,17 @@ Are you sure to rewrite it?</source>
     <message>
         <location filename="../../GUI/EditorWindow.cpp" line="281"/>
         <source>Run game in Steam.</source>
-        <translation type="unfinished"></translation>
+        <translation>Запстить игру в Steam</translation>
     </message>
     <message>
         <location filename="../../GUI/EditorWindow.cpp" line="282"/>
         <source>Move hotkey to its &quot;island&quot; before object/action name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Сместить горячие клавиши в &quot;островок&quot; перед названием объекта/действия.</translation>
     </message>
     <message>
         <location filename="../../GUI/EditorWindow.cpp" line="283"/>
         <source>Copy edited *.csf file to the game folder for test.</source>
-        <translation type="unfinished"></translation>
+        <translation>Скопировать изменённый файл *.csf в папку игры для проверки.</translation>
     </message>
     <message>
         <location filename="../../GUI/EditorWindow.cpp" line="555"/>
@@ -283,55 +249,10 @@ Are you sure to rewrite it?</source>
         <translation>Все файлы</translation>
     </message>
     <message>
-        <location filename="../../../build/copy-to-game-check.cpp" line="131"/>
-        <source>Replace</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../build/copy-to-game-check.cpp" line="220"/>
-        <source>Copy To The Game</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../build/copy-to-game-check.cpp" line="221"/>
         <location filename="../../GUI/EditorWindow.cpp" line="769"/>
         <location filename="../../GUI/EditorWindow.cpp" line="850"/>
         <source>Don&apos;t Save</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>EditorWindowWrapper</name>
-    <message>
-        <location filename="../../../build/unsaved-changes-check.cpp" line="128"/>
-        <source>Close without saving</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>GreetingWindow</name>
-    <message>
-        <source>LOAD FROM</source>
-        <translation type="vanished">ЗАГРУЗИТЬ</translation>
-    </message>
-    <message>
-        <source>THE GAME</source>
-        <translation type="vanished">ИЗ ИГРЫ</translation>
-    </message>
-    <message>
-        <source>THE FILE</source>
-        <translation type="vanished">ИЗ ФАЙЛА</translation>
-    </message>
-</context>
-<context>
-    <name>LoadFromTheGameWindow</name>
-    <message>
-        <source>START</source>
-        <translation type="vanished">НАЧАТЬ</translation>
-    </message>
-    <message>
-        <source>BACK</source>
-        <translation type="vanished">НАЗАД</translation>
+        <translation>Не сохранять</translation>
     </message>
 </context>
 <context>
@@ -390,10 +311,6 @@ Are you sure to rewrite it?</source>
         <translation>Невозможно найти указанный CSF файл.</translation>
     </message>
     <message>
-        <source></source>
-        <translation></translation>
-    </message>
-    <message>
         <location filename="../../Core/ProgramConstants.hpp" line="104"/>
         <source>Choosen CSF file doesn&apos;t have CONTROLBAR category. Make sure that you are load correct file.</source>
         <translation>У выбранного CSF файла отсутствует категория CONTROLBAR. Проверьте, что вы загружаете правильный файл.</translation>
@@ -419,14 +336,11 @@ Are you sure to rewrite it?</source>
         <translation>Ошибка назначения</translation>
     </message>
     <message>
-        <location filename="../../../build/faction-language-check.cpp" line="14"/>
-        <location filename="../../../build/faction-localization-regression.cpp" line="61"/>
         <location filename="../../Core/ProgramConstants.hpp" line="148"/>
         <source>USA</source>
         <translation>США</translation>
     </message>
     <message>
-        <location filename="../../../build/faction-language-check.cpp" line="31"/>
         <location filename="../../Core/ProgramConstants.hpp" line="148"/>
         <source>United Stated Of America</source>
         <translation>Соединённые штаты Америки</translation>
@@ -584,10 +498,6 @@ Make sure that you are using only allowed symbols.</source>
         <translation>Включить отладочную консоль</translation>
     </message>
     <message>
-        <source>Enable Discord RPC (WIP)</source>
-        <translation type="vanished">Включить Discord RPC (WIP)</translation>
-    </message>
-    <message>
         <location filename="../../GUI/SettingsWindow.cpp" line="48"/>
         <source>Enable Steam Integration</source>
         <translation>Включить интеграцию со Steam</translation>
@@ -596,10 +506,6 @@ Make sure that you are using only allowed symbols.</source>
         <location filename="../../GUI/SettingsWindow.cpp" line="54"/>
         <source>Force editor to use system language on start up</source>
         <translation>Использовать язык системы при запуске</translation>
-    </message>
-    <message>
-        <source>Enable status bar</source>
-        <translation type="vanished">Включить строку состояния</translation>
     </message>
     <message>
         <location filename="../../GUI/SettingsWindow.cpp" line="42"/>
