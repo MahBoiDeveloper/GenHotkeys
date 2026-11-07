@@ -226,7 +226,7 @@ Are you sure to rewrite it?</source>
     <message>
         <location filename="../../GUI/EditorWindow.cpp" line="281"/>
         <source>Run game in Steam.</source>
-        <translation>Запстить игру в Steam</translation>
+        <translation>Запстить игру в Steam.</translation>
     </message>
     <message>
         <location filename="../../GUI/EditorWindow.cpp" line="282"/>
