@@ -3,8 +3,13 @@
 #include "EditorWindowWrapper.hpp"
 #include "WindowManager.hpp"
 
-EditorWindowWrapper::EditorWindowWrapper(QWidget* parent) : QStackedWidget(parent)
+EditorWindowWrapper::EditorWindowWrapper(QWidget* parent) : QStackedWidget(parent), editHistory{this}
 {
+    connect(&editHistory, &QUndoStack::cleanChanged, this, [this](bool clean)
+    {
+        hasDataChanged = !clean;
+        setWindowModified(hasDataChanged);
+    });
     resize(PROGRAM_CONSTANTS->EDITOR_INITIAL_WINDOW_SIZE);
     AddWidgets();
     setCurrentWidget(pEditorWindow);
@@ -13,7 +18,7 @@ EditorWindowWrapper::EditorWindowWrapper(QWidget* parent) : QStackedWidget(paren
 
 void EditorWindowWrapper::AddWidgets()
 {
-    pEditorWindow = new EditorWindow();
+    pEditorWindow = new EditorWindow(&editHistory);
     addWidget(pEditorWindow);
 }
 

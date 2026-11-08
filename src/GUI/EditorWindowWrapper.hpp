@@ -1,11 +1,13 @@
 #pragma once
 #include <QStackedWidget>
+#include <QUndoStack>
 #include "EditorWindow.hpp"
 
 class EditorWindowWrapper final : public QStackedWidget
 {
     Q_OBJECT
 private: // Data
+    QUndoStack    editHistory;
     EditorWindow* pEditorWindow  = nullptr;
 public:
     bool          hasDataChanged = false;

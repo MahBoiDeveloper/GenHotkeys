@@ -8,6 +8,7 @@
 #include <QPlainTextEdit>
 #include <QStackedWidget>
 #include <QStringList>
+#include <QUndoStack>
 
 #include "../Parsers/JSONFile.hpp"
 #include "ActionHotkeyWidget.hpp"
@@ -40,6 +41,7 @@ private: // Data
     QPlainTextEdit* pStatusBarHistory   = nullptr;
     QStackedWidget* pEditorPages        = nullptr;
     QStringList     statusMessages;
+    QUndoStack*     pEditHistory;
 
     // Current possible hotkeys layout
     QTabWidget*   pHotkeysPanelsWidget  = nullptr;
@@ -48,7 +50,7 @@ private: // Data
     QVector<QSet<ActionHotkeyWidget*>> vHotkeyWidgets;
 
 public: // Methods
-    EditorWindow(QWidget* parent = nullptr);
+    EditorWindow(QUndoStack* editHistory, QWidget* parent = nullptr);
     /// @brief Asks whether unsaved changes should be saved and allows closing.
     bool ConfirmClose();
 
@@ -63,8 +65,10 @@ private:
     void HighlightCurrentKeys();
     /// @brief Set key's styles on keyboard block to property `status=null`.
     void KeyboardWindow_Nullify();
-    /// @brief Replace current action assigned hotkey with new one.
-    void SetActionHotkey(const QString& fctShortName, const QString& goName, const QString& actName, const QString& hk);
+    /// @brief Records an actual edit as one undoable change.
+    void RecordStringChange(const QString& label, const QString& value);
+    /// @brief Refreshes all visible copies of actions and keyboard highlighting.
+    void RefreshEditedActions();
     /// @brief Creates line of keys for keyboard layout.
     QHBoxLayout* CreateKeysOnKeyboard(const QString& str);
     /// @brief Saves changes into CSF file.
@@ -83,6 +87,8 @@ private slots:
     void ActSettings_Triggered();
     void ActSave_Triggered();
     void ActSaveAs_Triggered();
+    void ActUndo_Triggered();
+    void ActRedo_Triggered();
     void ActOpen_Triggered();
     void ActClose_Triggered();
     void ActEnableStatusBar_Triggered();

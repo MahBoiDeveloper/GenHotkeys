@@ -3,6 +3,7 @@
 #include <QAction>
 #include <QKeyEvent>
 #include <QMessageBox>
+#include <QSignalBlocker>
 
 #include "../Extensions/L10NExt.hpp"
 #include "../Parsers/CSFParser.hpp"
@@ -71,6 +72,24 @@ ActionHotkeyWidget::ActionHotkeyWidget(const QString& csfString,
 
 QString ActionHotkeyWidget::GetActionName() const { return lblActionName.text(); }
 QString ActionHotkeyWidget::GetHotkey()     const { return btnHotkey.text(); }
+
+void ActionHotkeyWidget::RefreshFromParser()
+{
+    signalTimer.stop();
+    const QSignalBlocker blocker(txtActionName);
+    const QString value = CSF_PARSER->GetStringValue(csfLabelName);
+    hotkey = TextParser::GetHotkey(value);
+    actionName = TextParser::GetClearActionName(value);
+    lblActionName.show();
+    txtActionName->hide();
+    lblActionName.setText(actionName);
+    txtActionName->setText(value);
+    btnHotkey.setText(hotkey);
+    QFont font = btnHotkey.font();
+    font.setItalic(false);
+    btnHotkey.setFont(font);
+    setToolTip(csfLabelName + "\n\n" + value);
+}
 
 void ActionHotkeyWidget::HighlightKey(bool isKeysMoreThanTwo)
 {
@@ -153,7 +172,7 @@ void ActionHotkeyWidget::keyPressEvent(QKeyEvent* event)
             // Update CSF and widget's fields
             hotkey = ch;
             actionName = TextParser::GetClearActionName(txtActionName->text());
-            CSF_PARSER->SetStringValue(csfLabelName.toStdString(), txtActionName->text().toStdWString());
+            emit StringChangeRequested(csfLabelName, txtActionName->text());
             
             // Update widget's UI
             HideActionLabel(false);
@@ -184,7 +203,7 @@ void ActionHotkeyWidget::keyPressEvent(QKeyEvent* event)
         lblActionName.setText(TextParser::GetClearActionName(txt));
         txtActionName->setText(txt);
         setToolTip(csfLabelName + "\n\n" + txtActionName->text());
-        CSF_PARSER->SetStringValue(csfLabelName.toStdString(), TextParser::SetHotkey(CSF_PARSER->GetStringValue(csfLabelName), hotkey.at(0)).toStdWString());
+        emit StringChangeRequested(csfLabelName, TextParser::SetHotkey(CSF_PARSER->GetStringValue(csfLabelName), hotkey.at(0)));
         
         // If the key is correct -> disconnect the input error reset signal
         disconnect(this, &ActionHotkeyWidget::RepeatButtonTimerSignal, this, &ActionHotkeyWidget::BtnHotkey_Clicked);

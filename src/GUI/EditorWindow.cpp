@@ -32,6 +32,7 @@
 #include "WindowManager.hpp"
 #include "SettingsWindow.hpp"
 #include "EditorWindow.hpp"
+#include "EditStringsCommand.hpp"
 
 using namespace StringExt;
 using namespace BoolExt;
@@ -41,20 +42,22 @@ inline int operator+(Qt::Modifier mod, Qt::Key key) { return (static_cast<int>(m
 
 #pragma region CTORs and Setters
 
-EditorWindow::EditorWindow(QWidget* parent)
+EditorWindow::EditorWindow(QUndoStack* editHistory, QWidget* parent)
     : QMainWindow(parent)
     , pFactionsButtonsGroup{new QButtonGroup{this}}
     , pEntitiesTreeWidget{new QTreeWidget}
     , pHotkeysArea{new QScrollArea}
     , pKeyboardWindow{new QScrollArea}
-    , pStatusBar{new QStatusBar}
-    , pHotkeysPanelsWidget{nullptr}
     , pAboutDialog{nullptr}
+    , pStatusBar{new QStatusBar}
+    , pEditHistory{editHistory}
+    , pHotkeysPanelsWidget{nullptr}
 {
     LOGMSG("Total faction count that has been read from json file: " + FACTIONS_MANAGER->Count());
 
     resize(PROGRAM_CONSTANTS->EDITOR_INITIAL_WINDOW_SIZE);
     ConfigureMenu();
+    connect(pEditHistory, &QUndoStack::indexChanged, this, &EditorWindow::RefreshEditedActions);
 
     pEntitiesTreeWidget->header()->hide();
     // Enable smooth scrolling
@@ -241,23 +244,39 @@ void EditorWindow::ConfigureMenu()
     QAction* actOpen       = new QAction(tr("Open"));
     QAction* actSave       = new QAction(tr("Save"));
     QAction* actSaveAs     = new QAction(tr("Save As..."));
+    QAction* actUndo       = new QAction(tr("Undo"));
+    QAction* actRedo       = new QAction(tr("Redo"));
     QAction* actClose      = new QAction(tr("Close"));
 
     actOpen->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_O));
     actSave->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_S));
     actSaveAs->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_S));
+    actUndo->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_Z));
+    actRedo->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_Z));
     actClose->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_Q));
+
+    actUndo->setEnabled(pEditHistory->canUndo());
+    actRedo->setEnabled(pEditHistory->canRedo());
 
     mnFileOptions->addAction(actOpen);
     mnFileOptions->addAction(actSave);
     mnFileOptions->addAction(actSaveAs);
+    mnFileOptions->addSeparator();
+    mnFileOptions->addAction(actUndo);
+    mnFileOptions->addAction(actRedo);
+    mnFileOptions->addSeparator();
     mnFileOptions->addAction(actClose);
     menuBar()->addMenu(mnFileOptions);
 
-    connect(actOpen,   &QAction::triggered, this, &EditorWindow::ActOpen_Triggered);
-    connect(actSave,   &QAction::triggered, this, &EditorWindow::ActSave_Triggered);
-    connect(actSaveAs, &QAction::triggered, this, &EditorWindow::ActSaveAs_Triggered);
-    connect(actClose,  &QAction::triggered, this, &EditorWindow::ActClose_Triggered);
+    connect(actOpen,      &QAction::triggered,         this,    &EditorWindow::ActOpen_Triggered);
+    connect(actSave,      &QAction::triggered,         this,    &EditorWindow::ActSave_Triggered);
+    connect(actSaveAs,    &QAction::triggered,         this,    &EditorWindow::ActSaveAs_Triggered);
+    connect(actUndo,      &QAction::triggered,         this,    &EditorWindow::ActUndo_Triggered);
+    connect(actRedo,      &QAction::triggered,         this,    &EditorWindow::ActRedo_Triggered);
+    connect(actClose,     &QAction::triggered,         this,    &EditorWindow::ActClose_Triggered);
+    
+    connect(pEditHistory, &QUndoStack::canUndoChanged, actUndo, &QAction::setEnabled);
+    connect(pEditHistory, &QUndoStack::canRedoChanged, actRedo, &QAction::setEnabled);
 
     // View
     QMenu*   mnViewOptions       = new QMenu(tr("View"));
@@ -401,18 +420,11 @@ void EditorWindow::SetHotkeysPanels()
         {
             ActionHotkeyWidget* actionHotkey = new ActionHotkeyWidget(currAction.hotkeyString, currAction.iconName);
 
-            connect(actionHotkey, &ActionHotkeyWidget::HotkeyChanged, this, [=, this](const QString& newHotkey)
+            connect(actionHotkey, &ActionHotkeyWidget::StringChangeRequested, this, &EditorWindow::RecordStringChange);
+            connect(actionHotkey, &ActionHotkeyWidget::HotkeyChanged, this, [this]()
             {
-                // Set new hotkey
-                SetActionHotkey(factionShortName, gameObjectName, currAction.iconName, newHotkey);
-
-                // Highlight keys for entity
                 HighlightCurrentKeys();
-
-                // Set flag into wrapper
-                WINDOW_MANAGER->pHotkeysEditor->hasDataChanged = true;
-
-                emit pHotkeysPanelsWidget->currentChanged(i);
+                KeyboardWindow_Update(pHotkeysPanelsWidget->currentIndex());
             });
 
             ltHotkeys->addWidget(actionHotkey);
@@ -488,10 +500,27 @@ QHBoxLayout* EditorWindow::CreateKeysOnKeyboard(const QString& str)
     return pKeys;
 }
 
-void EditorWindow::SetActionHotkey(const QString& fctShortName, const QString& goName, const QString& actName, const QString& hk)
+void EditorWindow::RecordStringChange(const QString& label, const QString& value)
 {
-    Faction& fct = const_cast<Faction&>(FACTIONS_MANAGER->FindByShortName(fctShortName));
-    fct.SetHotkey(goName, actName, hk);
+    if (!CSF_PARSER->ExistString(label))
+        return;
+
+    const QString before = CSF_PARSER->GetStringValue(label);
+    if (before == value)
+        return;
+
+    pEditHistory->push(new EditStringsCommand(*CSF_PARSER, tr("Change action: %1").arg(label), {{label, before, value}}));
+}
+
+void EditorWindow::RefreshEditedActions()
+{
+    for (const auto& panel : vHotkeyWidgets)
+        for (auto* widget : panel)
+            widget->RefreshFromParser();
+
+    HighlightCurrentKeys();
+    if (pHotkeysPanelsWidget != nullptr)
+        KeyboardWindow_Update(pHotkeysPanelsWidget->currentIndex());
 }
 
 #pragma endregion
@@ -513,7 +542,11 @@ void EditorWindow::KeyboardWindow_Nullify()
 void EditorWindow::KeyboardWindow_Update(int id)
 {
     KeyboardWindow_Nullify();
+    if (pHotkeysPanelsWidget == nullptr)
+        return;
     auto currTab = pHotkeysPanelsWidget->findChild<QWidget*>(QString("Layout ") + QString::number(id + 1), Qt::FindChildrenRecursively);
+    if (currTab == nullptr)
+        return;
         
     QString accum;
     for (const auto& elem : currTab->findChildren<ActionHotkeyWidget*>(EmptyString, Qt::FindChildrenRecursively))
@@ -651,7 +684,7 @@ void EditorWindow::ActSave_Triggered()
 
     ShowStatusMessage(tr("Changes has been saved to the file:") + " " + CSF_PARSER->Path);
 
-    WINDOW_MANAGER->pHotkeysEditor->hasDataChanged = false;
+    pEditHistory->setClean();
 }
 
 void EditorWindow::ActSaveAs_Triggered()
@@ -662,14 +695,33 @@ void EditorWindow::ActSaveAs_Triggered()
     fdSelectFileWindow->setAcceptMode(QFileDialog::AcceptMode::AcceptSave);
     fdSelectFileWindow->setDefaultSuffix("csf");
     fdSelectFileWindow->exec();
-
-    WINDOW_MANAGER->pHotkeysEditor->hasDataChanged = false;
 }
 
 void EditorWindow::ActSaveAs_SaveToSelectedFile(const QString& filepath)
 { 
     CSF_PARSER->Save(filepath);
+    pEditHistory->setClean();
     ShowStatusMessage(tr("Saved as:") + " " + filepath);
+}
+
+void EditorWindow::ActUndo_Triggered()
+{
+    if (!pEditHistory->canUndo())
+        return;
+
+    const QString description = pEditHistory->undoText();
+    pEditHistory->undo();
+    ShowStatusMessage(tr("Undone: %1").arg(description));
+}
+
+void EditorWindow::ActRedo_Triggered()
+{
+    if (!pEditHistory->canRedo())
+        return;
+
+    const QString description = pEditHistory->redoText();
+    pEditHistory->redo();
+    ShowStatusMessage(tr("Redone: %1").arg(description));
 }
 
 void EditorWindow::ActOpen_Triggered()
@@ -744,13 +796,28 @@ void EditorWindow::ActExtractHotkey_Triggered()
 
     ShowStatusMessage(tr("Applying hotkey extraction..."));
 
-    CSF_PARSER->ExtractHotkeys(PROGRAM_CONSTANTS->HOTKEY_CSF_CATEGORY);
-    ActSave_Triggered();
+    QVector<EditStringsCommand::Change> changes;
+    const QString categoryPrefix = PROGRAM_CONSTANTS->HOTKEY_CSF_CATEGORY + ":";
+    for (const auto& name : CSF_PARSER->GetStringNames())
+    {
+        const QString label = ToQString(name);
+        if (label.startsWith(categoryPrefix, Qt::CaseInsensitive))
+            changes.append({label, CSF_PARSER->GetStringValue(label), {}});
+    }
 
-    const int currentLayout = pHotkeysPanelsWidget != nullptr ? pHotkeysPanelsWidget->currentIndex() : 0;
-    SetHotkeysPanels();
-    if (pHotkeysPanelsWidget != nullptr)
-        pHotkeysPanelsWidget->setCurrentIndex(currentLayout);
+    CSF_PARSER->ExtractHotkeys(PROGRAM_CONSTANTS->HOTKEY_CSF_CATEGORY);
+    for (auto it = changes.begin(); it != changes.end();)
+    {
+        it->after = CSF_PARSER->GetStringValue(it->label);
+        if (it->before == it->after)
+            it = changes.erase(it);
+        else
+            ++it;
+    }
+    if (!changes.isEmpty())
+        pEditHistory->push(new EditStringsCommand(*CSF_PARSER, tr("Extract hotkeys"), std::move(changes)));
+
+    ActSave_Triggered();
 }
 
 void EditorWindow::ActCopyCSF_Triggered()

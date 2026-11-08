@@ -42,10 +42,14 @@ public:
     QString GetActionName() const;
     /// @brief Returns current action hotkey after ampersand.
     QString GetHotkey() const;
+    /// @brief Reloads the action after an edit, undo or redo without recording a change.
+    void RefreshFromParser();
     /// @brief Change hotkeys property "unique" and updates its style.
     void    HighlightKey(bool isKeysLessThanTwo);
 
 signals:
+    /// @brief Requests a committed string edit from the editor history.
+    void StringChangeRequested(const QString& label, const QString& value);
     void RepeatButtonTimerSignal();
     /// @brief Emits new hotkey after change.
     void HotkeyChanged(QString hotkey);
