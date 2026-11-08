@@ -126,7 +126,7 @@ void WindowManager::StartUpWindow_AcceptConfiguration()
 
     LOGMSG("Loading editor window...");
     pHotkeysEditor = new EditorWindowWrapper();
-    pHotkeysEditor->setWindowTitle(strWindowName);
+    pHotkeysEditor->setWindowTitle(strWindowName + "[*]");
     pHotkeysEditor->show();
     LOGMSG("Editor window has been loaded");
 }
