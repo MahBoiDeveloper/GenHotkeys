@@ -16,22 +16,21 @@ public:
         QString after;
     };
 
-    EditStringsCommand(CSFParser& parser, const QString& description, QVector<Change> changes)
-        : QUndoCommand(description), parser{parser}, changes{std::move(changes)} {}
+    EditStringsCommand(const QString& description, QVector<Change> changes)
+        : QUndoCommand(description), changes{std::move(changes)} {}
 
     void undo() override
     {
         for (const auto& change : changes)
-            parser.SetStringValue({change.label, change.before});
+            CSF_PARSER->SetStringValue({change.label, change.before});
     }
 
     void redo() override
     {
         for (const auto& change : changes)
-            parser.SetStringValue({change.label, change.after});
+            CSF_PARSER->SetStringValue({change.label, change.after});
     }
 
 private:
-    CSFParser& parser;
     const QVector<Change> changes;
 };

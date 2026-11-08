@@ -509,7 +509,7 @@ void EditorWindow::RecordStringChange(const QString& label, const QString& value
     if (before == value)
         return;
 
-    pEditHistory->push(new EditStringsCommand(*CSF_PARSER, tr("Change action: %1").arg(label), {{label, before, value}}));
+    pEditHistory->push(new EditStringsCommand(tr("Change action: %1").arg(label), {{label, before, value}}));
 }
 
 void EditorWindow::RefreshEditedActions()
@@ -721,7 +721,7 @@ void EditorWindow::ActRedo_Triggered()
 
     const QString description = pEditHistory->redoText();
     pEditHistory->redo();
-    ShowStatusMessage(tr("Redone: %1").arg(description));
+    ShowStatusMessage(tr("Done: %1").arg(description));
 }
 
 void EditorWindow::ActOpen_Triggered()
@@ -815,7 +815,7 @@ void EditorWindow::ActExtractHotkey_Triggered()
             ++it;
     }
     if (!changes.isEmpty())
-        pEditHistory->push(new EditStringsCommand(*CSF_PARSER, tr("Extract hotkeys"), std::move(changes)));
+        pEditHistory->push(new EditStringsCommand(tr("Extract hotkeys"), std::move(changes)));
 
     ActSave_Triggered();
 }
