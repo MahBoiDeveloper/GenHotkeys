@@ -52,9 +52,8 @@
         <translation>Отменено: %1</translation>
     </message>
     <message>
-        <location filename="../../GUI/EditorWindow.cpp" line="724"/>
         <source>Redone: %1</source>
-        <translation>Повторено: %1</translation>
+        <translation type="vanished">Повторено: %1</translation>
     </message>
     <message>
         <location filename="../../GUI/EditorWindow.cpp" line="243"/>
@@ -134,6 +133,11 @@
         <location filename="../../GUI/EditorWindow.cpp" line="449"/>
         <source>Layout %1</source>
         <translation>Раскладка %1</translation>
+    </message>
+    <message>
+        <location filename="../../GUI/EditorWindow.cpp" line="724"/>
+        <source>Done: %1</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../GUI/EditorWindow.cpp" line="784"/>
@@ -518,6 +522,19 @@ Make sure that you are using only allowed symbols.</source>
         <location filename="../../Core/ProgramConstants.hpp" line="143"/>
         <source>Aircrafts</source>
         <translation>Авиация</translation>
+    </message>
+</context>
+<context>
+    <name>SetUpWindowsSwitcher</name>
+    <message>
+        <location filename="../../GUI/SetUpWindowsSwitcher.cpp" line="144"/>
+        <source>Warning</source>
+        <translation type="unfinished">Предупреждение</translation>
+    </message>
+    <message>
+        <location filename="../../GUI/SetUpWindowsSwitcher.cpp" line="145"/>
+        <source>The game is not installed. Its path was not found in the registry.</source>
+        <translation>Игра не установлена. Путь к игре не найден в реестре.</translation>
     </message>
 </context>
 <context>

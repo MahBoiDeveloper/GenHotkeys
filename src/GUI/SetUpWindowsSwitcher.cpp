@@ -138,7 +138,14 @@ void SetUpWindowsSwitcher::LoadWindow_LoadFromTheGame()
     const QString gamePath = WINDOW_MANAGER->ProfileFolder.split('/')[2] == PROGRAM_CONSTANTS->G_FOLDER_NAME
         ? QString::fromStdWString(Windows::Registry::GetPathToGame(Windows::Registry::Games::Generals))
         : QString::fromStdWString(Windows::Registry::GetPathToGame(Windows::Registry::Games::GeneralsZeroHour));
-    
+
+    if (gamePath.isEmpty())
+    {
+        QMessageBox::warning(this, tr("Warning"),
+                             tr("The game is not installed. Its path was not found in the registry."));
+        return;
+    }
+
     const QString pathDataEngGenCsf = gamePath + "Data\\English\\generals.csf";
 
     if (QFile::exists(pathDataEngGenCsf))
