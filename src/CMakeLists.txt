@@ -100,10 +100,10 @@
     target_link_libraries(${MAIN_TARGET_NAME} PRIVATE GUI)
 
 # Discord RPC configuration
-    set(DRPC_TARGET_NAME discord-rpc)                            # Define lib folder path
-    set(DRPC_TARGET_FILE "lib${DRPC_TARGET_NAME}.a")             # Define lib file
-    set(DRPC_SOURCE_DIR ${PROJECT_LIBS_FOLDER}/discord-rpc)      # Define lib folder path
-    set(DRPC_BINARY_DIR ${CMAKE_CURRENT_BINARY_DIR}/discord-rpc) # Define lib build folder
+    set(DRPC_TARGET_NAME discord-rpc)                             # Define lib folder path
+    set(DRPC_TARGET_FILE "lib${DRPC_TARGET_NAME}.a")              # Define lib file
+    set(DRPC_SOURCE_DIR  ${PROJECT_LIBS_FOLDER}/discord-rpc)      # Define lib folder path
+    set(DRPC_BINARY_DIR  ${CMAKE_CURRENT_BINARY_DIR}/discord-rpc) # Define lib build folder
 
     # Create a lib build folder
     file(MAKE_DIRECTORY ${DRPC_BINARY_DIR})
