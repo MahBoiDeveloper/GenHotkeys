@@ -129,13 +129,13 @@
     # Define the target that is launched by the build command and activates the rebuild of the main target 
     add_custom_target(DiscordRPCTarget DEPENDS "${PROJECT_LIBS_FOLDER}/${DRPC_TARGET_FILE}")
 
-    # Add a libwebp target as a dependency to GUI target
+    # Add a DiscordRPC target as a dependency to GUI exe target
     add_dependencies(${MAIN_TARGET_NAME} DiscordRPCTarget)
 
-    # Make the libwebp target output file visible to the GUI target
+    # Make the DiscordRPC target output file visible to the GUI exe target
     target_link_directories(${MAIN_TARGET_NAME} PUBLIC ${PROJECT_LIBS_FOLDER})
 
-    # Link the libwebp target to the GUI target
+    # Link the DiscordRPC target to the GUI exe target
     target_link_libraries(${MAIN_TARGET_NAME} PRIVATE ${DRPC_TARGET_NAME})
 
 # Starter target configuration
