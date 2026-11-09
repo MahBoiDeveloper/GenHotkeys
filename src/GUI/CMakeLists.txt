@@ -72,7 +72,7 @@
             # PRE_BUILD
             OUTPUT ${QM_FILE}
             # Generate translation source file
-            COMMAND ${LUPDATE_EXECUTABLE} ${CMAKE_SOURCE_DIR} -recursive -ts ${TS_FILE} # -no-obsolete
+            COMMAND ${LUPDATE_EXECUTABLE} ${CMAKE_SOURCE_DIR}/src -recursive -ts ${TS_FILE} # -no-obsolete
             # Generate translation binary file
             COMMAND ${LRELEASE_EXECUTABLE} ${TS_FILE} -qm ${QM_FILE}
             MAIN_DEPENDENCY ${SOURCES} ${TS_FILE}
