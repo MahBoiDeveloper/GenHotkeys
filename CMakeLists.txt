@@ -20,7 +20,7 @@ cmake_minimum_required(VERSION 3.26 FATAL_ERROR)
         GenHotkeys
         VERSION     "${GENHOTKEYS_VERSION}"
         DESCRIPTION "A tool for editing hotkeys for C&C: Generals and C&C: Generals - Zero Hour"
-        LANGUAGES   CXX
+        LANGUAGES   C CXX
     )
 
 # Shared metadata for C++ sources and Windows resource scripts.
