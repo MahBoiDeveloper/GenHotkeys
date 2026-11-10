@@ -99,6 +99,92 @@
     # Add graphic dependency to the main target
     target_link_libraries(${MAIN_TARGET_NAME} PRIVATE GUI)
 
+# LZMA SDK configuration
+    set(LZMA_TARGET_NAME lzma-sdk)                                     # Define lib target name
+    set(LZMA_TARGET_FILE "lib${LZMA_TARGET_NAME}.a")                   # Define lib file
+    set(LZMA_SOURCE_DIR  "${PROJECT_LIBS_FOLDER}/lzma-sdk")            # Define lib source folder
+    set(LZMA_BINARY_DIR  "${CMAKE_CURRENT_BINARY_DIR}/lzma-sdk")       # Define lib build folder
+    set(LZMA_LIBRARY     "${PROJECT_LIBS_FOLDER}/${LZMA_TARGET_FILE}")
+
+    # Reuse the saved archive after deleting build, including with Ninja.
+    if(NOT EXISTS "${LZMA_LIBRARY}")
+        # The reduced 7z reader/writer from Bundles/Format7zR/makefile.
+        set(LZMA_SOURCES)
+        function(lzma_sdk_sources directory)
+            foreach(name IN LISTS ARGN)
+                list(APPEND LZMA_SOURCES "${LZMA_SOURCE_DIR}/${directory}/${name}")
+            endforeach()
+            set(LZMA_SOURCES "${LZMA_SOURCES}" PARENT_SCOPE)
+        endfunction()
+
+        lzma_sdk_sources(CPP/Common
+            CRC.cpp           IntToString.cpp LzFindPrepare.cpp MyString.cpp
+            StringConvert.cpp StringToInt.cpp MyVector.cpp      Wildcard.cpp)
+        
+        lzma_sdk_sources(CPP/Windows
+            FileDir.cpp         FileFind.cpp FileIO.cpp    FileName.cpp
+            Synchronization.cpp System.cpp   TimeUtils.cpp PropVariant.cpp)
+        
+        lzma_sdk_sources(CPP/7zip/Common
+            CreateCoder.cpp CWrappers.cpp      InBuffer.cpp   InOutTempBuffer.cpp
+            FilterCoder.cpp LimitedStreams.cpp MethodId.cpp   MethodProps.cpp
+            OutBuffer.cpp   ProgressUtils.cpp  PropId.cpp     StreamBinder.cpp 
+            StreamUtils.cpp UniqBlocks.cpp     VirtThread.cpp StreamObjects.cpp)
+        
+        lzma_sdk_sources(CPP/7zip/Archive/Common
+            CoderMixer2.cpp      HandlerOut.cpp      InStreamWithCRC.cpp 
+            OutStreamWithCRC.cpp ParseProperties.cpp ItemNameUtils.cpp)
+        
+        lzma_sdk_sources(CPP/7zip/Archive/7z
+            7zCompressionMode.cpp 7zDecode.cpp  7zEncode.cpp     7zExtract.cpp
+            7zFolderInStream.cpp  7zHandler.cpp 7zHandlerOut.cpp 7zHeader.cpp
+            7zIn.cpp              7zOut.cpp     7zProperties.cpp 7zSpecStream.cpp
+            7zUpdate.cpp)
+        
+        lzma_sdk_sources(CPP/7zip/Compress
+            Bcj2Coder.cpp     Bcj2Register.cpp   BcjCoder.cpp     BcjRegister.cpp
+            BranchMisc.cpp    BranchRegister.cpp ByteSwap.cpp     CopyCoder.cpp
+            CopyRegister.cpp  DeltaFilter.cpp    Lzma2Decoder.cpp Lzma2Encoder.cpp
+            Lzma2Register.cpp LzmaDecoder.cpp    LzmaEncoder.cpp  LzmaRegister.cpp)
+        
+        lzma_sdk_sources(C
+            7zStream.c   Alloc.c    Bcj2.c    Bcj2Enc.c  Bra.c       Bra86.c
+            CpuArch.c    Delta.c    LzFind.c  LzFindMt.c LzFindOpt.c Lzma2Dec.c
+            Lzma2DecMt.c Lzma2Enc.c LzmaDec.c LzmaEnc.c  MtCoder.c   MtDec.c
+            SwapBytes.c  Threads.c  7zCrc.c   7zCrcOpt.c BraIA64.c)
+
+        # Compile the SDK.
+        add_library(${LZMA_TARGET_NAME} STATIC EXCLUDE_FROM_ALL ${LZMA_SOURCES})
+        target_include_directories(${LZMA_TARGET_NAME} PRIVATE "${LZMA_SOURCE_DIR}")
+        target_compile_definitions(${LZMA_TARGET_NAME} PRIVATE Z7_NO_CRYPTO UNICODE _UNICODE)
+        set_target_properties(${LZMA_TARGET_NAME} PROPERTIES ARCHIVE_OUTPUT_DIRECTORY "${LZMA_BINARY_DIR}")
+
+        # Store the static library outside build for subsequent builds.
+        add_custom_command(
+            OUTPUT "${LZMA_LIBRARY}"
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different "$<TARGET_FILE:${LZMA_TARGET_NAME}>" "${LZMA_LIBRARY}"
+            DEPENDS ${LZMA_TARGET_NAME}
+            VERBATIM
+        )
+    endif()
+
+    # Allow the SDK to be built separately from the editor.
+    add_custom_target(LzmaSDKTarget DEPENDS "${LZMA_LIBRARY}")
+
+    # Expose the saved archive, headers and required definitions to the editor.
+    add_library(LzmaSdk STATIC IMPORTED GLOBAL)
+    set_target_properties(LzmaSdk PROPERTIES
+        IMPORTED_LOCATION "${LZMA_LIBRARY}"
+        INTERFACE_INCLUDE_DIRECTORIES "${LZMA_SOURCE_DIR}"
+        INTERFACE_COMPILE_DEFINITIONS Z7_NO_CRYPTO
+        INTERFACE_LINK_LIBRARIES "oleaut32;uuid"
+    )
+    add_dependencies(LzmaSdk LzmaSDKTarget)
+    add_dependencies(${MAIN_TARGET_NAME} LzmaSDKTarget)
+
+    # Keep codec registration objects when linking only this static library.
+    target_link_libraries(${MAIN_TARGET_NAME} PRIVATE "$<LINK_LIBRARY:WHOLE_ARCHIVE,LzmaSdk>")
+
 # Discord RPC configuration
     set(DRPC_TARGET_NAME discord-rpc)                             # Define lib folder path
     set(DRPC_TARGET_FILE "lib${DRPC_TARGET_NAME}.a")              # Define lib file
