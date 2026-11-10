@@ -4,3 +4,6 @@
 [submodule "libs/discord-rpc"]
 	path = libs/discord-rpc
 	url = https://github.com/discord/discord-rpc
+[submodule "libs/lzma-sdk"]
+	path = libs/lzma-sdk
+	url = https://github.com/MahBoiDeveloper/lzma-sdk-mirror.git
