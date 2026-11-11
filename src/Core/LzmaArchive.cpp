@@ -15,8 +15,13 @@
 #include "../../libs/lzma-sdk/CPP/Windows/PropVariant.h"
 #include "../../libs/lzma-sdk/CPP/7zip/Archive/7z/7zHandler.h"
 
-#include "LzmaArchive.hpp"
 #include "../Extensions/ExceptionExt.hpp"
+#include "../Extensions/StringExt.hpp"
+#include "LzmaArchive.hpp"
+
+using namespace StringExt;
+
+#pragma region LZMA SDK wrapper
 
 namespace
 {
@@ -31,8 +36,8 @@ namespace
     void CheckResult(HRESULT result, const QString& operation, const QString& error = {})
     {
         Require(result == S_OK, error.isEmpty()
-            ? QStringLiteral("%1 (SDK code 0x%2)").arg(operation).arg(quint32(result), 8, 16, QLatin1Char('0'))
-            : operation + QStringLiteral(": ") + error);
+            ? operation + " (SDK code 0x%1)"q.arg(quint32(result), 8, 16, QLatin1Char('0'))
+            : operation + ": "q + error);
     }
 
     // COM callbacks must return errors to the SDK, without letting exceptions escape.
@@ -46,18 +51,18 @@ namespace
         }
         catch (const std::exception& exception)
         {
-            error = QString::fromUtf8(exception.what());
+            error = ToQString(exception.what());
         }
         catch (...)
         {
-            error = QStringLiteral("Unexpected archive callback error");
+            error = "Unexpected archive callback error"q;
         }
         return E_FAIL;
     }
 
     QString AbsolutePath(const QString& path)
     {
-        Require(!path.trimmed().isEmpty(), QStringLiteral("Path must not be empty"));
+        Require(!path.trimmed().isEmpty(), "Path must not be empty"q);
         return QDir::cleanPath(QFileInfo(path).absoluteFilePath());
     }
 
@@ -68,14 +73,14 @@ namespace
         {
             const QFileInfo info(path);
             QString nativePath = QDir::toNativeSeparators(path);
-            if (!nativePath.startsWith(QStringLiteral("\\\\?\\")))
-                nativePath = nativePath.startsWith(QStringLiteral("\\\\"))
-                    ? QStringLiteral("\\\\?\\UNC\\") + nativePath.mid(2)
-                    : QStringLiteral("\\\\?\\") + nativePath;
+            if (!nativePath.startsWith("\\\\?\\"q))
+                nativePath = nativePath.startsWith("\\\\"q)
+                    ? "\\\\?\\UNC\\"q + nativePath.mid(2)
+                    : "\\\\?\\"q + nativePath;
             const DWORD attributes = GetFileAttributesW(reinterpret_cast<LPCWSTR>(nativePath.utf16()));
             Require(!info.isSymLink() && (attributes == INVALID_FILE_ATTRIBUTES
                 || !(attributes & FILE_ATTRIBUTE_REPARSE_POINT)),
-                QStringLiteral("Links and reparse points are not supported: %1").arg(path));
+                "Links and reparse points are not supported: "q + path);
             const QString parent = info.absolutePath();
             if (parent == path)
                 break;
@@ -85,20 +90,20 @@ namespace
 
     QString SafeRelativePath(QString path)
     {
-        path.replace(QLatin1Char('\\'), QLatin1Char('/'));
-        Require(!path.isEmpty() && !path.startsWith(QLatin1Char('/')),
-            QStringLiteral("Invalid archive path: %1").arg(path));
+        path.replace('\\', '/');
+        Require(!path.isEmpty() && !path.startsWith('/'),
+            "Invalid archive path: "q + path);
         static const QRegularExpression reserved(
-            QStringLiteral("^(CON|PRN|AUX|NUL|COM[1-9\u00b9\u00b2\u00b3]|LPT[1-9\u00b9\u00b2\u00b3])(?:\\.|$)"),
+            "^(CON|PRN|AUX|NUL|COM[1-9\u00b9\u00b2\u00b3]|LPT[1-9\u00b9\u00b2\u00b3])(?:\\.|$)"q,
             QRegularExpression::CaseInsensitiveOption);
-        for (const QString& part : path.split(QLatin1Char('/')))
+        for (const QString& part : path.split('/'))
         {
-            Require(!part.isEmpty() && part != QStringLiteral(".") && part != QStringLiteral("..")
-                && !part.endsWith(QLatin1Char('.')) && !part.endsWith(QLatin1Char(' '))
-                && !reserved.match(part).hasMatch(), QStringLiteral("Unsafe archive path: %1").arg(path));
+            Require(!part.isEmpty() && part != "."q && part != ".."q
+                && !part.endsWith('.') && !part.endsWith(' ')
+                && !reserved.match(part).hasMatch(), "Unsafe archive path: "q + path);
             for (const QChar character : part)
-                Require(character.unicode() >= 32 && !QStringLiteral(":*?\"<>|").contains(character),
-                    QStringLiteral("Unsafe archive path: %1").arg(path));
+                Require(character.unicode() >= 32 && !":*?\"<>|"q.contains(character),
+                    "Unsafe archive path: "q + path);
         }
         return path;
     }
@@ -126,7 +131,7 @@ namespace
         explicit InputStream(const QString& path) : file(path)
         {
             CheckNoLinks(path);
-            Require(file.open(QIODevice::ReadOnly), QStringLiteral("Cannot read %1: %2").arg(path, file.errorString()));
+            Require(file.open(QIODevice::ReadOnly), "Cannot read "q + path + ": "q + file.errorString());
         }
     };
 
@@ -189,15 +194,15 @@ namespace
     {
         CheckNoLinks(path);
         const QFileInfo info(path);
-        Require(info.exists() && (info.isFile() || info.isDir()), QStringLiteral("Invalid source: %1").arg(path));
-        Require(items.size() < (std::numeric_limits<int>::max)(), QStringLiteral("Too many archive entries"));
+        Require(info.exists() && (info.isFile() || info.isDir()), "Invalid source: "q + path);
+        Require(items.size() < (std::numeric_limits<int>::max)(), "Too many archive entries"q);
         items.append({path, SafeRelativePath(name), info.isDir(), info.isDir() ? 0 : UInt64(info.size())});
         if (info.isDir())
         {
-            Require(info.isReadable(), QStringLiteral("Cannot read directory: %1").arg(path));
+            Require(info.isReadable(), "Cannot read directory: "q + path);
             const auto entries = QDir(path).entryInfoList(QDir::AllEntries | QDir::NoDotAndDotDot | QDir::Hidden | QDir::System, QDir::Name);
             for (const QFileInfo& entry : entries)
-                CollectItems(entry.absoluteFilePath(), name + QLatin1Char('/') + entry.fileName(), items);
+                CollectItems(entry.absoluteFilePath(), name + '/' + entry.fileName(), items);
         }
     }
 
@@ -256,41 +261,41 @@ namespace
     {
         return Callback(Error, [&]
         {
-            Require(result == NArchive::NUpdate::NOperationResult::kOK, QStringLiteral("Compression failed"));
+            Require(result == NArchive::NUpdate::NOperationResult::kOK, "Compression failed"q);
         });
     }
 
     QVector<Item> ReadItems(IInArchive* archive, const QString& destination)
     {
         UInt32 count = 0;
-        CheckResult(archive->GetNumberOfItems(&count), QStringLiteral("Cannot read archive entries"));
-        Require(count <= UInt32((std::numeric_limits<int>::max)()), QStringLiteral("Too many archive entries"));
+        CheckResult(archive->GetNumberOfItems(&count), "Cannot read archive entries"q);
+        Require(count <= UInt32((std::numeric_limits<int>::max)()), "Too many archive entries"q);
         QVector<Item> items;
         QSet<QString> names;
         for (UInt32 index = 0; index < count; ++index)
         {
             CPropVariant path, directory, attributes, anti, encrypted;
-            CheckResult(archive->GetProperty(index, kpidPath, &path), QStringLiteral("Cannot read entry path"));
-            CheckResult(archive->GetProperty(index, kpidIsDir, &directory), QStringLiteral("Cannot read entry type"));
-            CheckResult(archive->GetProperty(index, kpidAttrib, &attributes), QStringLiteral("Cannot read entry attributes"));
-            CheckResult(archive->GetProperty(index, kpidIsAnti, &anti), QStringLiteral("Cannot read entry flags"));
-            CheckResult(archive->GetProperty(index, kpidEncrypted, &encrypted), QStringLiteral("Cannot read entry encryption flag"));
-            Require(path.vt == VT_BSTR && directory.vt == VT_BOOL, QStringLiteral("Invalid archive entry"));
-            Require(anti.vt == VT_EMPTY || (anti.vt == VT_BOOL && anti.boolVal == VARIANT_FALSE), QStringLiteral("Anti-items are not supported"));
+            CheckResult(archive->GetProperty(index, kpidPath, &path),           "Cannot read entry path"q);
+            CheckResult(archive->GetProperty(index, kpidIsDir, &directory),     "Cannot read entry type"q);
+            CheckResult(archive->GetProperty(index, kpidAttrib, &attributes),   "Cannot read entry attributes"q);
+            CheckResult(archive->GetProperty(index, kpidIsAnti, &anti),         "Cannot read entry flags"q);
+            CheckResult(archive->GetProperty(index, kpidEncrypted, &encrypted), "Cannot read entry encryption flag"q);
+            Require(path.vt == VT_BSTR && directory.vt == VT_BOOL, "Invalid archive entry"q);
+            Require(anti.vt == VT_EMPTY || (anti.vt == VT_BOOL && anti.boolVal == VARIANT_FALSE), "Anti-items are not supported"q);
             Require(attributes.vt == VT_EMPTY || (attributes.vt == VT_UI4
                 && !(attributes.ulVal & FILE_ATTRIBUTE_REPARSE_POINT)
-                && !MY_LIN_S_ISLNK(attributes.ulVal >> 16)), QStringLiteral("Archive links are not supported"));
+                && !MY_LIN_S_ISLNK(attributes.ulVal >> 16)), "Archive links are not supported"q);
             Require(encrypted.vt == VT_EMPTY || (encrypted.vt == VT_BOOL && encrypted.boolVal == VARIANT_FALSE),
-                QStringLiteral("Encrypted archives are not supported"));
+                "Encrypted archives are not supported"q);
             const QString name = SafeRelativePath(QString::fromWCharArray(path.bstrVal, int(SysStringLen(path.bstrVal))));
             const QString key = name.toCaseFolded();
-            Require(!names.contains(key), QStringLiteral("Duplicate archive path: %1").arg(name));
+            Require(!names.contains(key), "Duplicate archive path: "q + name);
             names.insert(key);
             const QString target = QDir(destination).filePath(name);
             CheckNoLinks(target);
             const bool isDirectory = directory.boolVal != VARIANT_FALSE;
             const QFileInfo existing(target);
-            Require(!existing.exists() || (isDirectory && existing.isDir()), QStringLiteral("Destination already exists: %1").arg(target));
+            Require(!existing.exists() || (isDirectory && existing.isDir()), "Destination already exists: "q + target);
             items.append({target, name, isDirectory, 0});
         }
         // Reject file/directory conflicts before writing any entry.
@@ -301,12 +306,12 @@ namespace
         for (const Item& item : items)
         {
             QString parent = item.name;
-            while (parent.contains(QLatin1Char('/')))
+            while (parent.contains('/'))
             {
-                parent.truncate(parent.lastIndexOf(QLatin1Char('/')));
-                Require(!files.contains(parent.toCaseFolded()), QStringLiteral("Conflicting archive path: %1").arg(item.name));
+                parent.truncate(parent.lastIndexOf('/'));
+                Require(!files.contains(parent.toCaseFolded()), "Conflicting archive path: "q + item.name);
                 const QFileInfo info(QDir(destination).filePath(parent));
-                Require(!info.exists() || info.isDir(), QStringLiteral("Destination directory is a file: %1").arg(info.filePath()));
+                Require(!info.exists() || info.isDir(), "Destination directory is a file: "q + info.filePath());
             }
         }
         return items;
@@ -333,19 +338,19 @@ namespace
         return Callback(Error, [&]
         {
             output.Release();
-            Require(!file.isOpen(), QStringLiteral("Previous archive entry was not finalized"));
+            Require(!file.isOpen(), "Previous archive entry was not finalized"q);
             if (mode != NArchive::NExtract::NAskMode::kExtract)
                 return;
             const Item& item = items.at(int(index));
             CheckNoLinks(item.path);
             Require(QDir().mkpath(item.directory ? item.path : QFileInfo(item.path).absolutePath()),
-                QStringLiteral("Cannot create directory for %1").arg(item.path));
+                "Cannot create directory for "q + item.path);
             if (!item.directory)
             {
-                Require(!QFileInfo::exists(item.path), QStringLiteral("Destination already exists: %1").arg(item.path));
+                Require(!QFileInfo::exists(item.path), "Destination already exists: "q + item.path);
                 file.setFileName(item.path);
                 if (!file.open(QIODevice::WriteOnly))
-                    throw ExceptionExt(QStringLiteral("Cannot write %1: %2").arg(item.path, file.errorString()));
+                    throw ExceptionExt("Cannot write "q + item.path + ": "q + file.errorString());
                 output = new OutputStream(file);
                 *stream = output;
                 (*stream)->AddRef();
@@ -359,36 +364,38 @@ namespace
         {
             output.Release();
             Require(result == NArchive::NExtract::NOperationResult::kOK,
-                QStringLiteral("Archive integrity check failed (code %1)").arg(result));
+                "Archive integrity check failed (code "q + result + ')');
             if (file.isOpen())
             {
                 CheckNoLinks(file.fileName());
-                Require(!QFileInfo::exists(file.fileName()), QStringLiteral("Destination already exists: %1").arg(file.fileName()));
+                Require(!QFileInfo::exists(file.fileName()), "Destination already exists: "q + file.fileName());
                 if (!file.commit())
-                    throw ExceptionExt(QStringLiteral("Cannot commit extracted file: %1").arg(file.errorString()));
+                    throw ExceptionExt("Cannot commit extracted file: "q + file.errorString());
             }
         });
     }
 }
 
+#pragma endregion
+
 void LzmaArchive::Pack(const QString& sourcePath, const QString& archivePath, int level)
 {
-    Require(level >= 0 && level <= 9, QStringLiteral("Compression level must be between 0 and 9"));
+    Require(level >= 0 && level <= 9, "Compression level must be between 0 and 9"q);
     const QString source = AbsolutePath(sourcePath);
     const QString target = AbsolutePath(archivePath);
     CheckNoLinks(source);
     CheckNoLinks(target);
     const QFileInfo sourceInfo(source);
-    Require(sourceInfo.exists(), QStringLiteral("Source does not exist: %1").arg(source));
-    Require(!QFileInfo::exists(target), QStringLiteral("Archive already exists: %1").arg(target));
+    Require(sourceInfo.exists(), "Source does not exist: "q + source);
+    Require(!QFileInfo::exists(target), "Archive already exists: "q + target);
     Require(source.compare(target, Qt::CaseInsensitive) != 0
-        && (!sourceInfo.isDir() || !target.startsWith(source + QLatin1Char('/'), Qt::CaseInsensitive)),
-        QStringLiteral("Archive must be outside the source directory"));
+        && (!sourceInfo.isDir() || !target.startsWith(source + '/', Qt::CaseInsensitive)),
+        "Archive must be outside the source directory"q);
 
     QVector<Item> items;
     if (sourceInfo.isDir())
     {
-        Require(sourceInfo.isReadable(), QStringLiteral("Cannot read directory: %1").arg(source));
+        Require(sourceInfo.isReadable(), "Cannot read directory: "q + source);
         const auto entries = QDir(source).entryInfoList(QDir::AllEntries | QDir::NoDotAndDotDot | QDir::Hidden | QDir::System, QDir::Name);
         for (const QFileInfo& entry : entries)
             CollectItems(entry.absoluteFilePath(), entry.fileName(), items);
@@ -396,43 +403,48 @@ void LzmaArchive::Pack(const QString& sourcePath, const QString& archivePath, in
     else
         CollectItems(source, sourceInfo.fileName(), items);
 
-    Require(QFileInfo(target).dir().exists(), QStringLiteral("Archive output directory does not exist"));
-    QTemporaryFile temporary(QFileInfo(target).absolutePath() + QStringLiteral("/.genhotkeys-XXXXXX"));
-    Require(temporary.open(), QStringLiteral("Cannot create archive: %1").arg(temporary.errorString()));
+    Require(QFileInfo(target).dir().exists(), "Archive output directory does not exist"q);
+    QTemporaryFile temporary(QFileInfo(target).absolutePath() + "/.genhotkeys-XXXXXX"q);
+    Require(temporary.open(), "Cannot create archive: "q + temporary.errorString());
     CMyComPtr<IOutStream> output = new OutputStream(temporary);
     CMyComPtr<IOutArchive> archive = new NArchive::N7z::CHandler;
     CMyComPtr<ISetProperties> properties;
-    CheckResult(archive.QueryInterface(IID_ISetProperties, &properties), QStringLiteral("Cannot configure archive"));
+    CheckResult(archive.QueryInterface(IID_ISetProperties, &properties), "Cannot configure archive"q);
     const wchar_t* property = L"x";
     CPropVariant value;
     value = UInt32(level);
-    CheckResult(properties->SetProperties(&property, &value, 1), QStringLiteral("Cannot set compression level"));
+    CheckResult(properties->SetProperties(&property, &value, 1), "Cannot set compression level"q);
     CMyComPtr2<IArchiveUpdateCallback, PackCallback> callback;
     callback.SetFromCls(new PackCallback(items));
     const HRESULT result = archive->UpdateItems(output, UInt32(items.size()), callback);
-    CheckResult(result, QStringLiteral("Cannot pack archive"), callback->Error);
+    CheckResult(result, "Cannot pack archive"q, callback->Error);
     output.Release();
-    Require(temporary.flush(), QStringLiteral("Cannot flush archive: %1").arg(temporary.errorString()));
+    Require(temporary.flush(), "Cannot flush archive: "q + temporary.errorString());
+    
     temporary.close();
     if (!temporary.rename(target))
-        throw ExceptionExt(QStringLiteral("Cannot save archive %1: %2").arg(target, temporary.errorString()));
+        throw ExceptionExt("Cannot save archive "q + target + ": "q + temporary.errorString());
     temporary.setAutoRemove(false);
 }
 
 void LzmaArchive::Unpack(const QString& archivePath, const QString& destinationPath)
 {
-    const QString source = AbsolutePath(archivePath);
+    const QString source      = AbsolutePath(archivePath);
     const QString destination = AbsolutePath(destinationPath);
+
     CheckNoLinks(destination);
-    Require(!QFileInfo::exists(destination) || QFileInfo(destination).isDir(), QStringLiteral("Destination must be a directory"));
+    Require(!QFileInfo::exists(destination) || QFileInfo(destination).isDir(), "Destination must be a directory"q);
+
     CMyComPtr<IInStream> input = new InputStream(source);
     CMyComPtr<IInArchive> archive = new NArchive::N7z::CHandler;
-    CheckResult(archive->Open(input, nullptr, nullptr), QStringLiteral("Cannot open 7z archive"));
+
+    CheckResult(archive->Open(input, nullptr, nullptr), "Cannot open 7z archive"q);
     const QVector<Item> items = ReadItems(archive, destination);
-    Require(QDir().mkpath(destination), QStringLiteral("Cannot create destination directory: %1").arg(destination));
+    Require(QDir().mkpath(destination), "Cannot create destination directory: "q + destination);
     CMyComPtr2<IArchiveExtractCallback, UnpackCallback> callback;
     callback.SetFromCls(new UnpackCallback(items));
     const HRESULT result = archive->Extract(nullptr, UInt32(-1), false, callback);
-    CheckResult(result, QStringLiteral("Cannot unpack archive"), callback->Error);
-    CheckResult(archive->Close(), QStringLiteral("Cannot close archive"));
+
+    CheckResult(result, "Cannot unpack archive"q, callback->Error);
+    CheckResult(archive->Close(), "Cannot close archive"q);
 }
