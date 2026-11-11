@@ -4,6 +4,9 @@ on:
   release:
     types: [published]
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: windows-2022
@@ -12,11 +15,34 @@ jobs:
       - name: Get Sources
         uses: actions/checkout@v7
         with:
+          ref: ${{ github.event.release.tag_name }}
           submodules: true
 
+      # Match the release tag to the shared CMake metadata before building.
+      - name: Validate Release Version
+        id: version
+        shell: pwsh
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: |
+          $cmake = Get-Content -LiteralPath CMakeLists.txt -Raw
+          $versionMatch = [regex]::Match($cmake, '(?m)^\s*set\(\s*GENHOTKEYS_VERSION\s+"([0-9]+\.[0-9]+\.[0-9]+)"\s*\)')
+          $revisionMatch = [regex]::Match($cmake, '(?m)^\s*set\(\s*GENHOTKEYS_VERSION_REVISION\s+([0-9]+)\s*\)')
+          if (!$versionMatch.Success -or !$revisionMatch.Success) {
+            throw 'Cannot read GenHotkeys version and revision from CMakeLists.txt.'
+          }
+
+          $version = "$($versionMatch.Groups[1].Value).$($revisionMatch.Groups[1].Value)"
+          # Existing tags use four components; also accept an optional v prefix.
+          if (($env:RELEASE_TAG -creplace '^v', '') -cne $version) {
+            throw "Release tag '$env:RELEASE_TAG' does not match CMake version '$version'."
+          }
+          "archive=GenHotkeys-$version.7z" >> $env:GITHUB_OUTPUT
+
       # Check this about more info: https://github.com/marketplace/actions/install-version-specific-mingw
-      # Setting up MinGW_x64 version 8.1.0
+      # Setting up MinGW_x64 version 12.2.0
       - name: Set Up MinGW
+        id: mingw
         uses: egor-tensin/setup-mingw@v2
         with:
           platform: x64
@@ -33,43 +59,56 @@ jobs:
           target: desktop
           dir: C:\
 
-      # Check this about more info: https://github.com/marketplace/actions/cmake-action
-      - name: Set Up CMake
+      # Configure and build with the installed MinGW toolchain.
+      - name: Compile Project
         uses: threeal/cmake-action@v1.3.0
         with:
-          run-build: false
+          generator: MinGW Makefiles
+          c-compiler: ${{ steps.mingw.outputs.gcc }}
+          cxx-compiler: ${{ steps.mingw.outputs.gxx }}
+          options: |
+            CMAKE_BUILD_TYPE=Release
+            CMAKE_EXPORT_COMPILE_COMMANDS=TRUE
+          run-build: true
+          build-args: --config Release --target all -j 4
 
-      # Compile code
-      - name: Compile Project
-        shell: cmd
-        run: |
-          :: Remove previous cmake build folder
-          
-          rmdir /s /q build >nul 2>nul
-          :: Link MinGW to system variables
-          mkdir C:\Qt\Tools > nul
-          mklink C:\Qt\Tools\mingw_64 C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64 > nul
-          set PATH=%PATH%;C:\Qt\5.15.2\mingw81_64\bin;C:\Qt\Tools\mingw_64\bin
-
-          call Build.bat
-
-      # Check if workflow has been called for release
-      - name: Development Build Check
+      # Preserve the additional files shipped by Build.bat.
+      - name: Prepare Distribution
         shell: pwsh
         run: |
-          if ($env:GitVersion_CommitsSinceVersionSource -ne "0") {
-            Write-Output "::error:: This is a development build and should not be released. Did you forget to create a new tag for the release?"
-            exit 1
+          foreach ($executable in @('build/exe/GenHotkeys.exe', 'build/exe/Resources/Binaries/LoadEditor.exe')) {
+            if (!(Test-Path -LiteralPath $executable -PathType Leaf)) {
+              throw "Required executable is missing: $executable"
+            }
           }
 
+          $tools = 'build/exe/Resources/Translations/Tools'
+          New-Item -ItemType Directory -Path $tools -Force | Out-Null
+          Copy-Item -LiteralPath 'C:/Qt/5.15.2/mingw81_64/bin/lrelease.exe', 'C:/Qt/5.15.2/mingw81_64/bin/linguist.exe', 'src/Resources/Translations/ru.ts' -Destination $tools
+          @(
+            'lrelease.exe -- Compile *.ts translation files to *.qm files.'
+            'linguist.exe -- Edit *.ts translation files.'
+            'ru.ts -- Translation file example.'
+          ) | Set-Content -LiteralPath "$tools/readme.txt" -Encoding utf8
+
+          New-Item -ItemType Directory -Path 'build/exe/Logs' -Force | Out-Null
+          'Do not delete this folder: it is used for application logs.' | Set-Content -LiteralPath 'build/exe/Logs/readme.txt' -Encoding utf8
+
       # Compress folder
-      - name: Zip Artifact
-        run: 7z a -t7z -mx=9 -m0=lzma2 -ms=on -r -- ${{ format('GenHotkeys-{0}.7z', env.GitVersion_SemVer) }} ./build/exe/*
+      - name: Archive Distribution
         shell: pwsh
+        env:
+          ARCHIVE_NAME: ${{ steps.version.outputs.archive }}
+        run: |
+          7z a -t7z -mx=9 -m0=lzma2 -ms=on -r -- "$env:ARCHIVE_NAME" ./build/exe/*
+          if ($LASTEXITCODE -ne 0) {
+            throw "7-Zip failed with exit code $LASTEXITCODE."
+          }
 
       # Upload it to release
       - name: Upload Final Artifact to the Release
         uses: softprops/action-gh-release@v2
         with:
-          append_body: true
-          files: ${{ format('GenHotkeys-{0}.7z', env.GitVersion_SemVer) }}
+          tag_name: ${{ github.event.release.tag_name }}
+          fail_on_unmatched_files: true
+          files: ${{ steps.version.outputs.archive }}
