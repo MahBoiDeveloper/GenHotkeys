@@ -39,10 +39,19 @@ jobs:
           }
           "archive=GenHotkeys-$version.7z" >> $env:GITHUB_OUTPUT
 
+      # Remove clang-format due to incompatybility with Discord RPC library
+      - name: Remove clang-format From OS And PATH
+        shell: powershell
+        run: |
+          $clangPath = "C:\Program Files\LLVM\bin\clang-format.exe"
+          if (Test-Path $clangPath) {
+            Remove-Item -Force $clangPath
+            Write-Host "Clang-format deleted successfully."
+          }
+
       # Check this about more info: https://github.com/marketplace/actions/install-version-specific-mingw
-      # Setting up MinGW_x64 version 12.2.0
+      # Setting up MinGW_x64 version 8.1.0
       - name: Set Up MinGW
-        id: mingw
         uses: egor-tensin/setup-mingw@v2
         with:
           platform: x64
@@ -59,18 +68,20 @@ jobs:
           target: desktop
           dir: C:\
 
-      # Configure and build with the installed MinGW toolchain.
-      - name: Compile Project
+      # Check this about more info: https://github.com/marketplace/actions/cmake-action
+      - name: Set Up CMake
         uses: threeal/cmake-action@v1.3.0
         with:
-          generator: MinGW Makefiles
-          c-compiler: ${{ steps.mingw.outputs.gcc }}
-          cxx-compiler: ${{ steps.mingw.outputs.gxx }}
-          options: |
-            CMAKE_BUILD_TYPE=Release
-            CMAKE_EXPORT_COMPILE_COMMANDS=TRUE
-          run-build: true
-          build-args: --config Release --target all -j 4
+          run-build: false
+
+      # Compile code
+      - name: Compile Project
+        shell: cmd
+        run: |
+          mkdir C:\Qt\Tools > nul
+          mklink C:\Qt\Tools\mingw_64 C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64 > nul
+          set PATH=%PATH%;C:\Qt\5.15.2\mingw81_64\bin;C:\Qt\Tools\mingw_64\bin
+          call Build.bat
 
       # Preserve the additional files shipped by Build.bat.
       - name: Prepare Distribution
@@ -106,7 +117,7 @@ jobs:
           }
 
       # Upload it to release
-      - name: Upload Final Artifact to the Release
+      - name: Upload Release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ github.event.release.tag_name }}
