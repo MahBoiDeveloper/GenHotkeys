@@ -6,8 +6,6 @@
 #include "WindowManager.hpp"
 #include "ImageManager.hpp"
 
-const auto ICON_EXTENSIONS = QImageReader::supportedImageFormats();
-
 QImage ImageManager::LoadActionIcon(const QString& iconName)
 {
     const QString iconsDirectory = QDir{WINDOW_MANAGER->ProfileFolder + "/" + PROGRAM_CONSTANTS->ICONS_FOLDER_NAME}.absolutePath();
@@ -44,10 +42,13 @@ QFileInfo ImageManager::FindIconFile(const QString& pathToIconsDir, const QStrin
 {
     if (fileBaseName.isEmpty()) return QFileInfo{};
 
+    // Discover image plugins only after QApplication has initialized their paths.
+    const auto exts = QImageReader::supportedImageFormats();
+
     const QFileInfoList fileInfoList = QDir{pathToIconsDir}.entryInfoList(QDir::Files | QDir::Dirs | QDir::NoDotAndDotDot,
                                                                         QDir::Name | QDir::IgnoreCase);
     QFileInfo bestMatch;
-    int bestPriority = ICON_EXTENSIONS.size();
+    int bestPriority = exts.size();
 
     for (const auto& fileInfo : fileInfoList)
     {
@@ -57,7 +58,7 @@ QFileInfo ImageManager::FindIconFile(const QString& pathToIconsDir, const QStrin
 
         if (!candidate.isFile() || candidate.completeBaseName() != fileBaseName) continue;
 
-        const int priority = ICON_EXTENSIONS.indexOf(candidate.suffix().toLower().toLocal8Bit());
+        const int priority = exts.indexOf(candidate.suffix().toLower().toLocal8Bit());
         if (priority >= 0 && priority < bestPriority)
         {
             bestMatch = candidate;
