@@ -19,6 +19,7 @@ private: // Data
     bool          StatusBar;
     size_t        SteamAppID;
     bool          SteamAPI;
+    bool          AutoCheckUpdates;
 
 private: // Methods
 public:
@@ -48,6 +49,8 @@ public:
     const bool IsStatusBarEnabled() const;
     /// @brief Returns status for Steam API from settings file
     const bool IsSteamIntegrationEnabled() const;
+    /// @brief Returns whether updates are checked automatically at startup.
+    const bool IsAutoCheckUpdatesEnabled() const;
 
     /// @brief Sets `QSet` of allowed keys.
     void SetAllowedKeys(const QSet<Qt::Key>& keys);
@@ -63,4 +66,6 @@ public:
     template<BoolExt::IsStateDescriptor T> void SetStatusBarStatus(const T state)              { StatusBar           = BoolExt::ToBool(state); }
     /// @brief Sets status for Steam API Integration.
     template<BoolExt::IsStateDescriptor T> void SetSteamIntegrationStatus(const T state)       { SteamAPI            = BoolExt::ToBool(state); }
+    /// @brief Sets status for automatic updates check.
+    template<BoolExt::IsStateDescriptor T> void SetAutoCheckUpdates(const T state)             { AutoCheckUpdates    = BoolExt::ToBool(state); }
 };

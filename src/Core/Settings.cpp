@@ -28,6 +28,7 @@ void Settings::SetToDefault()
     ForceSystemLanguage = true;
     StatusBar           = true;
     SteamAPI            = true;
+    AutoCheckUpdates    = false;
     SteamAppID          = PROGRAM_CONSTANTS->ZH_STEAM_APP_ID;
     Language            = 0; // English
 }
@@ -40,6 +41,7 @@ void Settings::Parse()
     StatusBar           = json.Query("$." + nameof(StatusBar)).toBool();
     SteamAppID          = json.Query("$." + nameof(SteamAppID)).toInt() != 0 ? json.Query("$." + nameof(SteamAppID)).toInt() : SteamAppID;
     SteamAPI            = json.Query("$." + nameof(SteamAPI)).toBool();
+    AutoCheckUpdates    = json.Query("$." + nameof(AutoCheckUpdates)).toBool(false);
 
     QString twoLetters = StringExt::EmptyString;
     if (ForceSystemLanguage)
@@ -69,6 +71,7 @@ void Settings::Save()
     jsMainObj[nameof(StatusBar)]           = StatusBar;
     jsMainObj[nameof(SteamAppID)]          = StringExt::ToQString(SteamAppID);
     jsMainObj[nameof(SteamAPI)]            = SteamAPI;
+    jsMainObj[nameof(AutoCheckUpdates)]    = AutoCheckUpdates;
 
     QJsonDocument jsDoc;
     jsDoc.setObject(jsMainObj);
@@ -90,6 +93,7 @@ const bool          Settings::IsDiscordRPCEnabled()                   const { re
 const bool          Settings::IsForceSystemLanguageOnStartUpEnabled() const { return ForceSystemLanguage; }
 const bool          Settings::IsStatusBarEnabled()                    const { return StatusBar; }
 const bool          Settings::IsSteamIntegrationEnabled()             const { return SteamAPI; }
+const bool          Settings::IsAutoCheckUpdatesEnabled()             const { return AutoCheckUpdates; }
 
 void Settings::SetAllowedKeys(const QSet<Qt::Key>& keys) { AllowedHotkeys = keys; }
 void Settings::SetLanguage(const size_t& code)           { Language       = code; }

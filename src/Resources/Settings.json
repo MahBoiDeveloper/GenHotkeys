@@ -4,6 +4,7 @@
     "DiscordRPC"          : true,
     "ForceSystemLanguage" : true,
     "SteamAPI"            : false,
+    "AutoCheckUpdates"    : false,
     "Language"            : "en",
 
     "AllowedHotkeys" :
